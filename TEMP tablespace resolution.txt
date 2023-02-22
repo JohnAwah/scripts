@@ -1,0 +1,28 @@
+2. WRITE FAILED ON TEMPORARY FILE---OUT OF DISK SPACE (UNABLE TO RUN QUERIES ON TRAX)
+
+>Run the below scripts to get the temp tablespace usage:
+
+select a.tablespace_name tablespace,
+         d.TEMP_TOTAL_MB,
+         sum (a.used_blocks * d.block_size) / 1024 / 1024 TEMP_USED_MB,
+         d.TEMP_TOTAL_MB - sum (a.used_blocks * d.block_size) / 1024 / 1024 TEMP_FREE_MB
+from v$sort_segment a,
+        (
+          select   b.name, c.block_size, sum (c.bytes) / 1024 / 1024 TEMP_TOTAL_MB
+          from     v$tablespace b, v$tempfile c
+          where    b.ts#= c.ts#
+          group by b.name, c.block_size
+        ) d
+where    a.tablespace_name = d.name
+group by a.tablespace_name, d.TEMP_TOTAL_MB;
+
+> If there is enough space in temporary tablespace, then check df -h and see if  mount point for tempfs has space.
+
+>If there is space, then check alert log files for any possible errors related to temp file space
+>If there is no space in temp tablespace as in check above, consider adding a temp file into the temp tablespace as follows 
+to add space into temp tablespace as follows:
+
+SQL> desc dba_temp_files;
+SQL> select file_name,TABLESPACE_NAME from dba_temp_files;
+add temp file into temp tablespace OR resize existing temp file to add space to temp tablespace.
+

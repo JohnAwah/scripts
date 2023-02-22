@@ -1,0 +1,354 @@
+EXPORT/IMPORT (EXPDP, IMPDP OF TABLES,SCHEMAS AND DATABASE)
+
+
+1.ON SOURCE:
+
+. oraenv
+
+A.) Check for directories to use:
+
+SQL> select * from dba_directories; (Pick export directory that exists for your persnal use)
+
+
+OR 
+CREATE OR REPLACE DIRECTORY EXPDP AS '/u01/app/oracle/oradata/';
+GRANT READ, WRITE ON DIRECTORY EXPDP TO testuser1;
+
+e.g
+SYS                            EXPDIR
+/netmnt/dba_work/db_backup
+
+AS SYSTEM USE COMMAND: 
+
+A.) expdp system/oracle DIRECTORY=EXPDP(always use logical directory) tables=PATRICK dumpfile=PAT.dmp logfile=PAT.dmp.log
+
+b) This is import for system table, remember system tablespace cannot be remapped, so we use the same table name:
+
+impdp system/oracle TABLES=PATRICK DIRECTORY=EXPDP(always use logical directory)  dumpfile=PAT.dmp logfile=PAT.impdmp.log TABLE_EXISTS_ACTION=replace cluster=N
+
+[oracle@odm5db01 ~]$ expdp \"/ as sysdba\" dumpfile=EXPDIR:PCDOMN_UAT.dmp logfile=EXPDIR:PCDOMN_UAT.log schemas=PCDOMN_UAT
+
+Export: Release 11.2.0.4.0 - Production on Fri Jul 1 06:55:14 2022
+
+Copyright (c) 1982, 2011, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Data Mining and Real Application Testing options
+Starting "SYS"."SYS_EXPORT_SCHEMA_02":  "/******** AS SYSDBA" dumpfile=EXPDIR:PCDOMN_UAT.dmp logfile=EXPDIR:PCDOMN_UAT.log schemas=PCDOMN_UAT
+Estimate in progress using BLOCKS method...
+Total estimation using BLOCKS method: 0 KB
+Processing object type SCHEMA_EXPORT/USER
+Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+Processing object type SCHEMA_EXPORT/ROLE_GRANT
+Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+Master table "SYS"."SYS_EXPORT_SCHEMA_02" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SYS.SYS_EXPORT_SCHEMA_02 is:
+  /netmnt/dba_work/db_backup/PCDOMN_UAT.dmp
+Job "SYS"."SYS_EXPORT_SCHEMA_02" successfully completed at Fri Jul 1 06:55:27 2022 elapsed 0 00:00:10
+
+[oracle@odm5db01 ~]$ expdp \"/ as sysdba\" dumpfile=EXPDIR:PCREPO_UAT.dmp logfile=EXPDIR:PCREPO_UAT.log schemas=PCREPO_UAT
+
+Export: Release 11.2.0.4.0 - Production on Fri Jul 1 06:57:37 2022
+
+Copyright (c) 1982, 2011, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Data Mining and Real Application Testing options
+Starting "SYS"."SYS_EXPORT_SCHEMA_02":  "/******** AS SYSDBA" dumpfile=EXPDIR:PCREPO_UAT.dmp logfile=EXPDIR:PCREPO_UAT.log schemas=PCREPO_UAT
+Estimate in progress using BLOCKS method...
+Total estimation using BLOCKS method: 0 KB
+Processing object type SCHEMA_EXPORT/USER
+Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+Processing object type SCHEMA_EXPORT/ROLE_GRANT
+Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+Processing object type SCHEMA_EXPORT/TABLESPACE_QUOTA
+Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+Master table "SYS"."SYS_EXPORT_SCHEMA_02" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SYS.SYS_EXPORT_SCHEMA_02 is:
+  /netmnt/dba_work/db_backup/PCREPO_UAT.dmp
+Job "SYS"."SYS_EXPORT_SCHEMA_02" successfully completed at Fri Jul 1 06:57:41 2022 elapsed 0 00:00:04
+
+[oracle@odm5db01 ~]$ expdp \"/ as sysdba\" dumpfile=EXPDIR:PCDANA_UAT.dmp logfile=EXPDIR:PCDANA_UAT.log schemas=PCDANA_UAT
+
+Export: Release 11.2.0.4.0 - Production on Fri Jul 1 06:58:08 2022
+
+Copyright (c) 1982, 2011, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Data Mining and Real Application Testing options
+Starting "SYS"."SYS_EXPORT_SCHEMA_02":  "/******** AS SYSDBA" dumpfile=EXPDIR:PCDANA_UAT.dmp logfile=EXPDIR:PCDANA_UAT.log schemas=PCDANA_UAT
+Estimate in progress using BLOCKS method...
+Total estimation using BLOCKS method: 0 KB
+Processing object type SCHEMA_EXPORT/USER
+Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+Processing object type SCHEMA_EXPORT/ROLE_GRANT
+Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+Master table "SYS"."SYS_EXPORT_SCHEMA_02" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SYS.SYS_EXPORT_SCHEMA_02 is:
+  /netmnt/dba_work/db_backup/PCDANA_UAT.dmp
+Job "SYS"."SYS_EXPORT_SCHEMA_02" successfully completed at Fri Jul 1 06:58:12 2022 elapsed 0 00:00:04
+
+
+
+
+
+B.) USE THE BELOW COMMAND IF SOURCE AND TARGET TABLE/DEFINITIONS ARE THESAME
+
+
+[oracle@odm5db01 ~]$ expdp  \"/ as sysdba\"  DIRECTORY=EXPDIR tables=OVT_MART.BROKER_S  dumpfile=PAT.dmp logfile=PAT.dmp.log
+
+Export: Release 11.2.0.4.0 - Production on Mon Apr 18 15:15:41 2022
+
+Copyright (c) 1982, 2011, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Data Mining and Real Application Testing options
+Starting "SYS"."SYS_EXPORT_TABLE_02":  "/******** AS SYSDBA" DIRECTORY=EXPDIR tables=OVT_MART.BROKER_S dumpfile=PAT.dmp logfile=PAT.dmp.log
+Estimate in progress using BLOCKS method...
+Processing object type TABLE_EXPORT/TABLE/TABLE_DATA
+Total estimation using BLOCKS method: 2 MB
+Processing object type TABLE_EXPORT/TABLE/TABLE
+Processing object type TABLE_EXPORT/TABLE/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type TABLE_EXPORT/TABLE/COMMENT
+Processing object type TABLE_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
+. . exported "OVT_MART"."BROKER_S"                       856.4 KB    6499 rows
+Master table "SYS"."SYS_EXPORT_TABLE_02" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SYS.SYS_EXPORT_TABLE_02 is:
+  /netmnt/dba_work/db_backup/PAT.dmp
+Job "SYS"."SYS_EXPORT_TABLE_02" successfully completed at Mon Apr 18 15:15:46 2022 elapsed 0 00:00:05
+
+-TO RUN COMMAND IN THE BACKEND FOR A SCHEMA BACKUP, put table_name for table backup
+
+>nohup expdp \"/ as sysdba\" directory=export_20220307 dumpfile=INSIS_CUST_ADDON.dmp logfile=INSIS_CUST_ADDON.log schemas=INSIS_CUST_ADDON &
+
+
+C.) COPY DUMPFILE TO TARGET SERVER:
+
+[oracle@odm5db01 ~]$ cd /netmnt/dba_work/db_backup
+[oracle@odm5db01 db_backup]$ ls -ltr
+drwxrwxrwx  2 oracle    oinstall         8192 Apr 18 01:05 opttst
+-rw-r-----  1 oracle    asmadmin      1007616 Apr 18 15:15 PAT.dmp
+-rw-r--r--  1 oracle    asmadmin         1318 Apr 18 15:15 PAT.dmp.log
+[oracle@odm5db01 db_backup]$ scp -r PAT.dmp oracle@10.1.65.11:/netmnt/dba_work/db_backup
+PAT.dmp                                                                                           100%  984KB   9.1MB/s   00:00
+
+
+2.) GO TO TARGET SERVER
+
+. oraenv: database_name
+
+A.) Check for directories to use:
+
+SQL> select * from dba_directories; (Pick export directory that exists for your persnal use in the import)
+SYS                            EXPORT_DIR
+/netmnt/dba_work/db_backup
+
+B)USE THE BELOW COMMAND IF SOURCE AND TARGET TABLE/DEFINITIONS ARE THESAME, AND IF SCHEMAS ARE NOT THESAME YOU MUST REMAP SCHEMA: (NOTE dumpfile names must be thesame as source, logfile should be any name that does not exist  on server, and use TABLE_EXISTS_ACTION=replace(if table exist let it replace it in target schema)
+
+-make sure to backup the target table a follows: create table table_name_backup as select * from target_table_name;
+
+
+impdp \"/ as sysdba\" remap_schema=OVT_MART:PAT DIRECTORY=EXPORT_DIR  dumpfile=PAT.dmp logfile=PAT.impdmp.log TABLE_EXISTS_ACTION=replace cluster=N
+
+3.)YOU CAN THEN CHECK THE TABLE IN THE TARGET DATABASE by : selecting count(*) on the table;
+
+
+
+SCENARIO 2:OR STANDARD EXPORT AND IMPORT FROM ONE SCHEMA TO THESAME SCHEMA IN ANOTHER DATABASE WITH SAME TABLE DEFINITIONS:
+
+
+1. ON SOURCE
+
+A) CREATE OR USER OR CHECK SOURCE SCHEMA AND TABLE:
+
+SQL> show parameter db_n
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+db_name                              string      odm3tst
+SQL> create user pat identified by welcome123;
+
+User created.
+
+SQL> grant dba,resource,connect to pat;
+
+Grant succeeded.
+
+SQL> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Data Mining and Real Application Testing options
+[oracle@odm5db01 ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Mon Apr 18 15:38:03 2022
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Data Mining and Real Application Testing options
+
+SQL> connect pat
+Enter password:
+Connected.
+SQL> create table info(name varchar(20));
+
+Table created.
+
+SQL> insert into info values ('patric');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+B. EXECUTE THE EXPORT:
+
+[oracle@odm5db01 ~]$ expdp  \"/ as sysdba\"  DIRECTORY=EXPDIR tables=PAT.INFO  dumpfile=PAT1.dmp logfile=PAT1.dmp.log
+
+Export: Release 11.2.0.4.0 - Production on Mon Apr 18 15:39:38 2022
+
+Copyright (c) 1982, 2011, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Data Mining and Real Application Testing options
+Starting "SYS"."SYS_EXPORT_TABLE_02":  "/******** AS SYSDBA" DIRECTORY=EXPDIR tables=PAT.INFO dumpfile=PAT1.dmp logfile=PAT1.dmp.log
+Estimate in progress using BLOCKS method...
+Processing object type TABLE_EXPORT/TABLE/TABLE_DATA
+Total estimation using BLOCKS method: 64 KB
+Processing object type TABLE_EXPORT/TABLE/TABLE
+. . exported "PAT"."INFO"                                5.023 KB       1 rows
+Master table "SYS"."SYS_EXPORT_TABLE_02" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SYS.SYS_EXPORT_TABLE_02 is:
+  /netmnt/dba_work/db_backup/PAT1.dmp
+Job "SYS"."SYS_EXPORT_TABLE_02" successfully completed at Mon Apr 18 15:39:43 2022 elapsed 0 00:00:04
+
+
+C.) COPY DUMPFILE TO TARGET SERVER:
+
+[oracle@odm5db01 ~]$ cd /netmnt/dba_work/db_backup
+[oracle@odm5db01 db_backup]$ scp -r PAT1.dmp oracle@10.1.65.11:/netmnt/dba_work/db_backup
+PAT1.dmp                                                                                          100%   96KB   4.9MB/s   00:00
+
+
+
+2.) ON TARGET SERVER:
+
+. oraenv:db_name
+
+A.)check if schema exists in target:
+
+SQL> create user pat identified by welcome123;
+
+User created.
+
+SQL> grant dba,resource,connect to pat;
+
+Grant succeeded.
+
+
+B) run the import command:
+
+(dumpfile name must same as the dumpfile name copied across, and TABLE_EXISTS_ACTION=replace (if table exists, replace it)
+
+-Always check if the tabble already exists on the target database, and back it up first before you import the new one as follows:
+
+-make sure to backup the target table a follows: create table table_name_backup as select * from target_table_name; 
+
+[oracle@odm5db01 ~]$ impdp \"/ as sysdba\"  DIRECTORY=EXPORT_DIR  dumpfile=PAT1.dmp logfile=PAT.impdmp.log TABLE_EXISTS_ACTION=replace cluster=N
+Import: Release 11.2.0.4.0 - Production on Mon Apr 18 15:41:19 2022
+
+Copyright (c) 1982, 2011, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Data Mining and Real Application Testing options
+Master table "SYS"."SYS_IMPORT_FULL_01" successfully loaded/unloaded
+Starting "SYS"."SYS_IMPORT_FULL_01":  "/******** AS SYSDBA" DIRECTORY=EXPORT_DIR dumpfile=PAT1.dmp logfile=PAT.impdmp.log TABLE_EXISTS_ACTION=replace cluster=N
+Processing object type TABLE_EXPORT/TABLE/TABLE
+Processing object type TABLE_EXPORT/TABLE/TABLE_DATA
+. . imported "PAT"."INFO"                                5.023 KB       1 rows
+Job "SYS"."SYS_IMPORT_FULL_01" successfully completed at Mon Apr 18 15:42:25 2022 elapsed 0 00:01:00
+
+log into the database and query the table count to compare with source:
+
+
+SQL> select * from PAT.INFO;
+
+NAME
+--------------------
+patric
+
+
+
+NOTE:YOU CAN ALSO MAKE USE OF THE PAR FILE AS FOLLOWS FOLLOWING THESAME RULES ABOVE:
+
+
+vi expdp.par
+
+directory=EXPDIR
+tables=SYS."PAT"
+dumpfile=PAT.dmp
+parallel=8
+cluster=n
+logfile=PATEXP.log
+
+
+expdp \"/ as sysdba\" parfile=expdp.par
+
+BY SYSTEM USER:
+
+EXPORT , IMPORT STEPS:
+
+1.STANDALONE BY SYSTEM USER:
+
+A.) expdp system/oracle DIRECTORY=EXPDP(always use logical directory) tables=PATRICK dumpfile=PAT.dmp logfile=PAT.dmp.log
+
+b) This is import for system table, remember system tablespace cannot be remapped, so we use the same table name:
+
+impdp system/oracle TABLES=PATRICK DIRECTORY=EXPDP(always use logical directory)  dumpfile=PAT.dmp logfile=PAT.impdmp.log TABLE_EXISTS_ACTION=replace cluster=N
+
+2. FOR PDB:
+
+export ORACLE_PDB_SID=INSISDB
+nohup expdp \"/ as sysdba\" directory=export_20220307 dumpfile=INSIS_CUST_ADDON.dmp logfile=INSIS_CUST_ADDON.log schemas=INSIS_CUST_ADDON &
+
+3. a) FOR STANDALONE (SCHEMA):
+
+expdp system/*** dumpfile=EXPDP:EXP_DEVL2_EVENTS.dmp logfile=EXP_LOG:EXP_DEVL2_EVENTS.log schemas=EVENTS
+
+impdp system/**** dumpfile=EXPDP:EXP_DEVL2_EVENTS.dmp logfile=EXP_LOG:EXP_DEVL2_EVENTS.log schemas=EVENTS TABLE_EXISTS_ACTION=replace cluster=N
+
+
+b)FOR STANDALONE (TABLE):
+
+expdp system/HoBuJe65 tables=GENERAL.GURDMOD dumpfile=EXPDP:EXP_DEVL2_GENERAL.GURDMOD.dmp logfile=EXP_LOG:IMP_EXP_DEVL2_GENERAL.GURDMOD.dmp.log
+
+impdp system/HoBuJe65 tables=GENERAL.GUBMODU dumpfile=EXPDP:EXP_DEVL2_GENERAL.GUBMODU.dmp logfile=EXP_LOG:IMP_DEVL2_GENERAL.GUBMODU.dmp.log TABLE_EXISTS_ACTION=replace cluster=N
+
+
+
+
+
+
+
+
+
+
+
+
