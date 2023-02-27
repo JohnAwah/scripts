@@ -1,0 +1,190 @@
+Generate AWR report:
+
+-login into the database ( For cluster environment, generate for 2 nodes as below)
+
+SQL> @?/rdbms/admin/awrgrpt.sql
+
+ 
+
+Current Database
+
+~~~~~~~~~~~~~~~~
+
+ 
+
+   DB Id    DB Name
+
+----------- ------------
+
+ 2793090278 ORCL
+
+ 
+
+ 
+
+Specify the Report Type
+
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Would you like an HTML report, or a plain text report?
+
+Enter 'html' for an HTML report, or 'text' for plain text
+
+Defaults to 'html'
+
+Enter value for report_type: text
+
+ 
+
+Type Specified:  text
+
+ 
+
+ 
+
+Instances in this Workload Repository schema
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 
+
+       DB Id   INST_NUM DB Name      INST_NAME        Host
+
+------------ ---------- ------------ ---------------- ------------
+
+* 2793090278          2 ORCL         orcl2            host01
+
+* 2793090278          1 ORCL         orcl1            host02
+
+ 
+
+ 
+
+Using 2793090278 for database Id
+
+Using instances ALL (default 'ALL')
+
+
+
+2. FOR SINGLE, ONE INSTANCE OR NODE, FOLLOW BELOW:
+
+[oracle@JBCUALORA1001b ~]$ . .profile_traxprd
+[oracle@JBCUALORA1001b ~]$ sqlplus / as sysdba
+
+-SQL> @?/rdbms/admin/awrrpt.sql
+-Enter value for report_type: html
+-Enter value for num_days(specify number of days ago): 2
+-Enter value for begin_snap (according to the time of incident): 13923
+-Enter value for end_snap(according to time of incident): 13924
+-Enter value for report_name: hit enter to take default name
+-exit
+-$ find awrrpt_2_13923_13924.html
+-cp awrrpt_2_13923_13924.html /tmp
+-ls -ltr
+-cp awrrpt_2_13923_13924.html /tmp
+-cd /tmp or (any directory of choice with space)
+-ls -ltr
+-Use Winscp to remove report from server to local machine.
+
+
+
+OR AT DATABASE LEVEL:
+
+SQL> @?/rdbms/admin/awrrpt.sql
+Current Instance
+~~~~~~~~~~~~~~~~
+
+   DB Id    DB Name      Inst Num Instance
+----------- ------------ -------- ------------
+ 3120910543 AFCCCMSP            1 AFCCCMSP
+
+
+Instances in this Workload Repository schema
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   DB Id     Inst Num DB Name      Instance     Host
+------------ -------- ------------ ------------ ------------
+* 3120910543        1 AFCCCMSP     AFCCCMSP     col-afcccms-
+                                                01
+
+-old   1: select * from (select * from table(DBMS_WORKLOAD_REPOSITORY.AWR_REPORT_TEXT(&dbid,&inst_id,&start_snap,&end_snap))) where rownum < 70;
+.plug in the values and you get AWR report
+
+
+
+FOR RAC DATABASE BELOW, generate for cluster as below:
+
+To generate an AWR Compare Periods report for Oracle RAC on a specific database using the command-line interface:
+
+At the SQL prompt, enter:
+
+@$ORACLE_HOME/rdbms/admin/awrgdrpi.sql
+Specify whether you want an HTML or a text report:
+
+Enter value for report_type: html
+In this example, an HTML report is chosen.
+
+A list of available database identifiers and instance numbers are displayed:
+
+Instances in this Workload Repository schema
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   DB Id    Inst Num DB Name      Instance     Host
+----------- -------- ------------ ------------ ------------
+ 3309173529        1 MAIN         main         examp1690
+ 3309173529        1 TINT251      tint251      samp251
+ 3309173529        2 TINT251      tint252      samp252
+ 3309173529        3 TINT251      tint253      samp253
+ 3309173529        4 TINT251      tint254      samp254
+Enter the values for the database identifier (dbid) and instance number (instance_numbers_or_all) for the first time period:
+
+Enter value for dbid: 3309173529
+Using 3309173529 for Database Id for the first pair of snapshots
+Enter value for inst_num: 1,2
+Using instances 1 for the first pair of snapshots
+Specify the number of days for which you want to list snapshot IDs in the first time period.
+
+Enter value for num_days: 2
+A list of existing snapshots for the specified time range is displayed. In this example, snapshots captured in the last 2 days are displayed.
+
+Specify a beginning and ending snapshot ID for the first time period:
+
+Enter value for begin_snap: 102
+Enter value for end_snap: 103
+In this example, the snapshot with a snapshot ID of 102 is selected as the beginning snapshot, and the snapshot with a snapshot ID of 103 is selected as the ending snapshot for the first time period.
+
+A list of available database identifiers and instance numbers are displayed:
+
+Instances in this Workload Repository schema
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   DB Id    Inst Num DB Name      Instance     Host
+----------- -------- ------------ ------------ ------------
+ 3309173529        1 MAIN         main         examp1690
+ 3309173529        1 TINT251      tint251      samp251
+ 3309173529        2 TINT251      tint252      samp252
+ 3309173529        3 TINT251      tint253      samp253
+ 3309173529        4 TINT251      tint254      samp254
+INSTNUM1
+-----------------------------------------------------
+1,2
+Enter the values for the database identifier (dbid2) and instance numbers (instance_numbers_or_all2) for the second time period:
+
+Enter value for dbid2: 3309173529
+Using 3309173529 for Database Id for the second pair of snapshots
+Enter value for instance_numbers_or_all2: 3,4
+Specify the number of days for which you want to list snapshot IDs in the second time period.
+
+Enter value for num_days2: 1
+A list of existing snapshots for the specified time range is displayed. In this example, snapshots captured in the previous day are displayed.
+
+Specify a beginning and ending snapshot ID for the second time period:
+
+Enter value for begin_snap2: 126
+Enter value for end_snap2: 127
+In this example, the snapshot with a snapshot ID of 126 is selected as the beginning snapshot, and the snapshot with a snapshot ID of 127 is selected as the ending snapshot for the second time period.
+
+Enter a report name, or accept the default report name:
+
+Enter value for report_name: 
+Using the report name awrracdiff_1st_1_2nd_1.html
+In this example, the default name is accepted and an AWR report named awrrac_1st_1_2nd_1.html is generated.
+

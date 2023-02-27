@@ -1,0 +1,156 @@
+
+GENERAL:
+
+CLIENT NAME							JetBlue		 	 			
+Connectivity Information				 			
+ 			
+
+														Last Update When:9/3/2019			
+														Last Update Who:JJADHAV			
+
+Client to Cintra Relationship					Sensor			Sensor Support, Project, Adhoc or Emergency					
+
+Client Network Access Method					WebBased		Cisco, Checkpoint, SSH, WindowsVPN, Citrix, Logmein or WebEx					
+
+Client Access temporary or permenant 				Temporary		Temporary or Permenant
+					
+Client Network opened for Cintra Network			Yes			Is the network opened to our firewall IP 160.79.165.130					
+
+Client Network Access Token Needed 				Yes			Yes or No					
+
+Who holds the RSA Tokens 					TBC			Cintra DBA or Client Operational Desk					
+
+Do we need to call into the client for RSA Token 		Text to your Phone			 			
+
+Do we have a landing PC or do we connect directly 		Jump Server						
+
+Database Server Access Method					Citrix			RDP, VNC, SSH, RADMIN, PANYWHERE
+					
+Does the client log or monitor access 				No
+						
+Who do we call for connectivity issues				Patricia Toussaint	Contact Number	917-930-6789
+				
+Notable Utilities Available 					NA			OEM, Sqlplus, Bethnic …..					
+
+Grid Control Available 						No						
+
+DBConsole							No						
+							
+
+
+CITRIX URL ACCESS (NEW VPN ACCESS)				Username			Password					Expiry Date		ADM_Accounts			Password
+https://appaccess.jetblue.com	
+								pgupta				Newyork@12345					
+Use <username>@jetblue.com login for VPN			snutulapathi			HappyJetting!17					
+								jakpovi				Res0lve22!10					
+								lgiannone			HappyJetting!13					
+								pdesalvo			QAZ!@wsx12					
+								vtyagi				Australia#2019					
+
+ADM URL								JMahesh				Cintra@54321		voice call				
+https://desktopadm.jetblue.com					jjadhav@jetblue.com		C*ntr@1234567890	voice call					admjjadhav@jetblue.com		C*ntr@1234567890
+								vsachdeva			Cintra#123	 				
+								cyannamani			Loosecontrol@000							admcyannamani@jetblue.com	adminSafety!94985
+To reset password						mpaddock			ps226Worm!	 				
+
+https://webmail.jetblue.com/owa/auth/logon.aspx?replaceCurrent=1&reason=3&url=https%3a%2f%2fwebmail.jetblue.com%2fowa%2fauth%2flogon.aspx%3furl%3dhttps%253a%252f%252fwebmail.jetblue.com%252fowa%252f%23replaceCurrent%3d1%26reason%3d3 	
+								vilamkar			Vishu@2019	 				
+								pasharma			Winter2019!								admpasharma@jetblue.com		AdminSafety#92310
+								pgangadharan			Newyork@123	Text				
+								ceshwaraiah			Jetblue@1234!					
+								ssaghal				Jetblue12345	voice call				
+ 								mtimonin		 				
+
+Landing Machine							Connect Method			Username	Password	Domain			
+
+RDP – CTX_JH 							
+On appaccess.jetblue.com,  choose RDP – CTX_JH 			Use Same above credentials						
+							
+														
+
+						Winter2019!					
+GRID:
+
+
+CLIENT NAME:					JetBlue		 	 	
+Connectivity Information				 	
+ 													Last Update When	8/19/2013
+													Last Update Who	P. Desalvo
+					
+Culpepper Grid Server					
+
+Hostname					OS		Public IP	OS User			Password			Domain
+"cua44495oem001 (10.20.139.250)
+
+"						Windows 2008			SVC_oraadmin		HappyJetting!10			jetblue
+					
+Grid URL:					Secure Upload Password:	N/A	DB User			Password	
+https://cua44495oem001.jetblue.com:7799/em 	DB NAME	         EMPRD		sys			Pr0d3mprd	
+										system			Pr0d3mprd	
+										sysman			Pr0d3mprd	
+										dbsnmp			Pr0d3mprd	
+					
+					
+Englewood Grid Server					
+Hostname					OS		Public IP	OS User			Password			Domain
+egw44495oem001 (10.24.139.250)			Windows 2008			SVC_oraadmin		HappyJetting!10			jetblue
+					
+
+Grid URL:					Secure Upload Passwor:	N/A	DB User			Password	
+https://egw44495oem001.jetblue.com:7799/em	DB NAME		EMPRD		sys			Pr0d3mprd	
+										system			Pr0d3mprd	
+										sysman			Pr0d3mprd	
+										dbsnmp			Pr0d3mprd	
+					
+					
+					
+					
+					
+JBCUALOEMG1001	10.204.168.231				
+JBEGWLOEMG1001	10.205.168.231				
+					
+
+-Oracle User, P.W:BlueSkies2019
+
+    
+-OS User:SVC_oraadmin
+ Password: HappyJetting!10
+
+
+=====================================================================================================================================================================================
+
+Notes on Jet Blue architecture:
+
+CUA CTR PROD - JBCUALORA1002C/D (DOPRD)
+
+CUA CTR STAGE/QA - JBCUALORA2002C/D (TOQA, DOSTG)
+
+GOLDENGATE TARGET IS ON - EGW TRAX PRD 
+
+GOLDENGATE SOURCE IS ON- CUA TRAX PRD
+
+-Goldengate login procedure: log in as root
+                            sudo su - ggsowner
+                            ps -ef|grep mgr
+                            . .profile_trxprd
+                            g ( to sign in)
+        Useful GG commands : info all, info E*, info P*, info R*, start/stop E*, P*,R*
+
+=======================================================================================================================================================================================
+
+VERIZON CONTRACTOR LOGINS:
+
+We have been notified that you will be joining Verizon as a non-employee soon. In preparation for your arrival we have registered you in our identity systems. Below are your identity credentials. Please bring this information with you on your first day of work.
+
+User Community:VZNE
+CIM Worker Number:7310098
+PIN:5893
+
+
+
+
+
+
+
+	
+							

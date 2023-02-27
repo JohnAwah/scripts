@@ -1,0 +1,5 @@
+create or grant proxy user in Oracle:
+
+SQL> alter user ods_urx grant connect through bgujjarlapudi;
+
+SQL> alter user ods_urx revoke connect through bgujjarlapudi;

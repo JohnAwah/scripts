@@ -1,0 +1,27 @@
+BLOCKING SESSION QUERIES:
+
+SQL> select sid,serial#,status,sql_id,prev_sql_id,final_blocking_session from gv$session where final_blocking_session is not null;
+
+       SID    SERIAL# STATUS          SQL_ID        PREV_SQL_ID   FINAL_BLOCKING_SESSION
+---------- ---------- --------------- ------------- ------------- ----------------------
+      2189      48985 ACTIVE          cav09b6xgqhvd 8hdghy8ynyw63                    648
+
+SQL> select sid,serial#,status,sql_id,prev_sql_id,Event from gv$session where sid='648';
+
+       SID    SERIAL# STATUS          SQL_ID        PREV_SQL_ID   EVENT
+---------- ---------- --------------- ------------- ------------- ----------------------------------------------------------------
+       648      11749 INACTIVE        98p9bgu17b88u 98p9bgu17b88u SQL*Net message from client
+       648       2812 INACTIVE                      970rwm43a2b4d SQL*Net message from client
+
+SQL> select sql_text from gv$sql where sql_id='98p9bgu17b88u';
+
+SQL_TEXT
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SELECT "PKG_APPLICATION_FUNCTION"."CURRENTDATETIME" FROM DUAL
+SELECT "PKG_APPLICATION_FUNCTION"."CURRENTDATETIME" FROM DUAL
+
+SQL> select sid, serial#, username,status from v$session where sid in (648);
+
+       SID    SERIAL# USERNAME                       STATUS
+---------- ---------- ------------------------------ ---------------
+       648      11749 ODB                            INACTIVE

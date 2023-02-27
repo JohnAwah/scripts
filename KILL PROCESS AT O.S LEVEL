@@ -1,0 +1,8 @@
+TO GET PID AT OS LEVEL TO KILL SQL JOB IN UNIX:
+
+[oracle@dela-prod-insis-dbs1 ~]$ ps -C sqlplus
+  PID TTY          TIME CMD
+44184 ?        00:00:00 sqlplus
+[oracle@dela-prod-insis-dbs1 ~]$
+
+

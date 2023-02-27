@@ -1,0 +1,82 @@
+GRANT PRIVILEGES TO USER ON TABLES IN A PARTICULAR SCHEMA(SELECT...DML'S ALSO):
+
+CREATE DYNAMIC QUERY AS FOLLOWS:
+
+E.g
+spool /tmp/file.txt
+Select 'GRANT SELECT ON ODB.'||Table_Name||' TO ODBRO;' From All_Tables Where Owner='DLEX_B6RESV';
+spool off
+
+-Open the file.txt in node pad remove the spool and other features to look like this :
+
+
+GRANT SELECT ON ODB.SPEC2500_EXP_IMP TO ODBRO;                                  
+GRANT SELECT ON ODB.SPEC2500_EXP_IMP_ASSET TO ODBRO;                            
+GRANT SELECT ON ODB.SPEC2500_EXP_IMP_MAPPING TO ODBRO;                          
+GRANT SELECT ON ODB.SPEC2500_EXCEPTIONS TO ODBRO;                               
+GRANT SELECT ON ODB.SPEC2500_CODE_MASTER TO ODBRO;                              
+GRANT SELECT ON ODB.SPEC2500_STATIC_MAPPING TO ODBRO;                           
+GRANT SELECT ON ODB.CONV_DATA_VALIDATION TO ODBRO;                              
+GRANT SELECT ON ODB.TEMP_TASK_CARD_ITEM TO ODBRO;                               
+GRANT SELECT ON ODB.TEMP_TASK_CARD_CONTROL TO ODBRO;                            
+GRANT SELECT ON ODB.TEMP_TASK_CARD_PN TO ODBRO;                                 
+GRANT SELECT ON ODB.TEMP_TASK_CARD_EXECUTION TO ODBRO;                          
+
+GRANT SELECT ON ODB.TEMP_TASK_CARD_ITEM_HEAD_EFF TO ODBRO;                      
+GRANT SELECT ON ODB.TEMP_TASK_CARD_ITEM_DISTRI_EFF TO ODBRO;                    
+GRANT SELECT ON ODB.TEMP_TASK_CARD_TRAXDOC_REF TO ODBRO;                        
+GRANT SELECT ON ODB.TEMP_ENGINEERING_TASK_CARD_CTL TO ODBRO;                    
+GRANT SELECT ON ODB.TEMP_TASK_CARD_ITEM_RANGE TO ODBRO;                         
+GRANT SELECT ON ODB.WO_ACTUALS_DELETE TO ODBRO;                                 
+GRANT SELECT ON ODB.CONV_ENG_ORDER_AUDIT TO ODBRO;                              
+GRANT SELECT ON ODB.TXD_FAULT_CODE_DETAIL TO ODBRO;                             
+GRANT SELECT ON ODB.TXD_FAULT_ISOLATED_TASK_REF TO ODBRO;                       
+GRANT SELECT ON ODB.PN_EFFECTIVITY_TEMP TO ODBRO;                               
+GRANT SELECT ON ODB.AC_ACTUAL_FLIGHTS TO ODBRO;                                 
+
+
+GRANT SELECT ON ODB.SUB_LOCATION TO ODBRO;                                      
+GRANT SELECT ON ODB.DROPDEAD_BY_AC_PROCESS TO ODBRO;                            
+GRANT SELECT ON ODB.TRAXDOC_EXCEPTIONS_HEADER TO ODBRO;                         
+GRANT SELECT ON ODB.USER_LAYOUT TO ODBRO;                                       
+GRANT SELECT ON ODB.SUB_LOCATION_AUDIT TO ODBRO;                                
+GRANT SELECT ON ODB.TRAXDOC_IMPORT_DETAIL TO ODBRO;                             
+GRANT SELECT ON ODB.IFACE_EOS_IN_QT TO ODBRO;                                   
+GRANT SELECT ON ODB.LHT_SHOP_FINDINGS TO ODBRO;                                 
+GRANT SELECT ON ODB.LHT_MEMO_DOCUMENT TO ODBRO;                                 
+GRANT SELECT ON ODB.WO_PUBLISH TO ODBRO;                                        
+GRANT SELECT ON ODB.WO_ITEMS_PUBLISH TO ODBRO;      
+
+-Copy this output, create sql script in the O.S, eg
+$vi ODB_g.sql  (paste the output of the selected grants above into this script,save it)
+
+-Execute the script in the database as below
+>you may spool the output into a file
+>@ODB_g.sql
+>spool off;    
+
+-Query to get all tables belonging to a schema:
+   
+   
+   SELECT DISTINCT OWNER, OBJECT_NAME 
+  FROM DBA_OBJECTS
+ WHERE OBJECT_TYPE = 'TABLE'
+   AND OWNER = 'DLEX_B6RESV'
+   
+   
+ select INSERTS,UPDATES,DELETES,TRUNCATED,TIMESTAMP from dba_tab_modifications where TABLE_NAME='DLEX_B6TDP_AVAILCACHE.AVAILABILITYCACHECONFIG';
+
+DLEX_B6BIZ =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = EGW19CTRPRD-SCAN)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = dlex_b6biz_data_dr.jetblue.com)
+    )
+  )
+  
+  
+  SELECT SCN_TO_TIMESTAMP(MAX(ora_rowscn)) from 
+
+  
+

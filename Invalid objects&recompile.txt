@@ -1,0 +1,53 @@
+
+1.HOW TO QUERY FOR INVALID OBJECTS AND FIX THEM:
+
+-ADVISE TO CHECK INVALID OBJECTS DAILY AND ESCALATE TO DEV TEAM
+
+>SET lines 120 pages 2000
+COL status FOR a9
+COL object_type FOR a20;
+COL owner.object FOR a50
+SELECT status, object_id, object_type, owner||'.'||object_name "OWNER.OBJECT"
+FROM dba_objects
+WHERE status != 'VALID' AND object_name NOT LIKE 'BIN$%'
+ORDER BY 4,2;
+
+STATUS     OBJECT_ID OBJECT_TYPE          OWNER.OBJECT
+--------- ---------- -------------------- --------------------------------------------------
+INVALID       240052 PROCEDURE            ODS_URX.NCOA_INPUT_LOAD_PROC
+
+
+2. TO RECOMPILE INVALID OBJECTS:
+
+Packages :
+
+Alter package <package name> compile;
+Alter package <package name> compile body;
+
+for function :
+Alter function <function name> compile;
+
+Alter procedure <procedure name> compile
+
+Alter materialized view <mview name> Compile;
+
+>SQL> select status from dba_objects where object_name='SP_PRI_NEO_UPDATE' and owner='PRI_MART';
+
+
+
+STATUS
+
+-------
+
+VALID
+
+
+
+
+
+HOW TO FIX INVALID OBJECTS FOR ENTIRE DATABASE:
+
+cd $ORACLE_HOME/rdbms/admin
+execute utlrp.sql script
+
+

@@ -1,0 +1,12 @@
+RUN A SCRIPT IN THE BACKEND:
+
+vi file_name
+paste content of query
+save it
+set environment of database
+run script in backend with nohup command:
+
+ nohup sqlplus "/ as sysdba" @UNIMRMART.sql &
+ 
+ you can: tail -f nohup.out (to see content of logfile)
+

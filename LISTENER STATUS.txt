@@ -1,0 +1,13 @@
+CHECK STATUS OF LISTENER;
+
+[oracle@prodoraoda02 ~]$ ps -ef|grep lsnr
+grid     11975     1  0 Jun03 ?        00:04:29 /u01/app/19.13.0.0/grid/bin/tnslsnr ASMNET1LSNR_ASM -no_crs_notify -inherit
+grid     12069     1  0 Jun03 ?        00:06:05 /u01/app/19.13.0.0/grid/bin/tnslsnr LISTENER -no_crs_notify -inherit
+grid     12128     1  0 Jun03 ?        00:02:44 /u01/app/19.13.0.0/grid/bin/tnslsnr LISTENER_SCAN1 -no_crs_notify -inherit
+oracle   95551 77837  0 00:36 pts/2    00:00:00 grep --color=auto lsnr
+
+ALSO:
+
+[oracle@prodoraoda02 ~]$ srvctl status listener
+
+

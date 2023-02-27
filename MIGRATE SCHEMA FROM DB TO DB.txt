@@ -1,0 +1,3 @@
+MIGRATE SCHEMA FROM ONE DATABASE TO ANOTHER:
+
+https://techgoeasy.com/how-to-migrate-schema-from-one-database/

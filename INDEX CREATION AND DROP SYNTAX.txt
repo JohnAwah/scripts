@@ -1,0 +1,22 @@
+create index ods_moo.ncoa_output_record_IDX1 on ods_moo.ncoa_output_record (ncoa_output_record_id) parallel 32 nologging;
+alter index ods_moo.ncoa_output_record_IDX1 noparallel logging;
+create index ods_moo.ncoa_output_record_IDX2 on ods_moo.ncoa_output_record (ncoa_job_id) parallel 32 nologging;
+alter index ods_moo.ncoa_output_record_IDX2 noparallel logging;
+create index ods_moo.ncoa_output_record_IDX3 on ods_moo.ncoa_output_record (ncoa_input_record_id) parallel 32 nologging;
+alter index ods_moo.ncoa_output_record_IDX3 noparallel logging;
+create index ods_moo.ncoa_input_record_IDX1 on ods_moo.ncoa_input_record (ncoa_job_id ) parallel 32 nologging;
+alter index ods_moo.ncoa_input_record_IDX1 noparallel logging;
+create index ods_moo.ncoa_input_record_IDX2 on ods_moo.ncoa_input_record (ncoa_input_record_id) parallel 32 nologging;
+alter index ods_moo.ncoa_input_record_IDX2 noparallel logging;
+create index ods_moo.ncoa_input_record_IDX3 on ods_moo.ncoa_input_record (address_line_1) parallel 32 nologging;
+alter index ods_moo.ncoa_input_record_IDX3 noparallel logging;
+
+
+And index drop:
+
+drop index ods_moo.ncoa_output_record_IDX1;
+drop index ods_moo.ncoa_output_record_IDX2;
+drop index ods_moo.ncoa_output_record_IDX3;
+drop index ods_moo.ncoa_input_record_IDX1;
+drop index ods_moo.ncoa_input_record_IDX2;
+drop index ods_moo.ncoa_input_record_IDX3;

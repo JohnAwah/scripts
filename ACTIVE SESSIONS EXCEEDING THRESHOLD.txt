@@ -1,0 +1,94 @@
+ACTIVE SESSIONS EXCEEDING THRESHOLD:
+
+A.
+SQL> select count(*) BLOCK_SESSION_COUNT from gv$session where blocking_session is not null;
+
+BLOCK_SESSION_COUNT
+-------------------
+                  0
+
+SQL> select count(*) TOTAL_SESSIONS_DLEX from gv$session where username like 'DLEX%';
+
+TOTAL_SESSIONS_DLEX
+-------------------
+               5599
+
+SQL> select count(*) ACTIVE_SESSIONS_DLEX from gv$session where username like 'DLEX%' and status='ACTIVE';
+
+ACTIVE_SESSIONS_DLEX
+--------------------
+                  32
+				  
+				  
+SQL> select machine, username, status, count(*) from  gv$session group by  username, machine, status order by 4 desc;
+
+
+1.CHECK FOR:
+SQL> select count(*) from gv$session;
+
+  COUNT(*)
+----------
+      3139
+
+SQL> select count(*) from gv$session where status='INACTIVE';
+
+  COUNT(*)
+----------
+      2846
+
+SQL> select count(*) from gv$session where status='ACTIVE';
+
+  COUNT(*)
+----------
+       294
+	   
+2. CHECK FOR:	   
+	   
+TOTAL_SESSIONS
+--------------
+          6282
+
+ACTIVE_SESSIONS
+---------------
+             59
+
+	   
+3.CHECK FOR BLOCKING SESSIONS:
+
+BLOCK_SESSION_COUNT
+-------------------
+                  0
+
+TOTAL_SESSIONS_DLEX
+-------------------
+               2619
+
+
+ACTIVE_SESSIONS_DLEX
+--------------------
+                 282
+
+
+	   
+	   
+CHECK FOR BLOCKING SESSSIONS TOO:
+
+SQL> select count(*) BLOCK_SESSION_COUNT from gv$session where blocking_session is not null;
+
+
+
+From this graph it shows the number of active sessions were higher than the normal, as of now the sessions are running normally
+We are also not seeing any of the blocking/waiting sessions on the DOPRD database.
+
+Please confirm if you are facing any issues with the database connections.
+
+
+- Total number of sessions by machine name:
+select username, count(*) from gv$session where machine in ('JBVCBLTDRC1000','JBVCBLTDPC1000','jbvcbltdrc1000','jbvcbltdpc1000') group by username;
+
+
+
+
+
+
+

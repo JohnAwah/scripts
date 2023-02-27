@@ -1,0 +1,23 @@
+Subject: LEVEL1-JETBLUE-NUTANIX-SensorMONOS-JBEGWLORA1001b- Oracle ASM Reaching Storage limits.
+
+FOLLOWING DISK GROUPS NEED REVIEW on JBEGWLORA1001b
+******************************************************
+
+ASM RECODG - DG THRESHOLD:90%
+
+------------------------------ ------------
+
+NAME                   STATE                                                                      TOTAL                               FREE               FREE_W_MIRROR                  USED_PERCENT
+--------------- ------------------------------ -------------------- -------------------- -------------------- --------------------
+RECODG                             MOUNTED                                                              3072                               281.16          281.16                                        91
+
+
+-SOLUTION:
+
+
+
+
+Clear old backed up archive logs.
+RECODG is under threshold now
+
+ 

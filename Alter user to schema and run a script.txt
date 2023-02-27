@@ -1,0 +1,28 @@
+To log in as a user and execute a script:
+
+SQL> select owner from dba_tables where table_name='SECURITY_HEADER';
+
+OWNER
+--------------------------------------------------------------------------------
+ODB
+
+SQL> alter session set current_schema=ODB;
+
+
+SQL> !cat /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.txt
+
+
+-TO SEE AL SCHEMAS IN THE DATABASE:
+select distinct
+   owner
+from
+   dba_segments
+where
+   owner in
+   (select username
+    from dba_users
+    where default_tablespace not in ('SYSTEM','SYSAUX')
+   )
+;
+
+

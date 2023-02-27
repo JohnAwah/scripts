@@ -1,0 +1,1183 @@
+-To check blocking session, steps in 
+
+BLOCK_SESSION_COUNT
+-------------------
+                  0
+
+2. select
+   blocking_session,
+   sid,
+   serial#,
+   wait_class,
+   seconds_in_wait
+from
+   gv$session
+where
+   blocking_session is not NULL
+order by
+   blocking_session;
+   
+   
+  BLOCKING_SESSION        SID    SERIAL# WAIT_CLASS           SECONDS_IN_WAIT
+---------------- ---------- ---------- -------------------- --------
+             148        135      61521 Idle                              64
+			 
+			 obtain Serial num of session 148, and kill it, because it is blocking SID 135
+			 
+			 
+
+-From above query, session(SID) 148 is blocking session 135, and it has been waiting for 64 seconds.
+			 
+			 
+			 OR
+			 
+
+BLOCKING_SESSION        SID SERIAL# WAIT_CLASS                                                       SECONDS_IN_WAIT
+---------------- ---------- ------- ---------------------------------------------------------------- ---------------
+            1834       2495   24427 Application                                                                 1263
+
+
+ 
+-From above query, session(SID) 148 is blocking session 135, and it has been waiting for 64 seconds.
+
+
+3. To get more details about the blocking session:
+
+set lines 1234 pages 9999
+ col inst_id for a10
+ col serial# for a10
+ col machine for a30
+ col username for a10
+ col event for a20
+ col blocking_session for 999999
+ col blocking_instance for 999999
+ col status for a10
+ col INST_ID for 9999
+ col SERIAL# for 999999
+ select inst_id,sid,serial#, machine, username, event, blocking_session, blocking_instance, status, sql_id from gv$session where status ='ACTIVE'and sid = 1209;
+ 
+ INST_ID        SID SERIAL# MACHINE                        USERNAME   EVENT                BLOCKING_SESSION BLOCKING_INSTANCE STATUS     SQL_ID
+------- ---------- ------- ------------------------------ ---------- -------------------- ---------------- ----------------- ---------- -------------
+      1        633   60699 JBCUALORA1001a                 SYS        class slave wait                                        ACTIVE
+      1        949   14850 JBCUALORA1001a                 SYS        class slave wait                                        ACTIVE
+      1       1082   61634 JBCUALORA1001a                 SYS        PX Deq: Execute Repl                                    ACTIVE     6z1xtfx5t3sdn
+                                                                     y
+
+      1       1545   10948 JBCUALORA1001a                 SYS        class slave wait                                        ACTIVE
+      1       1853   30719 JBCUALORA1001a                 GGADMIN    LogMiner client: tra                                    ACTIVE
+                                                                     nsaction
+
+      1       1987    6083 JBCUALORA1001a                 SYS        PX Deq: Execution Ms                                    ACTIVE     6z1xtfx5t3sdn
+                                                                     g
+
+      1       1990    6908 JBCUALORA1001a                 SYS        LogMiner reader: red                                    ACTIVE
+                                                                     o (idle)
+
+      1       2155   18781 JBCUALORA1001a                 SYS        LogMiner builder: id                                    ACTIVE
+                                                                     le
+
+      1       2303   56304 JBCUALORA1001a                 SYS        LogMiner preparer: i                                    ACTIVE
+                                                                     dle
+
+      1       2458   12400 JBCUALORA1001a                 SYS        LogMiner preparer: i                                    ACTIVE
+                                                                     dle
+
+      1       2596   17388 JBCUALORA1001a                 SYS        class slave wait                                        ACTIVE
+      1       2790   62672 JBCUALORA1001a                 SYS        class slave wait                                        ACTIVE
+      1       2918   12000 JBCUALORA1001a                 SYS        class slave wait                                        ACTIVE
+      2         23   10102 JBCUALORA1001b                 ODB        direct path read                                        ACTIVE     fjnv54q1s2hm2
+      2        164   48259 JBCUALORA1001b                 SYS        class slave wait                                        ACTIVE
+      2        764   42864 JBCUALORA1001b                 SYS        class slave wait                                        ACTIVE
+      2        941   33095 JBCUALORA1001b                 ODB        class slave wait                                        ACTIVE
+      2       1112   53406 JBCUALORA1001b                 SYS        class slave wait                                        ACTIVE
+      2       1387   43797 JBCUALORA1001b                 SYS        class slave wait                                        ACTIVE
+      2       1437   25355 JBCUAMTRX1018                  ODB        db file sequential r                                    ACTIVE     735yqh07bcqcy
+                                                                     ead
+
+      2       2154   43454 JBCUALORA1001a                 SYS        PX Deq: Execution Ms                                    ACTIVE     6z1xtfx5t3sdn
+                                                                     g
+
+      2       2326   35283 JBCUALORA1001b                 SYS        class slave wait                                        ACTIVE
+      2       2495   24427 JBCUAMTRA1001                  ODB        enq: TX - row lock c             1834                 2 ACTIVE     b8smjx2pknxvu
+
+
+
+-TO KILL THE BLOCKING SESSION:
+
+SQL> ALTER SYSTEM KILL SESSION 'sid,serial#' IMMEDIATE;
+
+- TO KILL SESSION IN RAC:
+> put the ssesion ID=1778, SERIAL#=36311, and instance_ID=@2 as in the case below.
+
+INST_ID   SID
+---------- -----
+         2   339
+
+
+SQL> alter system kill session '94,33579,@1' immediate;
+System altered
+
+>To get the serial number, status of the SID and instance_ID, you can get all this from the gv$session view, as in the example below:
+
+SQL> select inst_id,sid,serial#,status from gv$session where sid=1036;
+
+   INST_ID        SID    SERIAL# STATUS
+---------- ---------- ---------- --------
+         1       1036      24021 ACTIVE
+         2       1036      27393 INACTIVE
+
+SQL> alter system kill session '141,23857,@2' immediate;
+
+System altered.
+
+-Also :
+SQL> select sid, serial#, username,status from v$session where sid in (177,2773);
+
+       SID    SERIAL# USERNAME             STATUS
+---------- ---------- -------------------- --------
+        39         77 SH                   ACTIVE <-- waiter
+        46         13 SH                   INACTIVE <-- Holder
+
+kill the holder
+
+
+
+alter system disconnect session 'sid,serial#' IMMEDIATE;
+kill -9 kill -9 <Unix Process Id from SID>
+
+
+
+
+
+
+
+ 
+ 4. Identify the Session to be Killed and use below command to kill session, after approval from Apps team if it is an application running.
+
+SQL> ALTER SYSTEM KILL SESSION 'sid,serial#' IMMEDIATE;
+alter system disconnect session 'sid,serial#' IMMEDIATE;
+kill -9 kill -9 <Unix Process Id from SID>
+
+
+To ask for go ahead to resolve blocking sessions:
+For DB blocking blocking session resolution
+email to with blocking session info:
+
+IT Operations Product Support TechOps <ITOpsProductSupportTO@jetblue.com>; de la Rocha, David <David.delaRocha@jetblue.com>; Tong, William <William.Tong@jetblue.com>; Chohan, Hamid <Hamid.Chohan@jetblue.com>; Geles, Michael <Michael.Geles@jetblue.com>; Brown, Marcellus <Marcellus.Brown@jetblue.com>
+
+JB_Support Cintra <JB_Support@cintra.com>
+
+
+
+
+
+==============================================================================================================================================
+BLOCKING SESSION IN WTD ENVIRONMENT:
+
+EXAMPLE:
+
+Host=odm4db02-adm.kbm1.loc 
+Target type=Database Instance 
+Target name=mooprd.kbm1.com_mooprd4 
+Incident creation time=Feb 2, 2022 2:01:56 PM CST 
+Last updated time=Feb 2, 2022 2:01:56 PM CST 
+Message=Total db time 11,250 seconds is consumed by 18 sessions blocked by session SID,SERIAL:708,39111,LOCK_TYPE:SS,PROGRAM:oracle@odm4db02-adm.kbm1.loc (P068),MODULE:PL/SQL Developer,ACTION:SQL Window,MACHINE:KBM1_DMZ\WDXADMZPV11,OSUSER:moo_jkoerner,USERNAME:MOO_JKOERNER. 
+Severity=Critical 
+Incident ID=83568 
+Event count=1 
+Incident Status=New 
+Escalated=No 
+Priority=None 
+Incident owner= 
+Incident Acknowledged By Owner=No 
+Categories=Load 
+Rule Name=Cintra - Incident Creation and Notification,Notifications 
+Rule Owner=SYSMAN 
+Update Details:
+
+
+-APPROACH TO RESOLVE IT:
+Team,
+ 
+We are seeing Blocking activity due to following session in Mutual production database.
+Pl confirm if this session should be run as is OR can be killed .
+ 
+Total db time 11,250 seconds is consumed by 18 sessions blocked by session SID,SERIAL:708,39111,LOCK_TYPE:SS,PROGRAM:oracle@odm4db02-adm.kbm1.loc (P068),MODULE:PL/SQL Developer,ACTION:SQL Window,MACHINE:KBM1_DMZ\WDXADMZPV11,OSUSER:moo_jkoerner,USERNAME:MOO_JKOERNER.
+ 
+Regards
+Nitin Gera
+
+>Kill it please and I’ll notify him.
+ 
+Thanks,
+ 
+▘ 
+Laurie Harper
+Director, Client Delivery Services
+
+
+>Acknowledged.
+Session has been killed from Production database MOOPRD
+
+======================================================================================================================================================================
+
+- TO CHECK BLOCKING SESSION ON OEM:
+
+2. How to identify blocking sessions on OEM: FOR TRAXPRD in this case:
+
+OPEN URL ON BROWSER: https://cua44495oem001.jetblue.com:7799/em
+LOG IN : SYSMAN
+PASSWORD: Pr0d3mprd
+Search for target on search target bar on top right hand: TRAXPRD and hit search
+CLICK on traxprd_nva
+click on drop down on Performance tab on top left
+select blocking sessions
+And under blocking sessions you will see if there are any blocking sessions for each of the instances.
+You can switch between instances to double check
+You can log back into the server on sqlplus to double check out ouput and confirm
+
+
+
+
+==========================================================================================================================================================
+
+OTHER HELPFUL COMMANDS BELOW:
+
+
+1.SQL> select * from dba_blockers;
+
+no rows selected
+
+SQL> select * from dba_waiters;
+
+no rows selected
+
+SQL> select sid, serial#,status, sql_id, prev_sql_id,wait_class ,final_blocking_session from gv$session where final_blocking_session is not null;
+
+no rows selected
+
+SQL> select inst_id,sid,Event,Seconds_in_wait,state from gv$session_wait where seconds_in_wait > 600 and wait_class#!=6 order by 3 desc;
+
+no rows selected
+
+[ORACLE][SQL] Alter system kill session ‘<SID>,<SERIAL#>’ immediate;
+
+SQL> ALTER SYSTEM KILL SESSION 'sid,serial#' IMMEDIATE;
+
+- TO KILL SESSION IN RAC:
+> put the ssesion ID=1778, SERIAL#=36311, and instance_ID=@2 as in the case below.
+
+SQL> alter system kill session '550,9517,@2' immediate;
+System altered
+
+>To get the serial number, status of the SID and instance_ID, you can get all this from the gv$session view, as in the example below:
+
+SQL> select inst_id,sid,serial#,status from gv$session where sid=1209;
+
+   INST_ID        SID    SERIAL# STATUS
+---------- ---------- ---------- --------
+         1       1036      24021 ACTIVE
+         2       1036      27393 INACTIVE
+		 
+ 1        231      51703 ACTIVE
+
+SQL> alter system kill session '1209,14707, @2' immediate;
+
+System altered.
+
+
+
+alter system disconnect session 'sid,serial#' IMMEDIATE;
+kill -9 kill -9 <Unix Process Id from SID>
+
+
+
+
+
+2. How to identify blocking sessions on OEM: FOR TRAXPRD in this case:
+
+OPEN URL ON BROWSER: https://cua44495oem001.jetblue.com:7799/em
+LOG IN : SYSMAN
+PASSWORD: Pr0d3mprd
+Search for target on search target bar on top right hand: TRAXPRD and hit search
+CLICK on traxprd_nva
+click on drop down on Performance tab on top left
+select blocking sessions
+And under blocking sessions you will see if there are any blocking sessions for each of the instances.
+You can switch between instances to double check
+You can log back into the server on sqlplus to double check out ouput and confirm
+
+
+
+2. BLOCKING SESSION ON SQLPLUS:
+
+Blocking sessions in RAC : select count(*) BLOCK_SESSION_COUNT from gv$session where blocking_session is not null;
+
+Blocking session: select username, status, count(*) from gv$session group by username, status;
+
+
+3. QUERY TO FIND OUT SQL THAT IS CAUSING A BLOCKING SESSION
+
+ STEPS:
+
+>Log into the database: 
+first sql> spool to directory/file_name.html
+
+set markup html on
+set pages 1000
+set lines 2000
+set echo on
+set verify on
+SELECT DISTINCT ash.sql_id,ash.session_id,
+                ash.blocking_session         blocker_ses,
+                ash.blocking_session_serial# blocker_ser,
+                ash.user_id,
+                s.sql_text,
+                ash.module,
+                ash.sample_time
+  FROM DBA_HIST_ACTIVE_SESS_HISTORY ash, gv$sql s
+ WHERE     ash.sql_id = s.sql_id
+       AND blocking_session IS NOT NULL
+       AND ash.user_id <> 0 
+AND s.sql_id like '72t0ta560tkzj'
+AND ash.sample_time BETWEEN '20-OCT-21 01.00.00.000 PM' AND '20-OCT-21 7.00.00.000 PM'; (OR AND ash.sample_time = SYSDATE -X (as the case might be))
+spool off
+
+Then go to directory on Winscp, copy over to local machine and open the file for analysis.
+
+
+>CHECKING FOR BLOCKING SESSIONS IN ORACLE with important details:
+
+set lines 1234 pages 9999
+ col inst_id for a10
+ col serial# for a10
+ col machine for a30
+ col username for a10
+ col event for a20
+ col blocking_session for 999999
+ col blocking_instance for 999999
+ col status for a10
+ col INST_ID for 9999
+ col SERIAL# for 999999
+ select inst_id,sid,serial#, machine, username, event, blocking_session, blocking_instance, status, sql_id from gv$session where status ='ACTIVE'and username is not null;
+
+INST_ID        SID SERIAL# MACHINE                        USERNAME   EVENT                BLOCKING_SESSION BLOCKING_                                         INSTANCE STATUS SQL_ID
+------- ---------- ------- ------------------------------ ---------- -------------------- ---------------- ---------                                         -------- ---------- -------------
+      1         33   19251 JBCUALORA1001C                 SYS        LogMiner preparer: i                                                                        ACTIVE
+                                                                     dle
+
+      1         58   24345 JETBLUE\JBCUAMTRX1007          ODB        enq: TX - row lock c              107                                                     1 ACTIVE      cav09b6xgqhvd
+                                                                     ontention
+
+      1         67   11815 JBCUALORA1001C                 GGADMIN    LogMiner client: tra                                                                        ACTIVE
+                                                                     nsaction
+
+      1         82   56034 JBCUALORA1001C                 SYS        LogMiner builder: id                                                                        ACTIVE
+                                                                     le
+
+      1        109   41657 JBCUALORA1001C                 SYS        LogMiner merger: idl                                                                        ACTIVE
+                                                                     e
+
+      1        113   14921 JBCUALORA1001C                 SYS        PX Deq: Execution Ms                                                                        ACTIVE      6z1xtfx5t3sdn
+                                                                     g
+
+      1        133    5963 JBCUALORA1001C                 SYS        PX Deq: Execute Repl                                                                        ACTIVE      6z1xtfx5t3sdn
+                                                                     y
+
+      1        201   15166 JBCUALORA1001C                 SYS        LogMiner reader: red                                                                        ACTIVE
+                                                                     o (idle)
+
+      1        259   13265 JBCUALORA1001C                 SYS        LogMiner merger: idl                                                                        ACTIVE
+                                                                     e
+
+      1        759   44289 JBCUALORA1001C                 SYS        OFS idle                                                                                    ACTIVE
+      1        838   46379 JBCUALORA1001C                 SYS        LogMiner preparer: i                                                                        ACTIVE
+                                                                     dle
+
+      1        935   65053 JBCUALORA1001C                 GGADMIN    LogMiner client: tra                                                                        ACTIVE
+                                                                     nsaction
+
+      1        957   42980 JBCUALORA1001C                 SYS        LogMiner builder: id                                                                        ACTIVE
+                                                                     le
+
+      1       1608   41180 JBCUALORA1001C                 SYS        LogMiner reader: red                                                                        ACTIVE
+                                                                     o (idle)
+
+      1       1615   24231 JBCUALORA1001C                 SYS        LogMiner preparer: i                                                                        ACTIVE
+                                                                     dle
+
+      1       1648   43327 JBCUALORA1001C                 SYS        LogMiner reader: red                                                                        ACTIVE
+                                                                     o (idle)
+
+      1       2325   61142 JBCUALORA1001C                 SYS        LogMiner reader: red                                                                        ACTIVE
+                                                                     o (idle)
+
+      1       2376   25195 JBCUALORA1001C                 SYS        LogMiner preparer: i                                                                        ACTIVE
+                                                                     dle
+
+      2        139   63749 JBCUALORA1001D                 ODB        gc current block 2-w                                                                        ACTIVE      7y6mg8f52mv6j
+                                                                     ay
+
+      2        230   58610 JETBLUE\JBCUAMTRX1003          ODB        SQL*Net message from                                                                        ACTIVE
+                                                                      client
+
+      2        759    3168 JBCUALORA1001D                 SYS        OFS idle                                                                                    ACTIVE
+      2       1705   34724 JBCUALORA1001C                 SYS        PX Deq: Execution Ms                                                                        ACTIVE      6z1xtfx5t3sdn
+                                                                     g
+
+      2       1761   31145 JETBLUE\JBCUAMTRX1011          ODB        gc cr block 2-way                                                                           ACTIVE      ft06rut1q1xax
+
+23 rows selected.
+
+
+
+ 
+ >Identify the Session to be Killed and use below command to kill session.
+
+SQL> ALTER SYSTEM KILL SESSION 'sid,serial#' IMMEDIATE;
+alter system disconnect session 'sid,serial#' IMMEDIATE;
+kill -9 kill -9 <Unix Process Id from SID>
+
+ 1036  and 1778 
+ 
+ alter system kill session '1778,36311' immediate;
+
+
+STANDARD QUERY:
+
+
+select
+   blocking_session,
+   sid,
+   serial#,
+   wait_class,
+   seconds_in_wait
+from
+   gv$session
+where
+   blocking_session is not NULL
+order by
+   blocking_session;
+   
+   
+  BLOCKING_SESSION        SID    SERIAL# WAIT_CLASS           SECONDS_IN_WAIT
+---------------- ---------- ---------- -------------------- --------
+             148        135      61521 Idle                              64
+ 
+   
+   
+-From above query, session(SID) 148 is blocking session 135, and it has been waiting for 64 seconds.
+
+
+
+-TO OBTAIN SESSIONS RUNNING ON A TABLE OR DATABASE OBJECT:
+
+COLUMN object FORMAT A30
+COLUMN type FORMAT A15
+COLUMN sid FORMAT 9999
+COLUMN username FORMAT A20
+COLUMN osuser FORMAT A10
+COLUMN program FORMAT A40
+SELECT a.object,
+a.type,
+a.sid,
+b.username,
+b.osuser,
+b.program
+FROM v$access a,
+gv$session b
+WHERE a.sid = b.sid
+AND a.owner = UPPER('&ENTER_SCHEMA_NAME')
+AND a.object = upper('&OBJECT_NAME')
+ORDER BY a.object
+/
+
+WILL PROMPT YOU SCHEMA NAME-
+WILL PROMPNT YOU OBJECT NAME- AND THEN enter
+
+   
+   
+   
+   
+   
+
+
+
+
+
+
+  SID TARGET                                    TOTALWORK   SOFAR       MINS_REMAINING    ELAPSED_SECONDS SQL_ID
+----- ---------------------------------------- ---------- ---------- -------------- --------------- --------------------
+  
+ 3105 OVT_MART.HPRO_MBR_GAPTable Scan             9923513    6154700     65.0666667             6376      869vw83bk4cwt
+
+
+-GENERATE A FILE IN HTML:
+
+vi file_name
+
+set markup HTML ON
+spool /tmp/tables_size.html
+
+COLUMN TABLE_NAME FORMAT A32
+COLUMN OBJECT_NAME FORMAT A32
+COLUMN OWNER FORMAT A10
+
+SELECT
+   owner, 
+   table_name, 
+   --to_char((round(bytes)/1024/1024),'999,999,990.99') AS mb
+   to_char(sum(bytes)/1024/1024,'999,999,990.99') Meg,
+   ROUND( ratio_to_report( sum(bytes) ) over () * 100) Percent
+FROM
+(SELECT segment_name table_name, owner, bytes
+ FROM dba_segments
+ WHERE segment_type IN ('TABLE', 'TABLE PARTITION', 'TABLE SUBPARTITION')
+ UNION ALL
+ SELECT i.table_name, i.owner, s.bytes
+ FROM dba_indexes i, dba_segments s
+ WHERE s.segment_name = i.index_name
+ AND   s.owner = i.owner
+ AND   s.segment_type IN ('INDEX', 'INDEX PARTITION', 'INDEX SUBPARTITION')
+ UNION ALL
+ SELECT l.table_name, l.owner, s.bytes
+ FROM dba_lobs l, dba_segments s
+ WHERE s.segment_name = l.segment_name
+ AND   s.owner = l.owner
+ AND   s.segment_type IN ('LOBSEGMENT', 'LOB PARTITION')
+ UNION ALL
+ SELECT l.table_name, l.owner, s.bytes
+ FROM dba_lobs l, dba_segments s
+ WHERE s.segment_name = l.index_name
+ AND   s.owner = l.owner
+ AND   s.segment_type = 'LOBINDEX')
+WHERE owner in UPPER('ODB')
+GROUP BY table_name, owner
+--HAVING SUM(bytes)/1024/1024 > 10  /* Ignore really small tables */
+ORDER BY SUM(bytes) desc
+;
+spool off
+
+SQL>@file_name
+
+
+-- query that gives you the SQL_ID (important for DBA to know), # of parallel processes for the various sessions
+
+select unique b.inst_id, b.sql_id, b.username,substr(a.sql_text,1,60) "SQL", round(last_call_et/60) "minutes running", count(*) "parallel processes"
+from gv$sqlarea a, gv$session b
+where a.sql_id=b.sql_id
+and a.inst_id=b.inst_id
+and b.status='ACTIVE'
+and username ='IBM_MR_INT_PRF'
+--and username is not null
+and last_call_et/60 > 1
+group by b.inst_id, b.sql_id, b.username,substr(a.sql_text,1,60) , round(last_call_et/60) order by round(last_call_et/60) asc;
+
+-Below query gives schema and sql_id :
+
+select unique b.inst_id, b.sql_id, b.username,b.machine, substr(a.sql_text,1,60) "SQL", round(last_call_et/60) "minutes running", count(*) "parallel processes"
+from gv$sqlarea a, gv$session b
+where a.sql_id=b.sql_id
+and a.inst_id=b.inst_id
+and b.status='ACTIVE'
+and username ='IBM_MR_INT_PRF'
+--and username is not null
+and last_call_et/60 > 1
+group by b.inst_id, b.sql_id, b.username,b.machine, substr(a.sql_text,1,60) , round(last_call_et/60) order by b.sql_id, round(last_call_et/60) asc
+/
+
+
+
+
+INST_ID        SID SERIAL# MACHINE                        USERNAME   EVENT                BLOCKING_SESSION BLOCKING_INSTANCE STATUS     SQL_ID
+------- ---------- ------- ------------------------------ ---------- -------------------- ---------------- ----------------- ---------- --------------------
+      2        118   33545 KBM1_DMZ\WDXADMZPV25           UHG_JOETH  PX Deq Credit: send                            ACTIVE      dj1hg9ytmazcw
+                                                                     blkd
+
+      2        158   27751 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2        177   37017 vdalinfpcprd01.kbm1.loc        OVT_APPS   PX Deq: Execute Repl             2733        2 ACTIVE      2sbnhf53xh1ng
+                                                                     y
+
+      2        189   30477 KBM1_DMZ\WDXADMZPV25           UHG_JOETH  PX Deq Credit: send                            ACTIVE      dj1hg9ytmazcw
+                                                                     blkd
+
+      2        301    9135 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2        358   44799 odm6db05.kbm1.loc              SYS        Disk file operations                           ACTIVE
+                                                                      I/O
+
+      2        361   60353 KBM1_DMZ\WDXADMZPV24           UHG_APETER direct path read tem                           ACTIVE      f52z7rq3wjywc
+                                                          SEN        p
+
+      2        443   33765 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2        480   27017 KBM1_DMZ\WDXADMZPV24           UHG_APETER PX Deq: Execution Ms                           ACTIVE      f52z7rq3wjywc
+                                                          SEN        g
+
+      2        586   47787 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      5cwq67n7cnbuq
+                                                                     blkd
+
+      2        669   26297 KBM1_DMZ\WDXADMZPV26           UHG_CMALME PX Deq: Execution Ms                           ACTIVE      dkqjxh1u4c0k9
+                                                          R          g
+
+      2        713   23207 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Execute Repl                           ACTIVE      1010mh7wzgkxb
+                                                                     y
+
+      2        922   52603 KBM1_DMZ\WDXADMZPV24           UHG_SREES  PX Deq Credit: send                            ACTIVE      0t87u9tazbu13
+                                                                     blkd
+
+      2        983    3427 KBM1_DMZ\WDXADMZPV24           UHG_SREES  PX Deq Credit: send                            ACTIVE      0t87u9tazbu13
+                                                                     blkd
+
+      2       1068   47013 KBM1_DMZ\WDXADMZPV27           UHG_JPERRY PX Deq Credit: need                            ACTIVE      ddj2mhjk2tax2
+                                                                     buffer
+
+      2       1194   32041 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      5cwq67n7cnbuq
+                                                                     blkd
+
+      2       1278   53415 KBM1_DMZ\WDXADMZPV27           UHG_JPERRY PX Deq: Execution Ms                           ACTIVE      ddj2mhjk2tax2
+                                                                     g
+
+      2       1294   10905 KBM1_DMZ\WDXADMZPV24           UHG_APETER PX Deq: Execution Ms                           ACTIVE      f52z7rq3wjywc
+                                                          SEN        g
+
+      2       1353   11347 KBM1_DMZ\WDXADMZPV27           UHG_JPERRY PX Deq Credit: need                            ACTIVE      ddj2mhjk2tax2
+                                                                     buffer
+
+      2       1357   38811 KBM1_DMZ\WDXADMZPV24           UHG_SREES  PX Deq Credit: send                            ACTIVE      0t87u9tazbu13
+                                                                     blkd
+
+      2       1417   44703 KBM1_DMZ\WDXADMZPV24           UHG_SREES  PX Deq Credit: send                            ACTIVE      0t87u9tazbu13
+                                                                     blkd
+
+      2       1422   41221 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      5cwq67n7cnbuq
+                                                                     blkd
+
+      2       1586   37233 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      5cwq67n7cnbuq
+                                                                     blkd
+
+      2       1613   30545 odm6db06.kbm1.loc              SYS        class slave wait                               ACTIVE
+      2       1744   55301 KBM1_DMZ\WDXADMZPV27           UHG_JPERRY PX Deq Credit: need                            ACTIVE      ddj2mhjk2tax2
+                                                                     buffer
+
+      2       1745   37579 KBM1_DMZ\WDXADMZPV23           UHG_KROWE  PX Deq Credit: send                            ACTIVE      c5prbu2r3rpta
+                                                                     blkd
+
+      2       1760   62821 KBM1_DMZ\WDXADMZPV23           UHG_KROWE  PX Deq Credit: send                            ACTIVE      c5prbu2r3rpta
+                                                                     blkd
+
+      2       1869   12479 KBM1_DMZ\WDXADMZPV25           UHG_KECKHO PX Deq Credit: send                            ACTIVE      dzh3s5b9pbt3z
+                                                          LDT        blkd
+
+      2       1931   25267 KBM1_DMZ\WDXADMZPV23           UHG_KROWE  PX Deq Credit: send                            ACTIVE      c5prbu2r3rpta
+                                                                     blkd
+
+      2       1978    5025 KBM1_DMZ\WDXADMZPV23           UHG_KROWE  PX Deq Credit: send                            ACTIVE      c5prbu2r3rpta
+                                                                     blkd
+
+      2       1994   41993 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      5cwq67n7cnbuq
+                                                                     blkd
+
+      2       2001   15051 KBM1_DMZ\WDXADMZPV25           UHG_JOETH  PX Deq Credit: send                            ACTIVE      dj1hg9ytmazcw
+                                                                     blkd
+
+      2       2024   51425 KBM1_DMZ\WDXADMZPV24           UHG_APETER direct path read tem                           ACTIVE      f52z7rq3wjywc
+                                                          SEN        p
+
+      2       2039   33039 KBM1_DMZ\WDXADMZPV25           UHG_JOETH  PX Deq Credit: send                            ACTIVE      dj1hg9ytmazcw
+                                                                     blkd
+
+      2       2055   29701 KBM1_DMZ\WDXADMZPV25           UHG_KECKHO PX Deq Credit: send                            ACTIVE      dzh3s5b9pbt3z
+                                                          LDT        blkd
+
+      2       2076    5195 KBM1_DMZ\WDXADMZPV25           UHG_JOETH  PX Deq Credit: send                            ACTIVE      dj1hg9ytmazcw
+                                                                     blkd
+
+      2       2118   30005 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      5cwq67n7cnbuq
+                                                                     blkd
+
+      2       2121   22667 KBM1_DMZ\WDXADMZPV25           UHG_JOETH  PX Deq Credit: send                            ACTIVE      dj1hg9ytmazcw
+                                                                     blkd
+
+      2       2122   21073 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2       2155   30607 odm6db05.kbm1.loc              SYS        PX Deq: Execution Ms                           ACTIVE      6z1xtfx5t3sdn
+                                                                     g
+
+      2       2158   34379 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2       2232    9011 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2       2246   29443 KBM1_DMZ\WDXADMZPV24           UHG_APETER direct path read tem                           ACTIVE      f52z7rq3wjywc
+                                                          SEN        p
+
+      2       2283    1237 KBM1_DMZ\WDXADMZPV26           UHG_CMALME PX Deq: Execution Ms                           ACTIVE      dkqjxh1u4c0k9
+                                                          R          g
+
+      2       2320   29417 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      5cwq67n7cnbuq
+                                                                     blkd
+
+      2       2370   55631 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      5cwq67n7cnbuq
+                                                                     blkd
+
+      2       2402    1921 KBM1_DMZ\WDXADMZPV25           UHG_KECKHO PX Deq Credit: send                            ACTIVE      dzh3s5b9pbt3z
+                                                          LDT        blkd
+
+      2       2526   48661 KBM1_DMZ\WDXADMZPV27           UHG_JPERRY PX Deq: Execution Ms                           ACTIVE      ddj2mhjk2tax2
+                                                                     g
+
+      2       2672   40295 KBM1_DMZ\WDXADMZPV27           UHG_JPERRY PX Deq: Execution Ms                           ACTIVE      ddj2mhjk2tax2
+                                                                     g
+
+      2       2673   10851 KBM1_DMZ\WDXADMZPV25           UHG_KECKHO PX Deq Credit: send                            ACTIVE      dzh3s5b9pbt3z
+                                                          LDT        blkd
+
+      2       2688   43171 KBM1_DMZ\WDXADMZPV27           UHG_JPERRY PX Deq: Execution Ms                           ACTIVE      ddj2mhjk2tax2
+                                                                     g
+
+      2       2693   47901 KBM1_DMZ\WDXADMZPV24           UHG_APETER direct path read tem                           ACTIVE      f52z7rq3wjywc
+                                                          SEN        p
+
+      2       2733   21051 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2       2748   65453 KBM1_DMZ\WDXADMZPV24           UHG_APETER PX Deq: Execute Repl              361        2 ACTIVE      f52z7rq3wjywc
+                                                          SEN        y
+
+      2       2755   19199 KBM1_DMZ\WDXADMZPV27           UHG_JPERRY PX Deq: Execution Ms                           ACTIVE      ddj2mhjk2tax2
+                                                                     g
+
+      2       2760    1187 KBM1_DMZ\WDXADMZPV25           UHG_KECKHO PX Deq Credit: send                            ACTIVE      dzh3s5b9pbt3z
+                                                          LDT        blkd
+
+      2       2847   47837 KBM1_DMZ\WDXADMZPV25           UHG_KECKHO PX Deq Credit: send                            ACTIVE      dzh3s5b9pbt3z
+                                                          LDT        blkd
+
+      2       2902   44891 KBM1_DMZ\WDXADMZPV25           UHG_JOETH  PX Deq Credit: send                            ACTIVE      dj1hg9ytmazcw
+                                                                     blkd
+
+      2       2957   60053 KBM1_DMZ\WDXADMZPV24           UHG_APETER PX Deq: Execution Ms                           ACTIVE      f52z7rq3wjywc
+                                                          SEN        g
+
+      2       2965   39219 KBM1_DMZ\WDXADMZPV25           UHG_JOETH  PX Deq Credit: send                            ACTIVE      dj1hg9ytmazcw
+                                                                     blkd
+
+      2       3012   11165 KBM1_DMZ\WDXADMZPV24           UHG_APETER PX Deq: Execution Ms                           ACTIVE      f52z7rq3wjywc
+                                                          SEN        g
+
+      2       3041   46977 KBM1_DMZ\WDXADMZPV26           UHG_CMALME PX Deq: Execution Ms                           ACTIVE      dkqjxh1u4c0k9
+                                                          R          g
+
+      2       3042   51733 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2       3117   33843 KBM1_DMZ\WDXADMZPV25           UHG_KECKHO PX Deq Credit: send                            ACTIVE      dzh3s5b9pbt3z
+                                                          LDT        blkd
+
+      2       3127   36569 KBM1_DMZ\WDXADMZPV26           UHG_CMALME PX Deq: Execution Ms                           ACTIVE      dkqjxh1u4c0k9
+                                                          R          g
+
+      2       3145   35629 KBM1_DMZ\WDXADMZPV25           UHG_KECKHO PX Deq Credit: send                            ACTIVE      dzh3s5b9pbt3z
+                                                          LDT        blkd
+
+      1         22   23577 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1         88   49327 odm6db05.kbm1.loc              SYS        class slave wait                               ACTIVE
+      1        110   55299 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1        145   62271 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1        152    2257 KBM1_DMZ\WDXADMZPV25           UHG_CHENDE PX Deq: Execution Ms                           ACTIVE      0u76f453xvjrt
+                                                          RSON       g
+
+      1        177   34855 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1        192   50631 KBM1_DMZ\WDXADMZPV25           UHG_CHENDE PX Deq: Execution Ms                           ACTIVE      0u76f453xvjrt
+                                                          RSON       g
+
+      1        208   53319 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1        245   12327 KBM1_DMZ\WDXADMZPV25           UHG_CHENDE PX Deq: Execution Ms                           ACTIVE      0u76f453xvjrt
+                                                          RSON       g
+
+      1        292   57461 KBM1_DMZ\WDXADMZPV25           UHG_CHENDE PX Deq Credit: send                            ACTIVE      0u76f453xvjrt
+                                                          RSON       blkd
+
+      1        513   36077 KBM1_DMZ\WDXADMZPV25           UHG_CHENDE PX Deq: Execution Ms                           ACTIVE      0u76f453xvjrt
+                                                          RSON       g
+
+      1        539   20973 vunimranaprd.kbm1.loc          IBM_MR_CAM cell single block ph                           ACTIVE      bbqkcb221nbhu
+                                                                     ysical read
+
+      1        545   50029 odm6db05.kbm1.loc              SYS        class slave wait                               ACTIVE
+      1        606   39601 KBM1_DMZ\WDXADMZPV26           UHG_MOXNAR PX Deq Credit: send                            ACTIVE      14yrumwa9by6j
+                                                          D          blkd
+
+      1        757   24575 KBM1_DMZ\WDXADMZPV26           UHG_MOXNAR PX Deq Credit: send                            ACTIVE      14yrumwa9by6j
+                                                          D          blkd
+
+      1        783    6097 KBM1_DMZ\WDXADMZPV26           UHG_CMALME PX Deq: Execution Ms                           ACTIVE      8zbdawqr532df
+                                                          R          g
+
+      1        895   25133 KBM1_DMZ\WDXADMZPV24           UHG_EWILLI PX Deq Credit: send                            ACTIVE      5pd94d199tcnv
+                                                          AMS        blkd
+
+      1       1003   62179 KBM1_DMZ\WDXADMZPV25           UHG_FARCEB PX Deq Credit: send                            ACTIVE      8b9hr0108tddp
+                                                          AL         blkd
+
+      1       1084   23727 KBM1_DMZ\WDXADMZPV26           UHG_CMALME PX Deq: Execution Ms                           ACTIVE      8zbdawqr532df
+                                                          R          g
+
+      1       1134   48083 odm6db05.kbm1.loc              SYS        PX Deq: Execution Ms                           ACTIVE      6z1xtfx5t3sdn
+                                                                     g
+
+      1       1165   49609 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       1184   56423 KBM1_DMZ\WDXADMZPV26           UHG_CMALME PX Deq: Execution Ms                           ACTIVE      8zbdawqr532df
+                                                          R          g
+
+      1       1208   53643 KBM1_DMZ\WDXADMZPV25           UHG_KECKHO PX Deq Credit: send                            ACTIVE      1n6z50dbaym0t
+                                                          LDT        blkd
+
+      1       1299   57433 odm6db05.kbm1.loc              SYS        Disk file operations                           ACTIVE
+                                                                      I/O
+
+      1       1310   29583 KBM1_DMZ\WDXADMZPV25           UHG_FARCEB PX Deq Credit: send                            ACTIVE      8b9hr0108tddp
+                                                          AL         blkd
+
+      1       1326   48965 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq Credit: need                            ACTIVE      8zc348zsn0cc0
+                                                                     buffer
+
+      1       1402   34239 vunimranaprd.kbm1.loc          UNIMR_MART PX qref latch                                  ACTIVE      8zc348zsn0cc0
+      1       1498   16451 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       1590    6265 KBM1_DMZ\WDXADMZPV26           UHG_CMALME PX Deq: Execution Ms                           ACTIVE      8zbdawqr532df
+                                                          R          g
+
+      1       1596   62333 KBM1_DMZ\WDXADMZPV27           UHG_BSTOIC PX Deq Credit: send                            ACTIVE      4tz0sy1pkhr5q
+                                                          K          blkd
+
+      1       1640   10897 KBM1_DMZ\WDXADMZPV26           UHG_CMALME PX Deq: Execution Ms                           ACTIVE      8zbdawqr532df
+                                                          R          g
+
+      1       1679   43181 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       1720   17871 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      8rs3asap4sssm
+                                                                     blkd
+
+      1       1755   26075 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      8rs3asap4sssm
+                                                                     blkd
+
+      1       1858   31461 odm6db05.kbm1.loc              SYS        class slave wait                               ACTIVE
+      1       1864   60791 KBM1_DMZ\WDXADMZPV24           UHG_EWILLI PX Deq Credit: send                            ACTIVE      5pd94d199tcnv
+                                                          AMS        blkd
+
+      1       1920    8203 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      8rs3asap4sssm
+                                                                     blkd
+
+      1       1921    7797 KBM1_DMZ\WDXADMZPV26           UHG_MOXNAR PX Deq Credit: send                            ACTIVE      14yrumwa9by6j
+                                                          D          blkd
+
+      1       1951   32601 KBM1_DMZ\WDXADMZPV25           UHG_FARCEB PX Deq Credit: send                            ACTIVE      8b9hr0108tddp
+                                                          AL         blkd
+
+      1       1984   30853 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq Credit: need                            ACTIVE      8zc348zsn0cc0
+                                                                     buffer
+
+      1       2036   59045 KBM1_DMZ\WDXADMZPV26           UHG_MOXNAR PX Deq Credit: send                            ACTIVE      14yrumwa9by6j
+                                                          D          blkd
+
+      1       2064   28559 KBM1_DMZ\WDXADMZPV27           UHG_BSTOIC PX Deq Credit: send                            ACTIVE      4tz0sy1pkhr5q
+                                                          K          blkd
+
+      1       2073   26817 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq Credit: need                            ACTIVE      8zc348zsn0cc0
+                                                                     buffer
+
+      1       2108   25331 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq Credit: need                            ACTIVE      8zc348zsn0cc0
+                                                                     buffer
+
+      1       2143    6129 KBM1_DMZ\WDXADMZPV25           UHG_FARCEB PX Deq Credit: send                            ACTIVE      8b9hr0108tddp
+                                                          AL         blkd
+
+      1       2189    4561 KBM1_DMZ\WDXADMZPV25           UHG_FARCEB PX Deq Credit: send                            ACTIVE      8b9hr0108tddp
+                                                          AL         blkd
+
+      1       2199   55727 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq Credit: need                            ACTIVE      8zc348zsn0cc0
+                                                                     buffer
+
+      1       2305   53277 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       2347   65065 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       2379   56477 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq Credit: need                            ACTIVE      8zc348zsn0cc0
+                                                                     buffer
+
+      1       2420   56605 KBM1_DMZ\WDXADMZPV25           UHG_FARCEB PX Deq Credit: send                            ACTIVE      8b9hr0108tddp
+                                                          AL         blkd
+
+      1       2432    2875 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      8rs3asap4sssm
+                                                                     blkd
+
+      1       2445   30501 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      8rs3asap4sssm
+                                                                     blkd
+
+      1       2466   37857 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq Credit: send                            ACTIVE      8zc348zsn0cc0
+                                                                     blkd
+
+      1       2476   52387 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      8rs3asap4sssm
+                                                                     blkd
+
+      1       2481   11589 odm6db05.kbm1.loc              SYS        PX Deq: Execute Repl                           ACTIVE      6z1xtfx5t3sdn
+                                                                     y
+
+      1       2516   26233 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq: Table Q Norm                           ACTIVE      8zc348zsn0cc0
+                                                                     al
+
+      1       2543   62043 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq: Execute Repl                           ACTIVE      8zc348zsn0cc0
+                                                                     y
+
+      1       2559   29575 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       2573   32505 odm6db05.kbm1.loc              SYS        class slave wait                               ACTIVE
+      1       2661   32481 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq: Table Q Norm                           ACTIVE      8zc348zsn0cc0
+                                                                     al
+
+      1       2675   58201 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq: Table Q Norm                           ACTIVE      8zc348zsn0cc0
+                                                                     al
+
+      1       2687   40113 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq: Table Q Norm                           ACTIVE      8zc348zsn0cc0
+                                                                     al
+
+      1       2708   44177 KBM1_DMZ\WDXADMZPV25           UHG_FARCEB PX Deq Credit: send                            ACTIVE      8b9hr0108tddp
+                                                          AL         blkd
+
+      1       2711   62603 KBM1_DMZ\WDXADMZPV24           UHG_EWILLI PX Deq Credit: send                            ACTIVE      5pd94d199tcnv
+                                                          AMS        blkd
+
+      1       2719   41623 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq: Table Q Norm                           ACTIVE      8zc348zsn0cc0
+                                                                     al
+
+      1       2769   56049 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       2771   50889 KBM1_DMZ\WDXADMZPV25           UHG_FARCEB PX Deq Credit: send                            ACTIVE      8b9hr0108tddp
+                                                          AL         blkd
+
+      1       2798   37827 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      8rs3asap4sssm
+                                                                     blkd
+
+      1       2800    7903 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       2810   20023 KBM1_DMZ\WDXADMZPV25           UHG_CHENDE PX Deq: Execution Ms                           ACTIVE      0u76f453xvjrt
+                                                          RSON       g
+
+      1       2822   44501 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1       2835    3585 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq: Table Q Norm                           ACTIVE      8zc348zsn0cc0
+                                                                     al
+
+      1       2859   47151 KBM1_DMZ\WDXADMZPV26           UHG_MOXNAR PX Deq Credit: send                            ACTIVE      14yrumwa9by6j
+                                                          D          blkd
+
+      1       2875   36475 KBM1_DMZ\WDXADMZPV27           UHG_SADLI  PX Deq Credit: send                            ACTIVE      8rs3asap4sssm
+                                                                     blkd
+
+      1       2894   54521 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1       2947    6807 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq: Table Q Norm                           ACTIVE      8zc348zsn0cc0
+                                                                     al
+
+      1       3029   58069 odm6db05.kbm1.loc              SYS        RMAN backup & recove                           ACTIVE
+                                                                     ry I/O
+
+      1       3034   30713 vunimranaprd.kbm1.loc          UNIMR_MART PX Deq: Table Q Norm                           ACTIVE      8zc348zsn0cc0
+                                                                     al
+
+      1       3052   40167 KBM1_DMZ\WDXADMZPV25           UHG_CHENDE PX Deq Credit: send                            ACTIVE      0u76f453xvjrt
+                                                          RSON       blkd
+
+      1       3106   23827 KBM1_DMZ\WDXADMZPV25           UHG_CHENDE PX Deq: Execution Ms                           ACTIVE      0u76f453xvjrt
+                                                          RSON       g
+
+      1       3116   54221 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+	  
+	  
+	  
+                                                                     p
+
+
+148 rows selected.
+
+
+SELECT SID, SERIAL#, STATUS, SERVER
+FROM V$SESSION
+WHERE USERNAME = 'MOO_APPS'
+
+
+
+INST_ID        SID SERIAL# MACHINE                        USERNAME   EVENT                BLOCKING_SESSION BLOCKING_INSTANCE STATUS     SQL_ID
+------- ---------- ------- ------------------------------ ---------- -------------------- ---------------- ----------------- ---------- --------------------
+      2        158   27751 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2        177   37017 vdalinfpcprd01.kbm1.loc        OVT_APPS   PX Deq: Execute Repl             2733        2 ACTIVE      2sbnhf53xh1ng
+
+
+
+
+INST_ID        SID SERIAL# MACHINE                        USERNAME   EVENT                BLOCKING_SESSION BLOCKING_INSTANCE STATUS     SQL_ID
+------- ---------- ------- ------------------------------ ---------- -------------------- ---------------- ----------------- ---------- --------------------
+      2        158   27751 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2        177   37017 vdalinfpcprd01.kbm1.loc        OVT_APPS   PX Deq: Execute Repl             2733        2 ACTIVE      2sbnhf53xh1ng
+                                                                     y
+
+      2        301    9135 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2        443   33765 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2        713   23207 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Execute Repl                           ACTIVE      1010mh7wzgkxb
+                                                                     y
+
+      2       2122   21073 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2       2136    8139 vdalinfpcprd01.kbm1.loc        OVT_APPS   PX Deq Credit: send                            ACTIVE      9k4q1c7ffrhpg
+                                                                     blkd
+
+      2       2158   34379 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2       2232    9011 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2       2514   12641 vdalinfpcprd01.kbm1.loc        OVT_APPS   cell single block ph                           ACTIVE      dxpnhszmb8y2k
+                                                                     ysical read
+
+      2       2733   21051 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      2       3042   51733 vdalinfpcprd01.kbm1.loc        OVT_APPS   direct path read tem                           ACTIVE      2sbnhf53xh1ng
+                                                                     p
+
+      1         22   23577 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1        110   55299 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1        145   62271 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1        177   34855 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1        208   53319 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1       1165   49609 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       1489   17485 vdalinfpcprd01.kbm1.loc        OVT_APPS   local write wait                               ACTIVE      661rxzjy6vvrc
+      1       1498   16451 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       1679   43181 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       2305   53277 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       2347   65065 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       2559   29575 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       2769   56049 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       2800    7903 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   PX Deq: Table Q Norm                           ACTIVE      1010mh7wzgkxb
+                                                                     al
+
+      1       2822   44501 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1       2894   54521 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+      1       3116   54221 KBM_HOU\KBMTDLPHUBPV01         OVT_APPS   direct path read tem                           ACTIVE      1010mh7wzgkxb
+                                                                     p
+
+
+29 rows selected.
+
+
+
+
+
+INST_ID  SID SERIAL# MACHINE                        USERNAME   EVENT                BLOCKING_SESSION BLOCKING_INSTANCE STATUS     SQL_ID
+------- ---------- ------- ------------------------------ ---------- -------------------- ---------------- ----------------- ---------- --------------------
+      2 1209   14707 zrmxmatkey01                   ODS_UCEE_A gc current request                                      ACTIVE     axtw17vpnvwbx
+                                                          PPS
+
+
+
+SID SERIAL# SQL_TEXT
+---------- ------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      1209   14707 MERGE INTO INDVDL_XREF_LEAD IXL USING ( SELECT IX.INDVDL_XREF_ID, :B1 AS LEAD_ID FROM INDVDL_XREF IX WHERE IX.FROM_INDVDL_ID = :B3 AND IX.TO_INDVDL_ID = :B2 ) SOURCE ON (IXL.INDVDL_XREF_ID = SOURCE.INDVDL_XREF_ID AND IXL.LEAD_ID = SOURCE.LEAD_ID) WHEN NOT MATCHED THEN INSERT (INDVDL_XREF_LEAD_ID, INDVDL_XREF_ID, LEAD_ID) VALUES ( INDVDL_XREF_LEAD_SEQ.NEXTVAL, SOURCE.INDVDL_XREF_ID, SOURCE.LEAD_ID )
+
+
+
+
+-DETAIL BLOCKING SESSION CHECK IN DATABASE:
+
+SQL> select sid,serial#,status,sql_id,prev_sql_id,final_blocking_session from gv$session where final_blocking_session is not null;
+
+       SID    SERIAL# STATUS          SQL_ID        PREV_SQL_ID   FINAL_BLOCKING_SESSION
+---------- ---------- --------------- ------------- ------------- ----------------------
+      2189      48985 ACTIVE          cav09b6xgqhvd 8hdghy8ynyw63                    648
+
+SQL> select sid,serial#,status,sql_id,prev_sql_id,Event from gv$session where sid='648';
+
+       SID    SERIAL# STATUS          SQL_ID        PREV_SQL_ID   EVENT
+---------- ---------- --------------- ------------- ------------- ----------------------------------------------------------------
+       648      11749 INACTIVE        98p9bgu17b88u 98p9bgu17b88u SQL*Net message from client
+       648       2812 INACTIVE                      970rwm43a2b4d SQL*Net message from client
+
+SQL> select sql_text from gv$sql where sql_id='98p9bgu17b88u';
+
+SQL_TEXT
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SELECT "PKG_APPLICATION_FUNCTION"."CURRENTDATETIME" FROM DUAL
+SELECT "PKG_APPLICATION_FUNCTION"."CURRENTDATETIME" FROM DUAL
+
+SQL> select sid, serial#, username,status from v$session where sid in (648);
+
+       SID    SERIAL# USERNAME                       STATUS
+---------- ---------- ------------------------------ ---------------
+       648      11749 ODB                            INACTIVE

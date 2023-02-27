@@ -1,0 +1,6 @@
+Oracle DB Error ORA-02002 error while writing to audit trail
+
+The auditing facility is unable to write to the AUDIT_TRAIL table. If this error occurs, SQL statements that are currently being audited may also fail. This error will occur if the SYSTEM tablespace runs out of disk space.
+
+Action you can take to resolve this issue: Add space to the SYSTEM tablespace or delete rows from the AUDIT_TRAIL table. If these operations fail or do not eliminate the problem, shut down and restart Oracle DB Error ORAcle with auditing disabled. This is done by setting the initialization parameter AUDIT_TRAIL to FALSE.
+

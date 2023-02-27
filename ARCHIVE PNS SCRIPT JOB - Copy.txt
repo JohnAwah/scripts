@@ -1,0 +1,39 @@
+SQL> select owner from dba_tables where table_name='RESV';
+
+OWNER
+--------------------------------------------------------------------------------
+DLEX_B6RESV
+
+SQL> select min(lastconsumptiondate) from DLEX_B6RESV.RESV where status = 'ARCHI                                                                             VED';
+
+MIN(LASTC
+---------
+02-MAR-19
+
+SQL> select max(lastconsumptiondate) from DLEX_B6RESV.RESV where status = 'ARCHI                                                                             VED';
+
+MAX(LASTC
+---------
+07-JUN-22
+
+SQL> conn DLEX_B6RESV
+Enter password:
+Connected.
+
+SQL> @update_resvs_archived.sql
+Enter value for 1: 07-JUN-2022
+Enter value for 2: 15-JUN-2022
+Updating resvs with last consumption date between : 07-JUN-2022 and 15-JUN-2022                                                                              (included)
+old   4: BETWEEN TO_DATE('&&start_date', 'DD-MON-YYYY') AND (TO_DATE('&&end_date                                                                             ', 'DD-MON-YYYY') +1 - (1/(24*3600) ) )
+new   4: BETWEEN TO_DATE('07-JUN-2022', 'DD-MON-YYYY') AND (TO_DATE('15-JUN-2022                                                                             ', 'DD-MON-YYYY') +1 - (1/(24*3600) ) )
+
+773692 rows updated.
+
+
+Commit complete.
+
+SQL> select max(lastconsumptiondate) from DLEX_B6RESV.RESV where status = 'ARCHI                                                                             VED';
+
+MAX(LASTC
+---------
+15-JUN-22

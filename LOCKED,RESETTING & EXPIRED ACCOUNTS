@@ -1,0 +1,326 @@
+RESOLVING LOCKED USER ACCOUNTS IN DATABASE & EXPIRED ACCOUNTS:
+
+ desc dba_users;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USERNAME                                  NOT NULL VARCHAR2(30)
+ USER_ID                                   NOT NULL NUMBER
+ PASSWORD                                           VARCHAR2(30)
+ ACCOUNT_STATUS                            NOT NULL VARCHAR2(32)
+ LOCK_DATE                                          DATE
+ EXPIRY_DATE                                        DATE
+ DEFAULT_TABLESPACE                        NOT NULL VARCHAR2(30)
+ TEMPORARY_TABLESPACE                      NOT NULL VARCHAR2(30)
+ CREATED                                   NOT NULL DATE
+ PROFILE                                   NOT NULL VARCHAR2(30)
+ INITIAL_RSRC_CONSUMER_GROUP                        VARCHAR2(30)
+ EXTERNAL_NAME                                      VARCHAR2(4000)
+ PASSWORD_VERSIONS                                  VARCHAR2(8)
+ EDITIONS_ENABLED                                   VARCHAR2(1)
+ AUTHENTICATION_TYPE                                VARCHAR2(8)
+ 
+ 
+  show parameter service;
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+service_names                        string      urxdev, UHGDEV, humdev, bo42sb
+                                                 x, mrdev, BO4SBX1
+
+
+
+ alter user msaimadanmohan account unlock;
+
+User altered.
+
+
+ select username, ACCOUNT_STATUS from dba_users where username=upper('msambasivan');
+
+USERNAME                       ACCOUNT_STATUS
+------------------------------ --------------------------------
+MSAIMADANMOHAN                 OPEN
+
+
+-TO RESET ORACLE ACCOUNTS  & EXPIRED ACCOUNTS:
+
+1.
+col username for a29
+col account_status for a30
+col password for a80
+set line 180 pages 20
+select username, account_status, expiry_date from dba_users where username=upper'DBSNMP';
+
+USERNAME                      ACCOUNT_STATUS                 EXPIRY_DA
+----------------------------- ------------------------------ ---------
+DBSNMP                        EXPIRED                        04-AUG-21
+
+
+set line 200 pages 200
+col username for a33
+select username, account_status , authentication_type from dba_users where username = 'MSAIMADANMOHAN';
+
+-if authentication type is PASSWORD, do the below changing the username:
+
+-SELECT PASSWORD FROM SYS.USER$ WHERE NAME ='DBSNMP';
+
+PASSWORD
+--------------------------------------------------------------------------------
+F48DEC4F5AEF2A9A
+
+-ALTER USER DBSNMP IDENTIFIED BY VALUES 'F48DEC4F5AEF2A9A';
+
+User altered.
+
+ select username, account_status, expiry_date from dba_users where username='DBSNMP';
+
+USERNAME                      ACCOUNT_STATUS                 EXPIRY_DA
+----------------------------- ------------------------------ ---------
+DBSNMP                        OPEN                           12-JUL-22
+
+
+2.In other scenarios where user is registered in LDAP:
+ you should alter the user with external__name or password as follows:
+ 
+set line 200 pages 200
+col username for a33
+select username, account_status , authentication_type from dba_users where username = 'MOO_RBELL';
+
+
+USERNAME ACCOUNT_STATUS AUTHENTI EXTERNAL_NAME
+----------------------- -------------------------------- -------- ------------------------------------------------------------------
+MSAIMADANMOHAN OPEN GLOBAL
+
+
+- select username, account_status , authentication_type,EXTERNAL_NAME from dba_users where username = 'MSAIMADANMOHAN';
+
+USERNAME
+--------------------------------------------------------------------------------
+ACCOUNT_STATUS                   AUTHENTI
+-------------------------------- --------
+EXTERNAL_NAME
+--------------------------------------------------------------------------------
+MSAIMADANMOHAN
+OPEN                             GLOBAL
+cn=Saimadanmohan Mallikarjun,cn=Users,dc=kbm1,dc=loc
+
+
+alter user MSAIMADANMOHAN identified globally as 'cn=Saimadanmohan Mallikarjun,cn=Users,dc=kbm1,dc=loc';
+
+User altered.
+
+( This will unexpire the password).
+
+
+
+
+
+
+
+ 3. BUT IF YOU DID ALTER MISTAKENLY the EXTERNAL USER WITH NEW PASSWORD 
+ WHICH YOU MUST NOT AND YOU DID...THIS IS WHAT YOU MUST DO TO FIX IT TO GLOBAL LDAP:
+
+
+
+
+-GO TO A DATABASE WHERE THE PASSWORD HAS NOT EXPIRED AND NOT ALTERED AS FOLLOWS, AND GET THE GLOBAL PASSWORD FOR LDAP AND MAKE IT GLOBAL IN THE CURRENT ENVIRONMENT:  
+
+
+-OTHER DATABASE
+set line 200 pages 200
+col username for a33
+select username, account_status , authentication_type from dba_users where username = 'MOO_RBELL';
+
+
+USERNAME ACCOUNT_STATUS AUTHENTI EXTERNAL_NAME
+----------------------- -------------------------------- -------- ------------------------------------------------------------------
+MSAIMADANMOHAN OPEN GLOBAL
+
+
+-desc dba_users;
+
+-select username, account_status , authentication_type,external_name from dba_users where username = 'MSAIMADANMOHAN';
+
+set line 200 pages 200
+col username for a33
+select username, account_status , authentication_type from dba_users where username = 'LIVIUB';
+
+
+USERNAME ACCOUNT_STATUS AUTHENTI EXTERNAL_NAME
+----------------------- -------------------------------- -------- ------------------------------------------------------------------
+MSAIMADANMOHAN OPEN GLOBAL
+
+
+- select username, account_status , authentication_type,EXTERNAL_NAME from dba_users where username = 'MSAIMADANMOHAN';
+
+USERNAME
+--------------------------------------------------------------------------------
+ACCOUNT_STATUS                   AUTHENTI
+-------------------------------- --------
+EXTERNAL_NAME
+--------------------------------------------------------------------------------
+MSAIMADANMOHAN
+OPEN                             GLOBAL
+cn=Saimadanmohan Mallikarjun,cn=Users,dc=kbm1,dc=loc
+
+-GO NOW TO CURRENT DATABASE WHERE YOU ALTERED THE PASSWORD TO PASSWORD AND CHANGE IT TO GLOBAL AS FOLLOWS:
+
+
+alter user MSAIMADANMOHAN identified globally as 'cn=Saimadanmohan Mallikarjun,cn=Users,dc=kbm1,dc=loc';
+
+
+
+User altered.
+
+( This will unexpire the password).
+
+
+2. OEM AGENTS NOT BEING MONITORED ON OEM, CHECK STATUS OF DBSNMP USER IN THE DATABASES AND AND FIX IT, AND THEN REFRESH THE OEM AGENT TO SEE STATUS. EXPIRED PASSWORD RESOLUTION:
+
+col username for a29
+col account_status for a30
+col password for a80
+set line 180 pages 20
+select username, account_status, expiry_date from dba_users where username='LIVIUB';
+
+USERNAME                      ACCOUNT_STATUS                 EXPIRY_DA
+----------------------------- ------------------------------ ---------
+DBSNMP                        EXPIRED                        04-AUG-21
+
+
+>set line 200 pages 200
+col username for a33
+select username, account_status , expiry_date from dba_users where username = 'LIVIUB';
+
+
+USERNAME ACCOUNT_STATUS AUTHENTI EXTERNAL_NAME
+----------------------- -------------------------------- -------- ------------------------------------------------------------------
+MSAIMADANMOHAN OPEN GLOBAL
+
+-SELECT PASSWORD FROM SYS.USER$ WHERE NAME ='LIVIUB';
+
+PASSWORD
+--------------------------------------------------------------------------------
+F48DEC4F5AEF2A9A
+
+ ALTER USER CTSCONFIG IDENTIFIED BY VALUES 'F48DEC4F5AEF2A9A';
+
+User altered.
+
+ select username, account_status, expiry_date from dba_users where username='DBSNMP';
+
+USERNAME                      ACCOUNT_STATUS                 EXPIRY_DA
+----------------------------- ------------------------------ ---------
+DBSNMP                        OPEN                           12-JUL-22
+
+
+- To unlock multiple accounts:
+
+alter user DLEX_B6AQ_ADMIN account unlock; 
+alter user DLEX_B6BIZ_DATA account unlock; 
+alter user DLEX_B6BUSINESS_RULES account unlock; 
+alter user DLEX_B6DATA_PURGE account unlock; 
+alter user DLEX_B6GTA account unlock; 
+alter user DLEX_B6HERTZ account unlock; 
+alter user DLEX_B6INVENTORY account unlock; 
+alter user DLEX_B6PROFILE account unlock; 
+alter user DLEX_B6RESV account unlock; 
+alter user DLEX_B6SPRINGBATCH account unlock; 
+alter user DLEX_B6STATICCONTENTS account unlock; 
+alter user DLEX_B6STATS_A1 account unlock; 
+alter user DLEX_B6TAXCACHE account unlock; 
+alter user DLEX_B6TICKETING account unlock; 
+alter user DLEX_B6TRANSACC account unlock; 
+alter user DLEX_B6CREDITBANK account unlock; 
+
+
+-SCENARIO ON USER ACCOUNTS
+
+Hello team, can you take a look at this user access DALVARADO. The error is "ORA-12154: TNS: could not resolve the connect identifier specified".
+
+.I checked DALVARADO profile in the database and compared it with the LDAP (ISS) profile and found a difference in the common name.
+
+Pl fix it in the LDAP profile and then test it.
+
+
+as below:
+select username, account_status , authentication_type,EXTERNAL_NAME from dba_users where username = 'LIVIUB';
+
+USERNAME				ACCOUNT_STATUS  	AUTHENTICATION_TYPE			EXTERNAL_NAME
+DALVARADO				    OPEN			  	GLOBAL				cn:Daisy Alvarado1, cn=users,dc=kbm1,dc=loc
+
+-Common name 'Daisy Alvarado' is different from LDAP profile Daisy Alvarado1
+
+
+-SETTING USER PASSWORD PROFILE EXPIRY TO UNLIMITED:
+
+>select profile from dba_users where username='TEST';
+"PROFILE"
+"DEFAULT"
+
+> IF USER PROFILE IS UNLIMITED?...THEN:
+> ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED;usee
+
+
+
+-REQUIREMEMTS FOR SETTING A NEW STRONG PASSWORD TO ORACLE USER:
+
+Your Oracle password must contain at least 15 characters and include 3 of the following:
+
+At least 1 uppercase letter
+At least 1 lowercase letter
+At least 1 digit
+At least 1 special character
+Note: Only the following special characters are allowed: # $ _
+
+Mol#76553CAA837
+
+Your Oracle password must:
+
+Differ from your previous database password by at least 3 characters
+Not include your username, the database name, or other common strings
+Differ from your previous three database passwords
+
+
+
+-I've checked your account, it is open and ldap is enabled.
+
+Pl assign this ticket to CS team to reset your password.
+
+
+
+USERNAME ACCOUNT_STATUS AUTHENTI PROFILE EXTERNAL_NAME
+
+-------------------------- -------------------------------- -------- --------------------------------- -------------------------------------------------------
+
+PKUMAR OPEN GLOBAL KBM_USER_PROFILE cn=Prashant Kumar,cn=Users,dc=kbm1,dc=loc
+
+
+
+
+James Chesley
+Today at 5:29 PM
+Liked 0 times
+
+· 
+Like
+
+to Nitin Gera, Prashant Kumar, WDM | ITS | DBA Team, Muhammad Rafiq
+CS would not reset an account password for AD... if the account is LDAP authenticated, Prashant should be using his PKUMAR user ID and network password to authenticate to the Oracle DB.
+
+-HOW TO OBTAIN USER CREATED METADATA AND ALSO PASSOWRD WHEN ALL STEPS ABOVE FAIL:
+
+SQL> select dbms_metadata.get_ddl ('USER','MOO_RBELL') from dual;
+
+DBMS_METADATA.GET_DDL('USER','MOO_RBELL')
+--------------------------------------------------------------------------------
+
+   CREATE USER "MOO_RBELL" IDENTIFIED BY VALUES 'S:76553CAA8376F9949B0DECDE7360
+   
+   >alter user MOO_RBELL identified by values '76553CAA8376F9949B0DECDE7360';
+   
+   -If this fails also, just create new Oracle password following rules above.
+
+
+
+
+

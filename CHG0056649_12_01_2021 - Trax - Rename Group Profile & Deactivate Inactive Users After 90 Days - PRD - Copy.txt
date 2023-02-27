@@ -1,0 +1,2028 @@
+##30 01 * * * /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_CLONE.sh >                                                                              /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_CLONE.out 2>&1
+
+####commented due to Rubrik
+###30 6 * * * /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMAN_INCRE                                                                             MENTAL.sh RMAN_Incremental_config.ini > /u02/app/oracle/admin/TRAXPRD_NVA/rman/C                                                                             DBA_BAK_TRAXPRD_RMANFULLINCR.out 2>&1
+
+### Cintra Stats
+30 4 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_SCHEMA_wra                                                                             pper.sh > /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_SCHEMA.out                                                                              2>&1
+00 3 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_DICT.sh >                                                                              /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_DICT.out 2>&1
+10 6 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_ADVISOR_TRAXPRD_SEGMENT.                                                                             sh > /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_ADVISOR_TRAXPRD_SEGMENT.out 2>                                                                             &1
+
+
+### Cron to Lock Inactive Users for TRAXPRD
+00 00 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/B045_HF_RESTRICTED_AC                                                                             .sh
+00 01 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/LOCK_USER_ACCOUNT.sh
+00 00 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/EMPLOYEE_SKILL.sh
+00 19 * * 2-5 /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/TDR_REPORT.sh
+58 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/MEL_REPORT.sh
+59 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/DELAY_CANCEL_REPORT.s                                                                             h
+58 11 1 1,4,7,10 * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/UNPAID_INVOICE                                                                             S.sh
+00 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/ALL_DELAY_CANCEL_REPO                                                                             RT.sh
+59 11 * * 1 /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/QAR_Downloads.sh
+
+00 01 * * * /home/oracle/Cintra/scripts/copy_TRAXPRD_archives2exa.sh TRAXPRD DRT                                                                             RAXPRD_VA >> /home/oracle/Cintra/log/copy_TRAXPRD_archives2exa.out 2>&1
+[oracle@JBCUALORA1001b ~]$ cd /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts
+[oracle@JBCUALORA1001b misc_scripts]$ ls -ltr
+total 1704
+-rwxr-xr-x 1 oracle oinstall   1865 Oct 14  2020 UNPAID_INVOICES_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   1976 Oct 14  2020 SIG_Event_config.ini
+-rwxr-xr-x 1 oracle oinstall  10908 Oct 14  2020 ALL_DELAY_CANCEL_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall  78706 Oct 14  2020 DELAY_CANCEL_REPORT.sh.org
+-rwxr-xr-- 1 oracle oinstall   7939 Oct 14  2020 TDR_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall   1967 Oct 14  2020 QAR_Downloads.ini
+-rwxr-xr-x 1 oracle oinstall   2492 Oct 14  2020 DELAY_CANCEL_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   5212 Oct 14  2020 B045_HF_RESTRICTED_AC.sh_26oct21
+-rwxr-xr-x 1 oracle oinstall   5212 Oct 14  2020 B045_HF_RESTRICTED_AC.sh.1
+-rwxr-xr-x 1 oracle oinstall   2721 Oct 14  2020 DELAY_CANCEL_script_config.ini.bkp
+-rw------- 1 oracle oinstall      0 Oct 14  2020 nohup.out
+-rwxr-xr-x 1 oracle oinstall   3834 Oct 14  2020 QAR_Downloads.sh
+-rwxr-xr-x 1 oracle oinstall   1002 Oct 14  2020 CDBA_SCP_TRAXPRD.sh
+-rwxr-xr-x 1 oracle oinstall   4833 Oct 14  2020 MEL_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall  78706 Oct 14  2020 DELAY_CANCEL_REPORT.sh.bkp
+-rwxr-xr-x 1 oracle oinstall   6452 Oct 14  2020 LOCK_USER_ACCOUNT.sh
+-rwxr-xr-- 1 oracle oinstall   6479 Oct 14  2020 create_sigevent_trigger.sql
+drwxr-xr-x 2 oracle oinstall   4096 Oct 14  2020 sql
+-rwxr-xr-x 1 oracle oinstall   1877 Oct 14  2020 ALL_DELAY_CANCEL_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   1977 Oct 14  2020 MEL_REPORT_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   4861 Oct 14  2020 EMPLOYEE_SKILL.sh.bak
+-rwxr-xr-x 1 oracle oinstall   4917 Oct 14  2020 EMPLOYEE_SKILL.sh
+-rwxr-xr-x 1 oracle oinstall  78706 Oct 14  2020 DELAY_CANCEL_REPORT.sh_backup20202307
+-rwxr-xr-x 1 oracle oinstall   3778 Oct 14  2020 UNPAID_INVOICES.sh
+-rwxr-xr-x 1 oracle oinstall  10908 Oct 14  2020 ALL_DELAY_CANCEL_REPORT.sh.bkp
+-rwxr-xr-x 1 oracle oinstall   1906 Oct 14  2020 lock_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   5448 Oct 14  2020 SIG_EVENT.sh
+-rwxr-xr-x 1 oracle oinstall   1794 Oct 14  2020 TDR_REPORT_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   1912 Oct 14  2020 EMPLOYEE_SKILL_script_config.ini
+-rwxr-xr-x 1 oracle oinstall  12335 Oct 14  2020 DELAY_CANCEL_REPORT_test.sh
+-rw-r--r-- 1 oracle oinstall  15030 Oct 14  2020 DELAY_CANCEL.html
+-rwxr-xr-x 1 oracle oinstall  91323 Jan  5  2021 DELAY_CANCEL_REPORT.sh_bkp01052021
+-rw-r--r-- 1 oracle oinstall   1063 Jan  5  2021 DELAY_CANCEL_LGB.html
+-rwxr-xr-x 1 oracle oinstall  85160 Jan  5  2021 DELAY_CANCEL_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall   1886 Oct 26 14:03 B045_HF_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   6264 Oct 26 14:07 B045_HF_RESTRICTED_AC.sh
+-rwxrwxrwx 1 oracle oinstall   2830 Nov 30 17:23 TRAX_changes.zip
+-rw-r--r-- 1 oracle oinstall   4600 Nov 30 17:23 REQ146193_Sql.txt
+-rw-r--r-- 1 oracle oinstall   2306 Nov 30 17:23 EXCEEDS90_06212021.txt
+-rw-r--r-- 1 oracle oinstall    846 Nov 30 17:23 EXCEEDS90_06212021_ROLLBACK.txt
+-rw-r--r-- 1 oracle oinstall   2547 Nov 30 17:23 EXCEEDS90_06212021_Existing_Sqls_To_Be_Removed.txt
+-rw-r--r-- 1 oracle oinstall   3160 Nov 30 19:00 TDR_REPORT.html
+-rw-r--r-- 1 oracle oinstall   1087 Dec  1 00:00 EMPLOYEE_SKILL.html
+-rwxrwxrwx 1 oracle oinstall   1027 Dec  1 00:00 B045_HF_RESTRICTED_AC.txt
+-rw-r--r-- 1 oracle oinstall   1479 Dec  1 01:00 LOCK_USER_ACCOUNTS.html
+-rw-r--r-- 1 oracle oinstall   9419 Dec  1 11:00 ALL_DELAY_CANCEL.html
+-rwxr-xr-x 1 oracle oinstall   6452 Dec  1 11:29 LOCK_USER_ACCOUNT.sh_01122021
+drwxr-xr-x 2 oracle oinstall  36864 Dec  1 11:59 log
+-rw-r----- 1 oracle oinstall 946900 Dec  1 11:59 sqlnet.log
+-rw-r--r-- 1 oracle oinstall   4406 Dec  1 11:59 DELAY_CANCEL_JFK.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_TPA.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_SFO.html
+-rw-r--r-- 1 oracle oinstall   2607 Dec  1 11:59 DELAY_CANCEL_PBI.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_MCO.html
+-rw-r--r-- 1 oracle oinstall   2583 Dec  1 11:59 DELAY_CANCEL_FLL.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_EWR.html
+-rw-r--r-- 1 oracle oinstall   1926 Dec  1 11:59 DELAY_CANCEL_DCA.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_BUF.html
+-rw-r--r-- 1 oracle oinstall   2691 Dec  1 11:59 DELAY_CANCEL_BOS.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_SJU.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_LAX.html
+-rw-r--r-- 1 oracle oinstall   2930 Dec  1 11:59 DELAY_CANCEL_MX.html
+[oracle@JBCUALORA1001b misc_scripts]$ cd
+[oracle@JBCUALORA1001b ~]$ crontab -e
+crontab: no changes made to crontab
+[oracle@JBCUALORA1001b ~]$ cd /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts
+[oracle@JBCUALORA1001b misc_scripts]$ ls -ltr
+total 1704
+-rwxr-xr-x 1 oracle oinstall   1865 Oct 14  2020 UNPAID_INVOICES_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   1976 Oct 14  2020 SIG_Event_config.ini
+-rwxr-xr-x 1 oracle oinstall  10908 Oct 14  2020 ALL_DELAY_CANCEL_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall  78706 Oct 14  2020 DELAY_CANCEL_REPORT.sh.org
+-rwxr-xr-- 1 oracle oinstall   7939 Oct 14  2020 TDR_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall   1967 Oct 14  2020 QAR_Downloads.ini
+-rwxr-xr-x 1 oracle oinstall   2492 Oct 14  2020 DELAY_CANCEL_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   5212 Oct 14  2020 B045_HF_RESTRICTED_AC.sh_26oct21
+-rwxr-xr-x 1 oracle oinstall   5212 Oct 14  2020 B045_HF_RESTRICTED_AC.sh.1
+-rwxr-xr-x 1 oracle oinstall   2721 Oct 14  2020 DELAY_CANCEL_script_config.ini.bkp
+-rw------- 1 oracle oinstall      0 Oct 14  2020 nohup.out
+-rwxr-xr-x 1 oracle oinstall   3834 Oct 14  2020 QAR_Downloads.sh
+-rwxr-xr-x 1 oracle oinstall   1002 Oct 14  2020 CDBA_SCP_TRAXPRD.sh
+-rwxr-xr-x 1 oracle oinstall   4833 Oct 14  2020 MEL_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall  78706 Oct 14  2020 DELAY_CANCEL_REPORT.sh.bkp
+-rwxr-xr-- 1 oracle oinstall   6479 Oct 14  2020 create_sigevent_trigger.sql
+drwxr-xr-x 2 oracle oinstall   4096 Oct 14  2020 sql
+-rwxr-xr-x 1 oracle oinstall   1877 Oct 14  2020 ALL_DELAY_CANCEL_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   1977 Oct 14  2020 MEL_REPORT_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   4861 Oct 14  2020 EMPLOYEE_SKILL.sh.bak
+-rwxr-xr-x 1 oracle oinstall   4917 Oct 14  2020 EMPLOYEE_SKILL.sh
+-rwxr-xr-x 1 oracle oinstall  78706 Oct 14  2020 DELAY_CANCEL_REPORT.sh_backup20202307
+-rwxr-xr-x 1 oracle oinstall   3778 Oct 14  2020 UNPAID_INVOICES.sh
+-rwxr-xr-x 1 oracle oinstall  10908 Oct 14  2020 ALL_DELAY_CANCEL_REPORT.sh.bkp
+-rwxr-xr-x 1 oracle oinstall   1906 Oct 14  2020 lock_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   5448 Oct 14  2020 SIG_EVENT.sh
+-rwxr-xr-x 1 oracle oinstall   1794 Oct 14  2020 TDR_REPORT_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   1912 Oct 14  2020 EMPLOYEE_SKILL_script_config.ini
+-rwxr-xr-x 1 oracle oinstall  12335 Oct 14  2020 DELAY_CANCEL_REPORT_test.sh
+-rw-r--r-- 1 oracle oinstall  15030 Oct 14  2020 DELAY_CANCEL.html
+-rwxr-xr-x 1 oracle oinstall  91323 Jan  5  2021 DELAY_CANCEL_REPORT.sh_bkp01052021
+-rw-r--r-- 1 oracle oinstall   1063 Jan  5  2021 DELAY_CANCEL_LGB.html
+-rwxr-xr-x 1 oracle oinstall  85160 Jan  5  2021 DELAY_CANCEL_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall   1886 Oct 26 14:03 B045_HF_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   6264 Oct 26 14:07 B045_HF_RESTRICTED_AC.sh
+-rwxrwxrwx 1 oracle oinstall   2830 Nov 30 17:23 TRAX_changes.zip
+-rw-r--r-- 1 oracle oinstall   4600 Nov 30 17:23 REQ146193_Sql.txt
+-rw-r--r-- 1 oracle oinstall   2306 Nov 30 17:23 EXCEEDS90_06212021.txt
+-rw-r--r-- 1 oracle oinstall    846 Nov 30 17:23 EXCEEDS90_06212021_ROLLBACK.txt
+-rw-r--r-- 1 oracle oinstall   2547 Nov 30 17:23 EXCEEDS90_06212021_Existing_Sqls_To_Be_Removed.txt
+-rw-r--r-- 1 oracle oinstall   3160 Nov 30 19:00 TDR_REPORT.html
+-rw-r--r-- 1 oracle oinstall   1087 Dec  1 00:00 EMPLOYEE_SKILL.html
+-rwxrwxrwx 1 oracle oinstall   1027 Dec  1 00:00 B045_HF_RESTRICTED_AC.txt
+-rw-r--r-- 1 oracle oinstall   1479 Dec  1 01:00 LOCK_USER_ACCOUNTS.html
+-rw-r--r-- 1 oracle oinstall   9419 Dec  1 11:00 ALL_DELAY_CANCEL.html
+-rwxr-xr-x 1 oracle oinstall   6452 Dec  1 11:29 LOCK_USER_ACCOUNT.sh_01122021
+drwxr-xr-x 2 oracle oinstall  36864 Dec  1 11:59 log
+-rw-r----- 1 oracle oinstall 946900 Dec  1 11:59 sqlnet.log
+-rw-r--r-- 1 oracle oinstall   4406 Dec  1 11:59 DELAY_CANCEL_JFK.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_TPA.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_SFO.html
+-rw-r--r-- 1 oracle oinstall   2607 Dec  1 11:59 DELAY_CANCEL_PBI.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_MCO.html
+-rw-r--r-- 1 oracle oinstall   2583 Dec  1 11:59 DELAY_CANCEL_FLL.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_EWR.html
+-rw-r--r-- 1 oracle oinstall   1926 Dec  1 11:59 DELAY_CANCEL_DCA.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_BUF.html
+-rw-r--r-- 1 oracle oinstall   2691 Dec  1 11:59 DELAY_CANCEL_BOS.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_SJU.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_LAX.html
+-rw-r--r-- 1 oracle oinstall   2930 Dec  1 11:59 DELAY_CANCEL_MX.html
+-rwxr-xr-x 1 oracle oinstall   6447 Dec  1 17:12 LOCK_USER_ACCOUNT.sh
+[oracle@JBCUALORA1001b misc_scripts]$ cat LOCK_USER_ACCOUNT.sh
+#!/bin/bash
+################################################################################
+# Name         : LOCK_USER_ACCOUNT.sh
+# Author       :
+# Purpose      : Daily execution of Lock User Account script
+# Version      : 1.0
+#
+# Date written : 03/20/2015
+################################################################################
+# Modification :
+# MM/DD/YYYY  WHO/VER      Change Description
+#
+#
+#
+################################################################################
+# Following lines setup logging environment.
+#set -xv
+
+# Source the variable initialization file
+source `dirname $0`/lock_script_config.ini
+
+# Define the script version
+
+cd ${SCRIPT_DIR}
+LOG_FILE=${SCRIPT_DIR}/log/`basename $0`_`date +'%Y%m%d_%H%M%S'`.log
+/usr/bin/find ./log -type f -mtime +${LOG_RETENTION} -exec rm -f {} \;
+/bin/touch ${LOG_FILE}
+exec >> ${LOG_FILE} 2>&1
+
+################################################################################
+
+# Define functions.
+
+errorcheck()
+{
+  if [ $? != 0 ]
+  then
+    echo "Error during LOCK USER ACCOUNTS script execution."
+    failure;
+    exit 1
+  fi
+}
+
+failure()
+{
+  echo " "
+  echo aborting $0
+  END_DATE=`date +%m/%d/%Y`
+  END_TIME=`date +%H:%M:%S`
+  if [ ${EMAIL_NOTIFICATION} == TRUE ]
+  then
+    MAILTO=${LEVEL1_RECIPIENTS}
+    MAIL_BODY="Error occurred during execution of ${SCRIPT_NAME} script for ${DB_NAME} database on ${HOST_NAME}"
+    EmailSubject="LEVEL1-${CLIENT}-${DB_NAME}-${SCRIPT_NAME} script execution for ${DB_NAME} database on ${HOST_NAME} Failed."
+    send_mail;
+  fi
+  echo "$0 ABORTED on ${END_DATE} ${END_TIME}"
+  exit 1
+}
+
+success()
+{
+  echo " "
+  END_DATE=`date +%m/%d/%Y`
+  END_TIME=`date +%H:%M:%S`
+  if [ ${EMAIL_NOTIFICATION} == TRUE ]
+  then
+    MAILTO=${LEVEL4_RECIPIENTS}
+    MAIL_BODY="LOCK USER ACCOUNTS script execution successful for ${DB_NAME} on ${HOST_NAME}. Please check the attached file for the script output."
+    EmailSubject="LEVEL4-${CLIENT}-${DB_NAME}-${SCRIPT_NAME} script execution successful for ${DB_NAME} on ${HOST_NAME}.."
+    send_mail;
+  fi
+  echo "$0 SUCCEDED on ${END_DATE} ${END_TIME}"
+  exit 0
+}
+
+send_mail()
+{
+  #echo " "                                             >> ${EMAIL_FILE}
+  #echo " Script Version : ${SCRIPT_VERSION}"               >> ${EMAIL_FILE}
+  #echo " Host Name      : ${HOST_NAME}"                >> ${EMAIL_FILE}
+  #echo " Database       : ${DB_NAME}"                  >> ${EMAIL_FILE}
+  #echo " DB Unique Name : ${DB_UNIQUE_NAME}"           >> ${EMAIL_FILE}
+  #echo " Date           : `date +%m/%d/%Y`"            >> ${EMAIL_FILE}
+  #echo " Started        : ${START_DATE} ${START_TIME}" >> ${EMAIL_FILE}
+  #echo " Ended          : ${END_DATE} ${END_TIME}"     >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #echo ${MAIL_BODY}                              >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #echo " Log file: ${LOG_FILE}"                  >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #cat ${LOG_FILE}                                >> ${EMAIL_FILE}
+  #${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -o message-file=${EMAIL_FILE}
+  #${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -a ${EMAIL_FILE} -m ${MAIL_BODY}
+  ${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -m ${MAIL_BODY} -a ${EMAIL_FILE}
+  if [ $? != 0 ]
+  then
+    echo
+    echo "Failed to send email."
+  fi
+}
+
+script_execution()
+{
+${ORACLE_HOME}/bin/sqlplus -s /nolog <<!!
+connect odb/trxE30dbJB
+set pages 9999
+SET MARKUP HTML ON SPOOL ON
+whenever sqlerror exit failure;
+spool ${EMAIL_FILE}
+
+BEGIN
+INSERT INTO SECURITY_HEADER_AUDIT(
+"USER",PASSWORD,EMPLOYEE,SECURITY,TOOLBAR_LOCATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY,MODIFIED_DATE,EXPLORER,EXPLORER_ICON,
+ DEPARTMENT,WIDTH,HEIGHT,SECURITY_EXPIRATION_DAYS,SECURITY_EXPIRATION_DATE,USER_PROFILE,ALLOW_PASSWORD_CHANGE_BY_USER,ADOPT_USER_PROFILE,
+ DICTIONARY,POP_MESSAGE,SELBOX_FAV,LAST_SINGON,LAST_SINGOFF,TABPOSITION,FIRST_TIME_PASS_CONTROL,TOOL_BAR_SHOW_TEXT,STATUS,ROUTING_STATUS,                    
+ SECURITY_EXPIRATION_DAYS_WALL,FIRST_TIME_WALL_CONTROL,SHORTCUTBAR,WALL_PASSWORD_CHANGE_BY_USER,DESCRIPTION,TRANSACTION_TYPE)
+
+Select "USER",PASSWORD,EMPLOYEE,SECURITY,TOOLBAR_LOCATION,NOTES,CREATED_BY,CREATED_DATE,'EXCEEDS90',SYSDATE,EXPLORER,EXPLORER_ICON,
+ DEPARTMENT,WIDTH,HEIGHT,SECURITY_EXPIRATION_DAYS,SECURITY_EXPIRATION_DATE,USER_PROFILE,ALLOW_PASSWORD_CHANGE_BY_USER,ADOPT_USER_PROFILE,
+ DICTIONARY,POP_MESSAGE,SELBOX_FAV,LAST_SINGON,LAST_SINGOFF,TABPOSITION,FIRST_TIME_PASS_CONTROL,TOOL_BAR_SHOW_TEXT,STATUS,ROUTING_STATUS,                    
+ SECURITY_EXPIRATION_DAYS_WALL,FIRST_TIME_WALL_CONTROL,SHORTCUTBAR,WALL_PASSWORD_CHANGE_BY_USER,DESCRIPTION,'UPDATE' AS  TRANSACTION_TYPE FROM
+ SECURITY_HEADER WHERE
+ ((("SECURITY_HEADER"."LAST_SINGON" <= SYSDATE - 90) AND
+ ("SECURITY_HEADER"."LAST_SINGOFF" <= SYSDATE - 90)) OR
+ ("SECURITY_HEADER"."LAST_SINGON" IS NULL AND "SECURITY_HEADER"."LAST_SINGOFF" IS NULL))
+ AND "SECURITY_HEADER"."STATUS" = 'ACTIVE'
+ AND "SECURITY_HEADER"."EMPLOYEE" IS NOT NULL
+ AND ("SECURITY_HEADER"."MODIFIED_DATE"  <= Sysdate - 90)
+ AND "SECURITY_HEADER"."MODIFIED_BY" <> 'TRAX_IFACE';
+
+END;
+COMMIT;
+
+
+BEGIN
+ UPDATE "SECURITY_HEADER"
+   SET "SECURITY_HEADER"."STATUS" = 'INACTIVE',
+       "SECURITY_HEADER"."MODIFIED_BY" ='EXCEEDS90',
+       "SECURITY_HEADER"."MODIFIED_DATE" = SYSDATE
+ WHERE ((("SECURITY_HEADER"."LAST_SINGON" <= SYSDATE  - 90) AND
+      ("SECURITY_HEADER"."LAST_SINGOFF" <= SYSDATE  - 90)) OR
+      ("SECURITY_HEADER"."LAST_SINGON" IS NULL AND
+      "SECURITY_HEADER"."LAST_SINGOFF" IS NULL))
+     AND  "SECURITY_HEADER"."STATUS" = 'ACTIVE'
+     AND  "SECURITY_HEADER"."EMPLOYEE" IS NOT NULL
+     AND "SECURITY_HEADER"."MODIFIED_BY" <> 'TRAX_IFACE'
+     AND  ("SECURITY_HEADER"."MODIFIED_DATE"  <= SYSDATE - 90);
+END;
+COMMIT;
+
+SET MARKUP HTML OFF
+SET ECHO ON
+!!
+errorcheck;
+}
+
+#######################################################################################################
+# Shell Execution starts here
+
+START_DATE=`date +%m/%d/%Y`
+START_TIME=`date +%H:%M:%S`
+echo "$0 taking off on ${START_DATE} ${START_TIME}...."
+echo ""
+
+script_execution;
+
+#export FILE_SUFF=`date +'%Y%m%d_%H%M%S'`
+export FILE_SUFF=`date +'%Y%m%d'`
+
+errorcheck;
+
+success;
+TIME=`date +%Y_%m_%d_at_%r`
+echo "$0 landed on ${TIME} ....
+
+[oracle@JBCUALORA1001b misc_scripts]$ vi LOCK_USER_ACCOUNT.sh
+[oracle@JBCUALORA1001b misc_scripts]$ cat LOCK_USER_ACCOUNT.sh
+#!/bin/bash
+################################################################################
+# Name         : LOCK_USER_ACCOUNT.sh
+# Author       :
+# Purpose      : Daily execution of Lock User Account script
+# Version      : 1.0
+#
+# Date written : 03/20/2015
+################################################################################
+# Modification :
+# MM/DD/YYYY  WHO/VER      Change Description
+#
+#
+#
+################################################################################
+# Following lines setup logging environment.
+#set -xv
+
+# Source the variable initialization file
+source `dirname $0`/lock_script_config.ini
+
+# Define the script version
+
+cd ${SCRIPT_DIR}
+LOG_FILE=${SCRIPT_DIR}/log/`basename $0`_`date +'%Y%m%d_%H%M%S'`.log
+/usr/bin/find ./log -type f -mtime +${LOG_RETENTION} -exec rm -f {} \;
+/bin/touch ${LOG_FILE}
+exec >> ${LOG_FILE} 2>&1
+
+################################################################################
+
+# Define functions.
+
+errorcheck()
+{
+  if [ $? != 0 ]
+  then
+    echo "Error during LOCK USER ACCOUNTS script execution."
+    failure;
+    exit 1
+  fi
+}
+
+failure()
+{
+  echo " "
+  echo aborting $0
+  END_DATE=`date +%m/%d/%Y`
+  END_TIME=`date +%H:%M:%S`
+  if [ ${EMAIL_NOTIFICATION} == TRUE ]
+  then
+    MAILTO=${LEVEL1_RECIPIENTS}
+    MAIL_BODY="Error occurred during execution of ${SCRIPT_NAME} script for ${DB_NAME} database on ${HOST_NAME}"
+    EmailSubject="LEVEL1-${CLIENT}-${DB_NAME}-${SCRIPT_NAME} script execution for ${DB_NAME} database on ${HOST_NAME} Failed."
+    send_mail;
+  fi
+  echo "$0 ABORTED on ${END_DATE} ${END_TIME}"
+  exit 1
+}
+
+success()
+{
+  echo " "
+  END_DATE=`date +%m/%d/%Y`
+  END_TIME=`date +%H:%M:%S`
+  if [ ${EMAIL_NOTIFICATION} == TRUE ]
+  then
+    MAILTO=${LEVEL4_RECIPIENTS}
+    MAIL_BODY="LOCK USER ACCOUNTS script execution successful for ${DB_NAME} on ${HOST_NAME}. Please check the attached file for the script output."
+    EmailSubject="LEVEL4-${CLIENT}-${DB_NAME}-${SCRIPT_NAME} script execution successful for ${DB_NAME} on ${HOST_NAME}.."
+    send_mail;
+  fi
+  echo "$0 SUCCEDED on ${END_DATE} ${END_TIME}"
+  exit 0
+}
+
+send_mail()
+{
+  #echo " "                                             >> ${EMAIL_FILE}
+  #echo " Script Version : ${SCRIPT_VERSION}"               >> ${EMAIL_FILE}
+  #echo " Host Name      : ${HOST_NAME}"                >> ${EMAIL_FILE}
+  #echo " Database       : ${DB_NAME}"                  >> ${EMAIL_FILE}
+  #echo " DB Unique Name : ${DB_UNIQUE_NAME}"           >> ${EMAIL_FILE}
+  #echo " Date           : `date +%m/%d/%Y`"            >> ${EMAIL_FILE}
+  #echo " Started        : ${START_DATE} ${START_TIME}" >> ${EMAIL_FILE}
+  #echo " Ended          : ${END_DATE} ${END_TIME}"     >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #echo ${MAIL_BODY}                              >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #echo " Log file: ${LOG_FILE}"                  >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #cat ${LOG_FILE}                                >> ${EMAIL_FILE}
+  #${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -o message-file=${EMAIL_FILE}
+  #${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -a ${EMAIL_FILE} -m ${MAIL_BODY}
+  ${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -m ${MAIL_BODY} -a ${EMAIL_FILE}
+  if [ $? != 0 ]
+  then
+    echo
+    echo "Failed to send email."
+  fi
+}
+
+script_execution()
+{
+${ORACLE_HOME}/bin/sqlplus -s /nolog <<!!
+connect odb/trxE30dbJB
+set pages 9999
+SET MARKUP HTML ON SPOOL ON
+whenever sqlerror exit failure;
+spool ${EMAIL_FILE}
+
+BEGIN
+INSERT INTO SECURITY_HEADER_AUDIT(
+"USER",PASSWORD,EMPLOYEE,SECURITY,TOOLBAR_LOCATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY,MODIFIED_DATE,EXPLORER,EXPLORER_ICON,
+ DEPARTMENT,WIDTH,HEIGHT,SECURITY_EXPIRATION_DAYS,SECURITY_EXPIRATION_DATE,USER_PROFILE,ALLOW_PASSWORD_CHANGE_BY_USER,ADOPT_USER_PROFILE,
+ DICTIONARY,POP_MESSAGE,SELBOX_FAV,LAST_SINGON,LAST_SINGOFF,TABPOSITION,FIRST_TIME_PASS_CONTROL,TOOL_BAR_SHOW_TEXT,STATUS,ROUTING_STATUS,                     SECURITY_EXPIRATION_DAYS_WALL,FIRST_TIME_WALL_CONTROL,SHORTCUTBAR,WALL_PASSWORD_CHANGE_BY_USER,DESCRIPTION,TRANSACTION_TYPE)
+ Select "USER",PASSWORD,EMPLOYEE,SECURITY,TOOLBAR_LOCATION,NOTES,CREATED_BY,CREATED_DATE,'EXCEEDS90',SYSDATE,EXPLORER,EXPLORER_ICON,
+ DEPARTMENT,WIDTH,HEIGHT,SECURITY_EXPIRATION_DAYS,SECURITY_EXPIRATION_DATE,USER_PROFILE,ALLOW_PASSWORD_CHANGE_BY_USER,ADOPT_USER_PROFILE,
+ DICTIONARY,POP_MESSAGE,SELBOX_FAV,LAST_SINGON,LAST_SINGOFF,TABPOSITION,FIRST_TIME_PASS_CONTROL,TOOL_BAR_SHOW_TEXT,STATUS,ROUTING_STATUS,                     SECURITY_EXPIRATION_DAYS_WALL,FIRST_TIME_WALL_CONTROL,SHORTCUTBAR,WALL_PASSWORD_CHANGE_BY_USER,DESCRIPTION,'UPDATE' AS  TRANSACTION_TYPE FROM
+ SECURITY_HEADER WHERE
+ ((("SECURITY_HEADER"."LAST_SINGON" <= SYSDATE - 90) AND
+ ("SECURITY_HEADER"."LAST_SINGOFF" <= SYSDATE - 90)) OR
+ ("SECURITY_HEADER"."LAST_SINGON" IS NULL AND "SECURITY_HEADER"."LAST_SINGOFF" IS NULL))
+ AND "SECURITY_HEADER"."STATUS" = 'ACTIVE'
+ AND "SECURITY_HEADER"."EMPLOYEE" IS NOT NULL
+ AND ("SECURITY_HEADER"."MODIFIED_DATE"  <= Sysdate - 90)
+ AND "SECURITY_HEADER"."MODIFIED_BY" <> 'TRAX_IFACE';
+
+END;
+COMMIT;
+
+
+BEGIN
+ UPDATE "SECURITY_HEADER"
+   SET "SECURITY_HEADER"."STATUS" = 'INACTIVE',
+       "SECURITY_HEADER"."MODIFIED_BY" ='EXCEEDS90',
+       "SECURITY_HEADER"."MODIFIED_DATE" = SYSDATE
+ WHERE ((("SECURITY_HEADER"."LAST_SINGON" <= SYSDATE  - 90) AND
+      ("SECURITY_HEADER"."LAST_SINGOFF" <= SYSDATE  - 90)) OR
+      ("SECURITY_HEADER"."LAST_SINGON" IS NULL AND
+      "SECURITY_HEADER"."LAST_SINGOFF" IS NULL))
+     AND  "SECURITY_HEADER"."STATUS" = 'ACTIVE'
+     AND  "SECURITY_HEADER"."EMPLOYEE" IS NOT NULL
+     AND "SECURITY_HEADER"."MODIFIED_BY" <> 'TRAX_IFACE'
+     AND  ("SECURITY_HEADER"."MODIFIED_DATE"  <= SYSDATE - 90);
+END;
+COMMIT;
+
+SET MARKUP HTML OFF
+SET ECHO ON
+!!
+errorcheck;
+}
+
+#######################################################################################################
+# Shell Execution starts here
+
+START_DATE=`date +%m/%d/%Y`
+START_TIME=`date +%H:%M:%S`
+echo "$0 taking off on ${START_DATE} ${START_TIME}...."
+echo ""
+
+script_execution;
+
+#export FILE_SUFF=`date +'%Y%m%d_%H%M%S'`
+export FILE_SUFF=`date +'%Y%m%d'`
+
+errorcheck;
+
+success;
+TIME=`date +%Y_%m_%d_at_%r`
+echo "$0 landed on ${TIME} ....
+
+[oracle@JBCUALORA1001b misc_scripts]$ crontab -e
+crontab: installing new crontab
+[oracle@JBCUALORA1001b misc_scripts]$ crontab -l
+### Cintra Sensor checks
+
+05,20,35,50 * * * * /u02/app/Cintra/Sensor/Server/SensorMONos.sh
+05,20,35,50 * * * * /u02/app/Cintra/Sensor/DB/TRAXPRD_NVA/SensorMONdb.sh
+00 11 * * * /u02/app/Cintra/Sensor/DB/TRAXPRD_NVA/checks/printer.sh > /u02/app/Cintra/Sensor/DB/TRAXPRD_NVA/checks/printer.log 2>&1
+
+### Cintra ADRCI/Cleanup
+30 05 * * 6 /u02/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh TRAXPRD_NVA >> /u02/app/Cintra/ADRCI/log/CDBA_AUDIT_CLEANUP_RDBMS_TRAXPRD.out 2>&1
+
+### Cintra RMAN jobs
+##00 22 * * * /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMANFULL.sh RMAN_config.ini > /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMANFULL.out 2>&1
+##30 01 * * * /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_CLONE.sh > /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_CLONE.out 2>&1
+
+####commented due to Rubrik
+###30 6 * * * /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini > /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMANFULLINCR.out 2>&1
+
+### Cintra Stats
+30 4 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_SCHEMA_wrapper.sh > /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_SCHEMA.out 2>&1
+00 3 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_DICT.sh > /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_DICT.out 2>&1
+10 6 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_ADVISOR_TRAXPRD_SEGMENT.sh > /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_ADVISOR_TRAXPRD_SEGMENT.out 2>&1
+
+
+### Cron to Lock Inactive Users for TRAXPRD
+00 00 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/B045_HF_RESTRICTED_AC.sh
+00 05 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/LOCK_USER_ACCOUNT.sh
+00 00 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/EMPLOYEE_SKILL.sh
+00 19 * * 2-5 /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/TDR_REPORT.sh
+58 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/MEL_REPORT.sh
+59 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/DELAY_CANCEL_REPORT.sh
+58 11 1 1,4,7,10 * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/UNPAID_INVOICES.sh
+00 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/ALL_DELAY_CANCEL_REPORT.sh
+59 11 * * 1 /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/QAR_Downloads.sh
+
+00 01 * * * /home/oracle/Cintra/scripts/copy_TRAXPRD_archives2exa.sh TRAXPRD DRTRAXPRD_VA >> /home/oracle/Cintra/log/copy_TRAXPRD_archives2exa.out 2>&1
+[oracle@JBCUALORA1001b misc_scripts]$ cd
+[oracle@JBCUALORA1001b ~]$ cd /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts
+[oracle@JBCUALORA1001b misc_scripts]$ ls -ltr
+total 1704
+-rwxr-xr-x 1 oracle oinstall   1865 Oct 14  2020 UNPAID_INVOICES_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   1976 Oct 14  2020 SIG_Event_config.ini
+-rwxr-xr-x 1 oracle oinstall  10908 Oct 14  2020 ALL_DELAY_CANCEL_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall  78706 Oct 14  2020 DELAY_CANCEL_REPORT.sh.org
+-rwxr-xr-- 1 oracle oinstall   7939 Oct 14  2020 TDR_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall   1967 Oct 14  2020 QAR_Downloads.ini
+-rwxr-xr-x 1 oracle oinstall   2492 Oct 14  2020 DELAY_CANCEL_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   5212 Oct 14  2020 B045_HF_RESTRICTED_AC.sh_26oct21
+-rwxr-xr-x 1 oracle oinstall   5212 Oct 14  2020 B045_HF_RESTRICTED_AC.sh.1
+-rwxr-xr-x 1 oracle oinstall   2721 Oct 14  2020 DELAY_CANCEL_script_config.ini.bkp
+-rw------- 1 oracle oinstall      0 Oct 14  2020 nohup.out
+-rwxr-xr-x 1 oracle oinstall   3834 Oct 14  2020 QAR_Downloads.sh
+-rwxr-xr-x 1 oracle oinstall   1002 Oct 14  2020 CDBA_SCP_TRAXPRD.sh
+-rwxr-xr-x 1 oracle oinstall   4833 Oct 14  2020 MEL_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall  78706 Oct 14  2020 DELAY_CANCEL_REPORT.sh.bkp
+-rwxr-xr-- 1 oracle oinstall   6479 Oct 14  2020 create_sigevent_trigger.sql
+drwxr-xr-x 2 oracle oinstall   4096 Oct 14  2020 sql
+-rwxr-xr-x 1 oracle oinstall   1877 Oct 14  2020 ALL_DELAY_CANCEL_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   1977 Oct 14  2020 MEL_REPORT_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   4861 Oct 14  2020 EMPLOYEE_SKILL.sh.bak
+-rwxr-xr-x 1 oracle oinstall   4917 Oct 14  2020 EMPLOYEE_SKILL.sh
+-rwxr-xr-x 1 oracle oinstall  78706 Oct 14  2020 DELAY_CANCEL_REPORT.sh_backup20202307
+-rwxr-xr-x 1 oracle oinstall   3778 Oct 14  2020 UNPAID_INVOICES.sh
+-rwxr-xr-x 1 oracle oinstall  10908 Oct 14  2020 ALL_DELAY_CANCEL_REPORT.sh.bkp
+-rwxr-xr-x 1 oracle oinstall   1906 Oct 14  2020 lock_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   5448 Oct 14  2020 SIG_EVENT.sh
+-rwxr-xr-x 1 oracle oinstall   1794 Oct 14  2020 TDR_REPORT_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   1912 Oct 14  2020 EMPLOYEE_SKILL_script_config.ini
+-rwxr-xr-x 1 oracle oinstall  12335 Oct 14  2020 DELAY_CANCEL_REPORT_test.sh
+-rw-r--r-- 1 oracle oinstall  15030 Oct 14  2020 DELAY_CANCEL.html
+-rwxr-xr-x 1 oracle oinstall  91323 Jan  5  2021 DELAY_CANCEL_REPORT.sh_bkp01052021
+-rw-r--r-- 1 oracle oinstall   1063 Jan  5  2021 DELAY_CANCEL_LGB.html
+-rwxr-xr-x 1 oracle oinstall  85160 Jan  5  2021 DELAY_CANCEL_REPORT.sh
+-rwxr-xr-x 1 oracle oinstall   1886 Oct 26 14:03 B045_HF_script_config.ini
+-rwxr-xr-x 1 oracle oinstall   6264 Oct 26 14:07 B045_HF_RESTRICTED_AC.sh
+-rwxrwxrwx 1 oracle oinstall   2830 Nov 30 17:23 TRAX_changes.zip
+-rw-r--r-- 1 oracle oinstall   4600 Nov 30 17:23 REQ146193_Sql.txt
+-rw-r--r-- 1 oracle oinstall   2306 Nov 30 17:23 EXCEEDS90_06212021.txt
+-rw-r--r-- 1 oracle oinstall    846 Nov 30 17:23 EXCEEDS90_06212021_ROLLBACK.txt
+-rw-r--r-- 1 oracle oinstall   2547 Nov 30 17:23 EXCEEDS90_06212021_Existing_Sqls_To_Be_Removed.txt
+-rw-r--r-- 1 oracle oinstall   3160 Nov 30 19:00 TDR_REPORT.html
+-rw-r--r-- 1 oracle oinstall   1087 Dec  1 00:00 EMPLOYEE_SKILL.html
+-rwxrwxrwx 1 oracle oinstall   1027 Dec  1 00:00 B045_HF_RESTRICTED_AC.txt
+-rw-r--r-- 1 oracle oinstall   1479 Dec  1 01:00 LOCK_USER_ACCOUNTS.html
+-rw-r--r-- 1 oracle oinstall   9419 Dec  1 11:00 ALL_DELAY_CANCEL.html
+-rwxr-xr-x 1 oracle oinstall   6452 Dec  1 11:29 LOCK_USER_ACCOUNT.sh_01122021
+drwxr-xr-x 2 oracle oinstall  36864 Dec  1 11:59 log
+-rw-r----- 1 oracle oinstall 946900 Dec  1 11:59 sqlnet.log
+-rw-r--r-- 1 oracle oinstall   4406 Dec  1 11:59 DELAY_CANCEL_JFK.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_TPA.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_SFO.html
+-rw-r--r-- 1 oracle oinstall   2607 Dec  1 11:59 DELAY_CANCEL_PBI.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_MCO.html
+-rw-r--r-- 1 oracle oinstall   2583 Dec  1 11:59 DELAY_CANCEL_FLL.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_EWR.html
+-rw-r--r-- 1 oracle oinstall   1926 Dec  1 11:59 DELAY_CANCEL_DCA.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_BUF.html
+-rw-r--r-- 1 oracle oinstall   2691 Dec  1 11:59 DELAY_CANCEL_BOS.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_SJU.html
+-rw-r--r-- 1 oracle oinstall   1063 Dec  1 11:59 DELAY_CANCEL_LAX.html
+-rw-r--r-- 1 oracle oinstall   2930 Dec  1 11:59 DELAY_CANCEL_MX.html
+-rwxr-xr-x 1 oracle oinstall   6437 Dec  1 17:16 LOCK_USER_ACCOUNT.sh
+[oracle@JBCUALORA1001b misc_scripts]$ . .profile_trxprd
+-bash: .profile_trxprd: No such file or directory
+[oracle@JBCUALORA1001b misc_scripts]$ cd
+[oracle@JBCUALORA1001b ~]$ ls -la
+total 2707104
+drwx------. 32 oracle users          4096 Dec  1 17:16 .
+drwxr-xr-x.  7 root   root           4096 Feb 28  2020 ..
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .abrt
+drwx------   3 oracle oinstall       4096 Oct 14  2020 .ansible
+-rw-r--r--   1 oracle oinstall      55411 Sep  8 00:52 ash-traxprd_02.html
+-rw-r--r--   1 oracle oinstall    1422392 Oct 21 16:18 awrrpt_2_13923_13924.html
+-rw-r--r--   1 oracle oinstall    1588086 Sep 16 19:02 AWR_TRAXPRD_16sep21.html
+-rw-------.  1 oracle oinstall      18933 Dec  1 12:29 .bash_history
+-rw-r--r--.  1 oracle users            18 Mar 22  2017 .bash_logout
+-rw-r--r--   1 oracle oinstall        605 Oct 14  2020 .bash_profile
+-rw-r--r--.  1 oracle users           124 Mar 22  2017 .bashrc
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .cache
+drwxr-xr-x.  5 oracle oinstall       4096 Jul 31  2020 Cintra
+drwxr-xr-x.  5 oracle oinstall       4096 Nov 20  2019 .config
+-rw-r--r--   1 oracle oinstall       2458 Oct 20 03:53 cron_back_20211020
+-rw-r--r--   1 oracle oinstall       2458 Oct 14  2020 crontab_20201014.bkp
+-rw-r--r--   1 oracle oinstall       2458 Oct 15  2020 crontab_20201015.bkp
+-rw-r--r--   1 oracle oinstall       2453 Sep 18  2020 crontab.oracle.20200918
+drwxr-xr-x.  7 oracle oinstall       4096 Jul  7  2014 database
+drwx------.  3 oracle oinstall       4096 Nov 20  2019 .dbus
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Desktop
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Documents
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Downloads
+-rw-------.  1 oracle oinstall         16 Nov 20  2019 .esd_auth
+drwx------.  4 oracle oinstall       4096 Nov 20  2019 .gconf
+drwxr-xr-x.  5 oracle users          4096 Nov 20  2019 .gnome2
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .gnote
+drwx------.  2 oracle oinstall       4096 Nov 20  2019 .gnupg
+-rw-r--r--.  1 oracle oinstall        142 Nov 20  2019 .gtk-bookmarks
+drwx------.  2 oracle oinstall       4096 Nov 20  2019 .gvfs
+-rw-------.  1 oracle oinstall        934 Nov 20  2019 .ICEauthority
+-rw-r--r--.  1 oracle oinstall        654 Nov 20  2019 .imsettings.log
+-rw-r--r--   1 oracle asmadmin       4838 Oct 20 04:06 initTRAX20211020.ora
+-rw-r--r--.  1 oracle oinstall 1673544724 Nov 20  2019 linuxamd64_12102_database_1of2.zip
+-rw-r--r--.  1 oracle oinstall 1014530602 Nov 20  2019 linuxamd64_12102_database_2of2.zip
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .local
+-rw-r-----   1 oracle oinstall        316 May  4  2021 log_file_client.log
+drwxr-xr-x.  4 oracle users          4096 Nov 20  2019 .mozilla
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Music
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .nautilus
+-rw-------   1 oracle oinstall         94 Mar  4  2020 nohup.out
+drwx------   2 oracle asmadmin       4096 Oct 20 04:12 .oit
+drwxr-xr-x.  2 oracle oinstall       4096 Oct 14  2020 .oracle_jre_usage
+drwxr-----   3 oracle oinstall       4096 Mar 13  2020 oradiag_oracle
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 22  2019 patch
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Pictures
+-rw-r--r--   1 oracle oinstall        361 Oct 14  2020 .profile_traxprd
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Public
+drwx------.  2 oracle oinstall       4096 Nov 20  2019 .pulse
+-rw-------.  1 oracle oinstall        256 Nov 20  2019 .pulse-cookie
+-rw-r-----   1 oracle oinstall   80589860 Dec  1 17:05 sqlnet.log
+drwx------.  2 oracle oinstall       4096 Apr 10  2020 .ssh
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Templates
+-rw-r--r--   1 oracle oinstall      49793 Sep 16 18:30 TRAXPRD_ASH_16sep21.lst
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Videos
+-rw-------   1 oracle oinstall      17445 Dec  1 17:16 .viminfo
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .vnc
+-rw-------.  1 oracle oinstall         53 Nov 20  2019 .Xauthority
+-rw-------.  1 oracle oinstall       2797 Nov 20  2019 .xsession-errors
+-rw-------.  1 oracle oinstall       2054 Nov 20  2019 .xsession-errors.old
+[oracle@JBCUALORA1001b ~]$ . .profile_traxprd
+[oracle@JBCUALORA1001b ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 12.1.0.2.0 Production on Wed Dec 1 17:19:54 2021
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL> @?/u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.txt
+SP2-0310: unable to open file "/u02/app/oracle/product/12.1.0/dbhome_20201014040700/u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.txt"
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> @/u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.txt
+
+'RECSPE
+-------
+PASSWORD
+--------------------------------------------------------------------------------
+S TOOLBAR_LO CREATED_BY CREATED_D MODIFIED_B MODIFIED_ EXPLORER   EXPLORER_I
+- ---------- ---------- --------- ---------- --------- ---------- ----------
+     WIDTH     HEIGHT SECURITY_EXPIRATION_DAYS SECURITY_ USER_PROFI ALLOW_PASS
+---------- ---------- ------------------------ --------- ---------- ----------
+FIRST_TIME STATUS     SECURITY_EXPIRATION_DAYS_WALL FIRST_TIME
+---------- ---------- ----------------------------- ----------
+DESCRIPTION
+--------------------------------------------------------------------------------
+PASSWORD_R      NOTES
+---------- ----------
+RECSPEC
+
+'RECSPE
+-------
+PASSWORD
+--------------------------------------------------------------------------------
+S TOOLBAR_LO CREATED_BY CREATED_D MODIFIED_B MODIFIED_ EXPLORER   EXPLORER_I
+- ---------- ---------- --------- ---------- --------- ---------- ----------
+     WIDTH     HEIGHT SECURITY_EXPIRATION_DAYS SECURITY_ USER_PROFI ALLOW_PASS
+---------- ---------- ------------------------ --------- ---------- ----------
+FIRST_TIME STATUS     SECURITY_EXPIRATION_DAYS_WALL FIRST_TIME
+---------- ---------- ----------------------------- ----------
+DESCRIPTION
+--------------------------------------------------------------------------------
+PASSWORD_R      NOTES
+---------- ----------
+ItOiA4unhJqoWlg4DhqE1Q==
+
+'RECSPE
+-------
+PASSWORD
+--------------------------------------------------------------------------------
+S TOOLBAR_LO CREATED_BY CREATED_D MODIFIED_B MODIFIED_ EXPLORER   EXPLORER_I
+- ---------- ---------- --------- ---------- --------- ---------- ----------
+     WIDTH     HEIGHT SECURITY_EXPIRATION_DAYS SECURITY_ USER_PROFI ALLOW_PASS
+---------- ---------- ------------------------ --------- ---------- ----------
+FIRST_TIME STATUS     SECURITY_EXPIRATION_DAYS_WALL FIRST_TIME
+---------- ---------- ----------------------------- ----------
+DESCRIPTION
+--------------------------------------------------------------------------------
+PASSWORD_R      NOTES
+---------- ----------
+N left       NDHAMOON   06-DEC-07 CU31852    26-OCT-21 Y          LARGE
+
+'RECSPE
+-------
+PASSWORD
+--------------------------------------------------------------------------------
+S TOOLBAR_LO CREATED_BY CREATED_D MODIFIED_B MODIFIED_ EXPLORER   EXPLORER_I
+- ---------- ---------- --------- ---------- --------- ---------- ----------
+     WIDTH     HEIGHT SECURITY_EXPIRATION_DAYS SECURITY_ USER_PROFI ALLOW_PASS
+---------- ---------- ------------------------ --------- ---------- ----------
+FIRST_TIME STATUS     SECURITY_EXPIRATION_DAYS_WALL FIRST_TIME
+---------- ---------- ----------------------------- ----------
+DESCRIPTION
+--------------------------------------------------------------------------------
+PASSWORD_R      NOTES
+---------- ----------
+      2985       1940                       90 06-DEC-07 YES        YES
+
+'RECSPE
+-------
+PASSWORD
+--------------------------------------------------------------------------------
+S TOOLBAR_LO CREATED_BY CREATED_D MODIFIED_B MODIFIED_ EXPLORER   EXPLORER_I
+- ---------- ---------- --------- ---------- --------- ---------- ----------
+     WIDTH     HEIGHT SECURITY_EXPIRATION_DAYS SECURITY_ USER_PROFI ALLOW_PASS
+---------- ---------- ------------------------ --------- ---------- ----------
+FIRST_TIME STATUS     SECURITY_EXPIRATION_DAYS_WALL FIRST_TIME
+---------- ---------- ----------------------------- ----------
+DESCRIPTION
+--------------------------------------------------------------------------------
+PASSWORD_R      NOTES
+---------- ----------
+N          ACTIVE                                 0
+
+'RECSPE
+-------
+PASSWORD
+--------------------------------------------------------------------------------
+S TOOLBAR_LO CREATED_BY CREATED_D MODIFIED_B MODIFIED_ EXPLORER   EXPLORER_I
+- ---------- ---------- --------- ---------- --------- ---------- ----------
+     WIDTH     HEIGHT SECURITY_EXPIRATION_DAYS SECURITY_ USER_PROFI ALLOW_PASS
+---------- ---------- ------------------------ --------- ---------- ----------
+FIRST_TIME STATUS     SECURITY_EXPIRATION_DAYS_WALL FIRST_TIME
+---------- ---------- ----------------------------- ----------
+DESCRIPTION
+--------------------------------------------------------------------------------
+PASSWORD_R      NOTES
+---------- ----------
+TECHNICAL RECORDS SPECIALIST
+
+'RECSPE
+-------
+PASSWORD
+--------------------------------------------------------------------------------
+S TOOLBAR_LO CREATED_BY CREATED_D MODIFIED_B MODIFIED_ EXPLORER   EXPLORER_I
+- ---------- ---------- --------- ---------- --------- ---------- ----------
+     WIDTH     HEIGHT SECURITY_EXPIRATION_DAYS SECURITY_ USER_PROFI ALLOW_PASS
+---------- ---------- ------------------------ --------- ---------- ----------
+FIRST_TIME STATUS     SECURITY_EXPIRATION_DAYS_WALL FIRST_TIME
+---------- ---------- ----------------------------- ----------
+DESCRIPTION
+--------------------------------------------------------------------------------
+PASSWORD_R      NOTES
+---------- ----------
+Y             1142862
+
+'RECSPE
+-------
+PASSWORD
+--------------------------------------------------------------------------------
+S TOOLBAR_LO CREATED_BY CREATED_D MODIFIED_B MODIFIED_ EXPLORER   EXPLORER_I
+- ---------- ---------- --------- ---------- --------- ---------- ----------
+     WIDTH     HEIGHT SECURITY_EXPIRATION_DAYS SECURITY_ USER_PROFI ALLOW_PASS
+---------- ---------- ------------------------ --------- ---------- ----------
+FIRST_TIME STATUS     SECURITY_EXPIRATION_DAYS_WALL FIRST_TIME
+---------- ---------- ----------------------------- ----------
+DESCRIPTION
+--------------------------------------------------------------------------------
+PASSWORD_R      NOTES
+---------- ----------
+
+
+
+Commit complete.
+
+
+14 rows created.
+
+
+Commit complete.
+
+(Select 'RECSPEC',TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY, MODIFIED_DATE FROM SECURITY_DETAIL where "USER" IN( 'RECSPECSLC'))
+                                                                                                                         *
+ERROR at line 2:
+ORA-00942: table or view does not exist
+
+
+
+Commit complete.
+
+(Select 'RECSPEC',TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY, MODIFIED_DATE,TRANSACTION_TYPE FROM SECURITY_DETAIL_AUDIT where "USER" IN( 'RECSPECSLC'))
+                                                                                                                                          *
+ERROR at line 2:
+ORA-00942: table or view does not exist
+
+
+
+Commit complete.
+
+UPDATE SECURITY_HEADER SET ADOPT_USER_PROFILE = 'RECSPEC'  WHERE ADOPT_USER_PROFILE = 'RECSPECSLC'
+       *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+
+Commit complete.
+
+
+no rows selected
+
+
+Commit complete.
+
+ SELECT 'USER',"USER",PASSWORD,EMPLOYEE,CREATED_BY,CREATED_DATE,'144575', MODIFIED_DATE FROM SECURITY_HEADER WHERE ADOPT_USER_PROFILE =( 'RECSPEC')
+                                                                                             *
+ERROR at line 4:
+ORA-00942: table or view does not exist
+
+
+
+Commit complete.
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> select owner from dba_tables where table_name='SECURITY_HEADER';
+
+OWNER
+--------------------------------------------------------------------------------
+ODB
+
+SQL> alter session set current_schema=ODB;
+
+Session altered.
+
+SQL> !cat /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.txt
+SET DEFINE OFF;
+Insert into ODB.SECURITY_HEADER
+   ("USER", PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION, PASSWORD_RECOVERY,NOTES)
+
+(Select 'RECSPEC', PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION, PASSWORD_RECOVERY,NOTES  FROM ODB.SECURITY_HEADER where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+
+SET DEFINE OFF;
+Insert into ODB.SECURITY_HEADER_AUDIT
+   ("USER", PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION, TRANSACTION_TYPE, PASSWORD_RECOVERY)
+ (Select 'RECSPEC', PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION,TRANSACTION_TYPE, PASSWORD_RECOVERY  FROM ODB.SECURITY_HEADER_AUDIT where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+
+INSERT INTO SECURITY_DETAIL("USER",TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY,MODIFIED_DATE)
+(Select 'RECSPEC',TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY, MODIFIED_DATE FROM SECURITY_DETAIL where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+
+INSERT INTO SECURITY_DETAIL_AUDIT("USER",TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY,MODIFIED_DATE,TRANSACTION_TYPE)
+(Select 'RECSPEC',TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY, MODIFIED_DATE,TRANSACTION_TYPE FROM SECURITY_DETAIL_AUDIT where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+UPDATE SECURITY_HEADER SET ADOPT_USER_PROFILE = 'RECSPEC'  WHERE ADOPT_USER_PROFILE = 'RECSPECSLC';
+COMMIT;
+
+
+
+SET DEFINE OFF;
+Insert into ODB.SECURITY_HEADER_AUDIT
+   ("USER", PASSWORD, EMPLOYEE, SECURITY, TOOLBAR_LOCATION,
+    CREATED_BY, CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER,
+    EXPLORER_ICON, WIDTH, HEIGHT, TAB_CONTROL, SECURITY_EXPIRATION_DAYS,
+    SECURITY_EXPIRATION_DATE, USER_PROFILE, ALLOW_PASSWORD_CHANGE_BY_USER, ADOPT_USER_PROFILE, DICTIONARY,
+    POP_MESSAGE, SELBOX_FAV, LAST_SINGON, LAST_SINGOFF, TABPOSITION,
+    FIRST_TIME_PASS_CONTROL, TOOL_BAR_SHOW_TEXT, STATUS, ROUTING_STATUS, SECURITY_EXPIRATION_DAYS_WALL,
+    CATEGORY_TITLE, FIRST_TIME_WALL_CONTROL, TURN_OFF_TRANSPARENCY, BG_COLOR_PREFERENCE, GRADIENT_COLOR,
+    GRADIENT_OFF, SHORTCUTBAR, VIEW_TYPE, CLICK_ITEMS, AUTO_GENERATE_WALL_PASS,
+    RECENT_NO, TRANSACTION_TYPE, PASSWORD_RECOVERY)
+
+   (SELECT "USER", PASSWORD, EMPLOYEE, SECURITY, TOOLBAR_LOCATION,
+    CREATED_BY, CREATED_DATE, '144575', SYSDATE, EXPLORER,
+    EXPLORER_ICON, WIDTH, HEIGHT, TAB_CONTROL, SECURITY_EXPIRATION_DAYS,
+    SECURITY_EXPIRATION_DATE, USER_PROFILE, ALLOW_PASSWORD_CHANGE_BY_USER, ADOPT_USER_PROFILE, DICTIONARY,
+    POP_MESSAGE, SELBOX_FAV, LAST_SINGON, LAST_SINGOFF, TABPOSITION,
+    FIRST_TIME_PASS_CONTROL, TOOL_BAR_SHOW_TEXT, STATUS, ROUTING_STATUS, SECURITY_EXPIRATION_DAYS_WALL,
+    CATEGORY_TITLE, FIRST_TIME_WALL_CONTROL, TURN_OFF_TRANSPARENCY, BG_COLOR_PREFERENCE, GRADIENT_COLOR,
+    GRADIENT_OFF, SHORTCUTBAR, VIEW_TYPE, CLICK_ITEMS, AUTO_GENERATE_WALL_PASS,
+    RECENT_NO, 'UPDATE', PASSWORD_RECOVERY FROM ODB.SECURITY_HEADER WHERE ADOPT_USER_PROFILE =( 'RECSPEC'));
+COMMIT;
+
+
+SET DEFINE OFF;
+Insert into ODB.SECURITY_PASSWORD_HISTORY
+   (PASSWORD_TYPE, "USER", PASSWORD, EMPLOYEE, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE)
+ SELECT 'USER',"USER",PASSWORD,EMPLOYEE,CREATED_BY,CREATED_DATE,'144575', MODIFIED_DATE FROM SECURITY_HEADER WHERE ADOPT_USER_PROFILE =( 'RECSPEC');
+COMMIT;
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+[oracle@JBCUALORA1001b ~]$ cat /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.txt
+SET DEFINE OFF;
+Insert into ODB.SECURITY_HEADER
+   ("USER", PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION, PASSWORD_RECOVERY,NOTES)
+
+(Select 'RECSPEC', PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION, PASSWORD_RECOVERY,NOTES  FROM ODB.SECURITY_HEADER where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+
+SET DEFINE OFF;
+Insert into ODB.SECURITY_HEADER_AUDIT
+   ("USER", PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION, TRANSACTION_TYPE, PASSWORD_RECOVERY)
+ (Select 'RECSPEC', PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION,TRANSACTION_TYPE, PASSWORD_RECOVERY  FROM ODB.SECURITY_HEADER_AUDIT where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+
+INSERT INTO SECURITY_DETAIL("USER",TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY,MODIFIED_DATE)
+(Select 'RECSPEC',TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY, MODIFIED_DATE FROM SECURITY_DETAIL where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+
+INSERT INTO SECURITY_DETAIL_AUDIT("USER",TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY,MODIFIED_DATE,TRANSACTION_TYPE)
+(Select 'RECSPEC',TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY, MODIFIED_DATE,TRANSACTION_TYPE FROM SECURITY_DETAIL_AUDIT where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+UPDATE SECURITY_HEADER SET ADOPT_USER_PROFILE = 'RECSPEC'  WHERE ADOPT_USER_PROFILE = 'RECSPECSLC';
+COMMIT;
+
+
+
+SET DEFINE OFF;
+Insert into ODB.SECURITY_HEADER_AUDIT
+   ("USER", PASSWORD, EMPLOYEE, SECURITY, TOOLBAR_LOCATION,
+    CREATED_BY, CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER,
+    EXPLORER_ICON, WIDTH, HEIGHT, TAB_CONTROL, SECURITY_EXPIRATION_DAYS,
+    SECURITY_EXPIRATION_DATE, USER_PROFILE, ALLOW_PASSWORD_CHANGE_BY_USER, ADOPT_USER_PROFILE, DICTIONARY,
+    POP_MESSAGE, SELBOX_FAV, LAST_SINGON, LAST_SINGOFF, TABPOSITION,
+    FIRST_TIME_PASS_CONTROL, TOOL_BAR_SHOW_TEXT, STATUS, ROUTING_STATUS, SECURITY_EXPIRATION_DAYS_WALL,
+    CATEGORY_TITLE, FIRST_TIME_WALL_CONTROL, TURN_OFF_TRANSPARENCY, BG_COLOR_PREFERENCE, GRADIENT_COLOR,
+    GRADIENT_OFF, SHORTCUTBAR, VIEW_TYPE, CLICK_ITEMS, AUTO_GENERATE_WALL_PASS,
+    RECENT_NO, TRANSACTION_TYPE, PASSWORD_RECOVERY)
+
+   (SELECT "USER", PASSWORD, EMPLOYEE, SECURITY, TOOLBAR_LOCATION,
+    CREATED_BY, CREATED_DATE, '144575', SYSDATE, EXPLORER,
+    EXPLORER_ICON, WIDTH, HEIGHT, TAB_CONTROL, SECURITY_EXPIRATION_DAYS,
+    SECURITY_EXPIRATION_DATE, USER_PROFILE, ALLOW_PASSWORD_CHANGE_BY_USER, ADOPT_USER_PROFILE, DICTIONARY,
+    POP_MESSAGE, SELBOX_FAV, LAST_SINGON, LAST_SINGOFF, TABPOSITION,
+    FIRST_TIME_PASS_CONTROL, TOOL_BAR_SHOW_TEXT, STATUS, ROUTING_STATUS, SECURITY_EXPIRATION_DAYS_WALL,
+    CATEGORY_TITLE, FIRST_TIME_WALL_CONTROL, TURN_OFF_TRANSPARENCY, BG_COLOR_PREFERENCE, GRADIENT_COLOR,
+    GRADIENT_OFF, SHORTCUTBAR, VIEW_TYPE, CLICK_ITEMS, AUTO_GENERATE_WALL_PASS,
+    RECENT_NO, 'UPDATE', PASSWORD_RECOVERY FROM ODB.SECURITY_HEADER WHERE ADOPT_USER_PROFILE =( 'RECSPEC'));
+COMMIT;
+
+
+SET DEFINE OFF;
+Insert into ODB.SECURITY_PASSWORD_HISTORY
+   (PASSWORD_TYPE, "USER", PASSWORD, EMPLOYEE, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE)
+ SELECT 'USER',"USER",PASSWORD,EMPLOYEE,CREATED_BY,CREATED_DATE,'144575', MODIFIED_DATE FROM SECURITY_HEADER WHERE ADOPT_USER_PROFILE =( 'RECSPEC');
+COMMIT;
+[oracle@JBCUALORA1001b ~]$ cd
+[oracle@JBCUALORA1001b ~]$ cd
+[oracle@JBCUALORA1001b ~]$ cat /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.txt
+SET DEFINE OFF;
+Insert into ODB.SECURITY_HEADER
+   ("USER", PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION, PASSWORD_RECOVERY,NOTES)
+
+(Select 'RECSPEC', PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION, PASSWORD_RECOVERY,NOTES  FROM ODB.SECURITY_HEADER where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+
+SET DEFINE OFF;
+Insert into ODB.SECURITY_HEADER_AUDIT
+   ("USER", PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION, TRANSACTION_TYPE, PASSWORD_RECOVERY)
+ (Select 'RECSPEC', PASSWORD, SECURITY, TOOLBAR_LOCATION, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER, EXPLORER_ICON,
+    WIDTH, HEIGHT, SECURITY_EXPIRATION_DAYS, SECURITY_EXPIRATION_DATE, USER_PROFILE,
+    ALLOW_PASSWORD_CHANGE_BY_USER, FIRST_TIME_PASS_CONTROL, STATUS, SECURITY_EXPIRATION_DAYS_WALL, FIRST_TIME_WALL_CONTROL,
+    DESCRIPTION,TRANSACTION_TYPE, PASSWORD_RECOVERY  FROM ODB.SECURITY_HEADER_AUDIT where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+
+INSERT INTO SECURITY_DETAIL("USER",TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY,MODIFIED_DATE)
+(Select 'RECSPEC',TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY, MODIFIED_DATE FROM SECURITY_DETAIL where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+
+INSERT INTO SECURITY_DETAIL_AUDIT("USER",TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY,MODIFIED_DATE,TRANSACTION_TYPE)
+(Select 'RECSPEC',TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY, MODIFIED_DATE,TRANSACTION_TYPE FROM SECURITY_DETAIL_AUDIT where "USER" IN( 'RECSPECSLC'));
+COMMIT;
+
+
+UPDATE SECURITY_HEADER SET ADOPT_USER_PROFILE = 'RECSPEC'  WHERE ADOPT_USER_PROFILE = 'RECSPECSLC';
+COMMIT;
+
+
+
+SET DEFINE OFF;
+Insert into ODB.SECURITY_HEADER_AUDIT
+   ("USER", PASSWORD, EMPLOYEE, SECURITY, TOOLBAR_LOCATION,
+    CREATED_BY, CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, EXPLORER,
+    EXPLORER_ICON, WIDTH, HEIGHT, TAB_CONTROL, SECURITY_EXPIRATION_DAYS,
+    SECURITY_EXPIRATION_DATE, USER_PROFILE, ALLOW_PASSWORD_CHANGE_BY_USER, ADOPT_USER_PROFILE, DICTIONARY,
+    POP_MESSAGE, SELBOX_FAV, LAST_SINGON, LAST_SINGOFF, TABPOSITION,
+    FIRST_TIME_PASS_CONTROL, TOOL_BAR_SHOW_TEXT, STATUS, ROUTING_STATUS, SECURITY_EXPIRATION_DAYS_WALL,
+    CATEGORY_TITLE, FIRST_TIME_WALL_CONTROL, TURN_OFF_TRANSPARENCY, BG_COLOR_PREFERENCE, GRADIENT_COLOR,
+    GRADIENT_OFF, SHORTCUTBAR, VIEW_TYPE, CLICK_ITEMS, AUTO_GENERATE_WALL_PASS,
+    RECENT_NO, TRANSACTION_TYPE, PASSWORD_RECOVERY)
+
+   (SELECT "USER", PASSWORD, EMPLOYEE, SECURITY, TOOLBAR_LOCATION,
+    CREATED_BY, CREATED_DATE, '144575', SYSDATE, EXPLORER,
+    EXPLORER_ICON, WIDTH, HEIGHT, TAB_CONTROL, SECURITY_EXPIRATION_DAYS,
+    SECURITY_EXPIRATION_DATE, USER_PROFILE, ALLOW_PASSWORD_CHANGE_BY_USER, ADOPT_USER_PROFILE, DICTIONARY,
+    POP_MESSAGE, SELBOX_FAV, LAST_SINGON, LAST_SINGOFF, TABPOSITION,
+    FIRST_TIME_PASS_CONTROL, TOOL_BAR_SHOW_TEXT, STATUS, ROUTING_STATUS, SECURITY_EXPIRATION_DAYS_WALL,
+    CATEGORY_TITLE, FIRST_TIME_WALL_CONTROL, TURN_OFF_TRANSPARENCY, BG_COLOR_PREFERENCE, GRADIENT_COLOR,
+    GRADIENT_OFF, SHORTCUTBAR, VIEW_TYPE, CLICK_ITEMS, AUTO_GENERATE_WALL_PASS,
+    RECENT_NO, 'UPDATE', PASSWORD_RECOVERY FROM ODB.SECURITY_HEADER WHERE ADOPT_USER_PROFILE =( 'RECSPEC'));
+COMMIT;
+
+
+SET DEFINE OFF;
+Insert into ODB.SECURITY_PASSWORD_HISTORY
+   (PASSWORD_TYPE, "USER", PASSWORD, EMPLOYEE, CREATED_BY,
+    CREATED_DATE, MODIFIED_BY, MODIFIED_DATE)
+ SELECT 'USER',"USER",PASSWORD,EMPLOYEE,CREATED_BY,CREATED_DATE,'144575', MODIFIED_DATE FROM SECURITY_HEADER WHERE ADOPT_USER_PROFILE =( 'RECSPEC');
+COMMIT;
+[oracle@JBCUALORA1001b ~]$
+[oracle@JBCUALORA1001b ~]$
+[oracle@JBCUALORA1001b ~]$
+[oracle@JBCUALORA1001b ~]$
+[oracle@JBCUALORA1001b ~]$
+[oracle@JBCUALORA1001b ~]$ vi /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.txt
+[oracle@JBCUALORA1001b ~]$ mv /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.txt /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.sql
+[oracle@JBCUALORA1001b ~]$ ls -tr
+database   Pictures   Desktop                             nohup.out                crontab_20201014.bkp  TRAXPRD_ASH_16sep21.lst   awrrpt_2_13923_13924.html
+Videos     Music      linuxamd64_12102_database_1of2.zip  oradiag_oracle           crontab_20201015.bkp  AWR_TRAXPRD_16sep21.html  sqlnet.log
+Templates  Downloads  linuxamd64_12102_database_2of2.zip  Cintra                   log_file_client.log   cron_back_20211020
+Public     Documents  patch                               crontab.oracle.20200918  ash-traxprd_02.html   initTRAX20211020.ora
+[oracle@JBCUALORA1001b ~]$ ls -ltr
+total 2706936
+drwxr-xr-x. 7 oracle oinstall       4096 Jul  7  2014 database
+drwxr-xr-x. 2 oracle oinstall       4096 Nov 20  2019 Videos
+drwxr-xr-x. 2 oracle oinstall       4096 Nov 20  2019 Templates
+drwxr-xr-x. 2 oracle oinstall       4096 Nov 20  2019 Public
+drwxr-xr-x. 2 oracle oinstall       4096 Nov 20  2019 Pictures
+drwxr-xr-x. 2 oracle oinstall       4096 Nov 20  2019 Music
+drwxr-xr-x. 2 oracle oinstall       4096 Nov 20  2019 Downloads
+drwxr-xr-x. 2 oracle oinstall       4096 Nov 20  2019 Documents
+drwxr-xr-x. 2 oracle oinstall       4096 Nov 20  2019 Desktop
+-rw-r--r--. 1 oracle oinstall 1673544724 Nov 20  2019 linuxamd64_12102_database_1of2.zip
+-rw-r--r--. 1 oracle oinstall 1014530602 Nov 20  2019 linuxamd64_12102_database_2of2.zip
+drwxr-xr-x. 2 oracle oinstall       4096 Nov 22  2019 patch
+-rw-------  1 oracle oinstall         94 Mar  4  2020 nohup.out
+drwxr-----  3 oracle oinstall       4096 Mar 13  2020 oradiag_oracle
+drwxr-xr-x. 5 oracle oinstall       4096 Jul 31  2020 Cintra
+-rw-r--r--  1 oracle oinstall       2453 Sep 18  2020 crontab.oracle.20200918
+-rw-r--r--  1 oracle oinstall       2458 Oct 14  2020 crontab_20201014.bkp
+-rw-r--r--  1 oracle oinstall       2458 Oct 15  2020 crontab_20201015.bkp
+-rw-r-----  1 oracle oinstall        316 May  4  2021 log_file_client.log
+-rw-r--r--  1 oracle oinstall      55411 Sep  8 00:52 ash-traxprd_02.html
+-rw-r--r--  1 oracle oinstall      49793 Sep 16 18:30 TRAXPRD_ASH_16sep21.lst
+-rw-r--r--  1 oracle oinstall    1588086 Sep 16 19:02 AWR_TRAXPRD_16sep21.html
+-rw-r--r--  1 oracle oinstall       2458 Oct 20 03:53 cron_back_20211020
+-rw-r--r--  1 oracle asmadmin       4838 Oct 20 04:06 initTRAX20211020.ora
+-rw-r--r--  1 oracle oinstall    1422392 Oct 21 16:18 awrrpt_2_13923_13924.html
+-rw-r-----  1 oracle oinstall   80590200 Dec  1 17:19 sqlnet.log
+[oracle@JBCUALORA1001b ~]$ pwd
+/home/oracle
+[oracle@JBCUALORA1001b ~]$ ls -ltr /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.txt
+ls: cannot access /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.txt: No such file or directory
+[oracle@JBCUALORA1001b ~]$ ls -ltr /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.sql
+-rw-r--r-- 1 oracle oinstall 4625 Dec  1 17:27 /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.sql
+[oracle@JBCUALORA1001b ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 12.1.0.2.0 Production on Wed Dec 1 17:28:56 2021
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL> @/u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.sql
+SET DEFINE OFF;
+    *
+ERROR at line 2:
+ORA-06550: line 2, column 5:
+PL/SQL: ORA-00922: missing or invalid option
+ORA-06550: line 2, column 1:
+PL/SQL: SQL Statement ignored
+ORA-06550: line 19, column 5:
+PL/SQL: ORA-00922: missing or invalid option
+ORA-06550: line 19, column 1:
+PL/SQL: SQL Statement ignored
+ORA-06550: line 51, column 5:
+PL/SQL: ORA-00922: missing or invalid option
+ORA-06550: line 51, column 1:
+PL/SQL: SQL Statement ignored
+ORA-06550: line 75, column 5:
+PL/SQL: ORA-00922: missing or invalid option
+ORA-06550: line 75, column 1:
+PL/SQL: SQL Statement ignored
+
+
+
+Commit complete.
+
+SQL> !vi /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.sql
+
+SQL> @/u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.sql
+SET DEFINE OFF;
+    *
+ERROR at line 18:
+ORA-06550: line 18, column 5:
+PL/SQL: ORA-00922: missing or invalid option
+ORA-06550: line 18, column 1:
+PL/SQL: SQL Statement ignored
+ORA-06550: line 50, column 5:
+PL/SQL: ORA-00922: missing or invalid option
+ORA-06550: line 50, column 1:
+PL/SQL: SQL Statement ignored
+ORA-06550: line 74, column 5:
+PL/SQL: ORA-00922: missing or invalid option
+ORA-06550: line 74, column 1:
+PL/SQL: SQL Statement ignored
+
+
+
+Commit complete.
+
+SQL> !vi /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.sql
+
+SQL> @/u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.sql
+(Select 'RECSPEC',TRANSACTION,CATEGORY_TITLE,AUTHORIZATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY, MODIFIED_DATE FROM SECURITY_DETAIL where "USER" IN( 'RECSPECSLC'));
+                                                                                                                         *
+ERROR at line 34:
+ORA-06550: line 34, column 122:
+PL/SQL: ORA-00942: table or view does not exist
+ORA-06550: line 33, column 1:
+PL/SQL: SQL Statement ignored
+ORA-06550: line 40, column 139:
+PL/SQL: ORA-00942: table or view does not exist
+ORA-06550: line 39, column 1:
+PL/SQL: SQL Statement ignored
+ORA-06550: line 44, column 8:
+PL/SQL: ORA-00942: table or view does not exist
+ORA-06550: line 44, column 1:
+PL/SQL: SQL Statement ignored
+ORA-06550: line 75, column 95:
+PL/SQL: ORA-00942: table or view does not exist
+ORA-06550: line 72, column 1:
+PL/SQL: SQL Statement ignored
+
+
+
+Commit complete.
+
+SQL> alter session set current_schema=ODB;
+
+Session altered.
+
+SQL> @/u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.sql
+BEGIN
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ODB.P_SECURITY_HEADER_AUDIT) violated
+ORA-06512: at line 18
+
+
+
+Commit complete.
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+[oracle@JBCUALORA1001b ~]$ date
+Wed Dec  1 17:45:19 UTC 2021
+[oracle@JBCUALORA1001b ~]$ crontab -l
+### Cintra Sensor checks
+
+05,20,35,50 * * * * /u02/app/Cintra/Sensor/Server/SensorMONos.sh
+05,20,35,50 * * * * /u02/app/Cintra/Sensor/DB/TRAXPRD_NVA/SensorMONdb.sh
+00 11 * * * /u02/app/Cintra/Sensor/DB/TRAXPRD_NVA/checks/printer.sh > /u02/app/Cintra/Sensor/DB/TRAXPRD_NVA/checks/printer.log 2>&1
+
+### Cintra ADRCI/Cleanup
+30 05 * * 6 /u02/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh TRAXPRD_NVA >> /u02/app/Cintra/ADRCI/log/CDBA_AUDIT_CLEANUP_RDBMS_TRAXPRD.out 2>&1
+
+### Cintra RMAN jobs
+##00 22 * * * /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMANFULL.sh RMAN_config.ini > /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMANFULL.out 2>&1
+##30 01 * * * /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_CLONE.sh > /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_CLONE.out 2>&1
+
+####commented due to Rubrik
+###30 6 * * * /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini > /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMANFULLINCR.out 2>&1
+
+### Cintra Stats
+30 4 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_SCHEMA_wrapper.sh > /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_SCHEMA.out 2>&1
+00 3 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_DICT.sh > /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_DICT.out 2>&1
+10 6 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_ADVISOR_TRAXPRD_SEGMENT.sh > /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_ADVISOR_TRAXPRD_SEGMENT.out 2>&1
+
+
+### Cron to Lock Inactive Users for TRAXPRD
+00 00 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/B045_HF_RESTRICTED_AC.sh
+00 05 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/LOCK_USER_ACCOUNT.sh
+00 00 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/EMPLOYEE_SKILL.sh
+00 19 * * 2-5 /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/TDR_REPORT.sh
+58 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/MEL_REPORT.sh
+59 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/DELAY_CANCEL_REPORT.sh
+58 11 1 1,4,7,10 * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/UNPAID_INVOICES.sh
+00 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/ALL_DELAY_CANCEL_REPORT.sh
+59 11 * * 1 /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/QAR_Downloads.sh
+
+00 01 * * * /home/oracle/Cintra/scripts/copy_TRAXPRD_archives2exa.sh TRAXPRD DRTRAXPRD_VA >> /home/oracle/Cintra/log/copy_TRAXPRD_archives2exa.out 2>&1
+[oracle@JBCUALORA1001b ~]$ date
+Wed Dec  1 17:46:54 UTC 2021
+[oracle@JBCUALORA1001b ~]$ crontab -e
+crontab: installing new crontab
+[oracle@JBCUALORA1001b ~]$ crontab -l
+### Cintra Sensor checks
+
+05,20,35,50 * * * * /u02/app/Cintra/Sensor/Server/SensorMONos.sh
+05,20,35,50 * * * * /u02/app/Cintra/Sensor/DB/TRAXPRD_NVA/SensorMONdb.sh
+00 11 * * * /u02/app/Cintra/Sensor/DB/TRAXPRD_NVA/checks/printer.sh > /u02/app/Cintra/Sensor/DB/TRAXPRD_NVA/checks/printer.log 2>&1
+
+### Cintra ADRCI/Cleanup
+30 05 * * 6 /u02/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh TRAXPRD_NVA >> /u02/app/Cintra/ADRCI/log/CDBA_AUDIT_CLEANUP_RDBMS_TRAXPRD.out 2>&1
+
+### Cintra RMAN jobs
+##00 22 * * * /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMANFULL.sh RMAN_config.ini > /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMANFULL.out 2>&1
+##30 01 * * * /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_CLONE.sh > /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_CLONE.out 2>&1
+
+####commented due to Rubrik
+###30 6 * * * /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini > /u02/app/oracle/admin/TRAXPRD_NVA/rman/CDBA_BAK_TRAXPRD_RMANFULLINCR.out 2>&1
+
+### Cintra Stats
+30 4 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_SCHEMA_wrapper.sh > /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_SCHEMA.out 2>&1
+00 3 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_DICT.sh > /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_STATS_TRAXPRD_DICT.out 2>&1
+10 6 * * 0 /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_ADVISOR_TRAXPRD_SEGMENT.sh > /u02/app/oracle/admin/TRAXPRD_NVA/stats/CDBA_ADVISOR_TRAXPRD_SEGMENT.out 2>&1
+
+
+### Cron to Lock Inactive Users for TRAXPRD
+00 00 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/B045_HF_RESTRICTED_AC.sh
+00 10 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/LOCK_USER_ACCOUNT.sh
+00 00 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/EMPLOYEE_SKILL.sh
+00 19 * * 2-5 /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/TDR_REPORT.sh
+58 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/MEL_REPORT.sh
+59 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/DELAY_CANCEL_REPORT.sh
+58 11 1 1,4,7,10 * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/UNPAID_INVOICES.sh
+00 11 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/ALL_DELAY_CANCEL_REPORT.sh
+59 11 * * 1 /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/QAR_Downloads.sh
+
+00 01 * * * /home/oracle/Cintra/scripts/copy_TRAXPRD_archives2exa.sh TRAXPRD DRTRAXPRD_VA >> /home/oracle/Cintra/log/copy_TRAXPRD_archives2exa.out 2>&1
+[oracle@JBCUALORA1001b ~]$ crontab -e
+crontab: installing new crontab
+[oracle@JBCUALORA1001b ~]$ cd
+[oracle@JBCUALORA1001b ~]$ ./u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/LOCK_USER_ACCOUNT.sh
+-bash: ./u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/LOCK_USER_ACCOUNT.sh: No such file or directory
+[oracle@JBCUALORA1001b ~]$ cd /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts
+[oracle@JBCUALORA1001b misc_scripts]$
+[oracle@JBCUALORA1001b misc_scripts]$
+[oracle@JBCUALORA1001b misc_scripts]$
+[oracle@JBCUALORA1001b misc_scripts]$
+[oracle@JBCUALORA1001b misc_scripts]$
+[oracle@JBCUALORA1001b misc_scripts]$
+[oracle@JBCUALORA1001b misc_scripts]$ ./LOCK_USER_ACCOUNT.sh
+[oracle@JBCUALORA1001b misc_scripts]$ cat LOCK_USER_ACCOUNT.sh
+#!/bin/bash
+################################################################################
+# Name         : LOCK_USER_ACCOUNT.sh
+# Author       :
+# Purpose      : Daily execution of Lock User Account script
+# Version      : 1.0
+#
+# Date written : 03/20/2015
+################################################################################
+# Modification :
+# MM/DD/YYYY  WHO/VER      Change Description
+#
+#
+#
+################################################################################
+# Following lines setup logging environment.
+#set -xv
+
+# Source the variable initialization file
+source `dirname $0`/lock_script_config.ini
+
+# Define the script version
+
+cd ${SCRIPT_DIR}
+LOG_FILE=${SCRIPT_DIR}/log/`basename $0`_`date +'%Y%m%d_%H%M%S'`.log
+/usr/bin/find ./log -type f -mtime +${LOG_RETENTION} -exec rm -f {} \;
+/bin/touch ${LOG_FILE}
+exec >> ${LOG_FILE} 2>&1
+
+################################################################################
+
+# Define functions.
+
+errorcheck()
+{
+  if [ $? != 0 ]
+  then
+    echo "Error during LOCK USER ACCOUNTS script execution."
+    failure;
+    exit 1
+  fi
+}
+
+failure()
+{
+  echo " "
+  echo aborting $0
+  END_DATE=`date +%m/%d/%Y`
+  END_TIME=`date +%H:%M:%S`
+  if [ ${EMAIL_NOTIFICATION} == TRUE ]
+  then
+    MAILTO=${LEVEL1_RECIPIENTS}
+    MAIL_BODY="Error occurred during execution of ${SCRIPT_NAME} script for ${DB_NAME} database on ${HOST_NAME}"
+    EmailSubject="LEVEL1-${CLIENT}-${DB_NAME}-${SCRIPT_NAME} script execution for ${DB_NAME} database on ${HOST_NAME} Failed."
+    send_mail;
+  fi
+  echo "$0 ABORTED on ${END_DATE} ${END_TIME}"
+  exit 1
+}
+
+success()
+{
+  echo " "
+  END_DATE=`date +%m/%d/%Y`
+  END_TIME=`date +%H:%M:%S`
+  if [ ${EMAIL_NOTIFICATION} == TRUE ]
+  then
+    MAILTO=${LEVEL4_RECIPIENTS}
+    MAIL_BODY="LOCK USER ACCOUNTS script execution successful for ${DB_NAME} on ${HOST_NAME}. Please check the attached file for the script output."
+    EmailSubject="LEVEL4-${CLIENT}-${DB_NAME}-${SCRIPT_NAME} script execution successful for ${DB_NAME} on ${HOST_NAME}.."
+    send_mail;
+  fi
+  echo "$0 SUCCEDED on ${END_DATE} ${END_TIME}"
+  exit 0
+}
+
+send_mail()
+{
+  #echo " "                                             >> ${EMAIL_FILE}
+  #echo " Script Version : ${SCRIPT_VERSION}"               >> ${EMAIL_FILE}
+  #echo " Host Name      : ${HOST_NAME}"                >> ${EMAIL_FILE}
+  #echo " Database       : ${DB_NAME}"                  >> ${EMAIL_FILE}
+  #echo " DB Unique Name : ${DB_UNIQUE_NAME}"           >> ${EMAIL_FILE}
+  #echo " Date           : `date +%m/%d/%Y`"            >> ${EMAIL_FILE}
+  #echo " Started        : ${START_DATE} ${START_TIME}" >> ${EMAIL_FILE}
+  #echo " Ended          : ${END_DATE} ${END_TIME}"     >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #echo ${MAIL_BODY}                              >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #echo " Log file: ${LOG_FILE}"                  >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #cat ${LOG_FILE}                                >> ${EMAIL_FILE}
+  #${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -o message-file=${EMAIL_FILE}
+  #${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -a ${EMAIL_FILE} -m ${MAIL_BODY}
+  ${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -m ${MAIL_BODY} -a ${EMAIL_FILE}
+  if [ $? != 0 ]
+  then
+    echo
+    echo "Failed to send email."
+  fi
+}
+
+script_execution()
+{
+${ORACLE_HOME}/bin/sqlplus -s /nolog <<!!
+connect odb/trxE30dbJB
+set pages 9999
+SET MARKUP HTML ON SPOOL ON
+whenever sqlerror exit failure;
+spool ${EMAIL_FILE}
+
+BEGIN
+INSERT INTO SECURITY_HEADER_AUDIT(
+"USER",PASSWORD,EMPLOYEE,SECURITY,TOOLBAR_LOCATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY,MODIFIED_DATE,EXPLORER,EXPLORER_ICON,
+ DEPARTMENT,WIDTH,HEIGHT,SECURITY_EXPIRATION_DAYS,SECURITY_EXPIRATION_DATE,USER_PROFILE,ALLOW_PASSWORD_CHANGE_BY_USER,ADOPT_USER_PROFILE,
+ DICTIONARY,POP_MESSAGE,SELBOX_FAV,LAST_SINGON,LAST_SINGOFF,TABPOSITION,FIRST_TIME_PASS_CONTROL,TOOL_BAR_SHOW_TEXT,STATUS,ROUTING_STATUS,                     SECURITY_EXPIRATION_DAYS_WALL,FIRST_TIME_WALL_CONTROL,SHORTCUTBAR,WALL_PASSWORD_CHANGE_BY_USER,DESCRIPTION,TRANSACTION_TYPE)
+ Select "USER",PASSWORD,EMPLOYEE,SECURITY,TOOLBAR_LOCATION,NOTES,CREATED_BY,CREATED_DATE,'EXCEEDS90',SYSDATE,EXPLORER,EXPLORER_ICON,
+ DEPARTMENT,WIDTH,HEIGHT,SECURITY_EXPIRATION_DAYS,SECURITY_EXPIRATION_DATE,USER_PROFILE,ALLOW_PASSWORD_CHANGE_BY_USER,ADOPT_USER_PROFILE,
+ DICTIONARY,POP_MESSAGE,SELBOX_FAV,LAST_SINGON,LAST_SINGOFF,TABPOSITION,FIRST_TIME_PASS_CONTROL,TOOL_BAR_SHOW_TEXT,STATUS,ROUTING_STATUS,                     SECURITY_EXPIRATION_DAYS_WALL,FIRST_TIME_WALL_CONTROL,SHORTCUTBAR,WALL_PASSWORD_CHANGE_BY_USER,DESCRIPTION,'UPDATE' AS  TRANSACTION_TYPE FROM
+ SECURITY_HEADER WHERE
+ ((("SECURITY_HEADER"."LAST_SINGON" <= SYSDATE - 90) AND
+ ("SECURITY_HEADER"."LAST_SINGOFF" <= SYSDATE - 90)) OR
+ ("SECURITY_HEADER"."LAST_SINGON" IS NULL AND "SECURITY_HEADER"."LAST_SINGOFF" IS NULL))
+ AND "SECURITY_HEADER"."STATUS" = 'ACTIVE'
+ AND "SECURITY_HEADER"."EMPLOYEE" IS NOT NULL
+ AND ("SECURITY_HEADER"."MODIFIED_DATE"  <= Sysdate - 90)
+ AND "SECURITY_HEADER"."MODIFIED_BY" <> 'TRAX_IFACE';
+
+END;
+COMMIT;
+
+
+BEGIN
+ UPDATE "SECURITY_HEADER"
+   SET "SECURITY_HEADER"."STATUS" = 'INACTIVE',
+       "SECURITY_HEADER"."MODIFIED_BY" ='EXCEEDS90',
+       "SECURITY_HEADER"."MODIFIED_DATE" = SYSDATE
+ WHERE ((("SECURITY_HEADER"."LAST_SINGON" <= SYSDATE  - 90) AND
+      ("SECURITY_HEADER"."LAST_SINGOFF" <= SYSDATE  - 90)) OR
+      ("SECURITY_HEADER"."LAST_SINGON" IS NULL AND
+      "SECURITY_HEADER"."LAST_SINGOFF" IS NULL))
+     AND  "SECURITY_HEADER"."STATUS" = 'ACTIVE'
+     AND  "SECURITY_HEADER"."EMPLOYEE" IS NOT NULL
+     AND "SECURITY_HEADER"."MODIFIED_BY" <> 'TRAX_IFACE'
+     AND  ("SECURITY_HEADER"."MODIFIED_DATE"  <= SYSDATE - 90);
+END;
+COMMIT;
+
+SET MARKUP HTML OFF
+SET ECHO ON
+!!
+errorcheck;
+}
+
+#######################################################################################################
+# Shell Execution starts here
+
+START_DATE=`date +%m/%d/%Y`
+START_TIME=`date +%H:%M:%S`
+echo "$0 taking off on ${START_DATE} ${START_TIME}...."
+echo ""
+
+script_execution;
+
+#export FILE_SUFF=`date +'%Y%m%d_%H%M%S'`
+export FILE_SUFF=`date +'%Y%m%d'`
+
+errorcheck;
+
+success;
+TIME=`date +%Y_%m_%d_at_%r`
+echo "$0 landed on ${TIME} ....
+
+[oracle@JBCUALORA1001b misc_scripts]$ ./LOCK_USER_ACCOUNT.sh
+[oracle@JBCUALORA1001b misc_scripts]$ cd log
+[oracle@JBCUALORA1001b log]$ ls -ltr
+total 2648
+-rw-r--r-- 1 oracle oinstall   362 Nov  1 00:00 EMPLOYEE_SKILL.sh_20211101_000001.log
+-rw-r--r-- 1 oracle oinstall   454 Nov  1 00:00 B045_HF_RESTRICTED_AC.sh_20211101_000001.log
+-rw-r--r-- 1 oracle oinstall   587 Nov  1 01:00 LOCK_USER_ACCOUNT.sh_20211101_010001.log
+-rw-r--r-- 1 oracle oinstall 14217 Nov  1 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211101_110001.log
+-rw-r--r-- 1 oracle oinstall 20841 Nov  1 11:58 20211101_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 16500 Nov  1 11:58 MEL_REPORT.sh_20211101_115801.log
+-rw-r--r-- 1 oracle oinstall  6861 Nov  1 11:59 20211101_QAR.csv
+-rw-r--r-- 1 oracle oinstall 20840 Nov  1 11:59 DELAY_CANCEL_REPORT.sh_20211101_115901.log
+-rw-r--r-- 1 oracle oinstall  6623 Nov  1 11:59 QAR_Downloads.sh_20211101_115901.log
+-rw-r--r-- 1 oracle oinstall   363 Nov  2 00:00 EMPLOYEE_SKILL.sh_20211102_000001.log
+-rw-r--r-- 1 oracle oinstall   455 Nov  2 00:00 B045_HF_RESTRICTED_AC.sh_20211102_000001.log
+-rw-r--r-- 1 oracle oinstall   587 Nov  2 01:00 LOCK_USER_ACCOUNT.sh_20211102_010001.log
+-rw-r--r-- 1 oracle oinstall 12619 Nov  2 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211102_110001.log
+-rw-r--r-- 1 oracle oinstall 19737 Nov  2 11:58 20211102_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 15644 Nov  2 11:58 MEL_REPORT.sh_20211102_115801.log
+-rw-r--r-- 1 oracle oinstall 17932 Nov  2 11:59 DELAY_CANCEL_REPORT.sh_20211102_115901.log
+-rw-r--r-- 1 oracle oinstall  2317 Nov  2 19:00 TDR_REPORT.sh_20211102_190001.log
+-rw-r--r-- 1 oracle oinstall   363 Nov  3 00:00 EMPLOYEE_SKILL.sh_20211103_000001.log
+-rw-r--r-- 1 oracle oinstall   455 Nov  3 00:00 B045_HF_RESTRICTED_AC.sh_20211103_000001.log
+-rw-r--r-- 1 oracle oinstall   449 Nov  3 01:00 LOCK_USER_ACCOUNT.sh_20211103_010001.log
+-rw-r--r-- 1 oracle oinstall  9948 Nov  3 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211103_110001.log
+-rw-r--r-- 1 oracle oinstall 19185 Nov  3 11:58 20211103_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 15199 Nov  3 11:58 MEL_REPORT.sh_20211103_115801.log
+-rw-r--r-- 1 oracle oinstall 14985 Nov  3 11:59 DELAY_CANCEL_REPORT.sh_20211103_115901.log
+-rw-r--r-- 1 oracle oinstall  2318 Nov  3 19:00 TDR_REPORT.sh_20211103_190001.log
+-rw-r--r-- 1 oracle oinstall   362 Nov  4 00:00 EMPLOYEE_SKILL.sh_20211104_000001.log
+-rw-r--r-- 1 oracle oinstall   454 Nov  4 00:00 B045_HF_RESTRICTED_AC.sh_20211104_000001.log
+-rw-r--r-- 1 oracle oinstall   450 Nov  4 01:00 LOCK_USER_ACCOUNT.sh_20211104_010001.log
+-rw-r--r-- 1 oracle oinstall 12871 Nov  4 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211104_110001.log
+-rw-r--r-- 1 oracle oinstall 22083 Nov  4 11:58 20211104_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 17467 Nov  4 11:58 MEL_REPORT.sh_20211104_115801.log
+-rw-r--r-- 1 oracle oinstall 17087 Nov  4 11:59 DELAY_CANCEL_REPORT.sh_20211104_115901.log
+-rw-r--r-- 1 oracle oinstall  2317 Nov  4 19:00 TDR_REPORT.sh_20211104_190001.log
+-rw-r--r-- 1 oracle oinstall   362 Nov  5 00:00 EMPLOYEE_SKILL.sh_20211105_000001.log
+-rw-r--r-- 1 oracle oinstall   454 Nov  5 00:00 B045_HF_RESTRICTED_AC.sh_20211105_000001.log
+-rw-r--r-- 1 oracle oinstall   450 Nov  5 01:00 LOCK_USER_ACCOUNT.sh_20211105_010001.log
+-rw-r--r-- 1 oracle oinstall 10650 Nov  5 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211105_110001.log
+-rw-r--r-- 1 oracle oinstall 19047 Nov  5 11:58 20211105_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 15103 Nov  5 11:58 MEL_REPORT.sh_20211105_115801.log
+-rw-r--r-- 1 oracle oinstall 15830 Nov  5 11:59 DELAY_CANCEL_REPORT.sh_20211105_115901.log
+-rw-r--r-- 1 oracle oinstall  2318 Nov  5 19:00 TDR_REPORT.sh_20211105_190001.log
+-rw-r--r-- 1 oracle oinstall   362 Nov  6 00:00 EMPLOYEE_SKILL.sh_20211106_000001.log
+-rw-r--r-- 1 oracle oinstall   454 Nov  6 00:00 B045_HF_RESTRICTED_AC.sh_20211106_000001.log
+-rw-r--r-- 1 oracle oinstall   591 Nov  6 01:00 LOCK_USER_ACCOUNT.sh_20211106_010001.log
+-rw-r--r-- 1 oracle oinstall 12546 Nov  6 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211106_110001.log
+-rw-r--r-- 1 oracle oinstall 21807 Nov  6 11:58 20211106_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 17253 Nov  6 11:58 MEL_REPORT.sh_20211106_115801.log
+-rw-r--r-- 1 oracle oinstall 17247 Nov  6 11:59 DELAY_CANCEL_REPORT.sh_20211106_115901.log
+-rw-r--r-- 1 oracle oinstall   361 Nov  7 00:00 EMPLOYEE_SKILL.sh_20211107_000001.log
+-rw-r--r-- 1 oracle oinstall   454 Nov  7 00:00 B045_HF_RESTRICTED_AC.sh_20211107_000001.log
+-rw-r--r-- 1 oracle oinstall   449 Nov  7 01:00 LOCK_USER_ACCOUNT.sh_20211107_010001.log
+-rw-r--r-- 1 oracle oinstall 13504 Nov  7 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211107_110001.log
+-rw-r--r-- 1 oracle oinstall 21255 Nov  7 11:58 20211107_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 16817 Nov  7 11:58 MEL_REPORT.sh_20211107_115801.log
+-rw-r--r-- 1 oracle oinstall 17894 Nov  7 11:59 DELAY_CANCEL_REPORT.sh_20211107_115901.log
+-rw-r--r-- 1 oracle oinstall   362 Nov  8 00:00 EMPLOYEE_SKILL.sh_20211108_000001.log
+-rw-r--r-- 1 oracle oinstall   454 Nov  8 00:00 B045_HF_RESTRICTED_AC.sh_20211108_000001.log
+-rw-r--r-- 1 oracle oinstall   588 Nov  8 01:00 LOCK_USER_ACCOUNT.sh_20211108_010001.log
+-rw-r--r-- 1 oracle oinstall 11210 Nov  8 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211108_110001.log
+-rw-r--r-- 1 oracle oinstall 20289 Nov  8 11:58 20211108_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 16069 Nov  8 11:58 MEL_REPORT.sh_20211108_115801.log
+-rw-r--r-- 1 oracle oinstall 16391 Nov  8 11:59 DELAY_CANCEL_REPORT.sh_20211108_115901.log
+-rw-r--r-- 1 oracle oinstall  6126 Nov  8 11:59 20211108_QAR.csv
+-rw-r--r-- 1 oracle oinstall  5952 Nov  8 11:59 QAR_Downloads.sh_20211108_115901.log
+-rw-r--r-- 1 oracle oinstall   363 Nov  9 00:00 EMPLOYEE_SKILL.sh_20211109_000001.log
+-rw-r--r-- 1 oracle oinstall   455 Nov  9 00:00 B045_HF_RESTRICTED_AC.sh_20211109_000001.log
+-rw-r--r-- 1 oracle oinstall   449 Nov  9 01:00 LOCK_USER_ACCOUNT.sh_20211109_010001.log
+-rw-r--r-- 1 oracle oinstall 11588 Nov  9 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211109_110001.log
+-rw-r--r-- 1 oracle oinstall 20289 Nov  9 11:58 20211109_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 16073 Nov  9 11:58 MEL_REPORT.sh_20211109_115801.log
+-rw-r--r-- 1 oracle oinstall 16276 Nov  9 11:59 DELAY_CANCEL_REPORT.sh_20211109_115901.log
+-rw-r--r-- 1 oracle oinstall  2318 Nov  9 19:00 TDR_REPORT.sh_20211109_190001.log
+-rw-r--r-- 1 oracle oinstall   362 Nov 10 00:00 EMPLOYEE_SKILL.sh_20211110_000001.log
+-rw-r--r-- 1 oracle oinstall   455 Nov 10 00:00 B045_HF_RESTRICTED_AC.sh_20211110_000001.log
+-rw-r--r-- 1 oracle oinstall   586 Nov 10 01:00 LOCK_USER_ACCOUNT.sh_20211110_010001.log
+-rw-r--r-- 1 oracle oinstall  5559 Nov 10 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211110_110001.log
+-rw-r--r-- 1 oracle oinstall 19875 Nov 10 11:58 20211110_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 15752 Nov 10 11:58 MEL_REPORT.sh_20211110_115801.log
+-rw-r--r-- 1 oracle oinstall  9780 Nov 10 11:59 DELAY_CANCEL_REPORT.sh_20211110_115901.log
+-rw-r--r-- 1 oracle oinstall  2317 Nov 10 19:00 TDR_REPORT.sh_20211110_190001.log
+-rw-r--r-- 1 oracle oinstall   362 Nov 11 00:00 EMPLOYEE_SKILL.sh_20211111_000001.log
+-rw-r--r-- 1 oracle oinstall   295 Nov 11 00:00 B045_HF_RESTRICTED_AC.sh_20211111_000001.log
+-rw-r--r-- 1 oracle oinstall   587 Nov 11 01:00 LOCK_USER_ACCOUNT.sh_20211111_010001.log
+-rw-r--r-- 1 oracle oinstall  8759 Nov 11 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211111_110001.log
+-rw-r--r-- 1 oracle oinstall 18495 Nov 11 11:58 20211111_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 14669 Nov 11 11:58 MEL_REPORT.sh_20211111_115801.log
+-rw-r--r-- 1 oracle oinstall 12972 Nov 11 11:59 DELAY_CANCEL_REPORT.sh_20211111_115901.log
+-rw-r--r-- 1 oracle oinstall  2318 Nov 11 19:00 TDR_REPORT.sh_20211111_190001.log
+-rw-r--r-- 1 oracle oinstall   363 Nov 12 00:00 EMPLOYEE_SKILL.sh_20211112_000001.log
+-rw-r--r-- 1 oracle oinstall   296 Nov 12 00:00 B045_HF_RESTRICTED_AC.sh_20211112_000001.log
+-rw-r--r-- 1 oracle oinstall   448 Nov 12 01:00 LOCK_USER_ACCOUNT.sh_20211112_010001.log
+-rw-r--r-- 1 oracle oinstall  7631 Nov 12 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211112_110001.log
+-rw-r--r-- 1 oracle oinstall 20151 Nov 12 11:58 20211112_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 15960 Nov 12 11:58 MEL_REPORT.sh_20211112_115801.log
+-rw-r--r-- 1 oracle oinstall 11851 Nov 12 11:59 DELAY_CANCEL_REPORT.sh_20211112_115901.log
+-rw-r--r-- 1 oracle oinstall  2318 Nov 12 19:00 TDR_REPORT.sh_20211112_190001.log
+-rw-r--r-- 1 oracle oinstall   362 Nov 13 00:00 EMPLOYEE_SKILL.sh_20211113_000001.log
+-rw-r--r-- 1 oracle oinstall   454 Nov 13 00:00 B045_HF_RESTRICTED_AC.sh_20211113_000001.log
+-rw-r--r-- 1 oracle oinstall   679 Nov 13 01:00 LOCK_USER_ACCOUNT.sh_20211113_010001.log
+-rw-r--r-- 1 oracle oinstall  8940 Nov 13 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211113_110001.log
+-rw-r--r-- 1 oracle oinstall 20703 Nov 13 11:58 20211113_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 16396 Nov 13 11:58 MEL_REPORT.sh_20211113_115801.log
+-rw-r--r-- 1 oracle oinstall 14604 Nov 13 11:59 DELAY_CANCEL_REPORT.sh_20211113_115901.log
+-rw-r--r-- 1 oracle oinstall   363 Nov 14 00:00 EMPLOYEE_SKILL.sh_20211114_000001.log
+-rw-r--r-- 1 oracle oinstall   455 Nov 14 00:00 B045_HF_RESTRICTED_AC.sh_20211114_000001.log
+-rw-r--r-- 1 oracle oinstall   448 Nov 14 01:00 LOCK_USER_ACCOUNT.sh_20211114_010001.log
+-rw-r--r-- 1 oracle oinstall  6594 Nov 14 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211114_110001.log
+-rw-r--r-- 1 oracle oinstall 19323 Nov 14 11:58 20211114_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 15322 Nov 14 11:58 MEL_REPORT.sh_20211114_115801.log
+-rw-r--r-- 1 oracle oinstall 10027 Nov 14 11:59 DELAY_CANCEL_REPORT.sh_20211114_115901.log
+-rw-r--r-- 1 oracle oinstall   361 Nov 15 00:00 EMPLOYEE_SKILL.sh_20211115_000001.log
+-rw-r--r-- 1 oracle oinstall   453 Nov 15 00:00 B045_HF_RESTRICTED_AC.sh_20211115_000001.log
+-rw-r--r-- 1 oracle oinstall   589 Nov 15 01:00 LOCK_USER_ACCOUNT.sh_20211115_010001.log
+-rw-r--r-- 1 oracle oinstall  7747 Nov 15 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211115_110001.log
+-rw-r--r-- 1 oracle oinstall 22635 Nov 15 11:58 20211115_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 17882 Nov 15 11:58 MEL_REPORT.sh_20211115_115801.log
+-rw-r--r-- 1 oracle oinstall 12432 Nov 15 11:59 DELAY_CANCEL_REPORT.sh_20211115_115901.log
+-rw-r--r-- 1 oracle oinstall  6420 Nov 15 11:59 20211115_QAR.csv
+-rw-r--r-- 1 oracle oinstall  6221 Nov 15 11:59 QAR_Downloads.sh_20211115_115901.log
+-rw-r--r-- 1 oracle oinstall  1757 Nov 16 00:00 EMPLOYEE_SKILL.sh_20211116_000001.log
+-rw-r--r-- 1 oracle oinstall   453 Nov 16 00:00 B045_HF_RESTRICTED_AC.sh_20211116_000001.log
+-rw-r--r-- 1 oracle oinstall   587 Nov 16 01:00 LOCK_USER_ACCOUNT.sh_20211116_010001.log
+-rw-r--r-- 1 oracle oinstall 12165 Nov 16 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211116_110001.log
+-rw-r--r-- 1 oracle oinstall 20565 Nov 16 11:58 20211116_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 16281 Nov 16 11:58 MEL_REPORT.sh_20211116_115801.log
+-rw-r--r-- 1 oracle oinstall 17342 Nov 16 11:59 DELAY_CANCEL_REPORT.sh_20211116_115901.log
+-rw-r--r-- 1 oracle oinstall  2318 Nov 16 19:00 TDR_REPORT.sh_20211116_190001.log
+-rw-r--r-- 1 oracle oinstall   362 Nov 17 00:00 EMPLOYEE_SKILL.sh_20211117_000001.log
+-rw-r--r-- 1 oracle oinstall   454 Nov 17 00:00 B045_HF_RESTRICTED_AC.sh_20211117_000001.log
+-rw-r--r-- 1 oracle oinstall   450 Nov 17 01:00 LOCK_USER_ACCOUNT.sh_20211117_010001.log
+-rw-r--r-- 1 oracle oinstall  8581 Nov 17 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211117_110001.log
+-rw-r--r-- 1 oracle oinstall 16839 Nov 17 11:58 20211117_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 13379 Nov 17 11:58 MEL_REPORT.sh_20211117_115801.log
+-rw-r--r-- 1 oracle oinstall 13283 Nov 17 11:59 DELAY_CANCEL_REPORT.sh_20211117_115901.log
+-rw-r--r-- 1 oracle oinstall  2317 Nov 17 19:00 TDR_REPORT.sh_20211117_190001.log
+-rw-r--r-- 1 oracle oinstall   363 Nov 18 00:00 EMPLOYEE_SKILL.sh_20211118_000001.log
+-rw-r--r-- 1 oracle oinstall   455 Nov 18 00:00 B045_HF_RESTRICTED_AC.sh_20211118_000001.log
+-rw-r--r-- 1 oracle oinstall   587 Nov 18 01:00 LOCK_USER_ACCOUNT.sh_20211118_010001.log
+-rw-r--r-- 1 oracle oinstall  8631 Nov 18 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211118_110001.log
+-rw-r--r-- 1 oracle oinstall 16563 Nov 18 11:58 20211118_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 13163 Nov 18 11:58 MEL_REPORT.sh_20211118_115801.log
+-rw-r--r-- 1 oracle oinstall 13329 Nov 18 11:59 DELAY_CANCEL_REPORT.sh_20211118_115901.log
+-rw-r--r-- 1 oracle oinstall  2318 Nov 18 19:00 TDR_REPORT.sh_20211118_190001.log
+-rw-r--r-- 1 oracle oinstall  2279 Nov 19 00:00 EMPLOYEE_SKILL.sh_20211119_000001.log
+-rw-r--r-- 1 oracle oinstall   455 Nov 19 00:00 B045_HF_RESTRICTED_AC.sh_20211119_000001.log
+-rw-r--r-- 1 oracle oinstall   678 Nov 19 01:00 LOCK_USER_ACCOUNT.sh_20211119_010001.log
+-rw-r--r-- 1 oracle oinstall  8512 Nov 19 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211119_110001.log
+-rw-r--r-- 1 oracle oinstall 16425 Nov 19 11:58 20211119_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 13070 Nov 19 11:58 MEL_REPORT.sh_20211119_115801.log
+-rw-r--r-- 1 oracle oinstall 13224 Nov 19 11:59 DELAY_CANCEL_REPORT.sh_20211119_115901.log
+-rw-r--r-- 1 oracle oinstall  2317 Nov 19 19:00 TDR_REPORT.sh_20211119_190001.log
+-rw-r--r-- 1 oracle oinstall   362 Nov 20 00:00 EMPLOYEE_SKILL.sh_20211120_000001.log
+-rw-r--r-- 1 oracle oinstall   454 Nov 20 00:00 B045_HF_RESTRICTED_AC.sh_20211120_000001.log
+-rw-r--r-- 1 oracle oinstall   587 Nov 20 01:00 LOCK_USER_ACCOUNT.sh_20211120_010001.log
+-rw-r--r-- 1 oracle oinstall  9093 Nov 20 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211120_110001.log
+-rw-r--r-- 1 oracle oinstall 18633 Nov 20 11:58 20211120_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 14784 Nov 20 11:58 MEL_REPORT.sh_20211120_115801.log
+-rw-r--r-- 1 oracle oinstall 13880 Nov 20 11:59 DELAY_CANCEL_REPORT.sh_20211120_115901.log
+-rw-r--r-- 1 oracle oinstall   363 Nov 21 00:00 EMPLOYEE_SKILL.sh_20211121_000001.log
+-rw-r--r-- 1 oracle oinstall   493 Nov 21 00:00 B045_HF_RESTRICTED_AC.sh_20211121_000001.log
+-rw-r--r-- 1 oracle oinstall   589 Nov 21 01:00 LOCK_USER_ACCOUNT.sh_20211121_010001.log
+-rw-r--r-- 1 oracle oinstall 10506 Nov 21 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211121_110001.log
+-rw-r--r-- 1 oracle oinstall 18771 Nov 21 11:58 20211121_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 14889 Nov 21 11:58 MEL_REPORT.sh_20211121_115801.log
+-rw-r--r-- 1 oracle oinstall 16011 Nov 21 11:59 DELAY_CANCEL_REPORT.sh_20211121_115901.log
+-rw-r--r-- 1 oracle oinstall   363 Nov 22 00:00 EMPLOYEE_SKILL.sh_20211122_000001.log
+-rw-r--r-- 1 oracle oinstall   531 Nov 22 00:00 B045_HF_RESTRICTED_AC.sh_20211122_000001.log
+-rw-r--r-- 1 oracle oinstall   449 Nov 22 01:00 LOCK_USER_ACCOUNT.sh_20211122_010001.log
+-rw-r--r-- 1 oracle oinstall 11950 Nov 22 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211122_110001.log
+-rw-r--r-- 1 oracle oinstall 20151 Nov 22 11:58 20211122_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 15968 Nov 22 11:58 MEL_REPORT.sh_20211122_115801.log
+-rw-r--r-- 1 oracle oinstall 18563 Nov 22 11:59 DELAY_CANCEL_REPORT.sh_20211122_115901.log
+-rw-r--r-- 1 oracle oinstall  6420 Nov 22 11:59 20211122_QAR.csv
+-rw-r--r-- 1 oracle oinstall  6216 Nov 22 11:59 QAR_Downloads.sh_20211122_115901.log
+-rw-r--r-- 1 oracle oinstall   362 Nov 23 00:00 EMPLOYEE_SKILL.sh_20211123_000001.log
+-rw-r--r-- 1 oracle oinstall   530 Nov 23 00:00 B045_HF_RESTRICTED_AC.sh_20211123_000001.log
+-rw-r--r-- 1 oracle oinstall   450 Nov 23 01:00 LOCK_USER_ACCOUNT.sh_20211123_010001.log
+-rw-r--r-- 1 oracle oinstall 13572 Nov 23 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211123_110001.log
+-rw-r--r-- 1 oracle oinstall 19737 Nov 23 11:58 20211123_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 15646 Nov 23 11:58 MEL_REPORT.sh_20211123_115801.log
+-rw-r--r-- 1 oracle oinstall 19611 Nov 23 11:59 DELAY_CANCEL_REPORT.sh_20211123_115901.log
+-rw-r--r-- 1 oracle oinstall  2317 Nov 23 19:00 TDR_REPORT.sh_20211123_190001.log
+-rw-r--r-- 1 oracle oinstall   362 Nov 24 00:00 EMPLOYEE_SKILL.sh_20211124_000001.log
+-rw-r--r-- 1 oracle oinstall   530 Nov 24 00:00 B045_HF_RESTRICTED_AC.sh_20211124_000001.log
+-rw-r--r-- 1 oracle oinstall   618 Nov 24 01:00 LOCK_USER_ACCOUNT.sh_20211124_010001.log
+-rw-r--r-- 1 oracle oinstall 14784 Nov 24 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211124_110001.log
+-rw-r--r-- 1 oracle oinstall 20703 Nov 24 11:58 20211124_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 16404 Nov 24 11:58 MEL_REPORT.sh_20211124_115801.log
+-rw-r--r-- 1 oracle oinstall 20558 Nov 24 11:59 DELAY_CANCEL_REPORT.sh_20211124_115901.log
+-rw-r--r-- 1 oracle oinstall  2318 Nov 24 19:00 TDR_REPORT.sh_20211124_190001.log
+-rw-r--r-- 1 oracle oinstall   362 Nov 25 00:00 EMPLOYEE_SKILL.sh_20211125_000001.log
+-rw-r--r-- 1 oracle oinstall   530 Nov 25 00:00 B045_HF_RESTRICTED_AC.sh_20211125_000001.log
+-rw-r--r-- 1 oracle oinstall   588 Nov 25 01:00 LOCK_USER_ACCOUNT.sh_20211125_010001.log
+-rw-r--r-- 1 oracle oinstall  8861 Nov 25 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211125_110001.log
+-rw-r--r-- 1 oracle oinstall 19323 Nov 25 11:58 20211125_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 15333 Nov 25 11:58 MEL_REPORT.sh_20211125_115801.log
+-rw-r--r-- 1 oracle oinstall 12117 Nov 25 11:59 DELAY_CANCEL_REPORT.sh_20211125_115901.log
+-rw-r--r-- 1 oracle oinstall  2318 Nov 25 19:00 TDR_REPORT.sh_20211125_190001.log
+-rw-r--r-- 1 oracle oinstall   363 Nov 26 00:00 EMPLOYEE_SKILL.sh_20211126_000001.log
+-rw-r--r-- 1 oracle oinstall   531 Nov 26 00:00 B045_HF_RESTRICTED_AC.sh_20211126_000001.log
+-rw-r--r-- 1 oracle oinstall   789 Nov 26 01:00 LOCK_USER_ACCOUNT.sh_20211126_010001.log
+-rw-r--r-- 1 oracle oinstall  6180 Nov 26 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211126_110001.log
+-rw-r--r-- 1 oracle oinstall 19875 Nov 26 11:58 20211126_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 15759 Nov 26 11:58 MEL_REPORT.sh_20211126_115801.log
+-rw-r--r-- 1 oracle oinstall 10892 Nov 26 11:59 DELAY_CANCEL_REPORT.sh_20211126_115901.log
+-rw-r--r-- 1 oracle oinstall  2317 Nov 26 19:00 TDR_REPORT.sh_20211126_190001.log
+-rw-r--r-- 1 oracle oinstall   363 Nov 27 00:00 EMPLOYEE_SKILL.sh_20211127_000001.log
+-rw-r--r-- 1 oracle oinstall   569 Nov 27 00:00 B045_HF_RESTRICTED_AC.sh_20211127_000001.log
+-rw-r--r-- 1 oracle oinstall   721 Nov 27 01:00 LOCK_USER_ACCOUNT.sh_20211127_010001.log
+-rw-r--r-- 1 oracle oinstall  7737 Nov 27 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211127_110001.log
+-rw-r--r-- 1 oracle oinstall 19599 Nov 27 11:58 20211127_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 15540 Nov 27 11:58 MEL_REPORT.sh_20211127_115801.log
+-rw-r--r-- 1 oracle oinstall 12452 Nov 27 11:59 DELAY_CANCEL_REPORT.sh_20211127_115901.log
+-rw-r--r-- 1 oracle oinstall   362 Nov 28 00:00 EMPLOYEE_SKILL.sh_20211128_000001.log
+-rw-r--r-- 1 oracle oinstall   568 Nov 28 00:00 B045_HF_RESTRICTED_AC.sh_20211128_000001.log
+-rw-r--r-- 1 oracle oinstall   588 Nov 28 01:00 LOCK_USER_ACCOUNT.sh_20211128_010001.log
+-rw-r--r-- 1 oracle oinstall 13440 Nov 28 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211128_110001.log
+-rw-r--r-- 1 oracle oinstall 18495 Nov 28 11:58 20211128_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 14681 Nov 28 11:58 MEL_REPORT.sh_20211128_115801.log
+-rw-r--r-- 1 oracle oinstall 18155 Nov 28 11:59 DELAY_CANCEL_REPORT.sh_20211128_115901.log
+-rw-r--r-- 1 oracle oinstall   362 Nov 29 00:00 EMPLOYEE_SKILL.sh_20211129_000001.log
+-rw-r--r-- 1 oracle oinstall   568 Nov 29 00:00 B045_HF_RESTRICTED_AC.sh_20211129_000001.log
+-rw-r--r-- 1 oracle oinstall   449 Nov 29 01:00 LOCK_USER_ACCOUNT.sh_20211129_010001.log
+-rw-r--r-- 1 oracle oinstall 11085 Nov 29 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211129_110001.log
+-rw-r--r-- 1 oracle oinstall 17253 Nov 29 11:58 20211129_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 13712 Nov 29 11:58 MEL_REPORT.sh_20211129_115801.log
+-rw-r--r-- 1 oracle oinstall 16113 Nov 29 11:59 DELAY_CANCEL_REPORT.sh_20211129_115901.log
+-rw-r--r-- 1 oracle oinstall  6126 Nov 29 11:59 20211129_QAR.csv
+-rw-r--r-- 1 oracle oinstall  5944 Nov 29 11:59 QAR_Downloads.sh_20211129_115901.log
+-rw-r--r-- 1 oracle oinstall 37698 Nov 30 00:00 EMPLOYEE_SKILL.sh_20211130_000001.log
+-rw-r--r-- 1 oracle oinstall   569 Nov 30 00:00 B045_HF_RESTRICTED_AC.sh_20211130_000001.log
+-rw-r--r-- 1 oracle oinstall   449 Nov 30 01:00 LOCK_USER_ACCOUNT.sh_20211130_010001.log
+-rw-r--r-- 1 oracle oinstall  9124 Nov 30 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211130_110001.log
+-rw-r--r-- 1 oracle oinstall 16977 Nov 30 11:58 20211130_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 13486 Nov 30 11:58 MEL_REPORT.sh_20211130_115801.log
+-rw-r--r-- 1 oracle oinstall 15016 Nov 30 11:59 DELAY_CANCEL_REPORT.sh_20211130_115901.log
+-rw-r--r-- 1 oracle oinstall  2318 Nov 30 19:00 TDR_REPORT.sh_20211130_190001.log
+-rw-r--r-- 1 oracle oinstall   362 Dec  1 00:00 EMPLOYEE_SKILL.sh_20211201_000001.log
+-rw-r--r-- 1 oracle oinstall   568 Dec  1 00:00 B045_HF_RESTRICTED_AC.sh_20211201_000001.log
+-rw-r--r-- 1 oracle oinstall   817 Dec  1 01:00 LOCK_USER_ACCOUNT.sh_20211201_010001.log
+-rw-r--r-- 1 oracle oinstall  8567 Dec  1 11:00 ALL_DELAY_CANCEL_REPORT.sh_20211201_110001.log
+-rw-r--r-- 1 oracle oinstall 17391 Dec  1 11:58 20211201_MEL_REPORT.csv
+-rw-r--r-- 1 oracle oinstall 13815 Dec  1 11:58 MEL_REPORT.sh_20211201_115801.log
+-rw-r--r-- 1 oracle oinstall 12799 Dec  1 11:59 DELAY_CANCEL_REPORT.sh_20211201_115901.log
+-rw-r--r-- 1 oracle oinstall   198 Dec  1 17:56 LOCK_USER_ACCOUNT.sh_20211201_175608.log
+-rw-r--r-- 1 oracle oinstall   196 Dec  1 18:10 LOCK_USER_ACCOUNT.sh_20211201_181028.log
+[oracle@JBCUALORA1001b log]$
+[oracle@JBCUALORA1001b log]$
+[oracle@JBCUALORA1001b log]$
+[oracle@JBCUALORA1001b log]$
+[oracle@JBCUALORA1001b log]$
+[oracle@JBCUALORA1001b log]$ cat LOCK_USER_ACCOUNT.sh_20211201_181028.log
+./LOCK_USER_ACCOUNT.sh taking off on 12/01/2021 18:10:28....
+
+
+Dec 01 18:10:29 jbcualora1001b sendEmail[9648]: Email was sent successfully!
+./LOCK_USER_ACCOUNT.sh SUCCEDED on 12/01/2021 18:10:28
+[oracle@JBCUALORA1001b log]$
+[oracle@JBCUALORA1001b log]$
+[oracle@JBCUALORA1001b log]$
+[oracle@JBCUALORA1001b log]$
+[oracle@JBCUALORA1001b log]$ cd
+[oracle@JBCUALORA1001b ~]$ cat LOCK_USER_ACCOUNT.sh
+cat: LOCK_USER_ACCOUNT.sh: No such file or directory
+[oracle@JBCUALORA1001b ~]$ cd /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts
+[oracle@JBCUALORA1001b misc_scripts]$ cat LOCK_USER_ACCOUNT.sh
+#!/bin/bash
+################################################################################
+# Name         : LOCK_USER_ACCOUNT.sh
+# Author       :
+# Purpose      : Daily execution of Lock User Account script
+# Version      : 1.0
+#
+# Date written : 03/20/2015
+################################################################################
+# Modification :
+# MM/DD/YYYY  WHO/VER      Change Description
+#
+#
+#
+################################################################################
+# Following lines setup logging environment.
+#set -xv
+
+# Source the variable initialization file
+source `dirname $0`/lock_script_config.ini
+
+# Define the script version
+
+cd ${SCRIPT_DIR}
+LOG_FILE=${SCRIPT_DIR}/log/`basename $0`_`date +'%Y%m%d_%H%M%S'`.log
+/usr/bin/find ./log -type f -mtime +${LOG_RETENTION} -exec rm -f {} \;
+/bin/touch ${LOG_FILE}
+exec >> ${LOG_FILE} 2>&1
+
+################################################################################
+
+# Define functions.
+
+errorcheck()
+{
+  if [ $? != 0 ]
+  then
+    echo "Error during LOCK USER ACCOUNTS script execution."
+    failure;
+    exit 1
+  fi
+}
+
+failure()
+{
+  echo " "
+  echo aborting $0
+  END_DATE=`date +%m/%d/%Y`
+  END_TIME=`date +%H:%M:%S`
+  if [ ${EMAIL_NOTIFICATION} == TRUE ]
+  then
+    MAILTO=${LEVEL1_RECIPIENTS}
+    MAIL_BODY="Error occurred during execution of ${SCRIPT_NAME} script for ${DB_NAME} database on ${HOST_NAME}"
+    EmailSubject="LEVEL1-${CLIENT}-${DB_NAME}-${SCRIPT_NAME} script execution for ${DB_NAME} database on ${HOST_NAME} Failed."
+    send_mail;
+  fi
+  echo "$0 ABORTED on ${END_DATE} ${END_TIME}"
+  exit 1
+}
+
+success()
+{
+  echo " "
+  END_DATE=`date +%m/%d/%Y`
+  END_TIME=`date +%H:%M:%S`
+  if [ ${EMAIL_NOTIFICATION} == TRUE ]
+  then
+    MAILTO=${LEVEL4_RECIPIENTS}
+    MAIL_BODY="LOCK USER ACCOUNTS script execution successful for ${DB_NAME} on ${HOST_NAME}. Please check the attached file for the script output."
+    EmailSubject="LEVEL4-${CLIENT}-${DB_NAME}-${SCRIPT_NAME} script execution successful for ${DB_NAME} on ${HOST_NAME}.."
+    send_mail;
+  fi
+  echo "$0 SUCCEDED on ${END_DATE} ${END_TIME}"
+  exit 0
+}
+
+send_mail()
+{
+  #echo " "                                             >> ${EMAIL_FILE}
+  #echo " Script Version : ${SCRIPT_VERSION}"               >> ${EMAIL_FILE}
+  #echo " Host Name      : ${HOST_NAME}"                >> ${EMAIL_FILE}
+  #echo " Database       : ${DB_NAME}"                  >> ${EMAIL_FILE}
+  #echo " DB Unique Name : ${DB_UNIQUE_NAME}"           >> ${EMAIL_FILE}
+  #echo " Date           : `date +%m/%d/%Y`"            >> ${EMAIL_FILE}
+  #echo " Started        : ${START_DATE} ${START_TIME}" >> ${EMAIL_FILE}
+  #echo " Ended          : ${END_DATE} ${END_TIME}"     >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #echo ${MAIL_BODY}                              >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #echo " Log file: ${LOG_FILE}"                  >> ${EMAIL_FILE}
+  #echo "  "                                      >> ${EMAIL_FILE}
+  #cat ${LOG_FILE}                                >> ${EMAIL_FILE}
+  #${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -o message-file=${EMAIL_FILE}
+  #${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -a ${EMAIL_FILE} -m ${MAIL_BODY}
+  ${MAILX} -f ${SENDER} -t ${MAILTO} -u "${EmailSubject}" -s ${SMTP_SERVER} -m ${MAIL_BODY} -a ${EMAIL_FILE}
+  if [ $? != 0 ]
+  then
+    echo
+    echo "Failed to send email."
+  fi
+}
+
+script_execution()
+{
+${ORACLE_HOME}/bin/sqlplus -s /nolog <<!!
+connect odb/trxE30dbJB
+set pages 9999
+SET MARKUP HTML ON SPOOL ON
+whenever sqlerror exit failure;
+spool ${EMAIL_FILE}
+
+BEGIN
+INSERT INTO SECURITY_HEADER_AUDIT(
+"USER",PASSWORD,EMPLOYEE,SECURITY,TOOLBAR_LOCATION,NOTES,CREATED_BY,CREATED_DATE,MODIFIED_BY,MODIFIED_DATE,EXPLORER,EXPLORER_ICON,
+ DEPARTMENT,WIDTH,HEIGHT,SECURITY_EXPIRATION_DAYS,SECURITY_EXPIRATION_DATE,USER_PROFILE,ALLOW_PASSWORD_CHANGE_BY_USER,ADOPT_USER_PROFILE,
+ DICTIONARY,POP_MESSAGE,SELBOX_FAV,LAST_SINGON,LAST_SINGOFF,TABPOSITION,FIRST_TIME_PASS_CONTROL,TOOL_BAR_SHOW_TEXT,STATUS,ROUTING_STATUS,                     SECURITY_EXPIRATION_DAYS_WALL,FIRST_TIME_WALL_CONTROL,SHORTCUTBAR,WALL_PASSWORD_CHANGE_BY_USER,DESCRIPTION,TRANSACTION_TYPE)
+ Select "USER",PASSWORD,EMPLOYEE,SECURITY,TOOLBAR_LOCATION,NOTES,CREATED_BY,CREATED_DATE,'EXCEEDS90',SYSDATE,EXPLORER,EXPLORER_ICON,
+ DEPARTMENT,WIDTH,HEIGHT,SECURITY_EXPIRATION_DAYS,SECURITY_EXPIRATION_DATE,USER_PROFILE,ALLOW_PASSWORD_CHANGE_BY_USER,ADOPT_USER_PROFILE,
+ DICTIONARY,POP_MESSAGE,SELBOX_FAV,LAST_SINGON,LAST_SINGOFF,TABPOSITION,FIRST_TIME_PASS_CONTROL,TOOL_BAR_SHOW_TEXT,STATUS,ROUTING_STATUS,                     SECURITY_EXPIRATION_DAYS_WALL,FIRST_TIME_WALL_CONTROL,SHORTCUTBAR,WALL_PASSWORD_CHANGE_BY_USER,DESCRIPTION,'UPDATE' AS  TRANSACTION_TYPE FROM
+ SECURITY_HEADER WHERE
+ ((("SECURITY_HEADER"."LAST_SINGON" <= SYSDATE - 90) AND
+ ("SECURITY_HEADER"."LAST_SINGOFF" <= SYSDATE - 90)) OR
+ ("SECURITY_HEADER"."LAST_SINGON" IS NULL AND "SECURITY_HEADER"."LAST_SINGOFF" IS NULL))
+ AND "SECURITY_HEADER"."STATUS" = 'ACTIVE'
+ AND "SECURITY_HEADER"."EMPLOYEE" IS NOT NULL
+ AND ("SECURITY_HEADER"."MODIFIED_DATE"  <= Sysdate - 90)
+ AND "SECURITY_HEADER"."MODIFIED_BY" <> 'TRAX_IFACE';
+
+END;
+COMMIT;
+
+
+BEGIN
+ UPDATE "SECURITY_HEADER"
+   SET "SECURITY_HEADER"."STATUS" = 'INACTIVE',
+       "SECURITY_HEADER"."MODIFIED_BY" ='EXCEEDS90',
+       "SECURITY_HEADER"."MODIFIED_DATE" = SYSDATE
+ WHERE ((("SECURITY_HEADER"."LAST_SINGON" <= SYSDATE  - 90) AND
+      ("SECURITY_HEADER"."LAST_SINGOFF" <= SYSDATE  - 90)) OR
+      ("SECURITY_HEADER"."LAST_SINGON" IS NULL AND
+      "SECURITY_HEADER"."LAST_SINGOFF" IS NULL))
+     AND  "SECURITY_HEADER"."STATUS" = 'ACTIVE'
+     AND  "SECURITY_HEADER"."EMPLOYEE" IS NOT NULL
+     AND "SECURITY_HEADER"."MODIFIED_BY" <> 'TRAX_IFACE'
+     AND  ("SECURITY_HEADER"."MODIFIED_DATE"  <= SYSDATE - 90);
+END;
+COMMIT;
+
+SET MARKUP HTML OFF
+SET ECHO ON
+!!
+errorcheck;
+}
+
+#######################################################################################################
+# Shell Execution starts here
+
+START_DATE=`date +%m/%d/%Y`
+START_TIME=`date +%H:%M:%S`
+echo "$0 taking off on ${START_DATE} ${START_TIME}...."
+echo ""
+
+script_execution;
+
+#export FILE_SUFF=`date +'%Y%m%d_%H%M%S'`
+export FILE_SUFF=`date +'%Y%m%d'`
+
+errorcheck;
+
+success;
+TIME=`date +%Y_%m_%d_at_%r`
+echo "$0 landed on ${TIME} ....
+
+[oracle@JBCUALORA1001b misc_scripts]$ cd
+[oracle@JBCUALORA1001b ~]$
+
+
+
+
+
+
+
+
+ERROR FROM DEPLOYMENT:
+
+1. SQL> @/u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/REQ146193_Sql.sql
+BEGIN
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ODB.P_SECURITY_HEADER_AUDIT) violated
+ORA-06512: at line 18
+
+
+2. [oracle@JBCUALORA1001b log]$ cat LOCK_USER_ACCOUNT.sh_20211201_181028.log
+./LOCK_USER_ACCOUNT.sh taking off on 12/01/2021 18:10:28....
+
+
+Dec 01 18:10:29 jbcualora1001b sendEmail[9648]: Email was sent successfully!
+
+
+
+
+
+
+

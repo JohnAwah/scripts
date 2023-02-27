@@ -1,0 +1,30 @@
+Listener Management
+Checking Status
+To check for a running listener you must first identify the listener name. Then you can check to see if the listener is running.
+
+1.	Step 1 – Check if you are running cluster. If using a cluster you need to switch your home to the grid home.
+a.	[NOTE]If you have any grid processes running the system is using a cluster
+b.	[ORACLE][SHELL] ps -ef | grep grid
+2.	Step 2 – Set home
+a.	. oraenv
+3.	Step 3 – check for running listeners. 
+a.	[ORACLE][SHELL] ps -ef | grep tns
+i.	[NOTE] Format should be as follows
+ii.	[NOTE] [ORACLE_HOME]/bin/tnslsnr [LISTENER NAME] -inherit
+b.	[NOTE] If no running processes you can identify the listener name in the below file.
+i.	[ORACLE][SHELL] cat $ORACLE_HOME/network/admin/listener.ora
+4.	Step 4 – Check the current status
+a.	[ORACLE][SHELL] lsnrctl status [LISTENER NAME]
+b.	[NOTE] If you are using grid then you can check the status using srvctl for the cluster.
+i.	[ORACLE][SHELL] srvctl status listener
+c.	[NOTE] You can check the scan listener status using the following. This will give you the node locations.
+i.	[ORACLE][SHELL] srvctl status scan_listener
+
+
+If the status comes back with the “The listener supports no services” then you need to register the database with the service or it is not the right listener.
+ 
+
+Register Database With Listener
+To register the database with the listener you run the following
+1.	[ORACLE][SQL] alter system register;
+

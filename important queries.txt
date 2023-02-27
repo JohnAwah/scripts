@@ -1,0 +1,23 @@
+select instance_name, host_name,startup_time from gv$instance;
+
+To get the last time data was changed on a table:
+
+desc dba_tables;
+
+-SQL> select max(CREATED_DATE) from ODB.AC_ACTUAL_FLIGHTS;
+
+select instance_name, host_name,startup_time from gv$instance;
+
+-To get users with name similar to a given name:
+
+select username from dba_users where upper(username) like '%TRAIN1%'
+
+
+OR
+
+SQL> SELECT SCN_TO_TIMESTAMP(MAX(ora_rowscn)) from DLEX_B6RESV.RESVCUSTOMEREMAIL;
+
+SCN_TO_TIMESTAMP(MAX(ORA_ROWSCN))
+---------------------------------------------------------------------------
+26-MAY-22 05.17.53.000000000 PM
+
