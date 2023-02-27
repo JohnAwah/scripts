@@ -1,0 +1,8 @@
+Subject: RE: Unable to login into TRAX QA
+ 
+Cintra Team,
+Users are not able to login to the Trax QA app via Citrix, and are getting this error message.
+Can you please look into this?
+
+-FRA filled for database. Resize reco_file_dest.
+ .so check FRA usage, and resize it if necessary.

@@ -1,0 +1,526 @@
+login as: oracle
+oracle@jbcualora2001a's password:
+[oracle@JBCUALORA2001a ~]$ ps -ef|grep pmon
+grid       7539      1  0 May25 ?        00:22:03 asm_pmon_+ASM1
+oracle    32284      1  0 Nov11 ?        00:06:16 ora_pmon_TRAXSTG1
+oracle   154166      1  0 Oct17 ?        00:07:16 ora_pmon_TRAXTRN1
+oracle   215063      1  0 11:01 ?        00:00:01 ora_pmon_TRAXCLN1
+oracle   220995 220786  0 16:11 pts/0    00:00:00 grep pmon
+[oracle@JBCUALORA2001a ~]$ cat /etc/oratab
+#Backup file is  /u02/app/oracle/product/12.1.0/dbhome_20201008061648/srvm/admin                                                                             /oratab.bak.jbcualora2001a line added by Agent
+#
+
+
+
+# This file is used by ORACLE utilities.  It is created by root.sh
+# and updated by either Database Configuration Assistant while creating
+# a database or ASM Configuration Assistant while creating ASM instance.
+
+# A colon, ':', is used as the field terminator.  A new line terminates
+# the entry.  Lines beginning with a pound sign, '#', are comments.
+#
+# Entries are of the form:
+#   $ORACLE_SID:$ORACLE_HOME:<N|Y>:
+#
+# The first and second fields are the system identifier and home
+# directory of the database respectively.  The third field indicates
+# to the dbstart utility that the database should , "Y", or should not,
+# "N", be brought up at system boot time.
+#
+# Multiple entries with the same $ORACLE_SID are not allowed.
+#
+#
+TSTDB_NVA:/u02/app/oracle/product/12.1.0/dbhome_1:N             # line added by                                                                              Agent
+TRAXPRD:/u02/app/oracle/product/12.1.0/dbhome_1:N               # line added by                                                                              Agent
+TRAXDEV_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N             #                                                                              line added by Agent
+TRAXQA_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N              #                                                                              line added by Agent
++ASM1:/u01/app/12.1.0/grid_20201008061639:N             # line added by Agent
+TRAXTRN_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N             #                                                                              line added by Agent
+TRAXSTG_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N             #                                                                              line added by Agent
+TRAXCLN:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N          # line a                                                                             dded by Agent
+[oracle@JBCUALORA2001a ~]$ ls -la
+total 2959632
+drwx------. 48 oracle users          4096 Nov 30 14:44 .
+drwxr-xr-x.  7 root   root           4096 May 25  2021 ..
+-rw-r--r--.  1 oracle oinstall      67549 Feb 18  2020 01_grnt_privtorole.sql
+-rw-r--r--.  1 oracle oinstall       2279 Aug 20  2020 01_traxstg_scheduler_job_                                                                             20AUG20.sql
+-rw-r--r--.  1 oracle oinstall       3844 Jun 18  2020 1
+drwxr-xr-x.  3 oracle oinstall       4096 May 24  2021 24MAY2021_scripts
+-rw-r--r--.  1 oracle oinstall     196304 Aug 17 17:26 6_log.sql
+-rw-r--r--.  1 root   root            595 Jan 28  2020 70-persistent-net.rules
+-rw-r--r--.  1 oracle oinstall     197666 Aug 17 17:26 7_log.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .abrt
+drwx------.  3 oracle oinstall       4096 Oct  8  2020 .ansible
+drwxr-xr-x.  2 oracle oinstall       4096 Oct  8  2020 .ansible_async
+-rw-r--r--.  1 oracle oinstall    1412556 Sep 22  2020 AWR_TRAXSTG_sep22_15-16.h                                                                             tml
+-rw-------.  1 oracle oinstall      21906 Nov 30 22:33 .bash_history
+-rw-r--r--.  1 oracle users            18 Mar 22  2017 .bash_logout
+-rw-r--r--.  1 oracle oinstall        860 Oct  8  2020 .bash_profile
+-rw-r--r--.  1 oracle users           124 Mar 22  2017 .bashrc
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .cache
+-rw-r--r--.  1 oracle oinstall       8077 Mar 10  2020 CHG0038604.log
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  5  2020 CHG0043254
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 25  2020 CHG0043827
+drwxr-xr-x.  2 oracle oinstall       4096 Sep  8  2020 CHG0044401
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 19  2020 CHG0044610
+drwxr-xr-x.  2 oracle oinstall       4096 Feb 26  2021 CHG0049142
+drwxr-xr-x.  2 oracle oinstall       4096 Mar 30  2021 CHG0049615
+drwxr-xr-x.  2 oracle oinstall       4096 Jun 29 14:45 CHG0052880_29062021
+drwxr-xr-x.  4 oracle oinstall       4096 Nov 30 09:59 cintra
+drwxrwxrwx. 11 oracle oinstall       4096 Oct 16 20:12 Cintra
+drwxr-xr-x.  5 oracle oinstall       4096 Nov 20  2019 .config
+-rw-r--r--.  1 oracle oinstall       4520 Oct 29  2020 cronjobs_20201028.txt
+-rw-r--r--.  1 oracle oinstall       3840 Jul 23  2020 cron.oracle.23july
+-rw-r--r--.  1 oracle oinstall       4531 Jan  9  2021 cron.oracle.9jan2021
+-rw-r--r--.  1 oracle oinstall       3840 Jun 30  2020 crontab-20203006.txt
+-rw-r--r--.  1 oracle asmadmin       1138 Jan  8  2020 ctrl_traxqa.sql
+drwxr-xr-x.  7 oracle oinstall       4096 Mar 30  2021 database
+drwx------.  3 oracle oinstall       4096 Nov 20  2019 .dbus
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Desktop
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Documents
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Downloads
+-rw-------.  1 oracle oinstall         16 Nov 20  2019 .esd_auth
+drwx------.  4 oracle oinstall       4096 Jan 28  2020 .gconf
+drwxr-xr-x.  5 oracle users          4096 Nov 20  2019 .gnome2
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .gnote
+drwx------.  2 oracle oinstall       4096 Jan 28  2020 .gnupg
+-rw-r--r--.  1 oracle oinstall     128525 Aug 15 23:24 grant_new.sql
+-rw-r--r--.  1 oracle oinstall     129042 Aug 15 23:21 grant.sql
+-rw-r--r--.  1 oracle oinstall        142 Jan 28  2020 .gtk-bookmarks
+drwx------.  2 oracle oinstall       4096 Nov 20  2019 .gvfs
+-rw-r--r--.  1 oracle oinstall      49600 Jul 15 21:15 hot_fix_traxstg.txt
+-rw-------.  1 oracle oinstall       1876 Jan 28  2020 .ICEauthority
+-rw-r--r--.  1 oracle oinstall        639 Jan 28  2020 .imsettings.log
+-rw-r--r--.  1 oracle asmadmin       1731 Jan  6  2020 init01_traxdev.ora
+-rw-r--r--.  1 oracle asmadmin       1735 Jan  5  2020 init01_traxdev.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1663 Jan  3  2020 initbkpTRAXDEV.ora
+-rw-r--r--.  1 oracle asmadmin       1632 Jan  3  2020 init_traxdev031219.ora
+-rw-r--r--.  1 oracle asmadmin       2263 Jan  8  2020 inittraxdev_20200108.ora
+-rw-r--r--.  1 oracle asmadmin       2295 Jan  9  2020 inittraxdev20200109.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1688 Jan  5  2020 initTRAXDEV.ora
+-rw-r--r--.  1 oracle oinstall       1671 Jan  5  2020 initTRAXDEV.ora_org
+-rw-r--r--.  1 oracle asmadmin       2211 Jan  8  2020 inittraxqa_nva_20200108.o                                                                             ra
+-rw-r--r--.  1 oracle asmadmin       2209 Jan  8  2020 inittraxqa_nva_20200108.o                                                                             ra_bkp
+-rw-r--r--.  1 oracle oinstall       1672 Jan  8  2020 inittraxqa_nva_20200108.o                                                                             ra_original
+-rw-r--r--.  1 oracle oinstall       1687 Jan  8  2020 inittraxqa.ora
+-rw-r--r--.  1 oracle oinstall       1639 Jan  8  2020 inittraxqa.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       2296 Jan 14  2020 initTRAXSTG_DR.ora
+-rw-r--r--.  1 oracle oinstall       2235 Jan  8  2020 inittraxtrn_20200108.ora
+-rw-r--r--.  1 oracle oinstall      48948 Aug 17 17:24 jetblue_patch.txt
+-rw-r--r--.  1 oracle oinstall 1673544724 Nov 20  2019 linuxamd64_12102_database                                                                             _1of2.zip
+-rw-r--r--.  1 oracle oinstall 1014530602 Nov 20  2019 linuxamd64_12102_database                                                                             _2of2.zip
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .local
+-rw-r-----.  1 oracle oinstall        316 Jun  1  2021 log_file_client.log
+drwxr-xr-x.  4 oracle users          4096 Nov 20  2019 .mozilla
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Music
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .nautilus
+-rw-------.  1 oracle oinstall         13 Aug  8  2020 nohup.out
+-rw-r--r--.  1 oracle oinstall       2796 Mar  6  2020 null_value.sql
+-rw-r--r--.  1 oracle oinstall    2314468 Feb 12  2020 odb123.lst
+-rw-r--r--.  1 oracle oinstall    3141085 Feb 12  2020 odb_ro1.lst
+drwx------.  2 oracle asmadmin       4096 Aug  6  2020 .oit
+drwxr-xr-x.  2 oracle oinstall       4096 Oct  8  2020 .oracle_jre_usage
+drwxr-----.  3 oracle oinstall       4096 Jan  8  2020 oradiag_oracle
+-rw-r--r--.  1 oracle oinstall       3353 Mar  6  2020 other_value.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 22  2019 patch
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Pictures
+-rw-r--r--.  1 oracle oinstall        172 Sep  2  2020 .profile_trax2cln
+-rw-r--r--.  1 oracle oinstall        189 Oct 29  2020 .profile_traxcln
+-rw-r--r--.  1 oracle oinstall        186 Nov 19  2020 .profile_traxdev
+-rw-r--r--.  1 oracle oinstall        230 Aug  6  2020 .profile_traxprd
+-rw-r--r--.  1 oracle oinstall        188 Jan  6  2021 .profile_traxqa
+-rw-r--r--.  1 oracle oinstall        189 Oct 23  2020 .profile_traxstg
+-rw-r--r--.  1 oracle oinstall        186 Nov 23  2020 .profile_traxtrn
+-rw-r--r--.  1 oracle oinstall        189 Nov 26  2020 .profile_traxtst
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Public
+drwx------.  2 oracle oinstall       4096 Jan 28  2020 .pulse
+-rw-------.  1 oracle oinstall        256 Nov 20  2019 .pulse-cookie
+-rw-r--r--.  1 oracle oinstall      11197 Jun 18  2020 r.sql
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Rubrik-cua
+drwxr-xr-x.  3 oracle oinstall       4096 Sep  2  2020 rubrik_oracle_tools
+drwxr-xr-x.  4 oracle oinstall       4096 Jul 17  2020 Rubrik_Tools
+-rw-r-----.  1 oracle oinstall  326060000 Dec  1 15:45 sqlnet.log
+drwx------.  2 oracle oinstall       4096 May  4  2020 .ssh
+-rw-r--r--.  1 oracle oinstall      19436 Sep 16  2020 sshpass-1.05-1.el6.rf.x86                                                                             _64.rpm
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Templates
+-rw-r--r--.  1 oracle oinstall       5142 Mar  5  2020 test01.sql
+drwxr-xr-x.  7 oracle oinstall      20480 Nov 11 04:57 TRAX
+-rw-r--r--.  1 oracle oinstall     173071 Jan  9  2020 traxdev_clone_20200108.lo                                                                             g
+-rw-r--r--.  1 oracle oinstall      28156 Jan  8  2020 traxdev_clone_20200108.lo                                                                             g_01
+-rwxr-xr-x.  1 oracle oinstall       1245 Jan  8  2020 traxdev_clone.sh
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  1 01:56 TRAXQA_REFRESH
+-rw-r--r--.  1 oracle oinstall       4963 Oct 23  2020 TRAXSTG_index.log
+-rw-r--r--.  1 oracle oinstall    7886172 Mar 10  2020 TRAX.tar.gz
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Videos
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 15 10:09 .vim
+-rw-------.  1 oracle oinstall      10427 Nov 30 14:44 .viminfo
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .vnc
+-rw-------.  1 oracle oinstall        173 Jul 24  2020 .Xauthority
+-rw-------.  1 oracle oinstall       4816 Feb 16  2020 .xsession-errors
+-rw-------.  1 oracle oinstall      11494 Jan  8  2020 .xsession-errors.old
+[oracle@JBCUALORA2001a ~]$ cat /etc/oratab
+#Backup file is  /u02/app/oracle/product/12.1.0/dbhome_20201008061648/srvm/admin                                                                             /oratab.bak.jbcualora2001a line added by Agent
+#
+
+
+
+# This file is used by ORACLE utilities.  It is created by root.sh
+# and updated by either Database Configuration Assistant while creating
+# a database or ASM Configuration Assistant while creating ASM instance.
+
+# A colon, ':', is used as the field terminator.  A new line terminates
+# the entry.  Lines beginning with a pound sign, '#', are comments.
+#
+# Entries are of the form:
+#   $ORACLE_SID:$ORACLE_HOME:<N|Y>:
+#
+# The first and second fields are the system identifier and home
+# directory of the database respectively.  The third field indicates
+# to the dbstart utility that the database should , "Y", or should not,
+# "N", be brought up at system boot time.
+#
+# Multiple entries with the same $ORACLE_SID are not allowed.
+#
+#
+TSTDB_NVA:/u02/app/oracle/product/12.1.0/dbhome_1:N             # line added by                                                                              Agent
+TRAXPRD:/u02/app/oracle/product/12.1.0/dbhome_1:N               # line added by                                                                              Agent
+TRAXDEV_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N             #                                                                              line added by Agent
+TRAXQA_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N              #                                                                              line added by Agent
++ASM1:/u01/app/12.1.0/grid_20201008061639:N             # line added by Agent
+TRAXTRN_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N             #                                                                              line added by Agent
+TRAXSTG_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N             #                                                                              line added by Agent
+TRAXCLN:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N          # line a                                                                             dded by Agent
+[oracle@JBCUALORA2001a ~]$ cat /etc/oratab
+#Backup file is  /u02/app/oracle/product/12.1.0/dbhome_20201008061648/srvm/admin/oratab.bak.jbcualora2001a line added by Agent
+#
+
+
+
+# This file is used by ORACLE utilities.  It is created by root.sh
+# and updated by either Database Configuration Assistant while creating
+# a database or ASM Configuration Assistant while creating ASM instance.
+
+# A colon, ':', is used as the field terminator.  A new line terminates
+# the entry.  Lines beginning with a pound sign, '#', are comments.
+#
+# Entries are of the form:
+#   $ORACLE_SID:$ORACLE_HOME:<N|Y>:
+#
+# The first and second fields are the system identifier and home
+# directory of the database respectively.  The third field indicates
+# to the dbstart utility that the database should , "Y", or should not,
+# "N", be brought up at system boot time.
+#
+# Multiple entries with the same $ORACLE_SID are not allowed.
+#
+#
+TSTDB_NVA:/u02/app/oracle/product/12.1.0/dbhome_1:N             # line added by Agent
+TRAXPRD:/u02/app/oracle/product/12.1.0/dbhome_1:N               # line added by Agent
+TRAXDEV_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N              # line added by Agent
+TRAXQA_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N               # line added by Agent
++ASM1:/u01/app/12.1.0/grid_20201008061639:N             # line added by Agent
+TRAXTRN_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N              # line added by Agent
+TRAXSTG_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N              # line added by Agent
+TRAXCLN:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N          # line added by Agent
+[oracle@JBCUALORA2001a ~]$ . .profile_traxtrn
+[oracle@JBCUALORA2001a ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 12.1.0.2.0 Production on Wed Dec 1 16:15:23 2021
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL> select SYSTEM_CODE, DISPATCH_SYSTEM_CONFIDENCE
+from SYSTEM_TRAN_CODE
+where SYSTEM_TRANSACTION = 'CONFIDENCELEVEL';  2    3
+from SYSTEM_TRAN_CODE
+     *
+ERROR at line 2:
+ORA-00942: table or view does not exist
+
+
+SQL> select SYSTEM_CODE, DISPATCH_SYSTEM_CONFIDENCE
+from SYSTEM_TRAN_CODE
+where SYSTEM_TRANSACTION = 'CONFIDENCELEVEL';
+  4
+SQL>
+SQL>
+SQL>
+SQL> select owner from dba_tables where table_name='SYSTEM_TRAN_CODE';
+
+OWNER
+--------------------------------------------------------------------------------
+ODB
+
+SQL> alter session set current_schema=ODB;
+
+Session altered.
+
+SQL> select SYSTEM_CODE, DISPATCH_SYSTEM_CONFIDENCE from SYSTEM_TRAN_CODE where SYSTEM_TRANSACTION = 'CONFIDENCELEVEL';
+
+SYSTEM_CODE
+----------------------------------------------------------------------
+DISPATCH_S
+----------
+HIGH
+
+
+LOW
+
+
+MEDIUM
+
+
+
+SYSTEM_CODE
+----------------------------------------------------------------------
+DISPATCH_S
+----------
+NA
+
+
+
+SQL> set lines 2000
+SQL> /
+
+SYSTEM_CODE                                                            DISPATCH_S
+---------------------------------------------------------------------- ----------
+HIGH
+LOW
+MEDIUM
+NA
+
+SQL> UPDATE SYSTEM_TRAN_CODE
+SET DISPATCH_SYSTEM_CONFIDENCE = :conf
+WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL'
+AND SYSTEM_CODE = :code;  2    3    4
+SP2-0552: Bind variable "CODE" not declared.
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code;
+Enter value for conf: HIGH
+Enter value for code: HIGH
+old   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code
+new   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = HIGH WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = HIGH
+UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = HIGH WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = HIGH
+                                                                                                                             *
+ERROR at line 1:
+ORA-00904: "HIGH": invalid identifier
+
+
+SQL> UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code;
+Enter value for conf: 'HIGH'
+Enter value for code: 'HIGH'
+old   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code
+new   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = 'HIGH' WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = 'HIGH'
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code;
+Enter value for conf: 'LOW'
+Enter value for code: 'LOW'
+old   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code
+new   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = 'LOW' WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = 'LOW'
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code;
+Enter value for conf: 'MEDIUM'
+Enter value for code: 'MEDIUM'
+old   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code
+new   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = 'MEDIUM' WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = 'MEDIUM'
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code;
+Enter value for conf: 'NA'
+Enter value for code: 'NA'
+old   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code
+new   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = 'NA' WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = 'NA'
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+[oracle@JBCUALORA2001a ~]$ . .profile_traxstg
+[oracle@JBCUALORA2001a ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 12.1.0.2.0 Production on Wed Dec 1 16:35:39 2021
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL>
+MEDIUM
+
+
+
+SYSTEM_CODE
+----------------------------------------------------------------------
+DISPATCH_S
+----------
+NA
+
+
+
+SQL> set lines 2000
+SQL> /
+
+SYSTEM_CODE                                                            DISPATCH_S
+---------------------------------------------------------------------- ----------
+HIGH
+LOW
+MEDIUM
+NA
+
+SQL> UPDATE SYSTESQL> SP2-0042: unknown command "MEDIUM" - rest of line ignored.
+SQL> SQL> SQL> SQL> SP2-0734: unknown command beginning "SYSTEM_COD..." - rest of line ignored.
+SQL> SQL> SP2-0042: unknown command "DISPATCH_S" - rest of line ignored.
+SQL> SQL> SP2-0042: unknown command "NA" - rest of line ignored.
+SQL> SQL> SQL> SQL> SP2-0734: unknown command beginning "SQL> set l..." - rest of line ignored.
+SQL> SP2-0042: unknown command "SQL> /" - rest of line ignored.
+SQL> SQL> SP2-0734: unknown command beginning "SYSTEM_COD..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> SQL> SP2-0042: unknown command "HIGH" - rest of line ignored.
+SQL> SP2-0042: unknown command "LOW" - rest of line ignored.
+SQL> SP2-0042: unknown command "MEDIUM" - rest of line ignored.
+SQL> SP2-0042: unknown command "NA" - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> SQL>
+SP2-0734: unknown command beginning "SQL> UPDAT..." - rest of line ignored.
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> select SYSTEM_CODE, DISPATCH_SYSTEM_CONFIDENCE from SYSTEM_TRAN_CODE where SYSTEM_TRANSACTION = 'CONFIDENCELEVEL';
+select SYSTEM_CODE, DISPATCH_SYSTEM_CONFIDENCE from SYSTEM_TRAN_CODE where SYSTEM_TRANSACTION = 'CONFIDENCELEVEL'
+                                                    *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> alter session set current_schema=ODB;
+
+Session altered.
+
+SQL> select SYSTEM_CODE, DISPATCH_SYSTEM_CONFIDENCE from SYSTEM_TRAN_CODE where SYSTEM_TRANSACTION = 'CONFIDENCELEVEL';
+
+SYSTEM_CODE
+----------------------------------------------------------------------
+DISPATCH_S
+----------
+HIGH
+
+
+LOW
+
+
+MEDIUM
+
+
+
+SYSTEM_CODE
+----------------------------------------------------------------------
+DISPATCH_S
+----------
+NA
+
+
+
+SQL> set lines 2000
+SQL> /
+
+SYSTEM_CODE                                                            DISPATCH_S
+---------------------------------------------------------------------- ----------
+HIGH
+LOW
+MEDIUM
+NA
+
+SQL> UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code;
+Enter value for conf: 'HIGH'
+Enter value for code: 'HIGH'
+old   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code
+new   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = 'HIGH' WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = 'HIGH'
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code;
+Enter value for conf: 'LOW'
+Enter value for code: 'LOW'
+old   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code
+new   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = 'LOW' WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = 'LOW'
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code;
+Enter value for conf: 'MEDIUM'
+Enter value for code: 'MEDIUM'
+old   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code
+new   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = 'MEDIUM' WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = 'MEDIUM'
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code;
+Enter value for conf: 'NA'
+Enter value for code: 'NA'
+old   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = &conf WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = &code
+new   1: UPDATE SYSTEM_TRAN_CODE SET DISPATCH_SYSTEM_CONFIDENCE = 'NA' WHERE SYSTEM_TRANSACTION = 'CONFIDENCELEVEL' AND SYSTEM_CODE = 'NA'
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL>

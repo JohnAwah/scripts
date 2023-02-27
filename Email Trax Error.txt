@@ -1,0 +1,37 @@
+Hi Cintra Support, 
+
+We’re getting the issue with email again not being sent out from TRAX. Can you guys fix the name resolution issue. 
+
+Regards
+Will
+Sent from my iPhone
+
+
+On Jun 30, 2022, at 8:42 AM, Gomez, Harrington <Harrington.Gomez@jetblue.com> wrote:
+ 
+Hi Will, 
+Users are getting an error message when attempting to email from Trax. Is this message a connection error?
+Regards,
+Harrington 
+Sent from my iPhone
+
+Begin forwarded message:
+From: "Quintal, Jonathan" <Jonathan.Quintal@jetblue.com>
+Date: June 30, 2022 at 8:34:15 AM EDT
+To: "Tong, Hoi Sun" <HoiSun.Tong@jetblue.com>, "Gomez, Harrington" <Harrington.Gomez@jetblue.com>
+Subject: Email Trax Error
+ 
+Hello Hoi, Harrington,  
+ 
+I am getting the below error when attempting to email from my Trax.  Can you please assist with this as I use emailing on my trax as a daily task. 
+ 
+ ORA-20111 & ORA-29728
+ 
+ 
+Regards,
+ 
+Jonathan Quintal
+Expeditor | Technical Repairs
+JetBlue Airways
+Ph: 718-751-7142
+Group Email: bluerepairs@jetblue.com

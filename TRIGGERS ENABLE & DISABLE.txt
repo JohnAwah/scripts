@@ -1,0 +1,20 @@
+TRIGGER ENABLING AND DISABLING:
+
+-disable test
+alter trigger ODS_UHG.T_PREFRNC_AT_IBR disable;
+
+-- enable test
+alter trigger ODS_UHG.T_PREFRNC_AT_IBR enable;      ODSTST
+
+
+-- disable prod
+alter trigger ODS_UCEE.T_PREFRNC_AT_IBR disable;
+
+--enable prod
+alter trigger ODS_UCEE.T_PREFRNC_AT_IBR enable;    ODSUHG
+
+-FOR ENTIRE TABLE:
+
+alter table table_name disable all triggers
+alter table_name enable all triggers
+

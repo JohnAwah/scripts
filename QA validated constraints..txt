@@ -1,0 +1,254 @@
+alter table DLEX_B6RESV.RESVITINSEGMENTRAIL modify constraint FK_RESV_ITIN_SEGM_RAIL_RESV_IT enable novalidate;
+alter table DLEX_B6RESV.RESVEVENTREMOTEREF modify constraint FK_RESV_EVT_REMO_REF_RESV_EVT enable novalidate;
+alter table DLEX_B6RESV.RESVITINSEGCARADDITIONALCHARGE modify constraint FK_RESVAC_ITINSEGCARID enable novalidate;
+alter table DLEX_B6RESV.RESVCUSTPAYMENTADDRESS modify constraint FK_RESVCUSTPAYMENTADDR_PAYMID enable novalidate;
+alter table DLEX_B6RESV.RESVGUESTITINSEGANCILLARY modify constraint FK_RESVGISANC_RAID enable novalidate;
+alter table DLEX_B6RESV.RESVGUESTITINSEGANCILLARY modify constraint FK_RESVGISANC_GISID enable novalidate;
+alter table DLEX_B6RESV.RESVAGCYAGENT modify constraint FK_RESV_AGCY_AGEN_RESV_AGCY enable novalidate;
+alter table DLEX_B6RESV.RESVCOMPINVENTORYCLASSPREF modify constraint FK_RESV_COMP_INVE_CLAS_PREF_RE enable novalidate;
+alter table DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC modify constraint FK_RESV_COMP_PROV_PAYM_EXCH_RE enable novalidate;
+alter table DLEX_B6RESV.RESVCUSTOMERPAYMENT modify constraint FK_RESV_CUST_PAYM_RESV_EVEN enable novalidate;
+alter table DLEX_B6RESV.RESVEVENTADDITINFO modify constraint FK_RESV_EVEN_ADDI_INFO_RESV_EV enable novalidate;
+alter table DLEX_B6RESV.RESVGUESTITINSEGFOIREMOTE modify constraint FK_RESV_GUES_ITIN_SEG_FOI_REMO enable novalidate;
+alter table DLEX_B6RESV.RESVINTERNALAGENTADDITINFO modify constraint FK_RESV_INTE_AGEN_ADDI_INFO_RE enable novalidate;
+
+
+
+
+
+
+
+
+
+col action_time for a20                     
+col action for a8                              
+col version for a8
+col comments for a30
+col status for a10
+set line 999 pages 999
+select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_INTE_AGEN_ADDI_INFO_RE';
+
+alter table DLEX_B6RESV.RESVINTERNALAGENTADDITINFO ENABLE VALIDATE CONSTRAINT FK_RESV_INTE_AGEN_ADDI_INFO_RE;
+
+
+
+
+1. SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESVAC_ITINSEGCARID';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESVAC_ITINSEGCARID       ENABLED    NOT VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVITINSEGCARADDITIONALCHARGE ENABLE VALIDATE CONSTRAINT FK_RESVAC_ITINSEGCARID;
+
+Table altered.
+
+SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESVAC_ITINSEGCARID';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESVAC_ITINSEGCARID       ENABLED    VALIDATED
+
+
+2.SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_EVT_REMO_REF_RESV_EVT';
+
+OWNER                                        CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_EVT_REMO_REF_RESV_EVT                                                                                                         ENABLED    NOT VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVEVENTREMOTEREF ENABLE VALIDATE CONSTRAINT FK_RESV_EVT_REMO_REF_RESV_EVT;
+
+Table altered.
+
+SQL>select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_EVT_REMO_REF_RESV_EVT';SQL> SQL> SQL> SQL> SQL> SQL>
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_EVT_REMO_REF_RESV_EVT                                                                                                         ENABLED    VALIDATED
+
+
+
+3.select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESVCUSTPAYMENTADDR_PAYMID';SQL> SQL> SQL> SQL> SQL> SQL>
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESVCUSTPAYMENTADDR_PAYMID                                                                                                         ENABLED    NOT VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVCUSTPAYMENTADDRESS ENABLE VALIDATE CONSTRAINT FK_RESVCUSTPAYMENTADDR_PAYMID;
+
+
+Table altered.
+
+
+select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESVCUSTPAYMENTADDR_PAYMID';SQL> SQL> SQL> SQL> SQL> SQL>
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESVCUSTPAYMENTADDR_PAYMID                                                                                                         ENABLED    VALIDATED
+
+
+4.
+SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESVGISANC_RAID';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESVGISANC_RAID           ENABLED    NOT VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVGUESTITINSEGANCILLARY ENABLE VALIDATE CONSTRAINT FK_RESVGISANC_RAID;
+
+Table altered.
+
+SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESVGISANC_RAID';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESVGISANC_RAID           ENABLED    VALIDATED
+
+
+5.
+SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESVGISANC_GISID';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESVGISANC_GISID          ENABLED    NOT VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVGUESTITINSEGANCILLARY ENABLE VALIDATE CONSTRAINT FK_RESVGISANC_GISID;
+
+
+Table altered.
+
+SQL> SQL>
+SQL>  select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESVGISANC_GISID';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESVGISANC_GISID          ENABLED    VALIDATED
+
+
+6.SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_AGCY_AGEN_RESV_AGCY';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_AGCY_AGEN_RESV_AGCY  ENABLED    NOT VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVAGCYAGENT ENABLE VALIDATE CONSTRAINT FK_RESV_AGCY_AGEN_RESV_AGCY;
+
+Table altered.
+
+SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_AGCY_AGEN_RESV_AGCY';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_AGCY_AGEN_RESV_AGCY  ENABLED    VALIDATED
+
+
+7.SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_COMP_INVE_CLAS_PREF_RE';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_COMP_INVE_CLAS_PREF_RE                                                                                                ENABLED    NOT VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVCOMPINVENTORYCLASSPREF ENABLE VALIDATE CONSTRAINT FK_RESV_COMP_INVE_CLAS_PREF_RE;
+
+Table altered.
+
+SQL>  select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_COMP_INVE_CLAS_PREF_RE';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_COMP_INVE_CLAS_PREF_RE                                                                                                ENABLED    VALIDATED
+
+
+
+8.
+SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_COMP_PROV_PAYM_EXCH_RE';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_COMP_PROV_PAYM_EXCH_RE                                                                                                ENABLED    NOT VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC ENABLE VALIDATE CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE;
+
+
+Table altered.
+
+SQL> SQL>
+SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_COMP_PROV_PAYM_EXCH_RE';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_COMP_PROV_PAYM_EXCH_RE                                                                                                ENABLED    VALIDATED
+
+
+9.
+SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_CUST_PAYM_RESV_EVEN';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_CUST_PAYM_RESV_EVEN  ENABLED    VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVCUSTOMERPAYMENT ENABLE VALIDATE CONSTRAINT FK_RESV_CUST_PAYM_RESV_EVEN;
+
+
+Table altered.
+
+SQL> SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_CUST_PAYM_RESV_EVEN';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_CUST_PAYM_RESV_EVEN  ENABLED    VALIDATED
+
+
+10.
+
+SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_EVEN_ADDI_INFO_RESV_EV';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_EVEN_ADDI_INFO_RESV_EV                                                                                                ENABLED    NOT VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVEVENTADDITINFO ENABLE VALIDATE CONSTRAINT FK_RESV_EVEN_ADDI_INFO_RESV_EV;
+
+Table altered.
+
+SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_EVEN_ADDI_INFO_RESV_EV';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_EVEN_ADDI_INFO_RESV_EV                                                                                                ENABLED    VALIDATED
+
+
+11.SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_GUES_ITIN_SEG_FOI_REMO';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_GUES_ITIN_SEG_FOI_REMO                                                                                                ENABLED    NOT VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVGUESTITINSEGFOIREMOTE ENABLE VALIDATE CONSTRAINT FK_RESV_GUES_ITIN_SEG_FOI_REMO;
+
+Table altered.
+
+SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_GUES_ITIN_SEG_FOI_REMO';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_GUES_ITIN_SEG_FOI_REMO                                                                                                ENABLED    VALIDATED
+
+
+12.SQL> select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_INTE_AGEN_ADDI_INFO_RE';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_INTE_AGEN_ADDI_INFO_RE                                                                                                ENABLED    NOT VALIDATED
+
+SQL> alter table DLEX_B6RESV.RESVINTERNALAGENTADDITINFO ENABLE VALIDATE CONSTRAINT FK_RESV_INTE_AGEN_ADDI_INFO_RE;
+
+Table altered.
+
+SQL>  select owner,CONSTRAINT_NAME,STATUS,VALIDATED from dba_constraints where CONSTRAINT_NAME='FK_RESV_INTE_AGEN_ADDI_INFO_RE';
+
+OWNER                                                                                                                            CONSTRAINT_NAME              STATUS     VALIDATED
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------
+DLEX_B6RESV                                                                                                                      FK_RESV_INTE_AGEN_ADDI_INFO_RE                                                                                                ENABLED    VALIDATED
+
+

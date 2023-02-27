@@ -1,0 +1,8 @@
+HOW TO CREATE PARALLELISM IN A QUERY TO ENHANCE PERFORMANCE:
+
+CREATE TABLE UNIMR_MART.DS_ORDER_TRANS_LOG_20220825 AS
+SELECT /*+ PARALLEL(8) */ * FROM rmxmeta.ds_order_trans_log@remixprd_sys WHERE ds_order_trans_id IN
+(SELECT ds_order_trans_id FROM rmxmeta.DS_ORDER_TRANS@remixprd_sys t
+WHERE t.ds_order_id IN (274873,730312)
+AND (trunc(t.start_timestamp) = to_timestamp('20220721','YYYYMMDD') or
+t.updated_timestamp between to_date('20220723','YYYYMMDD') and to_date('20220823','YYYYMMDD')))

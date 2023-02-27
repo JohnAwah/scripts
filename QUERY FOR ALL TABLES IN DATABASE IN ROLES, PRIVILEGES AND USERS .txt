@@ -1,0 +1,113 @@
+COL roles FOR a20
+COL table_name FOR a30
+col privilege for a9
+set lin 200 trims on pages 0 emb on hea on newp none
+
+spool /tmp/tableprivs
+
+SELECT *
+FROM ( SELECT CONNECT_BY_ROOT grantee grantee,
+privilege,
+REPLACE (
+REGEXP_REPLACE (SYS_CONNECT_BY_PATH (granteE, '/'),
+'^/[^/]*'),
+'/',
+' --> ')
+ROLES,
+owner,
+table_name,
+column_name
+FROM (SELECT PRIVILEGE,
+GRANTEE,
+OWNER,
+TABLE_NAME,
+NULL column_name
+FROM DBA_TAB_PRIVS
+WHERE owner NOT IN
+('SYS',
+'SYSTEM',
+'WMSYS',
+'SYSMAN',
+'MDSYS',
+'ORDSYS',
+'XDB',
+'WKSYS',
+'EXFSYS',
+'OLAPSYS',
+'DBSNMP',
+'DMSYS',
+'CTXSYS',
+'WK_TEST',
+'ORDPLUGINS',
+'OUTLN',
+'ORACLE_OCM',
+'APPQOSSYS')
+UNION
+SELECT PRIVILEGE,
+GRANTEE,
+OWNER,
+TABLE_NAME,
+column_name
+FROM DBA_COL_PRIVS
+WHERE owner NOT IN
+('SYS',
+'SYSTEM',
+'WMSYS',
+'SYSMAN',
+'MDSYS',
+'ORDSYS',
+'XDB',
+'WKSYS',
+'EXFSYS',
+'OLAPSYS',
+'DBSNMP',
+'DMSYS',
+'CTXSYS',
+'WK_TEST',
+'ORDPLUGINS',
+'OUTLN',
+'ORACLE_OCM',
+'APPQOSSYS')
+UNION
+SELECT GRANTED_ROLE,
+GRANTEE,
+NULL,
+NULL,
+NULL
+FROM DBA_ROLE_PRIVS
+WHERE GRANTEE NOT IN
+('SYS',
+'SYSTEM',
+'WMSYS',
+'SYSMAN',
+'MDSYS',
+'ORDSYS',
+'XDB',
+'WKSYS',
+'EXFSYS',
+'OLAPSYS',
+'DBSNMP',
+'DMSYS',
+'CTXSYS',
+'WK_TEST',
+'ORDPLUGINS',
+'OUTLN',
+'ORACLE_OCM',
+'APPQOSSYS')) T
+START WITH grantee IN (SELECT username FROM dba_users)
+CONNECT BY PRIOR PRIVILEGE = GRANTEE)
+WHERE table_name IS NOT NULL AND grantee != OWNER
+ORDER BY grantee,
+owner,
+table_name,
+column_name,
+privilege;
+
+
+select p.owner,r.granted_role, p.privilege, p.table_name from dba_role_privs r
+join dba_tab_privs p on r.granted_role = p.grantee where p.owner = 'ODB';
+
+
+select max(CREATED_DATE) from table_name; (to get last time a table data was changed)
+
+>Query for all tables in a schema

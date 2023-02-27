@@ -1,0 +1,166 @@
+-HOW TO CHECK THE ROLES BELONGING TO A USER IN ORACLE(REPLEACE THE NAME IN QUOTES WITH USER NAME):
+
+set line 200 pages 200
+column grantee for a18
+column priv for a25
+column tabnm for a29
+column colnm for a26
+column owner for a15
+set wrap on
+select 'ROLE' typ, grantee grantee, granted_role priv, admin_option ad, '--' tabnm, '--' colnm, '--' owner
+from dba_role_privs
+where grantee='MRAFIQ'
+union
+select 'SYSTEM' typ, grantee grantee, privilege priv, admin_option ad, '--' tabnm, '--' colnm,'--' owner
+from dba_sys_privs
+where grantee='MRAFIQ'
+union
+select 'TABLE' typ, grantee grantee, privilege priv, grantable ad, table_name tabnm, '--' colnm, owner owner
+from dba_tab_privs
+where grantee='MRAFIQ'
+union
+
+set line 200 pages 200
+column grantee for a18
+column priv for a25
+column tabnm for a29
+column colnm for a26
+column owner for a15
+set wrap on
+
+select 'COLUMN' typ, grantee grantee, privilege priv, grantable ad, table_name tabnm, column_name colnm, owner owner
+from dba_col_privs
+where grantee='UHG_DDIXON'
+order by 1;
+
+TYP    GRANTEE            PRIV                      AD  TABNM                         COLNM                      OWNER
+------ ------------------ ------------------------- --- ----------------------------- -------------------------- ---------------
+ROLE   RHOFFMAN           ODS_MOO_POWER_USER        NO  --                            --                         --
+ROLE   RHOFFMAN           ODS_MOO_POWER_USERS       NO  --                            --                         --
+ROLE   RHOFFMAN           ODS_MOO_USER              NO  --                            --                         --
+SYSTEM RHOFFMAN           CREATE SESSION            NO  --                            --                         --
+SYSTEM RHOFFMAN           CREATE TABLE              NO  --                            --                         --
+SYSTEM RHOFFMAN           SELECT ANY DICTIONARY     NO  --                            --                         --
+
+6 rows selected.
+
+
+-HOW TO CHECK THE PRIVILEGES GRANTED TO A USER IN ORACLE:
+
+SELECT * FROM DBA_TAB_PRIVS where grantee = 'ODBRO';
+
+-DO this to fix the access: 
+SQL> grant select on unimr_mart.uhg_mbr_engagement to UHG_DDIXON;
+
+Grant succeeded.
+
+-Further check if access was granted to the user:
+
+SQL> SELECT * FROM DBA_TAB_PRIVS where grantee = 'JHARRISON';
+
+GRANTEE                        OWNER
+------------------------------ ------------------------------
+TABLE_NAME                     GRANTOR
+------------------------------ ------------------------------
+PRIVILEGE                                GRA HIE
+---------------------------------------- --- ---
+UHG_DDIXON                     UNIMR_MART
+UHG_MBR_ENGAGEMENT             UNIMR_MART
+SELECT                                   NO  NO
+
+
+
+GRANTEE                        OWNER
+------------------------------ ------------------------------
+TABLE_NAME                     GRANTOR
+------------------------------ ------------------------------
+PRIVILEGE                                GRA HIE
+---------------------------------------- --- ---
+UHG_DDIXON                     UNIMR_MART
+UHG_MBR_ENGAGEMENT             UNIMR_MART
+SELECT                                   NO  NO
+
+
+
+-CHANGING THE DEFAULT ROLE OF A USER AND WHEN THE USER CANNOT SEE ALL TABLES UNDER A ROLE:
+
+
+QL> ALTER USER PYNERM DEFAULT ROLE UNIWMD_WORK_POWER_USER, UNIWMD_MART_POWER_USER, UNI_WMD_CAM_POWER_USER, UNI_WMD_PLAT_POWER_USER;
+
+User altered.
+
+OR:
+
+ALTER USER PHYNERM DEFAULT ROLE ALL; (THIS WILL MAKE ALL ROLES GRANTED TO PHYNERM AS DEFAULT AND ENABLE HIM TO VIEW ALL TABLES BELONNGING TO THE SCHEMA)
+
+SQL> SELECT * FROM DBA_ROLE_PRIVS WHERE GRANTEE = 'CCOTTON';
+
+GRANTEE                                                                                                                          GRANTED_ROLE                                                                                                                         ADM DEL DEF COM INH
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- --- --- --- --- ---
+PYNERM                                                                                                                           UNIWMD_WORK_POWER_USER                                                                                                               NO  NO  YES NO  NO
+PYNERM                                                                                                                           UNIWMD_MART_POWER_USER                                                                                                               NO  NO  YES NO  NO
+PYNERM                                                                                                                           UNI_WMD_CAM_POWER_USER                                                                                                               NO  NO  YES NO  NO
+PYNERM                                                                                                                           UNI_WMD_PLAT_POWER_USER                                                                                                              NO  NO  YES NO  NO
+
+
+
+
+4.-TO SEE AL SCHEMAS IN THE DATABASE:
+select distinct
+   owner
+from
+   dba_segments
+where
+   owner in
+   (select username
+    from dba_users
+    where default_tablespace not in ('SYSTEM','SYSAUX')
+   )
+;
+
+
+
+
+
+SELECT * FROM DBA_ROLE_PRIVS WHERE GRANTEE = 'ODS_UHG';  urx_twhittaker
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON testtbl TO hayat;
+
+GRANT ALL ON testtbl TO hayat;
+
+-HOW TO DROP A ROLE FROM A USER IN ORACLE: REVOKE ROLE_NAME FROM USER_NAME;
+
+SQL> revoke RMS_MART_USER from UHG_SRIVASTAVAS;
+
+Revoke succeeded.
+
+SELECT * FROM DBA_TAB_PRIVS where grantee ='PGE2_CMPGN'
+
+GRANTEE            OWNER           TABLE_NAME                     GRANTOR                        PRIVILEGE       GRA HIE
+------------------ --------------- ------------------------------ ------------------------------ ---------------------------------------- --- ---
+UHG_DDIXON         UNIMR_MART      UHG_MBR_ENGAGEMENT             UNIMR_MART                     SELECT          NO  NO
+
+
+
+SQL> SELECT * FROM DBA_TAB_PRIVS where grantee = 'UHG_DDIXON';
+
+GRANTEE            OWNER           TABLE_NAME                     GRANTOR                        PRIVILEGE                        GRA HIE
+------------------ --------------- ------------------------------ ------------------------------ ---------------------------------------- --- ---
+UHG_DDIXON         UNIMR_MART      UHG_MBR_ENGAGEMENT             UNIMR_MART                     SELECT                           NO  NO
+UHG_DDIXON         UNIMR_MART      CLINICAL_FEED_DAILY            UNIMR_MART                     SELECT                           NO  NO
+
+
+-TO CHECK THE PRIVILEGES IN A GIVEN ROLE IN ORACLE:
+
+>SELECT * FROM DBA_SYS_PRIVS WHERE GRANTEE LIKE  'ROLE_NAME';
+
+
+-to check all privileges belonging to a user in Oracle:
+
+SELECT * FROM DBA_TAB_PRIVS where grantee ='PGE2_CMPGN'
+SELECT * FROM DBA_ROLE_PRIVS WHERE GRANTEE = 'ODS_UHG'
+SELECT * FROM DBA_SYS_PRIVS WHERE GRANTEE=
+
+
+
+

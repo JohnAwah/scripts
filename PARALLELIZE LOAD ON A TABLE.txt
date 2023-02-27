@@ -1,0 +1,16 @@
+
+
+PARALLELIZE running a script on a table:
+SQL> select owner,table_name,degree from dba_tables where table_name='table_name';
+
+sql> alter table table_name parralel 8;
+
+
+
+2.SIZE OF A TABLE:
+
+select owner,segment_name,segment_type,sum(bytes)/1024/1024/1024 "GB" from dba_segments where segment_name='table_name'
+group by owner,segment_name,segment_type;
+
+
+

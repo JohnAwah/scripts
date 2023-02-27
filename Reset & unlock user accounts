@@ -1,0 +1,80 @@
+TO TROUBLESHOOT USER ACCOUNT ACCESS:
+
+-desc dba_users
+-create sql to identify what you want to check as below:
+
+>SQL> desc dba_users;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USERNAME                                  NOT NULL VARCHAR2(128)
+ USER_ID                                   NOT NULL NUMBER
+ PASSWORD                                           VARCHAR2(4000)
+ ACCOUNT_STATUS                            NOT NULL VARCHAR2(32)
+ LOCK_DATE                                          DATE
+ EXPIRY_DATE                                        DATE
+ DEFAULT_TABLESPACE                        NOT NULL VARCHAR2(30)
+ TEMPORARY_TABLESPACE                      NOT NULL VARCHAR2(30)
+ LOCAL_TEMP_TABLESPACE                              VARCHAR2(30)
+ CREATED                                   NOT NULL DATE
+ PROFILE                                   NOT NULL VARCHAR2(128)
+ INITIAL_RSRC_CONSUMER_GROUP                        VARCHAR2(128)
+ EXTERNAL_NAME                                      VARCHAR2(4000)
+ PASSWORD_VERSIONS                                  VARCHAR2(17)
+ EDITIONS_ENABLED                                   VARCHAR2(1)
+ AUTHENTICATION_TYPE                                VARCHAR2(8)
+ PROXY_ONLY_CONNECT                                 VARCHAR2(1)
+ COMMON                                             VARCHAR2(3)
+ LAST_LOGIN                                         TIMESTAMP(9) WITH TIME ZONE
+ ORACLE_MAINTAINED                                  VARCHAR2(1)
+ INHERITED                                          VARCHAR2(3)
+ DEFAULT_COLLATION                                  VARCHAR2(100)
+ IMPLICIT                                           VARCHAR2(3)
+ ALL_SHARD                                          VARCHAR2(3)
+ PASSWORD_CHANGE_DATE                               DATE
+ 
+ 
+ >SQL> select USERNAME,ACCOUNT_STATUS from dba_users where username = 'ODB'                   (checks status of account)
+  2  ;
+
+USERNAME
+--------------------------------------------------------------------------------
+ACCOUNT_STATUS
+--------------------------------
+ODB
+OPEN
+
+
+>SQL> alter user ODB identified by odb;   (resets the password)
+
+User altered.
+
+
+>SQL> alter user ODB identified by ODB account unlock;  (to unlock the account)
+
+
+
+> Query to get users with a name similar to another name: 
+
+for example:spotfire, query would be:
+
+SQL> select USERNAME,ACCOUNT_STATUS from dba_users where USERNAME like '%SPOT%';
+
+
+>SET ORACLE PASSWORD EXPIRY TO UNLIMITED IN ORACLE:
+
+-SQL> select account_status,profile from dba_users where username = upper('ODS_PRI_APPS');
+
+ACCOUNT_STATUS
+--------------------------------
+PROFILE
+--------------------------------------------------------------------------------
+OPEN
+DEFAULT
+
+-ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED;
+
+
+
+
+
+

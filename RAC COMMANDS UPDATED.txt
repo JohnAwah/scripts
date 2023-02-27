@@ -1,0 +1,136 @@
+RAC COMMANDS:
+
+RAC COMMANDS
+============
+crsctl check ctss
+crsctl check crs
+crsctl res stat -t
+cluvfy comp clocksync -n all -verbose
+srvctl stop instance -d ods2moop -i ods2moop1 (Stop only node-1 ods2moop1)
+srvctl stop instance -d ods2moop -i ods2moop1 -f (Forcefully Stop only node-1 ods2moop1)
+srvctl start instance -d odsuhgp -i ods2moop1 (Start only node-1 ods2moop1)
+srvctl disable instance -d cepprod -i cepprod1 (Disable startup)
+srvctl relocate database -d ottgwdb -n ott-oda0
+srvctl config service -d IDCPROD -s oc_wcc_hui3cprd | grep -i pluggable (To Identify the Pluggable Database Service Name)
+srvctl modify db -d RMBPRD_HA -o /u01/app/oracle/product/12.2.0.1/dbhome_1
+export ORACLE_HOME=/u01/app/oracle/product/12.2.0.1/dbhome_1
+srvctl start db -d RMBPRD_HA -o mount (Start DB on mount mode)
+srvctl modify pssword file to new location
+srvctl config database -db DB_UNIQUE_NAME
+srvctl status database -d TEST9
+srvctl start database -d odskbmp -o restrict (Start DB in Restrict Mode)
+srvctl status database -d odskbmp -v (Validate restrict mode)
+alter system enable restricted session; (Block Connection)
+alter system disable restricted session; (Allow Connection)
+
+
+2. MANAGING SERVICES IN RAC:
+
+
+-creating services names:
+
+-r TOQA1 is preferred node, and -a TOQA2 is secondary node.
+
+-s is preferred node, and -a is failover node
+
+DLEX_B6TICKETING 			 >> srvctl add service -d DOPRD_NCO -s DLEX_B6TICKETING_dr -r DOPRD2 -a DOPRD1
+DLEX_B6TRANSACC 		 >> srvctl add service -d TOQA_NVA -s DLEX_B6TRANSACC -r TOQA1 -a TOQA2
+DLEX_TDP_FARES2			 >> srvctl add service -d TOQA_NVA -s DLEX_TDP_FARES2 -r TOQA1 -a TOQA2
+DLEX_B6BIZ_DATA 		 >> srvctl add service -d TOQA_NVA -s DLEX_B6BIZ_DATA -r TOQA1 -a TOQA2
+DLEX_B6STATICCONTENTS		 >> srvctl add service -d TOQA_NVA -s DLEX_B6STATICCONTENTS -r TOQA1 -a TOQA2
+DLEX_B6TDP_AVAILCACHE		 >> srvctl add service -d TOQA_NVA -s DLEX_B6TDP_AVAILCACHE -r TOQA1 -a TOQA2
+DLEX_B6BUSINESS_RULES		 >> srvctl add service -d TOQA_NVA -s DLEX_B6BUSINESS_RULES -r TOQA1 -a TOQA2
+
+-bash-4.2$ srvctl status service -d DOPRD_NVA  -s dlex_b6business_rules_prd
+Service dlex_b6tdp_availcache_qa is running on instance(s) TOQA2
+-bash-4.2$ srvctl stop  service -d DLEX_B6TICKETING  -s dlex_b6tdp_availcache_qa
+-bash-4.2$ srvctl status service -d TOQA_NVA  -s dlex_b6tdp_availcache_qa
+Service dlex_b6tdp_availcache_qa is not running.
+-bash-4.2$ srvctl remove  service -d TOQA_NVA  -s dlex_b6tdp_availcache_qa
+-bash-4.2$ srvctl status service -d TOQA_NVA  -s dlex_b6tdp_availcache_qa
+PRCR-1001 : Resource ora.toqa_nva.dlex_b6tdp_availcache_qa.svc does not exist
+-bash-4.2$ srvctl status service -d TOQA_NVA
+
+srvctl start  service -db DOPRD_NCO -s DLEX_B6TICKETING_dr
+
+-TO RELOCATE A SERVICE IN RAC:
+
+>srvctl relocate service -db <dbname> -service <service name> -oldinst <inst1> -newinst <inst2>
+
+
+-HOW TO GET CONNECTIONS IN RAC USING SERVICE_NAMES, MAHINES NAME etc...
+
+>desc gv$session
+
+select machine,service_name from gv$session; (look at output, and can add other variables as required).
+
+
+
+srvctl add service -d DOPRD_NVA -s dlex_b6business_rules_prd -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NVA -s dlex_b6hertz_prd -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NVA -s dlex_b6inventory_prd -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NVA -s dlex_b6profile_prd -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NVA -s dlex_b6staticcontents_prd -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NVA -s dlex_b6transacc_prd -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NVA -s dlex_b6resv_prd -r DOPRD1 -a DOPRD2
+srvctl add service -d DOPRD_NVA -s dlex_b6biz_data_prd -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NVA -s dlex_b6taxcache_prd -r DOPRD2 -a DOPRD1
+
+
+
+srvctl add service -d DOPRD_NCO -s dlex_b6business_rules_dr -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NCO -s dlex_b6hertz_dr -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NCO -s dlex_b6inventory_dr -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NCO -s dlex_b6profile_dr -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NCO -s dlex_b6staticcontents_dr -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NCO -s dlex_b6transacc_dr -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NCO -s dlex_b6resv_dr -r DOPRD1 -a DOPRD2
+srvctl add service -d DOPRD_NCO -s dlex_b6biz_data_dr -r DOPRD2 -a DOPRD1
+srvctl add service -d DOPRD_NCO -s dlex_b6taxcache_dr -r DOPRD2 -a DOPRD1
+
+
+
+-bash-4.2$ hostname
+JBCUALORA1002C
+-bash-4.2$ srvctl status service -d DOPRD_NVA
+Service dlex_b6biz_data_prd is not running.
+Service dlex_b6business_rules_prd is not running.
+Service dlex_b6hertz_prd is not running.
+Service dlex_b6inventory_prd is not running.
+Service dlex_b6profile_prd is not running.
+Service dlex_b6resv_prd is not running.
+Service dlex_b6staticcontents_prd is not running.
+Service dlex_b6taxcache_prd is not running.
+Service dlex_b6transacc_prd is not running.
+
+-bash-4.2$ hostname
+JBEGWLORA1002C
+-bash-4.2$ srvctl status service -d DOPRD_NCO
+Service dlex_b6biz_data_dr is not running.
+Service dlex_b6business_rules_dr is not running.
+Service dlex_b6hertz_dr is not running.
+Service dlex_b6inventory_dr is not running.
+Service dlex_b6profile_dr is not running.
+Service dlex_b6resv_dr is not running.
+Service dlex_b6staticcontents_dr is not running.
+Service dlex_b6taxcache_dr is not running.
+Service dlex_b6transacc_dr is not running.
+
+-TO RELOCATE SERVICES IN RAC:
+
+srvctl relocate service -db DOPRD_NCO -service dlex_b6biz_data_dr -oldinst DOPRD1 -newinst DOPRD2
+srvctl relocate service -db DOPRD_NCO -service dlex_b6business_rules_dr -oldinst DOPRD1 -newinst DOPRD2
+srvctl relocate service -db DOPRD_NCO -service dlex_b6hertz_dr -oldinst DOPRD1 -newinst DOPRD2
+srvctl relocate service -db DOPRD_NCO -service dlex_b6inventory_dr -oldinst DOPRD1 -newinst DOPRD2
+srvctl relocate service -db DOPRD_NCO -service dlex_b6profile_dr -oldinst DOPRD1 -newinst DOPRD2
+srvctl relocate service -db DOPRD_NCO -service dlex_b6staticcontents_dr -oldinst DOPRD1 -newinst DOPRD2
+srvctl relocate service -db DOPRD_NCO -service dlex_b6taxcache_dr -oldinst DOPRD1 -newinst DOPRD2
+srvctl relocate service -db DOPRD_NCO -service dlex_b6transacc_dr -oldinst DOPRD1 -newinst DOPRD2
+
+
+
+
+
+
+
+

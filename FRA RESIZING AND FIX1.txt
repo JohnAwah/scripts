@@ -1,0 +1,103 @@
+FRA IS FULL:
+e.g : Warning:BHAXODMP_PR - db_recovery_file_dest_size of 1127428915200 bytes is 85.15% used and has 167442417664 remaining bytes available.
+
+Do this:
+
+-SQL> set line 200
+SQL> show paramter recovery;
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+db_recovery_file_dest                string      /u03/app/oracle/fast_recovery_
+                                                 area/
+db_recovery_file_dest_size           big integer 1300G
+recovery_parallelism                 integer     0
+remote_recovery_file_dest            string
+
+>
+col name  format a45
+col size_mb  format 999,999,999
+col used_mb  format 999,999,999
+col pct_used format 999
+
+select name,
+   ceil( space_limit / 1024 / 1024 /1024) size_gb,
+   ceil( space_used / 1024 / 1024/1024) used_gb,
+   decode( nvl( space_used, 0),0, 0,
+   ceil ( ( space_used / space_limit) * 100) ) pct_used
+from v$recovery_file_dest order by name desc;
+
+NAME                                             SIZE_GB    USED_GB PCT_USED
+--------------------------------------------- ---------- ---------- --------
+/u03/app/oracle/fast_recovery_area/                 1300        909       70
+
+
+
+
+
+SQL> select *  from v$flash_recovery_area_usage;
+
+FILE_TYPE               PERCENT_SPACE_USED PERCENT_SPACE_RECLAIMABLE NUMBER_OF_FILES     CON_ID
+----------------------- ------------------ ------------------------- --------------- ----------
+CONTROL FILE                             0                         0               0          0
+REDO LOG                                 0                         0               0          0
+ARCHIVED LOG                         69.59                         0             317          0
+BACKUP PIECE                             0                         0               0          0
+IMAGE COPY                               0                         0               0          0
+FLASHBACK LOG                            0                         0               0          0
+FOREIGN ARCHIVED LOG                   .02                         0              12          0
+AUXILIARY DATAFILE COPY                  0                         0               0          0
+
+8 rows selected.
+
+
+-alter system set db_recovery_file_dest_size=20G scope=both;
+
+
+-Once FRA size is exhausted, first fix is to increase FRA size, and then check what files to delete.
+
+If The last archive backup got failed due to an unknown error.
+Increased the FRA , re-initiated the backup now FRA is under the threshold limit.
+I’ve also reduced the threshold limit to 90% before it was 98%.
+
+
+
+-FRA GETTING EXHAUSTED ON TRAXPRD DATABASE
+******************************************************
+
+FRA - THRESHOLD: 85
+
+
+***************************** Utilization ****************************
+
+NAME									 PCT_USED SPACE_LIMIT_GB SPACE_USED_GB SPACE_RECLAIMABLE_GB NUMBER_OF_FILES
+---------------------------------------------------------------------- ---------- -------------- ------------- -------------------- ---------------
++RECODG 								    86.12	    2000       1722.38			  0	       3714
+
+***************************** Files Details ****************************
+
+
+FILE_TYPE		PERCENT_SPACE_USED PERCENT_SPACE_RECLAIMABLE NUMBER_OF_FILES	 CON_ID
+----------------------- ------------------ ------------------------- --------------- ----------
+ARCHIVED LOG			     46.11			   0		2915	      0
+AUXILIARY DATAFILE COPY 		 0			   0		   0	      0
+BACKUP PIECE			       .02			   0		   1	      0
+CONTROL FILE				 0			   0		   0	      0
+FLASHBACK LOG			     39.98			   0		 798	      0
+FOREIGN ARCHIVED LOG			 0			   0		   0	      0
+IMAGE COPY				 0			   0		   0	      0
+REDO LOG				 0			   0		   0	      0
+
+8 rows selected.
+
+***************************** Restore Point Details ****************************
+
+NAME								       RESTORE_POINT_TIME							   STORAGE_SIZE
+---------------------------------------------------------------------- --------------------------------------------------------------------------- ------------
+BEFORE_CHG																	     8.5559E+11
+
+
+select GUARANTEE_FLASHBACK_DATABASE,NAME ,TIME from v$restore_point;
+
+
+Obtain confirmation from management and Dev team which restore points ca be removed.
+

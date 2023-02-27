@@ -1,0 +1,172 @@
+Troubleshooting RAC cluster,database, Listener, ASM and resources:
+
+- First identify if its single node RAC or grid. If grid
+> ps -ef|grep tns
+grid     19420  1775   0   May 16 ?          68:01 /u01/app/11.2.0.4/grid/bin/tnslsnr LISTENER -inherit
+grid      6120  1775   0   Aug 15 ?          18:42 /u01/app/11.2.0.4/grid/bin/tnslsnr LISTENER_SCAN3 -inherit
+grid      6025  1775   0   Aug 15 ?          18:49 /u01/app/11.2.0.4/grid/bin/tnslsnr LISTENER_SCAN2 -inherit
+oracle    8757  3254   0 05:47:31 pts/9       0:00 grep tns
+You have new mail in /var/mail/oracle
+
+The output indicates its grid with SCAN listener running, So. 
+*You can also check ps -ef|grep pmon, and if you see +ASM1, you know it is grid or has morethan one node.
+
+su - grid
+password:
+
+>grid@zurxodsdbprd01> ps -ef|grep pmon
+grid     32431  1775   0   Jan 19 ?          11:31 asm_pmon_+ASM1
+grid     11934 11219   0 05:49:38 pts/9       0:00 grep pmon
+oracle    1854  1775   0   Jan 19 ?          15:41 ora_pmon_odsurxp1
+grid@zurxodsdbprd01> . oraenv
+ORACLE_SID = [grid] ? +ASM1
+The Oracle base has been set to /u01/app/grid
+
+>Check cluster resources and check is they are all online as follows:
+
+grid@zurxodsdbprd01> crsctl stat res -t
+--------------------------------------------------------------------------------
+NAME           TARGET  STATE        SERVER                   STATE_DETAILS
+--------------------------------------------------------------------------------
+Local Resources
+--------------------------------------------------------------------------------
+ora.DATADG.dg
+               ONLINE  ONLINE       zurxodsdbprd01
+               ONLINE  ONLINE       zurxodsdbprd02
+ora.LISTENER.lsnr
+               ONLINE  ONLINE       zurxodsdbprd01
+               ONLINE  ONLINE       zurxodsdbprd02
+ora.RECODG.dg
+               ONLINE  ONLINE       zurxodsdbprd01
+               ONLINE  ONLINE       zurxodsdbprd02
+ora.SYSTEMDG.dg
+               ONLINE  ONLINE       zurxodsdbprd01
+               ONLINE  ONLINE       zurxodsdbprd02
+ora.asm
+               ONLINE  ONLINE       zurxodsdbprd01           Started
+               ONLINE  ONLINE       zurxodsdbprd02           Started
+ora.gsd
+               OFFLINE OFFLINE      zurxodsdbprd01
+               OFFLINE OFFLINE      zurxodsdbprd02
+ora.net1.network
+               ONLINE  ONLINE       zurxodsdbprd01
+               ONLINE  ONLINE       zurxodsdbprd02
+ora.ons
+               ONLINE  ONLINE       zurxodsdbprd01
+               ONLINE  ONLINE       zurxodsdbprd02
+--------------------------------------------------------------------------------
+Cluster Resources
+--------------------------------------------------------------------------------
+ora.LISTENER_SCAN1.lsnr
+      1        ONLINE  ONLINE       zurxodsdbprd02
+ora.LISTENER_SCAN2.lsnr
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.LISTENER_SCAN3.lsnr
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.cvu
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.oc4j
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.odsurxp.db
+      1        ONLINE  ONLINE       zurxodsdbprd01           Open
+      2        ONLINE  ONLINE       zurxodsdbprd02           Open
+ora.odsurxp.odsurx.svc
+      1        ONLINE  ONLINE       zurxodsdbprd01
+      2        ONLINE  ONLINE       zurxodsdbprd02
+ora.scan1.vip
+      1        ONLINE  ONLINE       zurxodsdbprd02
+ora.scan2.vip
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.scan3.vip
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.zurxodsdbprd01.vip
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.zurxodsdbprd02.vip
+      1        ONLINE  ONLINE       zurxodsdbprd02
+
+>Check status of Listener and make sure it is up and running: 
+
+grid@zurxodsdbprd01> lsnrctl status
+
+LSNRCTL for Solaris: Version 11.2.0.4.0 - Production on 26-FEB-2022 05:51:02
+
+Copyright (c) 1991, 2017, Oracle.  All rights reserved.
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=IPC)(KEY=LISTENER)))
+STATUS of the LISTENER
+------------------------
+Alias                     LISTENER
+Version                   TNSLSNR for Solaris: Version 11.2.0.4.0 - Production
+Start Date                16-MAY-2021 07:16:01
+Uptime                    285 days 23 hr. 35 min. 0 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /u01/app/11.2.0.4/grid/network/admin/listener.ora
+Listener Log File         /u01/app/grid/diag/tnslsnr/zurxodsdbprd01/listener/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=LISTENER)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=10.1.112.231)(PORT=1521)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=10.1.112.230)(PORT=1521)))
+Services Summary...
+Service "+ASM" has 1 instance(s).
+  Instance "+ASM1", status READY, has 1 handler(s) for this service...
+Service "odsurx" has 1 instance(s).
+  Instance "odsurxp1", status READY, has 1 handler(s) for this service...
+Service "odsurxp" has 1 instance(s).
+  Instance "odsurxp1", status READY, has 1 handler(s) for this service...
+Service "odsurxpXDB" has 1 instance(s).
+  Instance "odsurxp1", status READY, has 1 handler(s) for this service...
+The command completed successfully
+
+>check status of cluster services and make sure all are available and online:
+grid@zurxodsdbprd01> crsctl check crs (for singdle node RAC use(crsctl check has))
+CRS-4638: Oracle High Availability Services is online
+CRS-4537: Cluster Ready Services is online
+CRS-4529: Cluster Synchronization Services is online
+CRS-4533: Event Manager is online
+
+
+>to start and stop services:
+
+crsctl start/stop crs/has.
+
+>CHECK ALERT LOG FOR ANY RELATED ERRORS(USE SHIFT + G TO GO TO END OF PAGE IN LOGFILE AND, USE 'K' TO MOVE UPWARDS THE FILE)
+grid@zurxodsdbprd01> vi alertzurxodsdbprd01.log
+
+>YOU CAN ALSO CHECK STATUS OF CLUSTER DEMONS AS BELOW, AND MAKE SURE THEY ARE ONLINE:
+
+grid@zurxodsdbprd01> crsctl stat res -t -init
+--------------------------------------------------------------------------------
+NAME           TARGET  STATE        SERVER                   STATE_DETAILS
+--------------------------------------------------------------------------------
+Cluster Resources
+--------------------------------------------------------------------------------
+ora.asm
+      1        ONLINE  ONLINE       zurxodsdbprd01           Started
+ora.cluster_interconnect.haip
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.crf
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.crsd
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.cssd
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.cssdmonitor
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.ctssd
+      1        ONLINE  ONLINE       zurxodsdbprd01           OBSERVER
+ora.diskmon
+      1        OFFLINE OFFLINE
+ora.evmd
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.gipcd
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.gpnpd
+      1        ONLINE  ONLINE       zurxodsdbprd01
+ora.mdnsd
+      1        ONLINE  ONLINE       zurxodsdbprd01
+
+
+
+

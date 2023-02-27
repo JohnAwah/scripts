@@ -1,0 +1,9 @@
+1. HOW TO PICK ALL SCHEMAS WITH SIMILAR STARTING NAMES:
+
+select username,account_status from dba_users where username like 'DLEX%';
+
+2. How to query all schemas in the database:
+
+select username as schema_name
+from sys.all_users
+order by username;

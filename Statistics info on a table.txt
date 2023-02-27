@@ -1,0 +1,7 @@
+Identify the last time stats were gathered for the table(s) involved.  The following query can be used.
+
+SELECT OWNER, TABLE_NAME, LAST_ANALYZED, NUM_ROWS, DEGREE,  owner, table_name, last_analyzed, num_rows, degree
+FROM ALL_TABLES
+WHERE OWNER='table_owner'
+AND TABLE_NAME IN ('table_name')
+ORDER BY OWNER, TABLE_NAME;

@@ -1,0 +1,13 @@
+-Command to check processes utilization in the database
+
+to check resource limit: select * from v$resource_limit where resource_name like 'process%';
+
+AND:
+
+set lin 500
+col osuser for a20
+select inst_id,osuser,status,count(*) from gv$session where status='INACTIVE' and OSUSER='jbinst' and last_call_et > 900 group by INST_ID,OSUSER,STATUS; 
+
+select inst_id,osuser,status,count(*) from gv$session where status='ACTIVE' and OSUSER='jbinst' group by INST_ID,OSUSER,STATUS;
+
+select inst_id,osuser,status,count(*) from gv$session where status='INACTIVE' and OSUSER='jbinst' group by INST_ID,OSUSER,STATUS;

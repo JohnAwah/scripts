@@ -1,0 +1,1457 @@
+Task tracker:
+
+1. Monday 01/24/22
+
+-WTD>> Migrate fix to audit view...20 mins
+-sent letter to JB for SentinelOne installation...15mins
+
+
+2. Tuesday 01/25/22
+
+-JB --> CHG0057837 - Trax OOS Confidence Level Bug Fix - STG (1/25 11:00AM)...1 hour 
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Monday 02/21
+
+-WTD>> Raised Maestro ticket Issue #348038, assigned: [/var amount at 91% on server vdaloraoemprd01..15MINS
+-WTd>>checked.....LEVEL1-WTD-SensorMONDB-vdaloraclecu002.kbm1.loc-IDCUAT-Oracle Tablespaces Reaching Storage limits...15mins
+-WTD>>Tablespace fix....Re: Tablespace [BLK_EXTR_SMT_T01] is [92.48 percent] full ....15 mins
+
+
+2. Tuesday 02/22
+
+-Respond to Nitin's email of taking Undo tablespace out of monitoring and do it(TO DO)
+-Migrate to prod script...30mins
+-WTD>> RUNNING MULTIPLE SCRIPTS RE: MOO DQM Next Steps - 2/22/2022
+-WTD>> JOINED 9.30PM CALL FOR UPDATE ON SCRIPTS WTD>> RUNNING MULTIPLE SCRIPTS RE: MOO DQM Next Steps - 2/22/2022
+-WTD>>GRANT DBA TO TIDAL ON TDL6DEV
+
+
+3. WED 02/23
+- JB>>CHG0058359 - Trax Location Master Window Security Features - Application Patch - PRD   CHG0058358 - Trax Location Master Window Security Features - SQL Patch - PRD ....1 HR
+
+-WTD>> TROUBLESHOOTING SCRIPT 1A OF MOO DQM Next Steps
+-JB>> CALL WITH VISH AND SHIV ON DD BACKUP CHECK AND FW: Oracle files recall from Azure cloud tier & JB >> Data Domain setup in JBCUALORA2001C/D 
+-WTD-4965>>LEVEL1-WTD-SensorMONDB-zmooodsdbprd01-ODS2MOOP-Oracle Tablespaces Reaching Storage limits
+
+
+
+4.Thursday 02/24
+
+WTD>>create and add some indexes for in the odsurxp database....30 mins
+WTD>>Issue #348051, submitted on your behalf: /var amount at 90% on server vdaloraclecu002...15MINS
+TBASE>>RE: CR App Database updates to UAT>>TBASE...30mins
+WTD>>-WTD>>LEVEL1-WTD-SensorMONDB-zurxodsdbprd01-ODSURXP-Oracle Tablespaces Reaching Storage limits 15MIN
+
+
+5. Friday 02/25
+
+WTD>>Unsubscribe Query Not Pulling Results In (2 queries in a sequence)...1 HR
+jb>> CHG0058682 - Trax - Unable to Post-Complete WO from Task Control - ECC...3HRS
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Monday 02/28
+-Index creation on WTD: ODS2MOOP Database:
+ODS_MOO.NCOA_OUTPUT_RECORD
+ODS_MOO.NCOA_INPUT_RECORD........
+
+-WTD>>Killed sql requested by MATT(APPS TEAM): Can you kill the SQL running on SID 1036 on ODS_MOO?  ....(15  to 30mins)
+-WTD>>WTD-4972 >> FW: LEVEL1-WTD-SensorMONDB-odm6db01.kbm1.loc-KBM2ODM-Oracle Tablespaces Reaching Storage limits...(15mins)
+_WTD>>Checked > oracle@odm5db01's connectivity ...15mins no issue
+-Troubleshootig blocking sessions on ODS_MOO.NCO_OUTPUT_RECORDS.....3HRS
+
+
+2.Tuesday 03/01
+
+-WTD: HUI_4000819_400_MartConstraintBuild failed on HUI - Production Support....30mins
+-WTD Migrate to Testing Environment...30 mins
+-TIMESHEET ENTRY 4 HRS
+
+
+3.Wednesday 03/02
+
+JB>> JB >> Defining Services for Different Workloads on Reservation Database ...1 HR
+WTD>> Unsubscribe Query Not Pulling Results In PRIPRD...1HR
+WTD-4974 >> RE: LEVEL1-WTD-SensorMONDB-zmooodsdbprd01-ODS2MOOP-Oracle Tablespaces Reaching Storage limits...15mins
+WTD>>Migrate fix to Shopper profile view...30MINS
+
+
+3.THURSDAY 03/03
+
+-FRDM>> MONTHLY SUMMARY REPORT...4 HRS
+-TBASE >>TBASE>>ServiceNow requests MEETINGS...30 MINS
+-WTD>> space quota issues for PYNERM account in WellMed Production...15MINS
+-WTD>>UNPLANNED>>space quota issues for PYNERM account on USERS tablespace still exhausted and needed to be increased and resized USERS tablespace in WellMed Production...15mins
+
+
+4.JB>>RE: TRAX Maintenance Latency INC 0315432 (Reboot of TRAX servers)...4hrs.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Monday 03/07/2022: 
+-Provided select privilege access to ODBRO on ACTUALS_FLIGHT_TABLE...15MINS
+-DELA - V034 and Reboot,CTI DELA RELEASE...2 HRS
+-TIMESHEET ENTRY...4HRS
+-TBASE>>RE: RITM0036084
+
+2.Tuesday 03/08/2022
+-Maestro ticket raised for this issue: /var mount space at 90% on server vdaloraclet001...15mins
+-JB>> Attended Catch-up on Traxmart  Issue MEETING...30mins
+-VIXX>> Call with Joseph Baranello to estimate time for full backup of twoo databases...15mins
+
+3.Wednesday 03/09/2022
+-WTD>> Migrate to Testing Environment on UHGTST...1 hr
+-JB>>Oracle 19C Upgrade Weekly Project Update...15mins
+JB>>Trax Latency Follow-up...30 mins
+
+-----------------------------------------------------------------------------------
+4. Thursday 03/09
+
+WTD>> LEVEL1-WTD-SensorMONDB-zuhgodsdbprd01-ODSUHGP-Oracle Tablespaces Reaching Storage limits...30mins
+JB>>Trax Latency Follow-up...30 MINS
+JB>> grant all ODB tables access to ODBRO user...1 HR mins 
+
+------------------------------------------------------------------------------------------------------
+
+5. FRiday 03/10
+
+JB>> CTR PERFORMANCE ISSUE CALL....
+JB>> CHECKING BLOCKING SESSIONS FOR TRAXPRD...15 MINS
+VIXXIO>> CHECKING VIXXIO CONNECTIVITY..
+VIXX>> VIXXIO MEETING...15MINS
+WTD>> 
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+1.Monday 03/14
+
+JB >> LEVEL1-JETBLUE-CTR19C-SensorMONDB-JBCUALORA1002C-DOPRD-Oracle Tablespaces Reaching Storage limits...15 mins
+Jb>>LEVEL1-JETBLUE-NON-PROD-SensorMONDB-JBCUALORA2002C-DRSTG-Oracle Tablespaces Reaching Storage limits....15 mins
+JB>>RE: Appdynamics :OEM-DOPRD: Critical: INC0319514, checked for blocking sessions, active sessions ...15 mins
+WTD>> MEETINNG WITH MUHAMMAD ON CHANGING PASSWORDS FOR ORACLE,DRID,ASM PASSWORDS....45MINS
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.TUESDAY
+JB>>CHG0058932/CHG0058934 - Trax Alpha Patch - Bug Fixes SQLs/Application Patch - STG...1HR
+  JB>>REDIFINING AND CREATION OF SERVICES FOR RESERVATION DATABASE IN QA2...2 HRS
+  WTD>migrATE FIX FOR SHOPPER PROFILE VIEW...30MINS
+WTD>>CHECKED THIS ORA-04031: unable to allocate 40 bytes of shared memory ("shared pool","CREATE TABLE...1.30MINS
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+3 WEDNESDAY
+
+-SENTINEL ONE INSTALLATION IN EGW STGE......1HR
+
+TO BE CHECKED
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+4. 02/17 thursday
+
+-WTD>>LEVEL1-WTD-SensorMONDB-odm6db03.kbm1.loc-URX2PRD-Oracle Tablespaces Reaching Storage limits..15MINS
+-WTD>> CHANGING SYS(ASM) AND ASMSNMP PASSWORDS....4 HOURS
+-WTD>>New Work Request: Migrate to Testing - Environment Architect support...20MINS
+-
+
+--------------------------------------------------------------------------------------------------------------------------
+
+5.02/18 FRIDAY:
+
+-WTD>>Comment on ETPROMOHIST - step "950 Archive ETPROMOHIST Audit Data" appears stuck on BLK - Production Support (thru Mar-2022) (75123312-001) (ref# 1680839)...15MINS
+-WTD>> SQL> select program,sql_id,sid,serial# from gv$session where sql_id like '4asrjmrw42jx3%';
+-Completing inconvenience bonus form for Feb 2022...3 hrs.
+-
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. 03/21 Monday
+
+-WTD:Raised Maestro ticket for issue #350314, submitted on your behalf: /var amount at 90% on server vdaloraoemprd01..15mins (KBM)
+-WTD:Migrate fix to Shopper profile view to production..15mins
+-WTD-4986>>LEVEL1-WTD-OEM EM Incident: Critical:New: - Tablespace [MGMT_TABLESPACE] is [97.07 percent] full...15mins
+
+
+
+2. 03/22 Tuesday
+- EGW19CTRSTG ctsconfig password has expired (reset)  **EGW QA**...15mins
+- 16.1.4 Deployment Prep - Unlock Cintra DBs and EGW Prod Packaging...5 hrs
+WTD>>Need expanded permissions on URX and MOO ODS for support of Webcrawler process...1 HR CHECKING
+
+
+3. 03/23 Wednesday
+
+-WTD>> Migrate to Production...30 mins
+-WTD>>CHANGING PASSWORDS FOR ASM, ASMSNMP IN WTD CLUSTERS...2 HRS
+-WTD>>Migrate to Production...15 TO 30 MINS
+-WTD>>Call to Relocate the services from node 2 to 1 on vdaloraclep001/02 servers...3 HRS
+
+
+4. THURSDAY 03/24
+
+WTD>>New Work Request: Migrate fix to view to TEST...30MINS
+FRDM>> Change swap thresholds for Prodoraoda02 warning to 90%, and Critical to 95%...FRDM..15MINS
+WTD>>WTD-4991>>LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [USERS] is [92.04 percent] full...15MINS
+
+5.: LEVEL1-WTD-SensorMONOS-zremixdbstby01-Filesystem running out of space.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Monday 03/28
+
+WTD: Migrate fix to view to TEST...30mins
+JB: E-Commerce Stabilization Regroup meeting.... 1 hr
+JB>>LEVEL1-JETBLUE-CTR19C-SensorMONDB-JBEGWLORA1002D-DOPRD-Oracle Tablespaces Reaching Storage limits.---20mins
+WTD:New Work Request: Migrate fix to view to TEST...15MINS
+
+2. Tuesday 03/29
+
+- GENERATED LOGFILE FOR Sentinel one ERROR LOGFILE...30 MINS
+-session count for JB by machine name and schema...01 HR
+-WTD>>Migrate fix to view to TEST...30MINS
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------3.Wednesday: 03/30
+-JB>>Updated session sheet for JB ....5 hrs
+
+4. Thursday: 03/31
+
+WTD>>New Work Request: Migrate to QA - for revised CC466 - CSIM...45mins
+WTD>> CHECKED MOO 2022 Archive Process - DBA on MOO - Production SupporT.TRUNCATE TABLES IN MOOPRD...30MINS
+JB>>TraxMart/Latency Follow-up...30mins
+
+5. FRIDAY:
+
+JB>> Prod | Trax Mart OLAP job changes...2 hrs
+WTD>>Need expanded permissions on URX and MOO ODS for support of Webcrawler process...30mins
+WTD>> LEVEL1-WTD-SensorMONDB-zmooodsdbprd02-ODS2MOOP-Oracle Tablespaces Reaching Storage limits...15mins
+WTD>>New Work Request: Creating Quarterly Partitions for 2022...30MINS
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Monday 04/04
+
+-New Work Request: Batch Core Interactions...15mins
+-Timesheet entry...2mins
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. Tuesday o4/05
+
+-JB>>S1 Connectivity testing and provided output to S1 Team...1 hr
+-WTD>> MOO 2022 Archive Process - DBA...CHECK AND CONFIRM ACTION TO truncate tables...30mins
+-JB>> DOPRD performance review...45mins
+-WTD>>New Work Request: Batch Core Interactions...30mins
+-JB>> Additional commands from SentinelOne team to execute in EGW STAGE for testing S1 console and provide output...15mins
+-JB>>change meeting CHG0059554-Deploy code to update Trax table schema (Production)...30mins
+-WTD>>LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [MOO_NEOOP_SMT_T01] is [92.46 percent] full
+
+3.Wednesday 04/06
+
+WTD>>LEVEL1-WTD-SensorMONDB-odm6db04.kbm1.loc-URX2PRD-Oracle Tablespaces Reaching Storage limits...15mins
+JB>> FW: Discuss QA2 database connection strings for new service...1 HR
+JB>> stopping and dropping two service names in Reservation database that are associated to schemas that dont exist in the TOQA database...1 hr
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. Thursday 04/07
+
+-JB Checked blocking session in TRAXPRD database...15mins
+-JB TraxMart/Latency Follow-up call....45mins
+-JB>>JB - DOPRD database hypercare proactive monitoring...meeting with Jayant, Geles Mike...30mins
+-JB>>Prod | Trax Mart OLAP job changes - Second attempt...30 mins
+-JB>>Repointing to New Oracle Services....30mins
+JB>> E-commerce meeting....30mins
+FRDM>> Monthly summary report for WTD...2 hrs
+JB>> Defining/created services for CUA STG & EGW PROD
+
+5. Friday 04/08
+
+-WTD>>New Work Request: URX_1753536_100_ExecuteConsPkg has not progressed, execute 2 scripts...30mins
+-WTD>>LEVEL1-WTD-SensorMONDB-odm6db03.kbm1.loc-URX2PRD-Oracle Tablespaces Reaching Storage limits adding multiple datafiles...30mins
+-WTD>>WTD>>Muhammad/Patrick>>ANTPROD database review....1 HR
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+1. MONDAY 04/11...SICK LEAVE
+
+2. TUESDAY 04/12...SICK LEAVE
+
+3. WEDNESDAY 04/13 
+-WTD>>Migrate to TEST - Refresh Improvement...30MINS
+-FRDM>>MEETING WITH MUHAMMAD TO REVIEW FRDM MONTHLY REPORTS,update secrete sever password...1HR
+-JB>>QA2 Sync Process is not working......1HR
+-WTD>>New Work Request: Migrate to PROD - Refresh Improvement...30MINS
+-WTD>>Comment on Suppress a Phone from FDC and ST DNC in PHONE Table on UHG - Production Support (thru Dec-2021) (75123266-001) (ref# 1686258)...30MINS
+
+4. THURSDAY 04/14
+
+-JB>>E-COMMERCE STABILIZATION REGROUP MEETING...30 MINS
+-WTD>>TROUBLESHOOTING CALL TO KILL SLOW & BLOCKING SESSIONS, AND GRANT PRIVILEGE TO PACKAGE...1HR
+-WTD>>Teams call with Mark Pryner>> kill other blocking sessions and truncate table...15mins
+-JB>>OGG script troubleshooting...30mins
+-JB>>Send S1 agent output to S1 team ...15mins
+-WTD>>LEVEL1-WTD-SensorMONDB-odm6db04.kbm1.loc-URX2PRD-Oracle Tablespaces Reaching Storage limits.30mins
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+5. Friday 04/15
+
+WTD>>New Work Request: Migrate to Production 3 scripts executed...30mins)
+JB>> S1 testing commands...15mins
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. MONDAY 04/18
+
+-Comment on Request for read access to the UNI_WMD_PLAT schema in three databases on Service Requests (75120808-007) (ref# 1681951)...30MINS.
+-Checked status of ticket and it was closed...confirmed for it to be closed on JIRA, 10MINS
+-
+
+2. TUESDAY 04/19
+-JB>>Deploy R16.1.4 to EGW Prod... 3 HRS
+-WTD>>Migrate Backfeed to Production...45MINS
+-WTD>> Comment on Migrate to Production on UHC - CC1161 - HPRO Modification for Snowflake Migration..( EXECUTED 1 SCRIPT AND CHECKED RUNTIME FOR 2ND SCRIPT)..45MINS
+-WTD>> New Work request: Comment on Archive Step from CLAIMHEALTHRX feed - Running Slow on PRI..30MINS
+
+3.WEDNESDAY 04/20
+
+CTI-DELA>> Dela Database Production password RESET FOR USER LIVIUB...1 HR
+
+4.THURSDAY 04/21
+
+WTD>>New Work Request: Migrate fix for issue - WF#1713100 to System Test(3 SCRIPTS TO EXECUTE)...30MINS
+JB>> EXECUTE COMMANDS ON JBEGWLORA2002D TO TROUBLESHOOT S1 CONNECTIVITY TO MANAGEMENT CONSOLE...1HR
+WTD>>LEVEL1-WTD-SensorMONDB-zremixdbprd02-KBM2PRD1-Oracle Tablespaces Reaching Storage limits...1HR
+
+
+5. FRIDAY 04/22
+
+TBASE>>TBASE>>RE: LEVEL1-TBASE-SensorMONDB-tboctbaexapl-f7fss1-sharedev-Oracle Tablespaces Reaching Storage limits..15MINS
+-Internal meeting with Muhammad
+
+-----------------------------------------------------------------------------------------------------------
+
+1.MONDAY 04/25
+
+-WTD>>New Work Request: Migrate to Production - revised CC466 - CSIM..3 SCRIPTS TO EXECUTE (1 HR)
+-
+
+2. TUESDAY:04/26
+
+WTD>> RE: Oracle database backups (NetApps) -We need to move the backups from netapp to ZFS for the below 4 databases.
+TESTED ARCHIVELOG BACKUP SCRIPTS IN 4 DATABASES...1HR
+WTD>>Updated sheet is with Amy and download and update the script...15MINS
+
+3.WEDNESDAY: 04/27
+
+WTD>>
+
+3.THURSDAY 04/28
+
+WTD>>New Work Request: Migrate to HUMPRD - LSC Extract...30MINS
+WTD>>New Work Request: UHC - Name and Address Load Overlaps - INDVDL_EXT_S...30MINS
+JB>>: RE: JB>>Trax Database Performance - Maintenance/Cleanup SCRIPTS TO OBTAIN TABLE SIZE IN DATABASE Trax is requesting you guys to run the sql attached to extract the full table list.  
+JB>>CTR Database Issue...BRIDGE CALL...2HRS
+JB>>Deploy Sabre DC Migration Code Drops 10&11 to EGW QA1...3HRS
+WTD>>WTD-5010 >> LEVEL1-WTD-OEM EM Incident: Critical:New: - The database status is UNKNOWN...Decommissioned servers Host=vorarac6p02/01.kbm1.loc from OEM.
+
+5.FRIDAY: 04/29
+
+-WTD>>New Work Request: Migrate to Test - Backfeed Change remove FK enable...30mins
+-JB>> CUI - Desktop Booking | Load test on QA2 - April 29 2022 | 00:00 AM EST...AWR REQUEST...15MINS
+-WTD>>Comment on UHC - Name and Address Load Overlaps - INDVDL_EXT_S on UHG - Production Support SCRIPTS TO EXECUTE AND THEN TROUBLESHHHOTED SCRIPT WITH ERRORS...1HR
+-JB>>RE: DLX deployment DROP11 CONTINUATION..1HR
+-WTD>>New Work Request: Migrate fix for issue WF#1713100 to System Test 4/29/22...15MINS
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. MONDAY 05/09
+
+-WTD>>Comment on HUI - BiMart Refresh issues on HUI - Production Support (thru Mar-2022) (75123303-001) (ref# 1741452)...45MINS
+-JB>>RE: CUA STG - ATTENDED MEETING DB Split Services...checked service names correspond with workload....1HR
+-CINTRA >>Introduction & JB KT WITH Manjuala Palani wjo just joined Cintra Team..1HR
+-INTERNAL CALL WITH MUHAMMAD ON FRDM SCRIPTS...30 MINS
+
+2. TUESDAY:05/10
+-ROVA>>Troubleshoot Verizon VPN/Pulse...1 HR
+-JB>>Table Record count and size REQUEST IN DOPRD AND DOSTG 19C...1HR
+
+3.WEDNESDAY 05/11
+
+FRDM>>INTERNAL CALL WITH MUHAMMAD TO TROUBLESHOOT HIS RDP CONNECTION...30MINS
+JB>>RE: CHECKED BLOCKING SESSIONS IN LEVEL3-JB-JBEGWLORA1002D-DOPRD2-Locked PNRs List...15MINS
+JB>> FIXED/UPDATED DATABASE PROFILES IN EGW PROD DATABASES...30MINS
+FRDM>>LEVEL1-FRDM-SensorMONDB-devoraoda01-HXODAFCT-Oracle Tablespaces Reaching Storage limits...Added 70GB of datafiles to tbs...30mins
+
+4. THURSDAY 05/12
+
+JB>>E-Commerce Stabilization Regroup...30MINS
+CTI DELA>> CTI >> DELA SUPPORT >> Support Release >> CHG0050267>> INSIS – apply support fixes releases to production...Acknowledged this email.15mins
+JB>>RE: JB>>DB Dips seen last night>> CHECKED CPU utilization and storage on DOPRD...45mins
+CININT>>View recordings OF NEW PLATFORM SERVICES...2 HRS
+
+5. FRIDAY 05/13
+
+-WTD>.New WF Request: Comment on Urgent Assistance Need - insufficient privileges UNIURX_REP on ORX - Production Support (thru Dec-2022) (75123282-001) (ref# 1732361)...1HR
+
+
+1. MONDAY 05/16
+
+JB>>Trax Alpha Patch Deployment Plan Review...1HR
+WTD>>Comment on Need access to tablespace called MOO_SAS_DATA on MOO - Production Support (thru Dec-2021) (75123256-001) (ref# 1750852)...15MINS
+
+2.TUESDAY 05/17
+
+JB>>E-Commerce Stabilization Regroup...30MINS
+JB>>GENERATE AWR REPORT FOR DOPRD, SUNDAY 3 TO 4 AM EST...15MINS
+WTD>>Comment on !Reset Password on MOO - Production Support (thru Dec-2021)...30mins
+WTD>>Comment on !UHG New User Access SHUBHAM SRIVASTAVA on UHG - Production Support (thru Dec-2021) (75123266-001) (ref# 1734754)...UNLOCK USER ACCOUNTS, RESET PASSOWRDS, CHECKED AND VERIFIED AND CONFIRMED WITH CUSTOMER ON TEAMS ABOUT CORRECT ACCOUNTS FOR ROLES TO BE DROPPED IN uhgprd AND UHGTST AND DROPPED THE ROLES...1.30MINS
+
+3.WEDNESDAY 05/18
+
+JB>>Backup Timings...30MINS
+CINTRA>>Platform Services >> Introduction to Docker >> Part 2 of 3..1HR
+JB>> JB>> DataDomain Space issue...MOUNTED THE MOUNT POINT..15mins
+JB>> Provided CTR OS crededtilas to Ameen for I/O troubleshooting...15mins
+CT_DELA_Release>> CTI >> DELA SUPPORT >> Support Release >> CHG0050267>> INSIS – apply support fixes releases to production...30mins
+
+4.TURSDAY 05/19
+
+CININT001>>ACUMATICA >> Cintra Timesheet Portal Introduction...45MINS
+JB>>New Database Servcies in EGW & CUA...1 HR
+WTD>>: LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [UNIMR_MART_SMT_T01] is [93.31 percent] full...30MINS
+CININT>>INCONVENIENT BONUS FORM COMPLETTION...1HR
+
+
+5.FRIDAY 05/20
+
+WTD>>New Work Request: Migrate to Testing - Environment  Architect support...30MINS
+WTD>>New Work Request: Migrate to Production....30MINS
+WTD>>BLK - ETPROMOHIST - step "950 Archive ETPROMOHIST Audit Data" completed abnormally...troubleshooting slow running query and give input into when job will complete...45MINS
+WTD>>TROUBLESHOOTED WITH MANJULA ABOUT ODM4 ASM storage and MOOPRD DB Size information,provided table output for largest tables..., and table owner collumns as requested BY Amy...1HR 30mins
+JB>> Review services configuration meeting with Jayant,Vish, and Sanaur...30mins
+
+=========================================================================================================================================================
+
+1.MONDAY 05/23
+WTD>>RE: Comment on Contingency - Hypercare on ORX - PS390 - Add Depromotions to Promo Hist extract for ORX...1hr 25mins
+WTD>>LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [URX_MART_SMT_T01] is [92.03 percent] full...added 960g of datafiles...30minutes
+JB>>DB Split Services - EGW Prod...3 hrs +
+JB>>CALLS FROM JJ,MANJULA
+
+02. TUESDAY 05/24
+
+JB>>DB Split Services - EGW prod issues ...5 TO 6 HOURS
+
+
+03. WEDNESDAY 05/25
+
+TIMESHEET ENTRY>>
+JB>>RE: Oracle 19C Upgrade - URGENT...30MINS
+
+
+04.thursday 05/26
+
+JB>>EGW Split Services Troubleshooting...2 HRS AND 3HRS
+JB>>EGW Split Services Troubleshooting...Extended hours renabling EGW GG and flashing back databases 1HR.
+
+05.FRIDAY 05/27
+
+JB>>New password Required for the user svc_app_spotfire...15mins
+JB>>Deploy Sabre DC Drop 12 on QA1...2HR
+
+
+=========================================================================================================================================================
+
+1. TUESDAY 05/31
+
+-JB>>R16.2 Deployment Prep - Unlocking Cintra DBs & EGW Prod Packaging ...3HRS
+
+2.WEDNESDAY 06/01
+
+-CUA Prod Packaging for R16.2...30MINS
+-Deploy R16.2 to EGW Prod....2hrs
+-WTD-5031 Tablespace [MOO_NEOOP_SMT_T01] is [94.9 percent] full...30mins
+-New Work Request: Unable to access a PL/SQL table...15mins
+-JB>>EXTENDED HOURS>>JB>>RE: Deploy R16.2 to EGW Prod...FLASHBACK,LOCK ACCOUNTS,GG RENABLING.
+
+4. THURSDAY 06/01:
+-JB>>Make issues list MEETING WITH VISH...30mins
+
+5.FRIDAY:
+-JB>>GG table mismatch issue MEETING WITH JIGNESH...30MINS
+-JB>>URGENT: MYB Retrieval Prod Issue Investigation...4HRS
+
+====================================================================================================================================
+
+1.MONDAY 06/06
+
+-SICK DAY OFF
+
+2.TUESDAY 06/07
+
+JB>>JB>>RE: AppDynamics : DB Server : Critical : INC0353969...15MINS
+JB>>FW: MYB 16.2 Prod Issue: Next Steps, run some queries...1hr
+
+3.wednesday:06/08
+
+-CINTRA Bi-Weekly US Delivery Catch Up
+-WTD>>CALL TO TROUBLESHOOT Overnight Issues on ODM6 - HUI, UHG, URX, PRI...3 hrs
+-JB>>Worked with Manjula on list of all CTR services for non prod, prod and DR in an excel sheet...1hr
+-WTD>>New Work Request: HUI - Bimart refresh issue...30MINS
+
+4. THURSDAY 06/09
+
+- JB>>RE: LEVEL1-JETBLUE-CTR19C-SensorMONDB-JBCUALORA1002D-DOPRD-Oracle Tablespaces Reaching Storage limits...15MINS
+- WTD>> Comment on PL/SQL Access to UNIMR_MART.UHG_MBR_ENGAGEMENT Table on UHG - Production Support...15mins
+
+5.FRIDAY:06/09
+-WTD>> checked WF ticket 1778503, ‘Mutual of Omaha - Database Access’ ...checked and double checked with with Amy..1hr
+FRDM>>FRDM month end SUMMARY report 3hrs
+
+
+============================================================================================================================================================
+
+1. MONDAY 06/13
+
+-WTD>> Comment on EPMP reference table updates on UHG - Production Support (thru Dec-2021) (75123266-001) (ref# 1772158)...30MINS
+-FRDM>> CRS is not running on devoraoda02...troubleshooted and update /etc/oratab file to include ASM entries after checking all crontab config files to make sure Oracle_home paths are correctly set....2 hrs
+-JB>>RE: Deploy Sabre DC Drop 13 on QA1...30mins briefly
+
+2.TUESDAY 06/14
+
+-WTD>>comment on EPMP reference table updates on UHG - Production Support (CHECKING ACCESS ISSUES AND GRANTS)...2HRS
+-FRDM>>Internal call with Muhammad on FRDM monthly report...30minuts
+-JB>>INSTALLATION MEETING FOR  HVR Best Practices for JetBlue's Oracle Upgrade...30MIN
+
+e. WEDNESDAY 06/15
+
+WTD>>Execute UHG Preference Inserts,TROUBLESHOOTING TRIGGERS ON odsuhg AND odsTST..1HR
+JB>>DRPRD Reporting  Sync Issue...1HR DISUCSSUION x
+WTD>>WTD>>RE: LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [MOO_SAS_DATA], added multiple datafiles
+WTD>>Comment on EPMP reference table updates on UHG - Production Support..30MINS
+
+7. THURSDAY 06/16
+
+JB>>Re: TRAX Oracle Upgrade meeting...30MINS
+WTD>>New work request: Comment on Deleting PH records on ORX - Production Support...3OMINS
+WTD>>Review elevated privileges for Impact Developer in personal schema in PROD...30MINS
+
+8. FRIDAY 06/17
+
+WTD>>RE: LEVEL1-WTD-SensorMONDB-odm6db06.kbm1.loc-UHG2PRD-Oracle Tablespaces Reaching Storage limits...15MINS
+WTD>> Comment on Salesforce Interaction Deletion Request on UHG - Production Support....disabling and enabling constraints...3omins
+WTD>>Please kill Sessions with Owner_ID=65630, OSUSER=jharrison, SID=94...30MINS
+
+============================================================================================================================================================
+1. monday 06/20
+
+-Support Operations x  US Platform + Infrastructure....1hr
+-JB>>RE: DOPRD2: JBCUALORA1002D: 1521 , DOPRD1: JBCUALORA1002C: 1521 -  INC0359197..30MINS
+
+
+2. TUESDAY 06/21
+
+- ACUMATICA >> Pat >> KT session for Sundeep and Sumeet...30MINS
+- JETBLUE >> Architecture Overview ...30mins
+- WTD>>RE: (Key User) Escalation Notice - Priority <@EscPriority> Issues Still Open....Did research on listener logs and alert logs and sent update email    to Nitin for findings...2hr
+-JB>>FW: HVR Change...1HR
+
+3.WEDNESDAY:06/22
+
+-WTD>>Comment on BLK job "INTRCTN" in Tidal - step 450 running longer than usual on BLK - Production Support .....1hr
+-JB>> Split DB EGW PROD...disabling GG and create restore points...30M
+-JB>>Split DB EGW PROD...Worked with manjula in Flashing back databases and re-enabling GG...1.5 HRS
+
+4. THURSDAY 06/23:
+
+JB>>PNR Purge Script...1.30HR
+JB>>Fivetran <> JetBlue Sync on Oracle Upgrade...1HR
+WTD>>LEVEL1-WTD-SensorMONDB-odm4db02-adm.kbm1.loc-MOOPRD-Oracle Tablespaces Reaching Storage limits,added few datafiles to tablespace...30mins
+
+5. FRIDAY 06/24:
+
+JB>>PNR Purge Script...3HRS
+
+============================================================================================================================================================
+
+1. MONDAY 06/27
+
+-JB>>PNR Purge Script Configuration & Testing in EGW PROD....3HRS
+-CTI-DELA>>RE: CTI >> DELA SUPPORT >> Support Release >> CHG0050697>> INSIS – apply support fixes releases to production event...2hrs
+
+2. TUESDAY 06/28
+
+-Re: JB>>TRAX Oracle Upgrade...CHECKED AND SHARED HVR CREDENTIALS WITH ASHLEY VAN NAME..15MINS
+- INTERNAL CALL WITH SUNDEEP TO HELP WITH TIMESHEETS...15MINS
+-TBASE>>LEVEL2-TBASE-OEM EM Incident: Warning:New: - Tablespace [TS_PGE2_DI] is [88.29 percent] full...15mins
+-WTD>>RE: JB >> TRAXPRD Lag Status update...15MINS
+
+3. WEDNESDAT 06/29
+
+WTD>>LEVEL1-WTD-SensorMONDB-zremixdbprd01-KBM2PRD1-Oracle Tablespaces Reaching Storage limits...30MINS
+JB>>UPDATED JB CONNECTIVITY SHEET WITH LATEST TRAX 19C VARIABLES...30MINS
+JB>>UPDATED RE: JB >> GG TRAXPRD Lag Status --> JBCUALORA1001C / JBCUALORA1001a...30MINS
+-INTERNAL CALL WITH JAMAL MUHAMMAD FROM IT TO FIX KEEPERS ISSUE WITH UPLOADING DOCS TO KEEPERS..30MINS
+
+4. THURSDAY 06/30
+
+WTD>>WTD-5041>> LEVEL1-WTD-SensorMONOS-vdaloraclep001.kbm1.loc-Filesystem running out of space...followed Maestro ticket resolution with Kris(15mins)
+JB>>PNR Purge Script Configuration & Testing...TEST RUN IN CUA PROD...30MINS
+WTD>>LEVEL1-WTD-SensorMONOS-vdaloracleu002.kbm1.loc-Filesystem running out of space....RAISED MAESTRO TICKET #351398...15MINS.
+WTD>>Informatica UAT database backup/export... EXTENDED HOURS:1hr
+
+5.FRIDAY:
+
+WTD>>RE: WTD-5018>>LEVEL1-WTD-SensorMONDB-vdaloracled002.kbm1.loc-IDPDEV-Oracle Tablespaces Reaching Storage limits...15MINS
+CINTRA>>Introduction & Acumatica KT session WITH ASHOK MOTE...30MINS
+WTD>>CHECKED AND KILLED A Kill a long running query on Service Requests (75120808-007) (ref# 1801153)...30MINS
+WTD>>LEVEL2-WTD-OEM EM Incident: Warning:New: - Filesystem /var has 5.19% available space, fallen below warning (10) or critical (5) threshold.RAISED MAESTRO TICKET...15MINS
+
+============================================================================================================================================================
+1.MONDAY:HOLIDAY
+
+2.TUESDAY:07/05/2022
+-JB>> ATTENDED MEETING: EGW Oracle 19C DB Upgrade Technical Review
+-TIMESHEET ENTRY...2HRS
+
+3.WEDNESDAY: 07/05/2022
+-WTD>>: LEVEL1-WTD-SensorMONDB-odm5db02.kbm1.loc-ODM7DEV-Oracle Tablespaces Reaching Storage limits...15MINS
+-JB>>RE: JB>>TRAX Oracle Upgrade...TROUBLESHOOTING CALL...1HR
+
+4.THURSDAY: 07/07
+
+-JB>>Consumed PNR Archive Script Manual Execution MEETING...30MINS
+-JB>>Sabre DC Drop 14 on QA2 - pre-deployment check...30MIN
+FRDM>>FRDM environment KT session with Sundeep...30MINS
+JB>>ASHOK >> JetBlue KT Session ...1HR
+
+5. FRIDAY 07/08
+
+JB>>FW: IT Infrastructure Environment Status Check..15MINS
+JB>>PLACEHOLDER: Deploy Sabre DC Drop 14 on QA2..2.30MINS
+
+
+============================================================================================================================================================
+
+1.MONDAY 07/11
+
+JB>>FW: IT Infrastructure Environment Status Check...15M
+WTD>>RE: WTD>>RE: LEVEL1-WTD-SensorMONOS-vdaloraclep001.kbm1.loc-Filesystem running out of space...RAISED MAESTRO TICKET..15MINS
+CINTRA HR ANTI-HARASSMENT TRAINING...2HR
+
+2.TUESDAY: 07/12
+
+JB>>FW: IT Infrastructure Environment Status Check MEETING...15M
+
+WTD>>5052 >> LEVEL1-WTD-OEM EM Incident: Critical:New: - Filesystem /var has 4.63% available space, fallen below warning (10) or critical (5) threshold... RAISED MAESTRO TICKET NO:351490..15mins
+
+WTD-5053 >>LEVEL2-WTD-OEM EM Incident: Warning:New: - Filesystem /var has 9.11% available space, fallen below warning (10) or critical (5) threshold...15mins
+
+JB>>JB >> CTR and TRAX 19c Environment Review meeting with Vish and Jayant...1HR
+JB>>ANTI-HARASSMENT TRAINING...30MINS
+
+
+3.WEDNESDAY:07/13
+
+-JB>>FW: DB Split EGW Prod Test Run...1HR
+-JB>>Re: Drop 14 Deployment: BRE QA2...1 HR
+-ANTI-HARASSMENT TRANINING TEST...30MINS TO 1HR
+
+4.THURSDAY: 07/14
+
+-JB>>Drop 14 Troubleshooting...2HRS
+-WTD>>EVEL1-WTD-SensorMONOS-vdaloraclect001-Filesystem running out of space...15MINS
+
+-FRIDAY: 07/15
+
+-JB>> Drop 14 Troubleshooting Session(SHADOWED SUMEET AND SUNDEEP)..1HR
+-JB>>Technical forum Fare Sale preparation MEETING...30MINS
+ JB>>RE: LEVEL1-JB-TRAXPRD1- Database Blocking Sessions Notification...15MINS
+TBASE>>RE: RITM0036485 - Database Administration Assigned to Cintra...30MINS
+
+============================================================================================================================================================
+
+-MONDAY: 07/18: SICK DAY OFF
+
+-TUESDAY:01/19
+WTD>>WTD>>RE: LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [CEP_DATA_SMT_T01] is [92.04 percent] full...15MINS
+JB>>CHG0061679 - Trax - Generic User Records Update to Dataload - STG....45MINS
+JB>>TRAX MASTER SHEET UPDATE FOR EGW TRAX STAGE...1HR
+
+-WEDNESDAY: 07/20
+JB>>Review Oracle Architecture...1HR
+JB>>Ecomm production outage regroup (INC0370084) ..30MINS
+WTD>> Comment on COPY.TABLE fails   on CEPPRD on Service Requests (75120808-007) (ref# 1817262)...troubleshoot and fixed 1hr 30mins
+Bi-Weekly US Delivery Catch Up...30MINS
+WTD>>Help with INSERTs to ODSTST and ODSUHG databases...30MINS
+
+-THURSDAY: 07/21
+
+WTD>>Comment on EPMP new preferences on UHG - Production Support (thru Dec-2021) (75123266-001)..30MINS
+JB>>Archive Script Scheduling & PNR Purge Script Review...1HR
+JB>>TRAX MASTER SHEET UPDATE CONTINUATION FOR  EGW TRAX STAGE...1HR
+
+- FRIDAY: 07/22
+-JB>> WTD>>RE: LEVEL1-WTD-SensorMONDB-odm6db05.kbm1.loc-UHG2PRD-Oracle Tablespaces Reaching Storage limits...15MINS
+-JB>>TRAX MASTER COMPLETION FOR EGW STAGE DATABASES
+RE: Error uploading document to Keepers...30MINS CALL WITH JAMAL TO FIX KEEPERS ISSUE...30MINS
+============================================================================================================================================================
+
+-MONDAY: 07/25
+-FRDM>RE>> LEVEL2-FRDM-OEM EM Incident: Warning:New: - 2,918.34 MB of Audit Trail files collected (.aud: 0 MB, .xml: 0 MB, .bin: 2,918.34 MB)...TROUBLESHOOTING .2HRS(TROUBLESHOOTING)
+-FRDM>>WORKED WITH MUHAMMAD TO COMPRESS AND RELEASE SPACE IN /[oracle@droraoda01 GTIKODMP2]$ df -h /u01/app/odaorabase1 ...30MINS
+
+-TUESDAY:07/26
+
+WTD>>CHECKED Comment on ORACLE: MOO ODS on Service Requests (75120808-007) (ref# 1822305)...30MINS...troubleshooting
+-JB>>CTR MASTER CHECKLIST Update and completion task for CTR EGW PROD databases...2 HRS
+
+-WEDNESDAY: 07/27
+
+FRDM>>
+FRDM>>
+
+-THURSDAY:07/28:
+
+JB>> JB>>Internal>>EGW PROD Split DB Testing:Flashing back EGW_CTR databases DISABLING and FLASHING BACK DATABASES & Re-enabling GG ACTIVITIES...1HR 30MIN
+JB>>KT WITH ASHOK MOTE ON EGW PROD DB SPLIT TESTING AND RELEASE DOCUMENT PROCESS...30MINS
+-JB>>TROUBLESHOOT EGW DOPRD DATABASE STARTUP MOUNT FAILURE ISSUE AFTER DB SPLIT TESTING WITH SUNDEEP...30MINS
+
+FRIDAY:
+
+FRDM>> MONTHLY SUMMARY REPORT FOR JULY 2022 1 HR
+WTD>>RE: LEVEL1-WTD-SensorMONDB-odm6db06.kbm1.loc-UHG2PRD-Oracle Tablespaces Reaching Storage limits....30mins
+=============================================================================================================================================
+
+MONDAY 08/01/
+-WTD>>New Work Request: Need access to table in urx_thsieh schema...15MINS
+
+======================================================================================================================================
+
+TUESDAY: 08/02
+
+-WTD>>RE: LEVEL1-WTD-SensorMONDB-odm4db01-adm.kbm1.loc-MOOPRD-Oracle Tablespaces Reaching Storage limits...30mins( adddes multiple datafiles to tablespace)
+
+============================================================================================================================================
+
+WEDNESDAY:
+
+-WTD>>RE: PROBLEM: Disk DBA - Warn: /u01 is WARNING on host odm5db01....30MINS
+============================================================================================================================================================
+
+-WEDNESDAY: 08/10
+
+-WTD>>RE: PROBLEM: Disk DBA - Warn: /u01 is WARNING on host odm5db01...15MINS
+-JB>>Sabre DC Drop 15 on QA2 (Pre-Deployment Checkpoint)...15NINS
+-FRDM>>Patrick>>[EXTERNAL] FW: FRDM>> LEVEL2-FRDM-OEM EM Event: Warning:col-cloragc-01.freedomh.com - Filesystem /mnt/boostfsp has 9.94% available space, fallen below warning (10) or critical (5) threshold...2HRS
+-
+
+=======================================================================================================================================================
+
+THURSDAY: 08/11
+
+-CTI >> DELA SUPPORT >> [CTIDELA-542] Support Release >> CHG0050685>> INSIS – apply support fixes releases to production..3.5 HRS
+-JB>>Sabre DC Drop 15 on QA2 (Pre-Deployment Checkpoint)...30MINS
+-JB>>Sabre DC Drop 15 on QA2....1 HR
+-FRDM>>Cintra rds login poc testing...30MINS
+-WTD>>Contact History Restore...2HRS.15MINS
+==================================================================================================================================================
+
+FRIDAY:08/12
+
+-JB>>PLACEHOLDER:TROUBLESHOOTING  Deploy Sabre DC Drop 15 LOGS on QA2....3HRS
+-
+
+
+============================================================================================================================================================
+
+MONDAY:08/15
+
+WTD>>Issue #351831, submitted on your behalf: Locked Oracle account on server zwlpdbprd01 RAISED MAESTRO TICKET...15MINS(KBM)
+-WTD>>Issue #351832, assigned: [Unlock maestro account for cin_mrafiq] (KBM) As Enterer...15MINS
+-WTD>> WTD>>PROBLEM: Oracle TNS Check - DBA: kbm2prd11 is CRITICAL on host zremixdbprd01...15MINS CLOSED TICKET
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+TUESDAY:08/16
+
+-FRDM>>INTRENAL CALL WITH SUNDEEP TO SOUGHT OUT FREEDOM CONNECTIVITY...15MINS
+-WTD>>OVT_4000397_UnicaDataMartLoaD TROUBLESHOOTED TO  provide sql id and user id to tune sql performing slow...30mins
+
+============================================================================================================================================================
+
+WEDNESDAY:08/17
+
+-TBASE>>Re: LEVEL1-TBASE-SensorMONDB-tboctbaexapl-f7fss2-ppge2p-Oracle Tablespaces Reaching Storage limits...15MINS
+-JB>>EGW PROD Deployment - Update 1-800 copy in TDP MYB (v16.2)...1HR 45MINS WITH ASHOK MOTE ON THE PROCESS
+-Bi-Weekly US Delivery Catch Up
+-WTD>>TRUOUBLESHOOT Comment on Received error ORA 12801 again on ORX - Production Support (thru Dec-2022) (75123282-001) (ref# 1852050)...1.30MINSHR
+
+THURSDAY:
+
+-WTD>>RE: PROBLEM: Disk DBA - Warn: /u01 is WARNING on host odm5db01...30mins
+-WTD>>RE: LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [HUI_NEOOP_SMT_T01] is [92.35 percent] full added multiple data files...30mins
+-
+
+-
+========================================================================================================================================================
+
+FRIDAY: 08/18
+
+WTD>> WTD>>RE: LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [HUI_NEOOP_SMT_T01] is [95.65 percent] full...30MINS
+WTD>> WEBLOGIC, ZEUSDEV,ZEUSPROD PATCHING MAINTENANCE CHECKS....2HRS
+TBASE>>RE: RITM0036586   -   Deploy PDS UAC Tables to QA and UAT   -   Assigned to Cintra...30mins
+
+==========================================================================================================================================================
+
+-MONDAY:08/22
+
+-TBASE>> Change CHG0033354 has been assigned to group Cintra...30MINS
+-Inconvenience bonus form completion....1HR 30MINS hr
+WTD>>Comment on Migrate to Testing Environment on HUI - CC484 - ECR Extract to Humana (75123594-033) (ref# 1712117)...30MINS
+
+===========================================================================================================================================================
+
+TUESDAY:08/23
+
+-WTD and FRDM environments access validation...30MINS SUNDEEP & MANJULA...30minutes
+-CHG0062207 - Trax - Generic User Records Update to Dataload - PRD...1hr
+
+========================================================================================================================================================
+
+WEDNESDAY:08/24
+
+-ROVA TRAINING>>
+-FRDM BI-WEEKLY REPORT FOR AUGUST 2022
+-
+===========================================================================================================================================================
+
+-THURSDAY:08/25
+
+
+-WTD>>Comment on Migrate to Testing Environment on UHC - CC1170/CC1171 - USP Phase 3/Care Cash...WORKED WITH MANJULA(75123557-051)...30mins
+-WTD>> Comment on IntelliSight Logs Temp table request on UHG - Production Support (thru Dec-2021) (75123266-001) (ref# 1864809)...1HR
+-TBASE>>Change CHG0033352 has been assigned to group Cintra...30MINS
+-WTD>> Comment on IntelliSight Logs Temp table request on UHG - Production Support (thru Dec-2021) (75123266-001) (ref# 1864809)...CHECKING AND MONITORING TABLE CREATION WHICH TOOK 3 HRS TO COMPLETE.
+
+============================================================================================================================================================
+FRIDAY: 08/26
+
+-WTD>>IntelliSight Logs Temp table request for Order ID 507571 on UHG - Production Support, EXECUTED SCRIPT AND MONITORED PROCESS WHICH TOOK 3 HOURS TO COMPLETE
+-JB>>FW: Testing of DB split service - https://protect-us.mimecast.com/s/kIj-CpYjOoTyyMkUP-Ol_?domain=support.datalex.com...flashing back databases and re-enabling GG replication...2hrs
+-FRDM>>
+===========================================================================================================================================================
+
+MONDAY:08/29
+
+-JB>>Pre-deployment check: DC Drop 16 on QA2...30MINS
+-WTD>>New Work request: Comment on PROD IntelliSight log table on UHG - Production Support (thru Dec-2021) (75123266-001) (ref# 1868953)...3hrs
+-WTD>>RE: LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [UNIMR_MART_SMT_T01] is [93.01 percent]...3omins
+
+============================================================================================================================================================
+
+TUESDAY:08/30
+
+WTD>>New Work Request: Migrate to Testing Environment - Unimart View, back and forth with developer troubleshooting to fix query.
+===========================================================================================================================================================
+
+WEDNESDAY:08/31
+
+TBASE>>RE: RITM0036609   -   grants for uac pds tables   -   Assigned to Cintra...15MINS
+TBASE>> Request Item RITM0036611 - Database Administration - Delete from Acct_Tactic_Stg - Commented....3OMINS
+TBASE>>Request Item RITM0036613 - Database Administration - PGE - Create Client User Account - Commented...30mins
+
+===========================================================================================================================================================
+
+THURSDAY:09/01
+-WTD>>Project Overhead on MOO - Migration to Yellowstone (ref# 1698824)...30MINS
+-TBASE>>RITM0036616   -   PGE - cleanup    -   Assigned to Cintra...CHECKING.. (script failed, fixed and re-executed thrice after sending emails to customer)...30mins to 1 hr
+-TBASE>>FW: Request Item RITM0036613 - Database Administration - PGE - Create Client User Account -...30MINS 
+-WTD>>WTD 1876650: MOO Database question...guided Manjula resolve the ticket...30mins
+-WTD>>
+===========================================================================================================================================================
+
+FRIDAY:09/02
+
+-
+
+===========================================================================================================================================================
+
+TUESDAY:09/06
+-JB>>RE: QA2 - Rsync betwEen Cintra and utl5 VM...1HR
+-WTD>>New Work request: Comment on Migrate HUI Tuning to HUMPRD on HUI - Production Support (thru Mar-2022) (75123303-001) (ref# 1881612)...30MINS
+
+WEDNESDAY:09/07
+
+WTD>.New Work Request: Reset of my Oracle Password for 1.0...checked and referred to Cs team 15mins
+
+FRIDAY:09/09
+
+WTD>>New Work Request: Migrate add two attributes to Audit view...15MINS
+============================================================================================================================================================
+MONDAY: 09/12
+
+TBASE Internal Maintenance on Tuesday MEETING...30MINS
+WTD>>WTD>>RE: LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [BLK_AUD_SMT_T01] is [92 percent] full..30MINS
+WTD>>
+
+TUESDAY:09/13
+
+WTD>>New Work Request: Unable to access oc_wcc_wmd3cdev..30MINS
+WTD>>Comment on Migrate Changes for Publish Job - TEST on UHC - CC1169 - Shopper Profile HID + Triggered Outreach (75123557-053) (ref# 1896350)..30MINS
+
+WEDNESDAY:09/14
+
+WTD>>Comment on HUI - Bimart Refresh issue on HUI - Production Support (thru Mar-2022) (75123303-001) (ref# 1897700)...30mins
+WTD>>(Key User) Escalation Notice - Priority <@EscPriority> Issues Still Open...CHECKED AND CLOSED MAESTRO TICKET...15MINS
+WTD>>Comment on Remove DB access for users on Service Requests (75120808-007) (ref# 1898150)...REMOVE 3 ACCOUNTS IN 8 DATABASES...1HR 30MINS
+
+THURSDAY:09/15
+WTD>>AWS Training Survey
+WTD>>WTD>.RE: LEVEL1-WTD-SensorMONDB-odm5db01.kbm1.loc-ODM3TST-Oracle Tablespaces Reaching Storage limits....15MINS
+
+FRIDAY:09/16
+
+WTD>>Comment on Migrate Changes for Publish Job - TEST on UHC - CC1169 - Shopper Profile HID + Triggered Outreach (75123557-053) (ref# 1896350)...30MINS
+
+=========================================================================================================================================================
+
+MONDAY: 09/20
+-TIMEHSEET ENTRY...2HHRS
+-INCONVENIENCE BONUS FORM...1 HR
+-MEETING>>Support Operations x US Platform & Infrastructure ( Bi weekly Sync-up )...15MINS
+-TBASE>>LEVEL2-TBASE-OEM EM Incident: Warning:New: - Tablespace [TS_PGE2_CMPGN] is [85.32 percent] full...15 TO 30MINS
+
+TUESDAY:....
+
+SATURDAY:09/24
+-RE: [EXTERNAL] FRDM>> ODA Patching>> Post support...4.30MINS
+==========================================================================================================================================================
+
+monday: 09/26
+
+TUESDAY:09/27
+
+-Inconvenience bonus form correction(1hr)
+-TBASE>>Change CHG0033377, troubleshooted and fixed the scipt has been assigned to group Cintra...1hr
+-WTD>>WTD-5095 Tablespace [HUI_MART_D128K_T01] is [92.57 percent] full...30mins
+-WTD-5096 Tablespace [HUI_MART_D128K_T01] is [92.33 percent] full...30mins
+
+wednesday:09/28
+
+-Comment on Migrate to PROD on MOO - Production Support (thru Dec-2021) (75123256-001) (ref# 1910356)..1hr
+-New Work Request: Oracle Account Unlock Request..1hr
+-CTI-DELA>>Support Release >> CHG0051408>> INSIS – apply support fixes releases to production...7hrs & 1hr extended hr
+
+THURSDAY:09/29
+
+FRIDAY:09/30
+
+-WTD>>New Work Request: Migrate to Production WH...1HR(EXECUTED SCRIPT WITH SYNTAX ERRORS, TROUBLESHOOTED THEM AND RE-RAN BEFORE IT SUCCEEDED)...1HR
+
+==============================================================================================================================================================
+MONDAY:10/10/22
+
+TUESDAY:10/11/22
+
+-CALL WITH MUHAMMAD TO FIX FRDM RDP ACCESS...30MINS
+-WTD>>New Work Request: WLP_1669071_StdNCOAP2Rename_5976560 - Step 090_StdNCOAP2LoadDMA Workaround...30MINS
+-Patrick >>  One-on-One...30mins
+-KT SESSION CALL WITH SUNDEEP for TBASE environment...30mins
+
+WEDNESDAY:10/12
+
+-WTD>>New Work Request: MOO - "4000990 - Address Correction Service Feed" step 300 running longer than usual - 10/12/22 checking sql_d, last runs and duration and provided findings to team..2hrs
+-WTD>>Comment on MOO - "4000990 - Address Correction Service Feed" step 300 running longer than usual - 10/12/22 on MOO - Production Support (thru Dec-2021) (75123256-001) (ref# 1938300)...CHECKED AND KILLED BLOCKING SESSION...30MINS
+-JB>>RE: JB >> DC Integration: SDC Migration Drop 17 Delivered...checked and replied to Mike's email...15mins.
+
+TURSDAY:10/13:
+
+-WTD>>RE: LEVEL1-WTD-SensorMONDB-odm4db01-adm.kbm1.loc-MOOPRD-Oracle Tablespaces Reaching Storage limits...adding multiple datafiles..30mins
+-CTI_Dela>>CTI-DELA>> Support Release >> CHG0051597>> INSIS – apply support fixes releases to production << CTIDELA-554 >>...2hrs
+-WTD>>gathered level) backup details for BLKPRD WTD database....15mins
+-JB>>FW: JB >> DC Integration: SDC Migration Drop 17 Delivered...provided deployment timings list to JB for PROD,DR,NON-PROD...30mins
+-WTD>>Remove DB access for users...30MINS
+
+FRIDAY:10/14
+
+-CHECKED FAILED BACKUP FOR KBM2PRD1 AND RE-RAN BACKUP AND IT WAS SUCCESSFUL...30MINS
+
+========================================================================================================================================================
+
+MONDAY:10/24
+-SICK-DAY OFF
+
+-TUESDAY:10/25
+
+>WTD>>Comment on Migrate to Production on HUI CC494 - Digital Data Feed from Tealium (75123594-035) (ref# 1909037)...3OMINS
+>
+
+=========================================================================================================================================================
+MONDAY:
+-JB>>RE: CTSconfig user check and replied to email...30MINS
+-WTD>>CHECKED KBM2PRD1 DATABASE FAILED BACKUP, RERAN IT AND IT WAS SUCCESSFUL...30MINS
+-FRDM>>MONTH END SUMMARY REPORT...2HRS
+-WTD>>New Work Request: Please kill SID 4014 on rmxmeta@remixprd, and 2005...troubleshooted and killed multiple blocking sessions...1 hr
+
+=========================================================================================================================================================
+
+TUESDAY:
+-WTD>>New Work Request: Please kill SID 290 on rmxmeta@remixprd...15MINS
+-New Work Request: Please kill SID 2724 on rmxmeta@remixprd...15mins
+============================================================================================================================================================
+
+WEDNESDAY:11/02/22
+JB>>CHECKED DB SPLIT SERVICES REF EMAILS AND UPDATED SUMEET...15MINS
+
+============================================================================================================================================================
+
+THURSDAY;11/03/22
+
+-CTO SESSIONS >> Session #10 >> Customer Journeys – Important Session ..1 HOUR
+-
+===========================================================================================================================================================
+FRIDAY:11/04/22
+
+-WTD>>LEVEL4-WTD-OEM EM Incident: Clear:Closed: - Tablespace [ODS_PRI_SMT_T01] is [81.25 percent] full...15MINS
+
+-WTD>>New Work Request: Migrate to Production...30MINS
+
+=========================================================================================================================================================
+
+MONDAY:11/07
+
+-WTD>>: LEVEL1-WTD-SensorMONDB-odm6db04.kbm1.loc-URX2PRD-Oracle Tablespaces Reaching Storage limits...30MINS
+- CTI >> DELA SUPPORT >> Support Release >> CHG0051779>> INSIS – apply support fixes releases to production..2hrs
+
+==========================================================================================================================================================
+
+TUESDAY:11/8
+
+WTD>>Checked wtd daily bacups, troubleshooted faled odsmoop failed backup and reran it successfully....30mins
+
+=========================================================================================================================================================
+
+WEDNESDAY:11/9
+
+JB>>FW: Sabre DC CUA STG Pre-deployment Check..30MINS
+WTD>>New Work Request: create view in unimr_mart to support optout suppression in campaign...15mins
+WTD>>Comment on create view in unimr_mart to support optout suppression in campaign on UHG - Production Support (thru June 2023) (75123266-001) (ref# 1982401)...30mins
+WTD>>WTD>>RE: LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [USERS] is [93.58 percent] full...30MINS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*******TBASE TASK FOR THURSDAY 2PM TO 3PM EST:RE: Change CHG0033352 has been assigned to group Cintra'*********************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------CALL WORK:
+
+1.MONDAY:02/21 RAISED TWO MAESTRO TICKETS FILESYSTEM ISSUE......30 MINS
+  WTD>>TROUBLESHOOT DATABASE UNAVAILABLE 1hr
+
+2. Tuesday to check:
+
+3.Wednesday: WTD>>MEETING WITH DAVID AND MATT ON ODSURX SCRIPTS DEPLOYMENTS ([2/23/2022 9:30 PM]  2/23/2022 9:30 PM Meeting ended:3h 36m 21s (UNPLANNED ON-CALL HOURS)..3HRS 30 MINS
+
+3Wednesday:FW: LEVEL1-WTD-SensorMONDB-odm6db05.kbm1.loc-UHG2PRD-Oracle Tablespaces Reaching Storage limits....30
+
+wed:WTD-4966>>LEVEL1-WTD-SensorMONDB-zurxodsdbprd01-ODSURXP-Ora...30MINS
+
+
+4.Thursday:WTD>>LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [MOO_MART_I128M_T01] is [92.39 percent] full...1hr
+  Thursday:WTD>> WTD-4969>>LEVEL1-WTD-SensorMONDB-zmooodsdbprd02-ODS2MOOP-Oracle Tablespaces Reaching Storage limits...1hr
+
+5. Friday >>E:WTD: WF Request Submitted: Mutual DQM process failed with ORA-12801 on MOO - Production Support (thru Dec-2021), APP TEAM REQUEST FOR TRUNCATING, RESIZING AND creating INDEXES ON THE TABLE ODS_MOO.NCO_INPUT RECORD TABLE AND MONITORING UNDO SIZE AND RESIZING (75123256-001)...3hrs
+
+6.
+-Saturday:WTD>>CHECK:Troubleshoot and found listener up and running again:Message=:~[crsd(196)]CRS-2765:Resource 'ora.LISTENER.lsnr' has failed on server 'zurxodsdbprd01'. See /u01/app/11.2.0.4/grid/log/zurxodsdbprd01/alertzurxodsdbprd01.log for details...30MINS
+
+-FOLLOWING TABLESPACES NEED REVIEW on ODM4TST DATABASE....ORA-01075 database down due to exhaustion of processes 
+******************************************************
+ORA-01075: you are currently logged on.....1 hr (unplanned)
+
+-Comment on Mutual DQM process failed with ORA-12801 on MOO - Production Support (thru Dec-2021) (75123256-001) (ref# 1626501)... drop indexes, truncate table, alter undo retention, monitor and increase Undo tablespace...2hrs(Unplanned)
+
+-FRDM post patch environment changes for PROD and DR ODAs and  scheduled the cronjobs...8 hrs(Unplanned)
+
+7.Monitoring JOB ON NCO_OUPUT_RECORD TABLE and resizing undo tablespace for the following job:Comment on Mutual DQM process failed with ORA-12801 on MOO - Production Support (thru Dec-2021) (75123256-001) (ref# 1626501)...2hrs
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+call work:
+
+1. monday 03/21
+
+- WTD>>UNPLANNED>> RAISED MAESTRO TICKET FOR - Filesystem /var has 1.07% available space, fallen below warning (10) or critical (5) threshold..15MINS
+-WTD>>UNPLANNED>>MOO 2022 Archive Process - DBA...truncate tables in MOOPRD....30 MINS
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+2 Tuesday 03/22
+-WTD>>UNPLANNED>>UHG2PRD-Oracle Tablespaces Reaching Storage limits( I have added MULTIPLE DATAFILES OF 400GB of SIZE)...30mins>> EH
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+3 Wed 03/23
+
+-
+-WTD>>UNPLANNED>>odm6db06.kbm1.loc-UHG2PRD-Oracle Tablespaces Reaching Storage limits.Adding multiple datafiles of about 1.6tb to 30 mins
+
+-WTD>>UNPLANNED>>ZFS archivelog backup of mooprd1 database failed- CHECKED THIS ERROR AND REFERRED TO BUSINESS HOURS... 15mins
+
+-----------------------------------------------------------------------------------------------------------------------
+4 THURSDAY 03/24
+
+WTD>>UNPLANNED>>SensorMONDB-odm4db01-adm.kbm1.loc-MOOPRD-Oracle Tablespaces Reaching Storage limits MULTIOLE DATAFILES 800GB ....30 MINS
+WTD>>UNPLANNED>>WTD-OEM EM Incident: Warning:New: - Tablespace [USERS] is [92.04 percent] full...15mins
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+6. Saturday 03/25
+
+WTD>>UNPLANNED>>LEVEL1-WTD-OEM EM Incident: Critical:New: - CHECKED The pluggable database is in UNKNOWN state....checked(15mins)
+WTD>>UNPLANNED>> WTD-4993>> LEVEL1-WTD-OEM EM Incident: Critical:New: -CHECKED Swap Utilization is 99.999%, crossed warning (95) or critical (98) threshold...15mins
+
+7.Sunday:
+
+WTD>>UNPLANNED>>OEM EM Incident: Warning:New: - CHECKED AND Fixed Filesystem /u01 has 7.17% available space, fallen below warning (10) or critical (5) threshold on Host=vdaloraclep002 ...30mins
+
+-WTD>>UNPLANNED>>vdaloraclep001.kbm1.loc-IDCPROD-Database | Pluggable Database Unavailable for READ WRITE...troubleshooted, CLEARED SPACE IN /UO1,MONITORED and brought ASM and instance back up...2.30 HRS
+
+==========================================================================================================================================
+
+ON-CALL WORK
+
+1. MONDAY 4/18/2022
+-
+
+2.TUESDAY:04/19/2022
+WTD>>UNPLANNED>>Comment on Migrate to Production on UHC - CC1161 - HPRO Modification for Snowflake Migration...MONITORING SCRIPT2 AND EXECUTED SCRIPT 3...1HR 15MINS
+
+3.Wednesday 04/20/22
+
+TBASE>>UNPLANNED>>TBASE-262 Tablespace [TS_ABBOTT_RPT_EXTERN] is [85.9 percent] full...15mins
+
+4.THURSDAY 04/21/2022
+
+WTD>>UNPLANNED>>LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [SYSAUX] is [92 percent] full...15mins
+
+5.FRIDAY 04/22/2022
+
+WTD>>UNPLANNED>>New Work Request: MOO - 1138403 - Model Score - step 700 ETL - ARCHIVE MODEL_SCORE step completed abnormally...30 MINS
+
+6.SATURDAY 04/23
+
+CTI DELA>>PLANNED>>CTI-DELA >> DELA SUPPORT >> Support Release >> CHG0050090>> INSIS – apply support fixes releases to production and server reboot...2 HRS
+WTD>>UNPLANNED>>Comment on Mart HUI_BIMart Refresh on HUI - Production Support (thru Mar-2022) (75123303-001) (ref# 1724351)...30mins
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Monday 05/16
+
+-WTD>>UNPLANNED>>LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [UNIURX_REP_SMT_T01] is [92 percent] full added multiple datafiles...30mins
+-WTD>>UNPLANNED>>LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [UNIURX_REP_SMT_T01] is [92.25 percent] full...30mins
+
+2. TUESDAY 05/17
+
+WTD>>UNPLANNED>>LEVEL1-WTD-SensorMONDB-odm6db04.kbm1.loc-URX2PRD-Oracle Tablespaces Reaching Storage limits....15MINS
+
+3. THURSDAY 05/19
+
+WTD>>LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [MOO_MART_I128M_T01] is [92.1 percent] full..ADDING AND RESIZING MULTIPLE DATAFILES IN TABLESPACE..30MINS
+
+WTD>>MEETING OF Duplicate Keylines - 5/19/22 - F34 SOL - 195 keylines/source ids have duplicates...ENABLE AND DISABLE TRIGGERS ON ODS_MOO.CELL...15 TO 30MINS
+
+4. SUNDAY NIGHT 05/23
+
+WTD>>UNPLANNED>>LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [BLK_WORK_SMT_T01] is [92.08 percent] full (350G OF DATAFILES MULTIPLE)...30MINS
+WTD>>UNPLANNED CHECKED BUT COULD NOT FIND TABLESPACE>>RE: LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [BOAUDPRD_SMT_T01] is [95.05 percent] full...15MINS
+WTD>>UNPLANNED>>Comment on Contingency - Hypercare on ORX - PS390 - Add Depromotions to Promo Hist extract for ORX...RUNNING(Acknowledged 1.32 AM-3.17 AM)...1HR 45MINS
+=========================================================================================================================================================
+
+1. MONDAY 06/13
+
+-WTD>>PLANNED>>Comment on Campaign Iteration Overlap on MOO - Production Support...30MINS
+
+2.TUESDAY 06/14
+
+-WTD>>UNPLANNED>>
+
+3.WEDNESDAY: 06/15
+
+WTD>>Cleanup for Solicitation File processing in ODS_MOO@ODSMOO..30MINS
+
+4.THURSDAY: 06/16
+
+FRDM>>unplanned>>[JIRA] (FRDM-4829) The current status of the target is Down,TROUBLESHOOTED...15 TO 30MINS
+
+5. FRIDAY 06/17
+WTD>> Deleting PH records TROUBLESHOOTING LONG RUNNING DELETE STATEMENT...30mins
+
+6. SATURDAY 06/18
+WTD>>UNPLANNED>> TWO REQUESTS TO TROUBLESHOOT AND KILL MULTIPLE SESSION UNDER URXPRD DB, USER:KBMP096, DELETE PH RECORDS REQUESTS TO KILL LONG RUNNING INSERT DELETE STATEMENT...2 HRS
+
+7.sunday 06/19
+
+-WTD>>UNPLANNED>Troubleshooting Bridge - Tidal and Control-M Jobs cannot connect to Phone Suppression database (Oracle)... (STARTED LISTENER WHICH WAS DOWN TO FIX THE ISSUE)...1hr 30mins
+
+-WTD>>UNPLANNED>>PROBLEM: Oracle DB Check - DBA: HUMPROD2 is CRITICAL on host odm6db02...TROUBLESHOOTED AND STARTED AND FIXED...2HRS
+
+-WTD>UNPLANNED>> LEVEL1-WTD-SensorMONDB-odm5db03.kbm1.loc-KBM5ODM-Oracle Tablespaces Reaching Storage limits.TWO TABLESPACES TO FIX.BO5PRD AND BO5PVM..30MINS
+
+-WTD>>UNPLANNED>>CLOSE OPSVIEW AND MAESTRO ALERTS,(Key User) Escalation Notice - Priority <@EscPriority> Issues Still Open..15MINS
+-WTD>>UNPLANNED>> RAISED MAESTRO TICKET FOR LEVEL1-WTD-SensorMONOS-vdaloraclep001.kbm1.loc-Filesystem running out of space ...15MINS
+-CTI_DELA>>PLANNED>>Change Request (CTI)- v005_SupportFixes (placeholder)...3HRS
+
+
+-MAKE SURE TO CHECK TIME SHEETS EXTENDED HOURS BEFORE SUBMITTING INCON.BONUS FORM FOR THIS MONTH OF JUNE.
+
+============================================================================================================================================================
+1. MONDAY 07/04
+
+2. TUESDAY 07/05
+
+3.WEDNESDAY 07/06
+-Duplicate Keylines - 6/30/22 - F30 SOL...15MINS
+
+4. FRIDAY 07/07
+
+- WTD> RAISED MAESTRO TICKET FOR Issue #351467 LEVEL1-WTD-OEM EM Incident: Critical:New: - Filesystem /var has 4.96% available space, fallen below warning (10) or critical (5) threshold....15MINS
+
+6.SATURDAY:
+
+-WTD>>UNPLANNED: LEVEL1-WTD-SensorMONDB-odm5db04.kbm1.loc-BLKPROD-Oracle Tablespaces Reaching Storage limits...added multiple datafiles to tablespace..30mins
+
+7. SUNDAY:
+-FRDM>>PLANNED>> Prododa post patching activities in PROD ODA & DR ODA...7HRS
+-FRDM>>UNPLANNED>>LEVEL2-FRDM-OEM EM Event: Warning:BHAXODMP_PR - Tablespace [SYSAUX] is -[89 percent] full..15MINS
+-FRDM>>UNPLANNED>>LEVEL1-FRDM-ODA-PROD-n1-RMAN ON-PREM FULL BACKUP Error occurred during backup of BHAXODMP_PR database..troubleshooted and fixed backup shell script on PROD ODA databases....3 hrs
+============================================================================================================================================================
+
+ON -CALL:
+
+1. SATURDAY: 07/16:
+
+-WTD>>RE: LEVEL1-WTD-SensorMONDB-vdaloracleu003.kbm1.loc-IDP2PPRE-Oracle Tablespaces Reaching Storage limits....ADDED DATAFILES IN SYSTEM TABLESSPACES IN TWO DIFFERENT DATABASES...30MINS
+
+2.SUNDAY:
+
+-TBASE>>LEVEL1-TBASE-SensorMONDB-tboccinmonpl01-emprd-Oracle Tablespaces Reaching Storage limits...15mins
+-LEVEL2-WTD-OEM EM Incident: Warning:New: - Filesystem /var has 9.98% available space, fallen below warning (10) or critical (5) threshold....15mins
+
+============================================================================================================================================================
+ON-CALL:
+
+1.MONDAY: 07/25
+
+WTD>>Comment on URX_1700368_700_InfaTableLoad on ORX - Production Support (thru Dec-2022) (75123282-001) ...1 HR TROUBLESHOOTING
+
+-TUESDAY:07/26
+
+-WTD>>UNPLANNED>>PROBLEM: Disk DBA - Warn: /u01 is WARNING on host odm5db01...cleared space 30mins
+-WTD>>UNPLANNED>>CHECKED AND TROUBLESHOOTED Getting oracle error on table ovt_mart.ctm...provided partition on the table...45 MINS
+-WTD>>UNPLANNED>>ACS job - step "180 ACS Unsuppression" running longer than expected...troubleshooted, checked progress of job and provided update the job was still running..1hr
+
+
+-wednesday:07/27
+
+-WTD>>UNPLANNED>.DISK WARNING - free space: /u01 38180 MB (19% inode=88%)...cleared space 15mins
+
+-THURSDAY:01/28
+
+-WTD>>Locked out of PLSQL..CHECKED STATUS OF ACCOUNT IVANGUEVARA IN ODSMOO,BLKPROD,MOOPRD AND ALL LDAP ENABLED, REFERRED TO CS TEAM FOR PASSWORD RESET...15MINS
+
+-FRIDAY:
+
+FRDM>Planned maintenance for Production and Development ODA environments on 7/29/22... CHECKED DATAGUARD SYNC STATUS FOR PRODORAODA AND DVEORAODA SENSOR PROCESSES WORKING WELL...30MINS
+-WTD>>WTD>>UHC / CG  Interact  Working Session...30MINS
+
+-SUNDAY:
+
+-WTD>>RE: PROBLEM: Disk DBA - Warn: /u01 is WARNING on host odm5db01..CLEARED SPACE AND RESOLVED ISSUE..30MINS
+
+=========================================================================================================================================================
+
+-MONDAY:08/15/2022
+
+WTD>>UNPLANNED>>OVT_4000397_UnicaDataMartLoad...ORA-12801: error signaled in parallel query server P012, instance odm6db06.kbm1.loc:uhg2prd2 (2)..30MINS
+
+TUESDAY:08/16
+
+WTD>>Comment on ORA-01031 insufficient privileges to Create View on Service Requests (75120808-007) (ref# 1851320)...30MINS
+
+WEDNESDAY: 08/17
+
+WTD>> KILLED BLOCKING SESSIONS IN UHGPRD REQUEST BY ANIKET....30MINS
+WTD>>WTD>>RE: LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [HUI_NEOOP_SMT_T01] is [95.65 percent] full...30MINS
+=======================================================================================================================================================
+THURSDAY:08/18
+
+-WTD>>LEVEL1-WTD-OEM EM Incident: Critical:New: - Tablespace [HUI_NEOOP_SMT_T01] is [97.82 percent] full...15MINS
+-WTD>>Re: Duplicate Keyline Request...15MINS
+
+===================================================================================================================================================
+
+FRIDAY:08/19
+
+WTD>>LEVEL2-WTD-OEM EM Incident: Warning:New: - Tablespace [PRI_CORE_SMT_T01] is [92.04 percent] full...30MINS
+WTD>>WTD>>RE: PROBLEM: Oracle DB Check - DBA: hui3prd1 is CRITICAL on host vorarac11p01...30MINS
+WTD>>RE: Comment on Kill Long Running SQL in UHG PROD on Service Requests (75120808-007) (ref# 1859802) toubleshoot issue an killed sessions...2.30hr
+
+
+
+
+=========================================================================================================================================================
+SATURDAY:08/20
+
+FRDM>>PLANNED>> Clearing Swap Plan - Completed,Validation of sync status post maintenance 3omins
+
+
+SUNDAY:08/21
+
+WTD>> LEVEL1-WTD-SensorMONDB-odm4db03-adm.kbm1.loc-MOOPRD-Oracle Tablespaces Reaching Storage limits....15MINS
+
+===========================================================================================================================================================
+
+-MONDAY:08/22
+
+-TBASE>> Change CHG0033354 has been assigned to group Cintra...30MINS
+-Inconvenience bonus form completion....1 hr
+WTD>>Comment on Migrate to Testing Environment on HUI - CC484 - ECR Extract to Humana (75123594-033) (ref# 1712117)...15MINS
+========================================================================================================================================================
+
+MONDAY:09/12
+TBASE>>exaccs MAINTENANCE ...1HR
+
+============================================================================================================================================================
+TUESDAY:09/13
+
+WTD>>Comment on OVT_1796897_FinderFileExtractsIncr running longer than usual on UHG - Production Support (thru Dec-2021) (75123266-001) (ref# 1896958)...1HR
+JB>>PLANNED>> DC Integration: SDC Migration Drop 17 Delivered...1HR
+
+============================================================================================================================================================
+
+WEDNESDAY:09/14
+
+WTD>>RE: WTD>> zremixdbstby01 >> RE: PROBLEM: Oracle DB Check - DBA: kbm2stby is CRITICAL on host zremixdbstby01 ...1HR
+
+============================================================================================================================================================THURSDAY:09/15
+
+FRDM>>LEVEL1-FRDM-DATABASE-FHODAFCT_TST-Datapump Backup Error occurred during backup of FHODAFCT database...30MINS CHECKING
+
+SATURDAY:09/17
+
+FRDM>>POST PATCH ACTIVITY IN NON-PROD ODA'S...3HRS
+
+===========================================================================================================================================================
+
+-SATURDAY:09/24
+-RE: [EXTERNAL] FRDM>>UNPLANNED>> ODA Patching>> Post support...4 hrs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

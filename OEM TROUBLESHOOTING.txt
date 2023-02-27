@@ -1,0 +1,79 @@
+1. OEM AGENT TROUBLESHOOTING:
+
+>cd Agent home (/u01/app/oracle/agent/agent_13.5.0.0.0/bin)
+./emctl status agent
+./emctl stop or start agent (as is required)
+
+>Go to OEM agent server,for WTD
+
+-https://vdaloraoemprd01:7803/em/faces/logon/core-uifwk-console-login
+-click Agent > hosts > and check the hosts which are reachable or unreachable
+-To change configuration on the targets
+cd to the sensor script and edit the agent Home(crontab -l)
+check sensor file directory
+cd to the sensor directory and check sensor_config_ini (to edit the home directory of the Agent)
+
+
+1. FOR SERVER UNREACHABLE:
+
+-Try to login into server on putty
+-try to Ping the server from another hosts
+-Check on OEM Agent to see is the host is reachable or not
+
+Then,
+
+-Contact Unix team (For WTD environment) 
+Rick Jones
+Linux/Unix Administrator
+—
+Choreograph
+2050 N. Greenville Ave Richardson, TX 75082 T  +1 972.664.3508  M +1 972.322.8230
+
+
+
+2.OEM AGENTS NOT BEING MONITORED ON OEM, CHECK STATUS OF DBSNMP USER IN THE DATABASES AND AND FIX IT, AND THEN REFRESH THE OEM AGENT TO SEE STATUS. EXPIRED PASSWORD RESOLUTION:
+
+col username for a29
+col account_status for a30
+ col password for a80
+ set line 180 pages 20
+ select username, account_status, expiry_date from dba_users where username='DBSNMP';
+
+USERNAME                      ACCOUNT_STATUS                 EXPIRY_DA
+----------------------------- ------------------------------ ---------
+DBSNMP                        EXPIRED                        04-AUG-21
+
+
+>set line 200 pages 200
+col username for a33
+select username, account_status , authentication_type from dba_users where username = 'DBSNMP';
+
+
+USERNAME ACCOUNT_STATUS AUTHENTI EXTERNAL_NAME
+----------------------- -------------------------------- -------- ------------------------------------------------------------------
+MSAIMADANMOHAN OPEN GLOBAL
+
+-SELECT PASSWORD FROM SYS.USER$ WHERE NAME ='DBSNMP';
+
+PASSWORD
+--------------------------------------------------------------------------------
+F48DEC4F5AEF2A9A
+
+ ALTER USER DBSNMP IDENTIFIED BY VALUES 'F48DEC4F5AEF2A9A';
+
+User altered.
+
+ select username, account_status, expiry_date from dba_users where username='DBSNMP';
+
+USERNAME                      ACCOUNT_STATUS                 EXPIRY_DA
+----------------------------- ------------------------------ ---------
+DBSNMP                        OPEN                           12-JUL-22
+
+
+
+
+
+
+
+
+ 

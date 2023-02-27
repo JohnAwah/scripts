@@ -1,0 +1,2109 @@
+FREEDOM BI-MONTHLY SENSOR REPORT:
+
+1. Summary:
+
+-Add new DR server
+
+Old DR database:
+-atl-oradbmir-02.freedomh.com
+username:skochar
+PW:FirstLogin12345s
+
+
+- CPU Load data: top
+.obtain the values for load average
+.Mount points data: df -h
+
+
+
+
+
+
+============================================================================================================================================================
+
+2.Architecture Diagram
+===========================================================================================================================================================
+
+3.O.S Logs:
+
+col-afcccms-01
+prodoraoda01  BHAXODMP
+prodoraoda01  GTIKODMP
+
+
+System log files have been verified for errors			
+			
+			
+Server		Database	Result	Output
+col-afcccms-01	AFCCCMSP	Pass	
+			/var/log/messages:Sep 29 07:10:43 col-afcccms-01 kernel: end_request: I/O error, dev fd0, sector 0
+			/var/log/messages:Sep 29 07:10:43 col-afcccms-01 kernel: end_request: I/O error, dev fd0, sector 0
+			/var/log/messages:Sep 29 07:10:43 col-afcccms-01 kernel: end_request: I/O error, dev fd0, sector 0
+			/var/log/messages:Sep 29 07:10:43 col-afcccms-01 kernel: end_request: I/O error, dev fd0, sector 0
+			/var/log/messages:Sep 29 07:10:43 col-afcccms-01 kernel: end_request: I/O error, dev fd0, sector 0
+			/var/log/messages:Sep 29 07:10:43 col-afcccms-01 kernel: end_request: I/O error, dev fd0, sector 0
+			
+prodoraoda01	BHAXODMP		Sep 29 07:44:11 prodoraoda01 kernel: sdh: sdh1 sdh2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdi: sdi1 sdi2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdi: sdi1 sdi2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdg: sdg1 sdg2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdm: sdm1 sdm2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdj: sdj1 sdj2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdi: sdi1 sdi2
+			Sep 29 07:44:12 prodoraoda01 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:12 prodoraoda01 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:12 prodoraoda01 kernel: sdl: sdl1 sdl2
+			Sep 29 07:44:12 prodoraoda01 kernel: sdn: sdn1 sdn2
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+prodoraoda01	GTIKODMP		Sep 29 07:44:11 prodoraoda01 kernel: sdh: sdh1 sdh2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdi: sdi1 sdi2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdi: sdi1 sdi2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdg: sdg1 sdg2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdm: sdm1 sdm2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdj: sdj1 sdj2
+			Sep 29 07:44:11 prodoraoda01 kernel: sdi: sdi1 sdi2
+			Sep 29 07:44:12 prodoraoda01 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:12 prodoraoda01 kernel: sdk: sdk1 sdk2
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+prodoraoda02	BHIKODMP		Sep 29 07:44:11 prodoraoda02 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdj: sdj1 sdj2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdj: sdj1 sdj2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdg: sdg1 sdg2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdl: sdl1 sdl2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdi: sdi1 sdi2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdm: sdm1 sdm2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdl: sdl1 sdl2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdl: sdl1 sdl2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdj: sdj1 sdj2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdn: sdn1 sdn2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdm: sdm1 sdm2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdm: sdm1 sdm2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdm: sdm1 sdm2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdl: sdl1 sdl2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdn: sdn1 sdn2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdn: sdn1 sdn2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdn: sdn1 sdn2
+			Sep 29 07:45:24 prodoraoda02 systemd-logind: New session 33806 of user root.
+			Sep 29 07:45:24 prodoraoda02 dbus[2778]: [system] Activating service name='org.freedesktop.problems' (using servicehelper)
+			Sep 29 07:45:24 prodoraoda02 dbus[2778]: [system] Successfully activated service 'org.freedesktop.problems'
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+prodoraoda02	GTIKODXP		Sep 29 07:44:11 prodoraoda02 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdj: sdj1 sdj2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdj: sdj1 sdj2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdg: sdg1 sdg2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdl: sdl1 sdl2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:11 prodoraoda02 kernel: sdi: sdi1 sdi2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdm: sdm1 sdm2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdl: sdl1 sdl2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdl: sdl1 sdl2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdj: sdj1 sdj2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdn: sdn1 sdn2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdm: sdm1 sdm2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdm: sdm1 sdm2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdm: sdm1 sdm2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdl: sdl1 sdl2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdk: sdk1 sdk2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdn: sdn1 sdn2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdn: sdn1 sdn2
+			Sep 29 07:44:12 prodoraoda02 kernel: sdn: sdn1 sdn2
+			Sep 29 07:45:24 prodoraoda02 systemd-logind: New session 33806 of user root.
+
+
+===========================================================================================================================================================
+4 Internal Disk Space:
+
+Server                        	Database
+col-afcccms-01	                AFCCCMSP
+prodoraoda01	                BHAXODMP
+prodoraoda01	                GTIKODMP
+prodoraoda02	                GTIKODXP
+
+============================================================================================================================================================
+
+5. SERVER PERFORMANCE DATA:
+
+Server	                    Database                    LOAD AVERAGE
+col-afcccms-01	            AFCCCMSP                    CPU USAGE     
+							MEMORY USAGE
+							IO IOTPS
+
+
+* To be reviewed
+============================================================================================================================================================
+
+6. SCHEDULED CRONJOBS
+
+
+Server		Database	Output
+col-afcccms-01	AFCCCMSP	
+		############################################# Cron JOBS ######################################
+		#M H D M W command to be executed                                                            #
+		#- - - - -                                                                                   #
+		#| | | | |                                                                                   #
+		#| | | | ----- Day of week (0 - 7) (Sunday=0 or 7)                                           #
+		#| | | ------- Month (1 - 12)                                                                #
+		#| | --------- Day of month (1 - 31)                                                         #
+		#| ----------- Hour (0 - 23)                                                                 #
+		#------------- Minute (0 - 59)                                                               #
+		############################################# Sensor JOBS ####################################
+		
+		########Cintra Sensor Scripts##############
+		00 05 * * * /u01/app/Cintra/Sensor/DB/AFCCCMSP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/AFCCCMSP/checks/printer.log 2>&1
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/AFCCCMSP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/Server/SensorMONos.sh
+		##00 05 * * * /u01/app/oracle/admin/AFCCCMSP_FL/sensor/checks/printer.sh > /u01/app/oracle/admin/AFCCCMSP_FL/sensor/checks/printer.log 2>&1
+		
+		##################Stats#####################
+		30 09 * * 6 /u01/app/Cintra/STATS/AFCCCMSP/CDBA_STATS_AFCCCMSP_DICT.sh
+		30 10 * * 0 /u01/app/Cintra/STATS/AFCCCMSP/CDBA_STATS_AFCCCMSP_MAIN.sh
+		
+		
+		##############RMAN and DATAPUMP Backup#######################
+		
+		45 20 * * *  /u01/app/Cintra/DPUMP/AFCCCMSP/CDBA_BAK_AFCCCMSP_DPUMPFULL.sh
+		30 00 * * *  /u01/app/Cintra/RMAN/AFCCCMSP/CDBA_BAK_AFCCCMSP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		
+		15 03,07,09,12,15,18,23 * * *  /u01/app/oracle/admin/AFCCCMS/rman/rj/CDBA_BAK_AFCCMSP_FRACLEAN.sh RMAN_FRA_Archive_config.ini
+		
+		######for patching####00 17 * * *  /u01/app/Cintra/RMAN/AFCCCMSP/CDBA_BAK_AFCCCMSP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		
+		
+		## Database Fragmentation check  for AFCCCMSP database
+		00 19 * * 0 /u01/app/Cintra/Sensor/DB/AFCCCMSP/check_fragmen.sh >> /u01/app/Cintra/Sensor/DB/AFCCCMSP/test.log 2>&1
+		
+		## Database Audit check  for AFCCCMSP database
+		00 09 * * * /u01/app/frdm/audit_complaince.sh >> /u01/app/frdm/audit_test.log 2>&1
+		
+		######ADRCI JOBS
+		30 04 * * 6 /u01/app/Cintra/ADRCI/CDBA_ADRCI_CLEANUP.sh >> /u01/app/Cintra/ADRCI/CDBA_ADRCI_CLEANUP.out 2>&1
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh AFCCCMSP_FL >> /u01/app/Cintra/ADRCI/log/CDBA_AUDIT_CLEANUP_RDBMS_AFCCCMSP.out 2>&1
+		
+		
+		
+		# **********************************************
+		# FRDM cronlist:
+		# **********************************************
+		42 07 * * * /u01/app/frdm/remove_daily_lst_files.sh >> /u01/app/frdm/remove_daily_lst_files.lst  2>&1
+		43 07 * * * /u01/app/frdm/daily_rmanbackup_validation.sh >> /u01/app/frdm/daily_rmanbackup_validations.lst 2>&1
+		45 07 * * * /u01/app/frdm/daily_exportbackup_validation.sh >> /u01/app/frdm/daily_exportbackup_validations.lst 2>&1
+		47 07 * * * /u01/app/frdm/daily_backup_validation_mail.sh 2>&1
+		#50 07 * * * /u01/app/frdm/Objects_created_today.sh 2>&1
+		35 09 * * * /u04/orapps/impdp/archive_history.sh 2>&1
+		#52 07 * * * /u01/app/frdm/Objects_created_thisweek.sh 2>&1
+		48 07 * * * /u01/app/frdm/remove_Objects_created_this_week.sh >> /u01/app/frdm/remove_objects_created_this_week.lst  2>&1
+		53 11 * * * /u01/app/frdm/dailyulgnlgf.sh 2>&1
+		
+		
+		00 23,04 * * * /u01/app/oracle/admin/AFCCCMSP/Invaliddb/CDBA_INVALIDS_DB.sh
+		
+		
+		
+		
+		
+		
+		
+		
+		
+prodoraoda01		############################################# Freedom Health Cron JOBS #######################
+		#M H D M W command to be executed                                                            #
+		#- - - - -                                                                                   #
+		#| | | | |                                                                                   #
+		#| | | | ----- Day of week (0 - 7) (Sunday=0 or 7)                                           #
+		#| | | ------- Month (1 - 12)                                                                #
+		#| | --------- Day of month (1 - 31)                                                         #
+		#| ----------- Hour (0 - 23)                                                                 #
+		#------------- Minute (0 - 59)                                                               #
+		##############################################################################################
+		
+		## Cintra Sensor Monitoring ##
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/BHIKODMP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/GTIKODXP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/GTIKODMP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/BHAXODMP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/GORARP01/SensorMONdb.sh
+		
+		00 * * * * /u01/app/Cintra/Sensor/Server/SensorMONos.sh
+		
+		#SS - Check for any archive, flashback or data file created in Oracle Home
+		20 00,04,08,12,16,20 * * * /u01/app/Cintra/OH_Mon/dbhome_check.sh
+		
+		## Cintra Auto Sensor ##
+		00 05 * * * /u01/app/Cintra/Sensor/DB/BHIKODMP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/BHIKODMP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/GTIKODXP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/GTIKODXP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/GTIKODMP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/GTIKODMP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/BHAXODMP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/BHAXODMP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/GORARP01/checks/printer.sh > /u01/app/Cintra/Sensor/DB/GORARP01/checks/printer.log 2>&1
+		
+		## Cintra STATS ##
+		15 10 * * 6 /u01/app/oracle/admin/BHAXODMP_PR/stats/CDBA_STATS_BHAXODMP_DICT.sh
+		15 10 * * 0 /u01/app/oracle/admin/BHAXODMP_PR/stats/CDBA_BHAXODMP_SCHEMASTATS_LIST.sh
+		05 14 * * 6 /u01/app/oracle/admin/GTIKODXP_PR/stats/CDBA_STATS_GTIKODXP_DICT.sh
+		05 14 * * 0 /u01/app/oracle/admin/GTIKODXP_PR/stats/CDBA_GTIKODXP_SCHEMASTATS_LIST.sh
+		30 09 * * 6 /u01/app/oracle/admin/BHIKODMP_PR/stats/CDBA_STATS_BHIKODMP_DICT.sh
+		30 09 * * 0 /u01/app/oracle/admin/BHIKODMP_PR/stats/CDBA_BHIKODMP_SCHEMASTATS_LIST.sh
+		30 11 * * 6 /u01/app/oracle/admin/GTIKODMP_PR/stats/CDBA_STATS_GTIKODMP_DICT.sh
+		30 11 * * 0 /u01/app/oracle/admin/GTIKODMP_PR/stats/CDBA_GTIKODMP_SCHEMASTATS_LIST.sh
+		15 06 * * 6 /u01/app/oracle/admin/GORARP01_PR/stats/CDBA_STATS_GORARP01_DICT.sh
+		15 06 * * 0 /u01/app/oracle/admin/GORARP01_PR/stats/CDBA_GORARP01_SCHEMASTATS_LIST.sh
+		
+		## Cintra RMAN Backups ##
+		#15 18 * * * /u01/app/oracle/admin/BHIKODMP_PR/rman/CDBA_BAK_BHIKODMP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		#35 19 * * * /u01/app/oracle/admin/BHAXODMP_PR/rman/CDBA_BAK_BHAXODMP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		#15 21 * * * /u01/app/oracle/admin/GTIKODMP_PR/rman/CDBA_BAK_GTIKODMP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		#05 22 * * * /u01/app/oracle/admin/GTIKODXP_PR/rman/CDBA_BAK_GTIKODXP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		#55 02 * * * /u01/app/oracle/admin/GORARP01_PR/rman/CDBA_BAK_GORARP01_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		
+		## Cintra DG Monitoring ##
+		#10,40 * * * * /u01/app/oracle/admin/BHAXODMP_PR/standby/CDBA_DG_BHAXODMP_MONITOR.sh
+		##20210608 Existing Enabled node1##10,40 * * * * /u01/app/oracle/admin/GTIKODXP_PR/standby/CDBA_DG_GTIKODXP_MONITOR.sh
+		# Discontinued as DB is Primary from 0618# 10,40 * * * * /u01/app/oracle/admin/GTIKODMP_PR/standby/CDBA_DG_GTIKODMP_MONITOR.sh
+		##10,40 * * * * /u01/app/oracle/admin/BHIKODMP_PR/standby/CDBA_DG_BHIKODMP_MONITOR.sh
+		#10,40 * * * * /u01/app/oracle/admin/GORARP01_PR/standby/CDBA_DG_GORARP01_MONITOR.sh
+		
+		## Cintra FRA Cleanup ##
+		#Enabled on node2 ##15 03,07,09,12,15,18,23 * * * /u01/app/oracle/admin/BHAXODMP_PR/rman/CDBA_BAK_BHAXODMP_FRACLEAN.sh
+		# 15 03,07,09,12,15,18,23 * * * /u01/app/oracle/admin/GTIKODMP_PR/rman/CDBA_BAK_GTIKODMP_FRACLEAN.sh
+		#15 03,07,09,12,15,18,23 * * * /u01/app/oracle/admin/BHIKODMP_PR/rman/CDBA_BAK_BHIKODMP_FRACLEAN.sh
+		##20210608 Existing Enabled node1##30 06,08,12,17,23 * * * /u01/app/oracle/admin/GTIKODXP_PR/rman/CDBA_BAK_GTIKODXP_FRACLEAN.sh
+		#30 07,12,17,23 * * * /u01/app/oracle/admin/GORARP01_PR/rman/CDBA_BAK_GORARP01_FRACLEAN.sh
+		
+		## Cintra ADRCI ##
+		30 04 * * 6 /u01/app/Cintra/ADRCI/CDBA_ADRCI_CLEANUP.sh
+		30 04 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_GI.sh
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh BHIKODMP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh GTIKODXP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh GTIKODMP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh BHAXODMP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh GORARP01_PR
+		
+		## Cintra Datapump Latest##
+		05 16  * * * /u01/app/oracle/admin/GORARP01_PR/datapump/CDBA_BAK_GORARP01_DPUMP.sh DATABASE
+		45 18  * * * /u01/app/oracle/admin/BHAXODMP_PR/datapump/CDBA_BAK_BHAXODMP_DPUMP.sh DATABASE
+		35 03  * * * /u01/app/oracle/admin/BHIKODMP_PR/datapump/CDBA_BAK_BHIKODMP_DPUMP.sh DATABASE
+		30 17  * * * /u01/app/oracle/admin/GTIKODMP_PR/datapump/CDBA_BAK_GTIKODMP_DPUMP.sh DATABASE
+		05 20  * * * /u01/app/oracle/admin/GTIKODXP_PR/datapump/CDBA_BAK_GTIKODXP_DPUMP.sh DATABASE
+		35 16  * * * /u01/app/oracle/admin/BHAXODMP_PR/datapump/CDBA_BAK_BHAXODMP_DPUMP_DMV4.sh SCHEMA CMS_ADMIN
+		
+		## Invalid check ##
+		#00 23,04 * * * /u01/app/oracle/admin/BHIKODMP_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		#00 23,04 * * * /u01/app/oracle/admin/GTIKODXP_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		#00 23,04 * * * /u01/app/oracle/admin/GTIKODMP_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		#00 23,04 * * * /u01/app/oracle/admin/BHAXODMP_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		#00 23,04 * * * /u01/app/oracle/admin/GTIKODXP_PR/frdm/FHVX_Dlygrntrun.sh
+		#00 23,04 * * * /u01/app/oracle/admin/GTIKODMP_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		#00 23,04 * * * /u01/app/oracle/admin/BHAXODMP_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		#00 23,04 * * * /u01/app/oracle/admin/GORARP01_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		
+		
+		
+		
+		
+		
+		
+prodoraoda02		############################################# Freedom Health Cron JOBS #######################
+		#M H D M W command to be executed                                                            #
+		#- - - - -                                                                                   #
+		#| | | | |                                                                                   #
+		#| | | | ----- Day of week (0 - 7) (Sunday=0 or 7)                                           #
+		#| | | ------- Month (1 - 12)                                                                #
+		#| | --------- Day of month (1 - 31)                                                         #
+		#| ----------- Hour (0 - 23)                                                                 #
+		#------------- Minute (0 - 59)                                                               #
+		##############################################################################################
+		
+		## Cintra Sensor Monitoring ##
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/BHIKODMP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/GTIKODXP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/GTIKODMP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/BHAXODMP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/GORARP01/SensorMONdb.sh
+		
+		00 * * * * /u01/app/Cintra/Sensor/Server/SensorMONos.sh
+		
+		#SS - Check for any archive, flashback or data file created in Oracle Home
+		20 00,04,08,12,16,20 * * * /u01/app/Cintra/OH_Mon/dbhome_check.sh
+		
+		## Cintra Auto Sensor ##
+		00 05 * * * /u01/app/Cintra/Sensor/DB/BHIKODMP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/BHIKODMP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/GTIKODXP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/GTIKODXP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/GTIKODMP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/GTIKODMP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/BHAXODMP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/BHAXODMP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/GORARP01/checks/printer.sh > /u01/app/Cintra/Sensor/DB/GORARP01/checks/printer.log 2>&1
+		
+		## Cintra STATS ##
+		#30 09 * * 6 /u01/app/oracle/admin/BHAXODMP_PR/stats/CDBA_STATS_BHAXODMP_DICT.sh
+		#30 10 * * 0 /u01/app/oracle/admin/BHAXODMP_PR/stats/CDBA_BHAXODMP_SCHEMASTATS_LIST.sh
+		#15 21 * * 6 /u01/app/oracle/admin/GTIKODXP_PR/stats/CDBA_STATS_GTIKODXP_DICT.sh
+		#00 10 * * 0 /u01/app/oracle/admin/GTIKODXP_PR/stats/CDBA_GTIKODXP_SCHEMASTATS_LIST.sh
+		#30 09 * * 6 /u01/app/oracle/admin/BHIKODMP_PR/stats/CDBA_STATS_BHIKODMP_DICT.sh
+		#30 10 * * 0 /u01/app/oracle/admin/BHIKODMP_PR/stats/CDBA_BHIKODMP_SCHEMASTATS_LIST.sh
+		#30 09 * * 6 /u01/app/oracle/admin/GTIKODMP_PR/stats/CDBA_STATS_GTIKODMP_DICT.sh
+		#30 10 * * 0 /u01/app/oracle/admin/GTIKODMP_PR/stats/CDBA_GTIKODMP_SCHEMASTATS_LIST.sh
+		#15 09 * * 6 /u01/app/oracle/admin/GORARP01_PR/stats/CDBA_STATS_GORARP01_DICT.sh
+		#15 08 * * 6 /u01/app/oracle/admin/GORARP01_PR/stats/CDBA_GORARP01_SCHEMASTATS_LIST.sh
+		
+		## Cintra RMAN Backups ##
+		35 19 * * * /u01/app/oracle/admin/BHIKODMP_PR/rman/CDBA_BAK_BHIKODMP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		00 02 * * * /u01/app/oracle/admin/BHAXODMP_PR/rman/CDBA_BAK_BHAXODMP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		35 20  * * * /u01/app/oracle/admin/GORARP01_PR/rman/CDBA_BAK_GORARP01_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		05 00 * * * /u01/app/oracle/admin/GTIKODMP_PR/rman/CDBA_BAK_GTIKODMP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		#35 20 * * * /u01/app/oracle/admin/GTIKODXP_PR/rman/CDBA_BAK_GTIKODXP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		
+		## Cintra DG Monitoring ##
+		#10,40 * * * * /u01/app/oracle/admin/BHAXODMP_PR/standby/CDBA_DG_BHAXODMP_MONITOR.sh
+		#10,40 * * * * /u01/app/oracle/admin/GTIKODXP_PR/standby/CDBA_DG_GTIKODXP_MONITOR.sh
+		#10,40 * * * * /u01/app/oracle/admin/GTIKODMP_PR/standby/CDBA_DG_GTIKODMP_MONITOR.sh
+		#10,40 * * * * /u01/app/oracle/admin/BHIKODMP_PR/standby/CDBA_DG_BHIKODMP_MONITOR.sh
+		#10,40 * * * * /u01/app/oracle/admin/GORARP01_PR/standby/CDBA_DG_GORARP01_MONITOR.sh
+		
+		## Cintra FRA Cleanup ##
+		15 03,07,09,12,15,18,23 * * * /u01/app/oracle/admin/BHAXODMP_PR/rman/CDBA_BAK_BHAXODMP_FRACLEAN.sh
+		25 03,07,09,12,15,18,23 * * * /u01/app/oracle/admin/GTIKODMP_PR/rman/CDBA_BAK_GTIKODMP_FRACLEAN.sh
+		35 03,07,09,12,15,18,23 * * * /u01/app/oracle/admin/BHIKODMP_PR/rman/CDBA_BAK_BHIKODMP_FRACLEAN.sh
+		45 06,08,12,17,23 * * * /u01/app/oracle/admin/GTIKODXP_PR/rman/CDBA_BAK_GTIKODXP_FRACLEAN.sh
+		55 07,12,17,23 * * * /u01/app/oracle/admin/GORARP01_PR/rman/CDBA_BAK_GORARP01_FRACLEAN.sh
+		
+		
+		## Cintra ADRCI ##
+		30 04 * * 6 /u01/app/Cintra/ADRCI/CDBA_ADRCI_CLEANUP.sh
+		30 04 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_GI.sh
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh BHIKODMP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh GTIKODXP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh GTIKODMP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh BHAXODMP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh GORARP01_PR
+		
+		## Cintra Datapump Latest##
+		00 19 * * *  /u01/app/oracle/admin/GORARP01_PR/datapump/CDBA_BAK_GORARP01_DPUMP.sh DATABASE
+		#Enbaled on node 1##00 20  * * * /u01/app/oracle/admin/BHAXODMP_PR/datapump/CDBA_BAK_BHAXODMP_DPUMP.sh DATABASE
+		#live from N2## 00 21  * * * /u01/app/oracle/admin/BHIKODMP_PR/datapump/CDBA_BAK_BHIKODMP_DPUMP.sh DATABASE
+		#live from N2## 30 21  * * * /u01/app/oracle/admin/GTIKODMP_PR/datapump/CDBA_BAK_GTIKODMP_DPUMP.sh DATABASE
+		#live from N2## 30 00  * * * /u01/app/oracle/admin/GTIKODXP_PR/datapump/CDBA_BAK_GTIKODXP_DPUMP.sh DATABASE
+		
+		## Invalid check ##
+		#00 23,04 * * * /u01/app/oracle/admin/BHIKODMP_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		#00 23,04 * * * /u01/app/oracle/admin/GTIKODXP_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		#00 23,04 * * * /u01/app/oracle/admin/GTIKODMP_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		#00 23,04 * * * /u01/app/oracle/admin/BHAXODMP_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		00 23,04 * * * /u01/app/oracle/admin/GORARP01_PR/Invaliddb/CDBA_INVALIDS_DB.sh
+		
+		
+prodoraoda01	GTIKODMP	############################################# Freedom Health Cron JOBS #######################
+		#M H D M W command to be executed                                                            #
+		#- - - - -                                                                                   #
+		#| | | | |                                                                                   #
+		#| | | | ----- Day of week (0 - 7) (Sunday=0 or 7)                                           #
+		#| | | ------- Month (1 - 12)                                                                #
+		#| | --------- Day of month (1 - 31)                                                         #
+		#| ----------- Hour (0 - 23)                                                                 #
+		#------------- Minute (0 - 59)                                                               #
+		##############################################################################################
+		
+		## Cintra Sensor Monitoring ##
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/BHIKODMP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/GTIKODXP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/GTIKODMP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/BHAXODMP/SensorMONdb.sh
+		00,15,30,45 * * * * /u01/app/Cintra/Sensor/DB/GORARP01/SensorMONdb.sh
+		
+		00 * * * * /u01/app/Cintra/Sensor/Server/SensorMONos.sh
+		
+		#SS - Check for any archive, flashback or data file created in Oracle Home
+		20 00,04,08,12,16,20 * * * /u01/app/Cintra/OH_Mon/dbhome_check.sh
+		
+		## Cintra Auto Sensor ##
+		00 05 * * * /u01/app/Cintra/Sensor/DB/BHIKODMP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/BHIKODMP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/GTIKODXP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/GTIKODXP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/GTIKODMP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/GTIKODMP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/BHAXODMP/checks/printer.sh > /u01/app/Cintra/Sensor/DB/BHAXODMP/checks/printer.log 2>&1
+		00 05 * * * /u01/app/Cintra/Sensor/DB/GORARP01/checks/printer.sh > /u01/app/Cintra/Sensor/DB/GORARP01/checks/printer.log 2>&1
+		
+		## Cintra STATS ##
+		15 10 * * 6 /u01/app/oracle/admin/BHAXODMP_PR/stats/CDBA_STATS_BHAXODMP_DICT.sh
+		15 10 * * 0 /u01/app/oracle/admin/BHAXODMP_PR/stats/CDBA_BHAXODMP_SCHEMASTATS_LIST.sh
+		05 14 * * 6 /u01/app/oracle/admin/GTIKODXP_PR/stats/CDBA_STATS_GTIKODXP_DICT.sh
+		05 14 * * 0 /u01/app/oracle/admin/GTIKODXP_PR/stats/CDBA_GTIKODXP_SCHEMASTATS_LIST.sh
+		30 09 * * 6 /u01/app/oracle/admin/BHIKODMP_PR/stats/CDBA_STATS_BHIKODMP_DICT.sh
+		30 09 * * 0 /u01/app/oracle/admin/BHIKODMP_PR/stats/CDBA_BHIKODMP_SCHEMASTATS_LIST.sh
+		30 11 * * 6 /u01/app/oracle/admin/GTIKODMP_PR/stats/CDBA_STATS_GTIKODMP_DICT.sh
+		30 11 * * 0 /u01/app/oracle/admin/GTIKODMP_PR/stats/CDBA_GTIKODMP_SCHEMASTATS_LIST.sh
+		15 06 * * 6 /u01/app/oracle/admin/GORARP01_PR/stats/CDBA_STATS_GORARP01_DICT.sh
+		15 06 * * 0 /u01/app/oracle/admin/GORARP01_PR/stats/CDBA_GORARP01_SCHEMASTATS_LIST.sh
+		
+		## Cintra RMAN Backups ##
+		#15 18 * * * /u01/app/oracle/admin/BHIKODMP_PR/rman/CDBA_BAK_BHIKODMP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		#35 19 * * * /u01/app/oracle/admin/BHAXODMP_PR/rman/CDBA_BAK_BHAXODMP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		#15 21 * * * /u01/app/oracle/admin/GTIKODMP_PR/rman/CDBA_BAK_GTIKODMP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		#05 22 * * * /u01/app/oracle/admin/GTIKODXP_PR/rman/CDBA_BAK_GTIKODXP_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		#55 02 * * * /u01/app/oracle/admin/GORARP01_PR/rman/CDBA_BAK_GORARP01_RMAN_INCREMENTAL.sh RMAN_Incremental_config.ini
+		
+		## Cintra DG Monitoring ##
+		#10,40 * * * * /u01/app/oracle/admin/BHAXODMP_PR/standby/CDBA_DG_BHAXODMP_MONITOR.sh
+		##20210608 Existing Enabled node1##10,40 * * * * /u01/app/oracle/admin/GTIKODXP_PR/standby/CDBA_DG_GTIKODXP_MONITOR.sh
+		# Discontinued as DB is Primary from 0618# 10,40 * * * * /u01/app/oracle/admin/GTIKODMP_PR/standby/CDBA_DG_GTIKODMP_MONITOR.sh
+		##10,40 * * * * /u01/app/oracle/admin/BHIKODMP_PR/standby/CDBA_DG_BHIKODMP_MONITOR.sh
+		#10,40 * * * * /u01/app/oracle/admin/GORARP01_PR/standby/CDBA_DG_GORARP01_MONITOR.sh
+		
+		## Cintra FRA Cleanup ##
+		#Enabled on node2 ##15 03,07,09,12,15,18,23 * * * /u01/app/oracle/admin/BHAXODMP_PR/rman/CDBA_BAK_BHAXODMP_FRACLEAN.sh
+		# 15 03,07,09,12,15,18,23 * * * /u01/app/oracle/admin/GTIKODMP_PR/rman/CDBA_BAK_GTIKODMP_FRACLEAN.sh
+		#15 03,07,09,12,15,18,23 * * * /u01/app/oracle/admin/BHIKODMP_PR/rman/CDBA_BAK_BHIKODMP_FRACLEAN.sh
+		##20210608 Existing Enabled node1##30 06,08,12,17,23 * * * /u01/app/oracle/admin/GTIKODXP_PR/rman/CDBA_BAK_GTIKODXP_FRACLEAN.sh
+		#30 07,12,17,23 * * * /u01/app/oracle/admin/GORARP01_PR/rman/CDBA_BAK_GORARP01_FRACLEAN.sh
+		
+		## Cintra ADRCI ##
+		30 04 * * 6 /u01/app/Cintra/ADRCI/CDBA_ADRCI_CLEANUP.sh
+		30 04 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_GI.sh
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh BHIKODMP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh GTIKODXP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh GTIKODMP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh BHAXODMP_PR
+		30 05 * * 6 /u01/app/Cintra/ADRCI/CDBA_AUDIT_CLEANUP_RDBMS.sh GORARP01_PR
+		
+		## Cintra Datapump Latest##
+		05 16  * * * /u01/app/oracle/admin/GORARP01_PR/datapump/CDBA_BAK_GORARP01_DPUMP.sh DATABASE
+		45 18  * * * /u01/app/oracle/admin/BHAXODMP_PR/datapump/CDBA_BAK_BHAXODMP_DPUMP.sh DATABASE
+		35 03  * * * /u01/app/oracle/admin/BHIKODMP_PR/datapump/CDBA_BAK_BHIKODMP_DPUMP.sh DATABASE
+		30 17  * * * /u01/app/oracle/admin/GTIKODMP_PR/datapump/CDBA_BAK_GTIKODMP_DPUMP.sh DATABASE
+		05 20  * * * /u01/app/oracle/admin/GTIKODXP_PR/datapump/CDBA_BAK_GTIKODXP_DPUMP.sh DATABASE
+============================================================================================================================================================
+
+7. OEM AGENTS:
+
+
+-ps -ef|grep -i agent
+-cd /u01/app/oracle/agent_13c/agent_13.4.0.0.0/bin/
+-./emctl status agent
+
+
+Server	Database	Result	Output
+col-afcccms-01	AFCCCMSP	Pass	Oracle Enterprise Manager Cloud Control 13c Release 4
+			Copyright (c) 1996, 2020 Oracle Corporation.  All rights reserved.
+			---------------------------------------------------------------
+			Agent Version          : 13.4.0.0.0
+			OMS Version            : 13.4.0.0.0
+			Protocol Version       : 12.1.0.1.0
+			Agent Home             : /u01/app/oracle/product/Agent13c/agent_inst
+			Agent Log Directory    : /u01/app/oracle/product/Agent13c/agent_inst/sysman/log
+			Agent Binaries         : /u01/app/oracle/product/Agent13c/agent_13.4.0.0.0
+			Core JAR Location      : /u01/app/oracle/product/Agent13c/agent_13.4.0.0.0/jlib
+			Agent Process ID       : 27537
+			Parent Process ID      : 27486
+			Agent URL              : https://col-afcccms-01:3873/emd/main/
+			Local Agent URL in NAT : https://col-afcccms-01:3873/emd/main/
+			Repository URL         : https://col-cloragc-01.freedomh.com:4903/empbs/upload
+			Started at             : 2021-09-17 22:44:24
+			Started by user        : oracle
+			Operating System       : Linux version 3.8.13-118.16.2.el6uek.x86_64 (amd64)
+			Number of Targets      : 8
+			Last Reload            : (none)
+			Last successful upload                       : 2021-09-29 07:29:27
+			Last attempted upload                        : 2021-09-29 07:29:27
+			Total Megabytes of XML files uploaded so far : 10.8
+			Number of XML files pending upload           : 0
+			Size of XML files pending upload(MB)         : 0
+			Available disk space on upload filesystem    : 79.46%
+			Collection Status                            : Collections enabled
+			Heartbeat Status                             : Ok
+			Last attempted heartbeat to OMS              : 2021-09-29 07:37:58
+			Last successful heartbeat to OMS             : 2021-09-29 07:37:58
+			Next scheduled heartbeat to OMS              : 2021-09-29 07:38:58
+			
+			---------------------------------------------------------------
+			Agent is Running and Ready
+			
+			
+			
+prodoraoda01			Oracle Enterprise Manager Cloud Control 13c Release 4
+			Copyright (c) 1996, 2020 Oracle Corporation.  All rights reserved.
+			---------------------------------------------------------------
+			Agent Version          : 13.4.0.0.0
+			OMS Version            : 13.4.0.0.0
+			Protocol Version       : 12.1.0.1.0
+			Agent Home             : /u01/app/oracle/agent_13c/agent_inst
+			Agent Log Directory    : /u01/app/oracle/agent_13c/agent_inst/sysman/log
+			Agent Binaries         : /u01/app/oracle/agent_13c/agent_13.4.0.0.0
+			Core JAR Location      : /u01/app/oracle/agent_13c/agent_13.4.0.0.0/jlib
+			Agent Process ID       : 50034
+			Parent Process ID      : 49852
+			Agent URL              : https://prodoraoda01.freedomh.com:3872/emd/main/
+			Local Agent URL in NAT : https://prodoraoda01.freedomh.com:3872/emd/main/
+			Repository URL         : https://col-cloragc-01.freedomh.com:4903/empbs/upload
+			Started at             : 2021-08-21 07:37:50
+			Started by user        : oracle
+			Operating System       : Linux version 4.14.35-2025.404.1.2.el7uek.x86_64 (amd64)
+			Number of Targets      : 26
+			Last Reload            : (none)
+			Last successful upload                       : 2021-09-29 07:54:05
+			Last attempted upload                        : 2021-09-29 07:54:05
+			Total Megabytes of XML files uploaded so far : 88.92
+			Number of XML files pending upload           : 0
+			Size of XML files pending upload(MB)         : 0
+			Available disk space on upload filesystem    : 42.18%
+			Collection Status                            : Collections enabled
+			Heartbeat Status                             : Ok
+			Last attempted heartbeat to OMS              : 2021-09-29 07:54:04
+			Last successful heartbeat to OMS             : 2021-09-29 07:54:04
+			Next scheduled heartbeat to OMS              : 2021-09-29 07:55:04
+			
+			---------------------------------------------------------------
+			Agent is Running and Ready
+			
+			
+			
+prodoraoda02			Oracle Enterprise Manager Cloud Control 13c Release 4
+			Copyright (c) 1996, 2020 Oracle Corporation.  All rights reserved.
+			---------------------------------------------------------------
+			Agent Version          : 13.4.0.0.0
+			OMS Version            : 13.4.0.0.0
+			Protocol Version       : 12.1.0.1.0
+			Agent Home             : /u01/app/oracle/agent_13c/agent_inst
+			Agent Log Directory    : /u01/app/oracle/agent_13c/agent_inst/sysman/log
+			Agent Binaries         : /u01/app/oracle/agent_13c/agent_13.4.0.0.0
+			Core JAR Location      : /u01/app/oracle/agent_13c/agent_13.4.0.0.0/jlib
+			Agent Process ID       : 3602
+			Parent Process ID      : 3423
+			Agent URL              : https://prodoraoda02.freedomh.com:3872/emd/main/
+			Local Agent URL in NAT : https://prodoraoda02.freedomh.com:3872/emd/main/
+			Repository URL         : https://col-cloragc-01.freedomh.com:4903/empbs/upload
+			Started at             : 2021-08-21 07:38:28
+			Started by user        : oracle
+			Operating System       : Linux version 4.14.35-2025.404.1.2.el7uek.x86_64 (amd64)
+			Number of Targets      : 27
+			Last Reload            : (none)
+			Last successful upload                       : 2021-09-29 07:53:30
+			Last attempted upload                        : 2021-09-29 07:53:30
+			Total Megabytes of XML files uploaded so far : 132.52
+			Number of XML files pending upload           : 0
+			Size of XML files pending upload(MB)         : 0
+			Available disk space on upload filesystem    : 35.39%
+			Collection Status                            : Collections enabled
+			Heartbeat Status                             : Ok
+			Last attempted heartbeat to OMS              : 2021-09-29 07:55:00
+			Last successful heartbeat to OMS             : 2021-09-29 07:55:00
+			Next scheduled heartbeat to OMS              : 2021-09-29 07:56:00
+			
+			---------------------------------------------------------------
+			Agent is Running and Ready
+
+============================================================================================================================================================
+
+8. Oracle LOGs:
+
+-Get from alert log file:
+-Show parameter dump
+-Extract last five lines from the alert log file
+
+Server	Database	Result	Output
+col-afcccms-01	AFCCCMSP	Pass	
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			LISTENER, /u01/app/oracle/diag/tnslsnr/col-afcccms-01/listener/alert/log.xml
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			ADRCI
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			ALERT LOG ,/u01/app/oracle/diag/rdbms/afcccmsp_fl/AFCCCMSP/trace/alert_AFCCCMSP.log
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			
+			
+			
+prodoraoda01	BHAXODMP	Pass	Thread 1 advanced to log sequence 1686 (LGWR switch),  current SCN: 7461302882599
+			  Current log# 1 seq# 1686 mem# 0: /u04/app/oracle/redo/BHAXODMP/BHAXODMP_PR/onlinelog/o1_mf_1_j2wogmmj_.log
+			2021-07-15T08:40:33.900571-04:00
+			ARC2 (PID:27212): Archived Log entry 29002 added for T-1.S-1685 ID 0x56301781 LAD:1
+			2021-07-15T08:40:43.339184-04:00
+			TT03 (PID:47926): SRL selected for T-1.S-1686 for LAD:2
+			2021-07-15T09:34:07.991238-04:00
+			Thread 1 advanced to log sequence 1687 (LGWR switch),  current SCN: 7461303846115
+			  Current log# 2 seq# 1687 mem# 0: /u04/app/oracle/redo/BHAXODMP/BHAXODMP_PR/onlinelog/o1_mf_2_j2wogos6_.log
+			2021-07-15T09:34:08.088679-04:00
+			
+			
+			
+			
+prodoraoda01	GTIKODMP	Pass	Thread 1 advanced to log sequence 2613 (LGWR switch),  current SCN: 7461308173559
+			  Current log# 3 seq# 2613 mem# 0: /u04/app/oracle/redo/GTIKODMP/GTIKODMP_PR/onlinelog/o1_mf_3_j2tx84x0_.log
+			2021-07-15T11:32:37.399093-04:00
+			ARC2 (PID:12331): Archived Log entry 22687 added for T-1.S-2612 ID 0x6d126c91 LAD:1
+			2021-07-15T11:32:37.495818-04:00
+			TT03 (PID:9139): SRL selected for T-1.S-2613 for LAD:2
+			
+			Thread 1 advanced to log sequence 2614 (LGWR switch),  current SCN: 7461308255924
+			  Current log# 4 seq# 2614 mem# 0: /u04/app/oracle/redo/GTIKODMP/GTIKODMP_PR/onlinelog/o1_mf_4_j2tx8786_.log
+			2021-07-15T11:47:37.549656-04:00
+			ARC3 (PID:12334): Archived Log entry 22691 added for T-1.S-2613 ID 0x6d126c91 LAD:1
+			2021-07-15T11:47:37.640048-04:00
+			TT03 (PID:9139): SRL selected for T-1.S-2614 for LAD:2
+			2021-07-15T12:02:38.030773-04:00
+			Thread 1 advanced to log sequence 2615 (LGWR switch),  current SCN: 7461308276016
+			
+			
+			
+			
+			
+			
+			
+			
+prodoraoda01	BHIKODMP		2021-07-15T10:42:37.505433-04:00
+			ARC1 (PID:3942): Archived Log entry 18267 added for T-1.S-1968 ID 0x3bd6818a LAD:1
+			2021-07-15T10:42:37.602087-04:00
+			TT03 (PID:92319): SRL selected for T-1.S-1969 for LAD:2
+			
+			Thread 1 advanced to log sequence 1970 (LGWR switch),  current SCN: 7461302840185
+			  Current log# 2 seq# 1970 mem# 0: /u04/app/oracle/redo/BHIKODMP/BHIKODMP_PR/onlinelog/o1_mf_2_j2wc2nn8_.log
+			2021-07-15T11:12:37.803031-04:00
+			ARC2 (PID:3945): Archived Log entry 18271 added for T-1.S-1969 ID 0x3bd6818a LAD:1
+			
+			TT03 (PID:92319): SRL selected for T-1.S-1970 for LAD:2
+			
+			Thread 1 advanced to log sequence 1971 (LGWR switch),  current SCN: 7461302846534
+			  Current log# 3 seq# 1971 mem# 0: /u04/app/oracle/redo/BHIKODMP/BHIKODMP_PR/onlinelog/o1_mf_3_j2wc2pv0_.log
+			2021-07-15T11:42:38.148521-04:00
+			ARC3 (PID:3948): Archived Log entry 18275 added for T-1.S-1970 ID 0x3bd6818a LAD:1
+			
+			
+			
+prodoraoda01	GTIKODXP		Thread 1 advanced to log sequence 395 (LGWR switch),  current SCN: 7461291599364
+			  Current log# 3 seq# 395 mem# 0: /u04/app/oracle/redo/GTIKODXP/GTIKODXP_PR/onlinelog/o1_mf_3_j2vhrfvt_.log
+			
+			TT03 (PID:39477): SRL selected for T-1.S-395 for LAD:2
+			
+			ARC3 (PID:83984): Archived Log entry 13495 added for T-1.S-394 ID 0x341488 LAD:1
+			2021-07-15T01:32:59.255976-04:00
+			KILL SESSION for sid=(981, 28175):
+			  Reason = profile limit idle_time
+			  Mode = KILL SOFT -/-/NO_REPLAY
+			  Requestor = PMON (orapid = 2, ospid = 83570, inst = 1)
+			  Owner = Process: USER (orapid = 93, ospid = 16954)
+			  Result = ORA-0
+			2021-07-15T01:48:26.484361-04:00
+			ALTER SYSTEM ARCHIVE LOG
+			2021-07-15T01:48:26.500098-04:00
+			Thread 1 advanced to log sequence 396 (LGWR switch),  current SCN: 7461294068067
+			  Current log# 4 seq# 396 mem# 0: /u04/app/oracle/redo/GTIKODXP/GTIKODXP_PR/onlinelog/o1_mf_4_j2vhrj5r_.log
+			2021-07-15T01:48:26.687927-04:00
+			TT03 (PID:39477): SRL selected for T-1.S-396 for LAD:2
+
+============================================================================================================================================================
+
+9.SCHEMA OBJECTS:
+
+Server		Database	Output
+col-afcccms-01	AFCCCMSP	
+		DB_TYPE
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Fragmented Index Information
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		no rows selected
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Objects Distribution
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		OWNER                            COUNT(*)
+		------------------------------ ----------
+		AIMMANUEL                              10
+		APEX_030200                          2561
+		BAT_ADMIN                               2
+		CCMSDBA                              2497
+		DBSNMP                                 57
+		DPA                                    10
+		DPA_ORACLE                             10
+		DPA_SQLDBA                             11
+		FAWZI                                   2
+		FLOWS_FILES                            13
+		IGNITE                                 10
+		ISJOBS                                  3
+		JROWE                                  12
+		KELLIS                                  8
+		MMIRABELLA                              7
+		ORACLE_OCM                              8
+		ORDDATA                               257
+		ORDPLUGINS                             10
+		OUTLN                                  10
+		PUBLIC                              36954
+		RNUTAKKI                                7
+		SCOTT                                   6
+		SI_INFORMTN_SCHEMA                      8
+		STAGE_CCMSDBA                         208
+		STAGING                                14
+		WOMNF8Y88                               3
+		XDB                                  1169
+		
+		27 rows selected.
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Invalid Objects
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		no rows selected
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Index Rebuild
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		TO_CHAR(LA   COUNT(*)
+		---------- ----------
+		2013/08/24       2379
+		2017/04/29        854
+		2017/06/29          2
+		2017/11/30          1
+		2018/03/08          1
+		2018/05/17          2
+		2019/03/08          1
+		2021/03/02          1
+		2021/06/01         29
+		
+		9 rows selected.
+		
+		
+		
+		
+prodoraoda01	BHAXODMP	DB_TYPE
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Fragmented Index Information
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		TABLESPACE_NAME           SEGMENT_OWNE SEGMENT_NAME                   ALLOCATED_SPACE_MB USED_SPACE_MB RECLAIMABLE_SPACE_MB PERCENT_RECLAIM
+		------------------------- ------------ ------------------------------ ------------------ ------------- -------------------- ---------------
+		CMS_ADMIN_DBF             CMS_ADMIN    BROKER_MATCH_IDX1                               0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    DMV4MEP_UNIQID_IDX                              0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_2A9B0002                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_2EBA0003                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_2EBA0004                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_2EBA0005                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_59BA0001                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_59C00003                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_6D360001                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_6EF10001                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_708C0001001                            2176        282.23              1893.77           87.03
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_B5E80002                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_E7650004                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_F2630002                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX$$_F65A0001                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX1_CLAIM_CODES                                0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX1_MP_REPORT                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX1_PAYMENT_DETAIL                             0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX1_V101_2018_SVCMON                           0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX_CLAIM_EVENT_CODES                           0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX_ERROR_CLAIMS_EXTERNALID                     0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX_V101_2019_PROVID                            0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX_V101_2019_SVCMON                            0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    IDX_V101_2020_CLAIM_ID                          0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    V4_MBR_MST_MBI                                  0             0                    0               0
+		CMS_ADMIN_DBF             CMS_ADMIN    V4_MBR_MST_MBI1                                 0             0                    0               0
+		CMS_ADMIN_DBF             HAX_ADMIN    BA_COUNTY_NAME                                  0             0                    0               0
+		CMS_ADMIN_DBF             HAX_ADMIN    IDX$$_2FBE0001                                  0             0                    0               0
+		CMS_ADMIN_DBF             HAX_ADMIN    IDX$$_315B0001                                  0             0                    0               0
+		CMS_ADMIN_DBF             HAX_ADMIN    IDX$$_37940003                                  0             0                    0               0
+		CMS_ADMIN_DBF             HAX_ADMIN    IDX$$_5D6910002                                 0             0                    0               0
+		CMS_ADMIN_DBF             HAX_ADMIN    IDX$$_5D6C20002                                 0             0                    0               0
+		CMS_ADMIN_DBF             HAX_ADMIN    IDX$$_7CD80001                                  0             0                    0               0
+		CMS_ADMIN_DBF             HAX_ADMIN    IDX_V101_PHYTAX                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    BROKER_MATCH_IDX                                0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    BUS_ADR#ID_IDTYPE_PAYER                         0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    BUS_CONTCT#ID_IDTYPE_PAYER                      0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    CAPITMBERS#PYRID#LDAYRUNDATE                    0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    CCTRACT_IDX#ACTID#PAYERID                       0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    CMS_NDX_XX21                                    0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    CONTACTID#PAYERID                               0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    CONTACTID#PAYERID#INQUIRYID                     0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    CONTACTID#PAYERID#INQUIRYID#D                   0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    DMV4_MEMBH_COMNT#PYRID                          0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    DM_V4_IDX_0008                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    DM_V4_IDX_0016                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    DM_V4_IDX_0041                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    DM_V4_IDX_0057                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    DM_V4_MM#NAME_ETC_IDX                           0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    EDS_1                                           0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    ICLM#CLMID                                      0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_01EE0002                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_01EE0005                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_05AC0005                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_06E50004                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_118B0003                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_33AA20001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_3AC620001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_3AC620004                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_3AC620005                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_3AC620006                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_3D25B0004                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_3D8FE0001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_3FC080001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_3FC080006                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_3FC08000B                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_3FC08000C                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_453240004                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_47BCE0002                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_487C20002                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_487EA0002                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_4D6500001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_4D6500002                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_51BE20001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_51F2A0002                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_51F2A0003                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_51F2A0008                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_5332A0004                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_535140001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_5630E0003                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_5630E0004                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_575A60001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_5887A0001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_5887A0002                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_5C3760001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_5D6910002                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_5D6C20001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_5D6C20002                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_5F77E0005                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_619AD0002                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_682410001                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX$$_6AB390002                                 0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX1_DMV4BA                                     0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_$$DMV4MBRMAST_SUIDFNLNCH                    0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_AUTHCMNTS_INSUPDDTTM                        0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_BUSCONTACT                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_CCTRACT_INSUPDDTTM                          0             0                    0               0
+		
+		TABLESPACE_NAME           SEGMENT_OWNE SEGMENT_NAME                   ALLOCATED_SPACE_MB USED_SPACE_MB RECLAIMABLE_SPACE_MB PERCENT_RECLAIM
+		------------------------- ------------ ------------------------------ ------------------ ------------- -------------------- ---------------
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_CCTR_INQDT                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_CCTR_INQ_PAYER                              0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_CCTR_STRTINQ                                0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_DMV4MBRMAST110                              0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_DM_V4_PD_CHK_NO                             0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_INSTCLMDTL_SRVDT                            0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_INSTCLM_INSUPDDTTM                          0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_INST_CLAIM                                  0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_PMTDTL_PDDT_PDAMT                           0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_PROFCLMDTL_SRVDT                            0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_PROV_CT_PYR_PROF_NW                         0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_PROV_CT_STATUS                              0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IDX_VV_CLAIM1                                   0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IND_ICD9_1                                      0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IND_ICD9_10                                     0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IND_ICD9_11                                     0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IND_ICD9_12                                     0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IND_ICD9_2                                      0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IND_ICD9_4                                      0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IND_ICD9_6                                      0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    IND_ICD9_8                                      0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    MEMFAMHIST#PAYERID                              0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    MM_AUD_1                                        0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    PAYERID#AUTHNUMBER                              0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    PAYERID#AUTHNUMBER10                            0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    PAYERID#AUTHNUMBER3                             0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    V4_MBR_ADDR#SUBS_ID                             0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    V4_MBR_MSTR#PAYER_ID                            0             0                    0               0
+		CMS_ADMIN_NDX             CMS_ADMIN    V4_MBR_MSTR#SUBS_ID#PAYER_ID                    0             0                    0               0
+		COM_ADMIN_DATA01          COM_ADMIN    IDX$$_99C20003                                  0             0                    0               0
+		COM_ADMIN_INDX01          COM_ADMIN    CM_ENR#HICN_NAME_DOB                            0             0                    0               0
+		USERS                     CMS_ADMIN    GRP_UPDATE                                   1158        588.03               569.97           49.22
+		USERS                     CMS_ADMIN    GRP_UPDATE_TEST                              1090        519.72               570.28           52.32
+		USERS                     CMS_ADMIN    IDX$$_112117V45DMV4MM                        2572        1379.7               1192.3           46.36
+		USERS                     CMS_ADMIN    IDX$$_2A650003_TEST                           537        415.15               121.85           22.69
+		USERS                     CMS_ADMIN    IDX$$_2B5C0002                                839        555.49               283.51           33.79
+		USERS                     CMS_ADMIN    IDX$$_350460001                                 0             0                    0               0
+		USERS                     CMS_ADMIN    IDX$$_44330001                                764        600.46               163.54           21.41
+		USERS                     CMS_ADMIN    IDX$$_585B40001                                 0             0                    0               0
+		USERS                     CMS_ADMIN    IDX$$_5C3770004                                 0             0                    0               0
+		USERS                     CMS_ADMIN    IDX$$_685740001                                 0             0                    0               0
+		USERS                     CMS_ADMIN    IDX$$_70660001                                809        632.34               176.66           21.84
+		USERS                     CMS_ADMIN    IDX$$_77E70001                               1494        909.33               584.67           39.13
+		USERS                     CMS_ADMIN    IDX_VV_CLAIM                                    0             0                    0               0
+		USERS                     CMS_ADMIN    MM3                                          1491        680.66               810.34           54.35
+		USERS                     CMS_ADMIN    MM3_TEST                                     1280        661.68               618.32           48.31
+		USERS                     CMS_ADMIN    MM4                                           716        566.84               149.16           20.83
+		USERS                     CMS_ADMIN    MM5                                           739        573.37               165.63           22.41
+		USERS                     CMS_ADMIN    MM6                                           947        637.22               309.78           32.71
+		USERS                     CMS_ADMIN    MM8                                           719        562.94               156.06            21.7
+		USERS                     CMS_ADMIN    MM9                                           808        636.83               171.17           21.18
+		USERS                     CMS_ADMIN    MOM_IDX1                                     1808        965.89               842.11           46.58
+		USERS                     CMS_ADMIN    PROV_NPI                                        0             0                    0               0
+		USERS                     HAX_ADMIN    CMS_IDX$$_V4CLMDTL_CLMNUMB                      0             0                    0               0
+		
+		151 rows selected.
+		
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Invalid Objects
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		OWNER                                                                                                                              COUNT(*)
+		-------------------------------------------------------------------------------------------------------------------------------- ----------
+		MMA_ADMIN                                                                                                                                13
+		PARTCD_UTILITY                                                                                                                            1
+		
+		
+prodoraoda01	GTIKODMP	DB_TYPE
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Fragmented Index Information
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		no rows selected
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Invalid Objects
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		no rows selected
+		
+		
+prodoraoda01	BHIKODMP	DB_TYPE
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Fragmented Index Information
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		no rows selected
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Invalid Objects
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		no rows selected
+		
+		
+prodoraoda01	GTIKODXP	DB_TYPE
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Fragmented Index Information
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		no rows selected
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		Invalid Objects
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		
+		no rows selected
+
+
+============================================================================================================================================================
+
+10.TABLESPACE USAGE:
+
+set pages 50000 lines 32767
+col tablespace_name format a30
+col TABLESPACE_NAME heading ""Tablespace|Name""
+col Allocated_size heading ""Allocated|Size(GB)"" form 99999999.99
+col Current_size heading ""Current|Size(GB)"" form 99999999.99
+col Used_size heading ""Used|Size(GB)"" form 99999999.99
+col Available_size heading ""Available|Size(GB)"" form 99999999.99
+col Pct_used heading ""%Used (vs)|(Allocated)"" form 99999999.99
+select a.tablespace_name
+        ,a.alloc_size/1024/1024/1024 Allocated_size
+        ,a.cur_size/1024/1024/1024 Current_Size
+        ,(u.used+a.file_count*65536)/1024/1024/1024 Used_size
+        ,(a.alloc_size-(u.used+a.file_count*65536))/1024/1024/1024 Available_size
+        ,((u.used+a.file_count*65536)*100)/a.alloc_size Pct_used
+from dba_tablespaces t
+        ,(select t1.tablespace_name
+        ,nvl(sum(s.bytes),0) used
+        from dba_segments s
+        ,dba_tablespaces t1
+         where t1.tablespace_name=s.tablespace_name(+)
+         group by t1.tablespace_name) u
+        ,(select d.tablespace_name
+        ,sum(greatest(d.bytes,nvl(d.maxbytes,0))) alloc_size
+        ,sum(d.bytes) cur_size
+        ,count(*) file_count
+        from dba_data_files d
+        group by d.tablespace_name) a
+where t.tablespace_name=u.tablespace_name
+and t.tablespace_name=a.tablespace_name
+order by Pct_used desc
+/
+
+
+
+Server	Database	Result	Output
+col-afcccms-01	AFCCCMSP	Pass	
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			Tablespace Usage Status
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			TABLESPACE_NAME                    SIZEMB    FREE_MB      USED%
+			------------------------------ ---------- ---------- ----------
+			TEMP                               153600
+			SYSAUX                              10240       1477         86
+			CCMS_MEDIUM                         58368   16653.06         71
+			CCMS_LARGE                         225280   68192.75         70
+			UNDOTBS1                            92160   36698.13         60
+			SYSTEM                               4096    2301.38         44
+			CCMS_SMALL                         234493  193934.88         17
+			AUDIT_AUX                            4096    3494.75         15
+			USERS                                5120    5114.94          0
+			EXAMPLE                               500        499          0
+			                               ----------
+			
+			TABLESPACE_NAME                    SIZEMB    FREE_MB      USED%
+			------------------------------ ---------- ---------- ----------
+			787953
+			
+			
+			
+			
+prodoraoda01	BHAXODMP	Pass	NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			Tablespace Usage Status
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			
+			TABLESPACE_NAME               SIZEMB    FREE_MB      USED%
+			------------------------- ---------- ---------- ----------
+			TEMP                          225280
+			CMS_ADMIN_DBF                1505377     199008         87
+			USERS                         524278   91748.06         83
+			SYSAUX                         65534   11962.75         82
+			CMS_ADMIN_NDX                 145407   37718.44         74
+			COM_ADMIN_DATA01               46080      20083         56
+			DBA_TOOLS_DATA                  5120    2260.25         56
+			COM_ADMIN_INDX01               30720   20578.88         33
+			PD_ADMIN_DBF                   20480   16963.94         17
+			SYSTEM                         65498   61429.75          6
+			HXTEMPADMIN_V1_DATA01          18432      17323          6
+			UNDOTBS1                  191998.984  186758.88          3
+			UNDOTBS2                      143360  141143.19          2
+			PD_ADMIN_NDX                    1024       1015          1
+			PD_ADMIN_INDX01                 5024       5023          0
+			AFCAPPSAPI_DATA01               6144       6142          0
+			HPH_ADMIN_INDX01                1001       1000          0
+			CCH_ADMIN_DATA01               20480   20477.94          0
+			TS                              1024    1022.75          0
+			AUDIT_AUX                     117760   117741.5          0
+			PD_ADMIN_DATA01                51200      51198          0
+			                          ----------
+			3191221.98
+			
+			
+prodoraoda01	GTIKODMP	Pass	TABLESPACE_NAME                    SIZEMB    FREE_MB      USED%
+			------------------------------ ---------- ---------- ----------
+			TEMP                               358400
+			USERS                             1764242  290383.44         84
+			CMS_ADMIN_DBF                      225280   44842.44         80
+			USERSF                             102400      21102         79
+			SYSAUX                              36864     8626.5         77
+			COM_ADMIN_NDX                       10480    2385.94         77
+			CMS_ADMIN_INDX01                    40960    9740.81         76
+			USERSE                             225280      59222         74
+			CMS_ADMIN_NDX                      143968    41258.5         71
+			CMS_ADMIN_RX_CLAIMS_LG_DBF          63487      19751         69
+			USERSX                              71680   24064.56         66
+			
+			TABLESPACE_NAME                    SIZEMB    FREE_MB      USED%
+			------------------------------ ---------- ---------- ----------
+			XINDEX                              46080   16888.38         63
+			COM_ADMIN_DBF                       31440   12280.94         61
+			USERSD                             190461   74257.13         61
+			USERSC                              83967   36094.38         57
+			CMS_ADMIN_LG_NDX                     6144    2631.69         57
+			CMS_ADMIN_DM_V4_NDX                 61440      32602         47
+			FHOD_USERS                           4096    2241.88         45
+			LOB_TABS                            46080   26598.56         42
+			SYSTEM                              20480   15165.01         26
+			UNDOTBS2                            61440   61122.38          1
+			ARCHIVE_PURGE                         200        198          1
+			
+			TABLESPACE_NAME                    SIZEMB    FREE_MB      USED%
+			------------------------------ ---------- ---------- ----------
+			FHOD_USERS_NDX                        100      98.94          1
+			CMS_ADMIN_ENC_STG_QUEST_LG_NDX       1024       1023          0
+			CMS_ADMIN_ENC_STG_QUEST_LG_DBF       1024       1023          0
+			INDX                                  665        664          0
+			COM_ADMIN_INDX01                     2048     2045.5          0
+			TOOLS                                1024    1020.88          0
+			CMS_ADMIN_LG_DBF                     1024       1023          0
+			CSNP_APP_DATA01                      8120       8119          0
+			AUDIT_AUX                           95231    95226.5          0
+			UNDOTBS1                           179200  178640.75          0
+			USERB                                2048    2042.75          0
+			
+			TABLESPACE_NAME                    SIZEMB    FREE_MB      USED%
+			------------------------------ ---------- ---------- ----------
+			TRANS_USERS                          2048       2038          0
+			CMS_ADMIN_RX_CLAIMS_LG_NDX           2048       2047          0
+			                               ----------
+			3890473
+			
+			
+			
+			
+prodoraoda01	BHIKODMP	Pass	TABLESPACE_NAME               SIZEMB    FREE_MB      USED%
+			------------------------- ---------- ---------- ----------
+			TEMP                           66560
+			USERS                          92160   16882.88         82
+			SYSTEM                          4000     788.88         80
+			AHMA_DATA                       8192       3057         63
+			SYSAUX                          6144    2839.31         54
+			INDX                           20480   15192.75         26
+			UNDOTBS2                        2048    1947.56          5
+			UNDOTBS1                       63488   62884.44          1
+			PRN_ADMIN_INDX01               10240      10239          0
+			AUDIT_AUX                      10240   10238.25          0
+			                          ----------
+			283552
+			
+			
+			
+			
+prodoraoda01	GTIKODXP	Pass	
+			TABLESPACE_NAME               SIZEMB    FREE_MB      USED%
+			------------------------- ---------- ---------- ----------
+			TEMP                          389120
+			MRA_ADMIN                     390115   43568.88         89
+			CMS_ADMIN                    1258477  139683.88         89
+			USERS                      1073124.5  179913.88         83
+			SYSAUX                         94208   16666.06         82
+			SYSTEM                          6144    1655.94         73
+			FIN_ADMIN                     235520   98611.38         58
+			CMS_ADMIN_NDX                  10240       9231         10
+			DATAMART                        5120     4743.5          7
+			CMS_ADMIN_DBF                    102        101          1
+			DM_INDX_B                        102     100.94          1
+			CMS_ADMIN_DBF_M                  102        101          1
+			CMS_ADMIN_DMV4                   102        101          1
+			DM_INDX                          102        101          1
+			CMS_ADMIN_RX_CLAIMS_LG_DB        102        101          1
+			F
+			
+			CMS_ADMIN_NDX_P                  100         99          1
+			USERS_INDEX                      102        101          1
+			AUDIT_AUX                      86014   85983.25          0
+			UNDOTBSNEW                     51200      51197          0
+			UNDOTBS1                      174080  173837.25          0
+			UNDOTBSTEMP                   153600  153085.75          0
+			                          ----------
+			3927776.5
+			
+============================================================================================================================================================
+
+11. DATABASE PERFORMANCE:
+
+
+
+-SQL> @?/rdbms/admin/awrrpt.sql
+Current Instance
+~~~~~~~~~~~~~~~~
+
+   DB Id    DB Name      Inst Num Instance
+----------- ------------ -------- ------------
+ 3120910543 AFCCCMSP            1 AFCCCMSP
+
+
+Instances in this Workload Repository schema
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   DB Id     Inst Num DB Name      Instance     Host
+------------ -------- ------------ ------------ ------------
+* 3120910543        1 AFCCCMSP     AFCCCMSP     col-afcccms-
+                                                01
+
+-old   1: select * from (select * from table(DBMS_WORKLOAD_REPOSITORY.AWR_REPORT_TEXT(&dbid,&inst_id,&start_snap,&end_snap))) where rownum < 70;
+.plug in the values and you get AWR report
+
+
+
+
+
+Server	Database	Output
+col-afcccms-01	AFCCCMSP	
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		AWR REPORT
+		NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+		      DBID
+		----------
+		3120910543
+		
+		   INST_ID
+		----------
+		         1
+		
+		START_SNAP   END_SNAP
+		---------- ----------
+		     37389      37555
+		
+		old   1: select * from (select * from table(DBMS_WORKLOAD_REPOSITORY.AWR_REPORT_TEXT(&dbid,&inst_id,&start_snap,&end_snap))) where rownum < 70
+		new   1: select * from (select * from table(DBMS_WORKLOAD_REPOSITORY.AWR_REPORT_TEXT(3120910543,         1,     37389,     37555))) where rownum < 70
+		OUTPUT
+		--------------------------------------------------------------------------------
+		WORKLOAD REPOSITORY report for
+		
+		DB Name         DB Id    Instance     Inst Num Startup Time    Release     RAC
+		------------ ----------- ------------ -------- --------------- ----------- ---
+		AFCCCMSP      3120910543 AFCCCMSP            1 13-Feb-21 20:33 11.2.0.4.0  NO
+		
+		Host Name        Platform                         CPUs Cores Sockets Memory(GB)
+		---------------- -------------------------------- ---- ----- ------- ----------
+		col-afcccms-01   Linux x86 64-bit                    8     8       4      46.92
+		
+		              Snap Id      Snap Time      Sessions Curs/Sess
+		            --------- ------------------- -------- ---------
+		Begin Snap:     37389 23-Jun-21 06:00:50        59       1.5
+		  End Snap:     37555 30-Jun-21 04:00:26        60       1.5
+		   Elapsed:            9,959.59 (mins)
+		   DB Time:              452.66 (mins)
+		
+		Load Profile                    Per Second   Per Transaction  Per Exec  Per Call
+		~~~~~~~~~~~~~~~            ---------------   --------------- --------- ---------
+		             DB Time(s):               0.1               0.0      0.00      0.00
+		              DB CPU(s):               0.0               0.0      0.00      0.00
+		      Redo size (bytes):          60,353.6          10,621.7
+		  Logical read (blocks):           4,354.2             766.3
+		          Block changes:             365.4              64.3
+		 Physical read (blocks):             505.2              88.9
+		Physical write (blocks):               7.0               1.2
+		       Read IO requests:             159.5              28.1
+		      Write IO requests:               1.9               0.3
+		           Read IO (MB):               4.0               0.7
+		          Write IO (MB):               0.1               0.0
+		             User calls:              65.6              11.5
+		           Parses (SQL):              92.6              16.3
+		      Hard parses (SQL):               0.2               0.0
+		     SQL Work Area (MB):               0.4               0.1
+		                 Logons:               0.1               0.0
+		         Executes (SQL):             469.0              82.5
+		              Rollbacks:               0.0               0.0
+		           Transactions:               5.7
+		
+		Instance Efficiency Percentages (Target 100%)
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		            Buffer Nowait %:  100.00       Redo NoWait %:  100.00
+		            Buffer  Hit   %:   99.54    In-memory Sort %:  100.00
+		            Library Hit   %:   99.88        Soft Parse %:   99.79
+		         Execute to Parse %:   80.25         Latch Hit %:   99.99
+		Parse CPU to Parse Elapsd %:   65.96     % Non-Parse CPU:   98.23
+		
+		Top 10 Foreground Events by Total Wait Time
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		                                            Tota    Wait   % DB
+		Event                                 Waits Time Avg(ms)   time Wait Class
+		------------------------------ ------------ ---- ------- ------ ----------
+		DB CPU                                      21.6           79.6
+		db file sequential read           5,797,606 2417       0    8.9 User I/O
+		log file sync                     3,344,434  899       0    3.3 Commit
+		direct path read                  1,149,926 888.       1    3.3 User I/O
+		SQL*Net more data to client       4,014,992 541.       0    2.0 Network
+		control file sequential read      2,968,611 491.       0    1.8 System I/O
+		enq: TX - row lock contention             5 270.   54025    1.0 Applicatio
+		SQL*Net more data from client       147,505 222.       2     .8 Network
+		db file scattered read              126,043 91.3       1     .3 User I/O
+		db file parallel read                48,309 25.2       1     .1 User I/O
+		
+		Wait Classes by Total Wait Time
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		                                                        Avg             Avg
+		                                        Total Wait     Wait   % DB   Active
+		Wait Class                  Waits       Time (sec)     (ms)   time Sessions
+		---------------- ---------------- ---------------- -------- ------ --------
+		
+		69 rows selected.
+
+============================================================================================================================================================
+
+
+12.FRA USAGE:
+
+-select * from v$flash_recovery_area_usage;
+
+Server	Database	Result	Output
+col-afcccms-01	AFCCCMSP	Pass	
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			FRA Usage
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			FILE_TYPE            PERCENT_SPACE_USED PERCENT_SPACE_RECLAIMABLE NUMBER_OF_FILES
+			-------------------- ------------------ ------------------------- ---------------
+			CONTROL FILE                          0                         0               0
+			REDO LOG                              0                         0               0
+			ARCHIVED LOG                          3                      2.29             413
+			BACKUP PIECE                          0                         0               0
+			IMAGE COPY                            0                         0               0
+			FLASHBACK LOG                         3                      1.43              10
+			FOREIGN ARCHIVED LOG                  0                         0               0
+			                     ------------------
+			TOTAL                                 6
+			
+			7 rows selected.
+			
+			
+			
+			
+prodoraoda01	BHAXODMP	Pass	NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			FRA Usage
+			NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+			
+			FILE_TYPE               PERCENT_SPACE_USED PERCENT_SPACE_RECLAIMABLE NUMBER_OF_FILES
+			----------------------- ------------------ ------------------------- ---------------
+			CONTROL FILE                             0                         0               0
+			REDO LOG                                 0                         0               0
+			ARCHIVED LOG                         22.81                         0              73
+			BACKUP PIECE                             0                         0               1
+			IMAGE COPY                               0                         0               0
+			FLASHBACK LOG                           58                         0             145
+			FOREIGN ARCHIVED LOG                   .02                         0              12
+			AUXILIARY DATAFILE COPY                  0                         0               0
+			
+			8 rows selected.
+			
+			
+			
+			
+prodoraoda01	GTIKODMP	Pass	FILE_TYPE               PERCENT_SPACE_USED PERCENT_SPACE_RECLAIMABLE NUMBER_OF_FILES
+			----------------------- ------------------ ------------------------- ---------------
+			CONTROL FILE                             0                         0               0
+			REDO LOG                                 0                         0               0
+			ARCHIVED LOG                          5.71                      4.91             271
+			BACKUP PIECE                           .05                       .05               9
+			IMAGE COPY                               0                         0               0
+			FLASHBACK LOG                          7.5                         0              15
+			FOREIGN ARCHIVED LOG                   .04                         0              15
+			AUXILIARY DATAFILE COPY                  0                         0               0
+			
+			8 rows selected.
+			
+			
+			
+			
+			
+prodoraoda01	BHIKODMP	Pass	FILE_TYPE               PERCENT_SPACE_USED PERCENT_SPACE_RECLAIMABLE NUMBER_OF_FILES
+			----------------------- ------------------ ------------------------- ---------------
+			CONTROL FILE                             0                         0               0
+			REDO LOG                                 0                         0               0
+			ARCHIVED LOG                          4.82                      3.87             428
+			BACKUP PIECE                           .03                       .02               8
+			IMAGE COPY                               0                         0               0
+			FLASHBACK LOG                            6                         2               6
+			FOREIGN ARCHIVED LOG                   .05                         0               9
+			AUXILIARY DATAFILE COPY                  0                         0               0
+			
+			8 rows selected.
+			
+			
+			
+			
+			
+			
+prodoraoda01	GTIKODXP	Pass	FILE_TYPE               PERCENT_SPACE_USED PERCENT_SPACE_RECLAIMABLE NUMBER_OF_FILES
+			----------------------- ------------------ ------------------------- ---------------
+			CONTROL FILE                             0                         0               0
+			REDO LOG                                 0                         0               0
+			ARCHIVED LOG                           .05                       .05               2
+			BACKUP PIECE                           .01                       .01               3
+			IMAGE COPY                               0                         0               0
+			FLASHBACK LOG                         3.69                      1.23              12
+			FOREIGN ARCHIVED LOG                   .01                         0               4
+			AUXILIARY DATAFILE COPY                  0                         0               0
+			
+			8 rows selected.
+			
+			
+============================================================================================================================================================
+
+13. USER ACCOUNTS EXPIRY:
+
+- TO BE OBTAINED
+
+Server		Database	Result	Output
+col-afcccms-01	AFCCCMSP	Pass	
+			
+			
+				no rows selected
+			
+			
+		prodoraoda01		BHAXODMP	Pass	USERNAME             ACCOUNT_STATUS                   EXPIRY_DA
+			-------------------- -------------------------------- ---------
+			MMIRABELLA           OPEN                             29-SEP-21
+			JGRAY                OPEN                             04-OCT-21
+			
+			
+			
+prodoraoda01	GTIKODMP	Pass	USERNAME             ACCOUNT_STATUS                   EXPIRY_DA
+			-------------------- -------------------------------- ---------
+			MMIRABELLA           OPEN                             29-SEP-21
+			JGRAY                OPEN                             04-OCT-21
+			
+			
+			
+			
+			
+prodoraoda01	BHIKODMP	Pass	USERNAME             ACCOUNT_STATUS                   EXPIRY_DA
+			-------------------- -------------------------------- ---------
+			JYANG                OPEN                             04-OCT-21
+			
+			
+prodoraoda01	GTIKODXP	Pass	
+			USERNAME             ACCOUNT_STATUS                   EXPIRY_DA
+			-------------------- -------------------------------- ---------
+			MMIRABELLA           OPEN                             29-SEP-21
+			JGRAY                OPEN                             04-OCT-21
+
+============================================================================================================================================================
+
+14.DATABASE BACKUPS
+
+
+-set environment
+-cd /u01/app/Cintra/RMAN/AFCCCMSP
+ls -ltr
+-cat AFCCCMSP_FL_RMAN_Incr_Backup.log (And copy output from current backup date)
+
+
+
+
+Server		Database	Result	Output
+col-afcccms-01	AFCCCMSP	Pass	RMAN backup copied successfully on 09/28/2021 19:26:35 ....
+			/u01/app/Cintra/RMAN/AFCCCMSP/CDBA_BAK_AFCCCMSP_RMAN_INCREMENTAL.sh landed on 09/28/2021 19:26:35 ....
+			Sep 28 19:26:35 col-afcccms-01 sendEmail[19255]: Email was sent successfully!
+			
+			-rw-r----- 1 oracle oinstall  4651524096 Sep 28 18:15 datafile_level0_AFCCCMSP_20210928_2c0a7e9e_1_1
+			-rw-r----- 1 oracle oinstall  4659863552 Sep 28 18:24 datafile_level0_AFCCCMSP_20210928_2d0a7epr_1_1
+			-rw-r----- 1 oracle oinstall  4721393664 Sep 28 18:32 datafile_level0_AFCCCMSP_20210928_2e0a7fa8_1_1
+			-rw-r----- 1 oracle oinstall  2133811200 Sep 28 18:36 datafile_level0_AFCCCMSP_20210928_2f0a7fqv_1_1
+			-rw-r----- 1 oracle oinstall  3088744448 Sep 28 18:41 datafile_level0_AFCCCMSP_20210928_2g0a7g1m_1_1
+			-rw-r----- 1 oracle oinstall  3201835008 Sep 28 18:47 datafile_level0_AFCCCMSP_20210928_2h0a7gbr_1_1
+			-rw-r----- 1 oracle oinstall  3543080960 Sep 28 18:53 datafile_level0_AFCCCMSP_20210928_2i0a7gma_1_1
+			-rw-r----- 1 oracle oinstall  1634246656 Sep 28 18:56 datafile_level0_AFCCCMSP_20210928_2j0a7h1n_1_1
+			-rw-r----- 1 oracle oinstall   145547264 Sep 28 18:56 datafile_level0_AFCCCMSP_20210928_2k0a7h76_1_1
+			-rw-r----- 1 oracle oinstall     2637824 Sep 28 18:56 datafile_level0_AFCCCMSP_20210928_2l0a7h7l_1_1
+			-rw-r----- 1 oracle oinstall  1043992576 Sep 28 18:58 archivelog_level0_AFCCCMSP_20210928_2m0a7h7r_1_1
+			-rw-r----- 1 oracle oinstall   188382208 Sep 28 18:58 archivelog_level0_AFCCCMSP_20210928_2n0a7haq_1_1
+			-rw-r----- 1 oracle oinstall   198718464 Sep 28 18:59 archivelog_level0_AFCCCMSP_20210928_2o0a7hbj_1_1
+			-rw-r----- 1 oracle oinstall   651852800 Sep 28 19:00 archivelog_level0_AFCCCMSP_20210928_2p0a7hcd_1_1
+			-rw-r----- 1 oracle oinstall  1407448576 Sep 28 19:02 archivelog_level0_AFCCCMSP_20210928_2q0a7hee_1_1
+			-rw-r----- 1 oracle oinstall   898841600 Sep 28 19:03 archivelog_level0_AFCCCMSP_20210928_2r0a7hib_1_1
+			-rw-r----- 1 oracle oinstall   289104896 Sep 28 19:04 archivelog_level0_AFCCCMSP_20210928_2s0a7hl1_1_1
+			-rw-r----- 1 oracle oinstall    30900224 Sep 28 19:04 control_file_AFCCCMSP_20210928_33885
+			[oracle@col-afcccms-01 CURRENT]$ pwd
+			/u08/AFCCCMSP/RMAN/CURRENT
+			[oracle@col-afcccms-01 CURRENT]$
+			
+			
+			
+			
+prodoraoda01	BHAXODMP	Pass	No Need to copy backup files to NAS.
+			RMAN backup copied successfully on 09/28/2021 20:23:27 ....
+			/u01/app/oracle/admin/BHAXODMP_PR/rman/CDBA_BAK_BHAXODMP_RMAN_INCREMENTAL.sh landed on 09/28/2021 20:23:27 ....
+			
+			
+			-rwxrwxrwx 1 oracle oinstall 67156205568 Sep 28 19:52 datafile_level0_BHAXODMP_20210928_sk0a7d33_20372_1_1
+			-rwxrwxrwx 1 oracle oinstall 68139819008 Sep 28 19:57 datafile_level0_BHAXODMP_20210928_sj0a7d33_20371_1_1
+			-rwxrwxrwx 1 oracle oinstall 69862375424 Sep 28 19:58 datafile_level0_BHAXODMP_20210928_sm0a7d33_20374_1_1
+			-rwxrwxrwx 1 oracle oinstall 69443371008 Sep 28 20:00 datafile_level0_BHAXODMP_20210928_sn0a7d34_20375_1_1
+			-rwxrwxrwx 1 oracle oinstall 76429983744 Sep 28 20:08 datafile_level0_BHAXODMP_20210928_so0a7d34_20376_1_1
+			-rwxrwxrwx 1 oracle oinstall 78163968000 Sep 28 20:12 datafile_level0_BHAXODMP_20210928_sl0a7d33_20373_1_1
+			-rwxrwxrwx 1 oracle oinstall  1825720320 Sep 28 20:18 archivelog_level0_BHAXODMP_20210928_sr0a7lmm_20379_1_1
+			-rwxrwxrwx 1 oracle oinstall  2140588032 Sep 28 20:19 archivelog_level0_BHAXODMP_20210928_sp0a7lml_20377_1_1
+			-rwxrwxrwx 1 oracle oinstall  3051089920 Sep 28 20:19 archivelog_level0_BHAXODMP_20210928_st0a7lmm_20381_1_1
+			-rwxrwxrwx 1 oracle oinstall  3348237824 Sep 28 20:20 archivelog_level0_BHAXODMP_20210928_sq0a7lmm_20378_1_1
+			-rwxrwxrwx 1 oracle oinstall  3570287104 Sep 28 20:21 archivelog_level0_BHAXODMP_20210928_ss0a7lmm_20380_1_1
+			-rwxrwxrwx 1 oracle oinstall    40402944 Sep 28 20:21 control_file_BHAXODMP_20210928_20382
+			[oracle@prodoraoda02 CURRENT]$ pwd
+			/Oraclebackups/RMAN/ODA_PROD/BHAXODMP/rman/CURRENT
+			[oracle@prodoraoda02 CURRENT]$
+			
+			
+			
+			
+			
+			
+			
+			
+prodoraoda01	GTIKODMP	Pass	/u01/app/oracle/admin/GTIKODMP_PR/rman/CDBA_BAK_GTIKODMP_RMAN_INCREMENTAL.sh landed on 09/29/2021 03:40:29 ....
+			MAILX
+			Email sent successfully
+			-rwxrwxrwx 1 oracle oinstall 90481377280 Sep 28 23:58 datafile_level0_GTIKODMP_20210928_350a7m29_159845_1_1
+			-rwxrwxrwx 1 oracle oinstall 94471077888 Sep 29 00:19 datafile_level0_GTIKODMP_20210928_330a7m29_159843_1_1
+			-rwxrwxrwx 1 oracle oinstall 99864715264 Sep 29 00:45 datafile_level0_GTIKODMP_20210928_340a7m29_159844_1_1
+			-rwxrwxrwx 1 oracle oinstall 95308300288 Sep 29 03:19 datafile_level0_GTIKODMP_20210928_360a82v1_159846_1_1
+			-rwxrwxrwx 1 oracle oinstall 92922462208 Sep 29 03:25 datafile_level0_GTIKODMP_20210929_370a8459_159847_1_1
+			-rwxrwxrwx 1 oracle oinstall  2297622016 Sep 29 03:31 archivelog_level0_GTIKODMP_20210929_390a8f21_159849_1_1
+			-rwxrwxrwx 1 oracle oinstall  2557604352 Sep 29 03:31 archivelog_level0_GTIKODMP_20210929_3a0a8f21_159850_1_1
+			-rwxrwxrwx 1 oracle oinstall  3369448960 Sep 29 03:33 archivelog_level0_GTIKODMP_20210929_380a8f21_159848_1_1
+			-rwxrwxrwx 1 oracle oinstall   655244288 Sep 29 03:33 archivelog_level0_GTIKODMP_20210929_3c0a8fd0_159852_1_1
+			-rwxrwxrwx 1 oracle oinstall   855587328 Sep 29 03:33 archivelog_level0_GTIKODMP_20210929_3b0a8fcg_159851_1_1
+			-rwxrwxrwx 1 oracle oinstall    46439424 Sep 29 03:34 archivelog_level0_GTIKODMP_20210929_3d0a8fg9_159853_1_1
+			-rwxrwxrwx 1 oracle oinstall    48594944 Sep 29 03:36 control_file_GTIKODMP_20210929_159854
+			[oracle@prodoraoda02 CURRENT]$ pwd
+			/Oraclebackups/RMAN/ODA_PROD/GTIKODMP/rman/CURRENT
+			[oracle@prodoraoda02 CURRENT]$
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+prodoraoda01	BHIKODMP	Pass	No Need to copy backup files to NAS.
+			RMAN backup copied successfully on 09/29/2021 02:18:33 ....
+			/u01/app/oracle/admin/BHIKODMP_PR/rman/CDBA_BAK_BHIKODMP_RMAN_INCREMENTAL.sh landed on 09/29/2021 02:18:33 ....
+			
+			-rwxrwxrwx 1 oracle oinstall 1216135168 Sep 29 01:57 datafile_level0_BHIKODMP_20210929_640a89le_11460_1_1
+			-rwxrwxrwx 1 oracle oinstall 5842812928 Sep 29 02:08 datafile_level0_BHIKODMP_20210929_620a89le_11458_1_1
+			-rwxrwxrwx 1 oracle oinstall 8415576064 Sep 29 02:14 datafile_level0_BHIKODMP_20210929_630a89le_11459_1_1
+			-rwxrwxrwx 1 oracle oinstall   56440320 Sep 29 02:14 archivelog_level0_BHIKODMP_20210929_670a8as5_11463_1_1
+			-rwxrwxrwx 1 oracle oinstall   45189120 Sep 29 02:15 archivelog_level0_BHIKODMP_20210929_680a8asu_11464_1_1
+			-rwxrwxrwx 1 oracle oinstall   10288640 Sep 29 02:15 archivelog_level0_BHIKODMP_20210929_690a8au1_11465_1_1
+			-rwxrwxrwx 1 oracle oinstall  523770368 Sep 29 02:15 archivelog_level0_BHIKODMP_20210929_660a8as5_11462_1_1
+			-rwxrwxrwx 1 oracle oinstall  589671936 Sep 29 02:16 archivelog_level0_BHIKODMP_20210929_650a8as5_11461_1_1
+			-rwxrwxrwx 1 oracle oinstall   14778368 Sep 29 02:16 control_file_BHIKODMP_20210929_11466
+			[oracle@prodoraoda02 CURRENT]$ pwd
+			/Oraclebackups/RMAN/ODA_PROD/BHIKODMP/rman/CURRENT
+			[oracle@prodoraoda02 CURRENT			
+			
+			
+			
+prodoraoda01	GTIKODXP	Pass	No Need to copy backup files to NAS.
+			RMAN backup copied successfully on 09/29/2021 00:12:10 ....
+			/u01/app/oracle/admin/GTIKODXP_PR/rman/CDBA_BAK_GTIKODXP_RMAN_INCREMENTAL.sh landed on 09/29/2021 00:12:10 ....
+			
+			-rwxrwxrwx 1 oracle oinstall    451108864 Sep 28 23:28 datafile_level1_GTIKODXP_20210928_420a80il_90242_1_1
+			-rwxrwxrwx 1 oracle oinstall    583680000 Sep 28 23:28 datafile_level1_GTIKODXP_20210928_3v0a80il_90239_1_1
+			-rwxrwxrwx 1 oracle oinstall    626180096 Sep 28 23:29 datafile_level1_GTIKODXP_20210928_430a80il_90243_1_1
+			-rwxrwxrwx 1 oracle oinstall    755482624 Sep 28 23:29 datafile_level1_GTIKODXP_20210928_400a80il_90240_1_1
+			-rwxrwxrwx 1 oracle oinstall    776593408 Sep 28 23:30 datafile_level1_GTIKODXP_20210928_410a80il_90241_1_1
+			-rwxrwxrwx 1 oracle oinstall    135250432 Sep 28 23:33 archivelog_level1_GTIKODXP_20210928_480a818j_90248_1_1
+			-rwxrwxrwx 1 oracle oinstall   1804680704 Sep 28 23:44 archivelog_level1_GTIKODXP_20210928_470a818j_90247_1_1
+			-rwxrwxrwx 1 oracle oinstall   1954944000 Sep 28 23:44 archivelog_level1_GTIKODXP_20210928_460a818j_90246_1_1
+			-rwxrwxrwx 1 oracle oinstall   2293081600 Sep 28 23:47 archivelog_level1_GTIKODXP_20210928_450a818j_90245_1_1
+			-rwxrwxrwx 1 oracle oinstall   2718233600 Sep 28 23:50 archivelog_level1_GTIKODXP_20210928_440a818j_90244_1_1
+			-rwxrwxrwx 1 oracle oinstall     49709056 Sep 28 23:53 control_file_GTIKODXP_20210928_90249
+			[oracle@prodoraoda02 CURRENT]$ pwd
+			/Oraclebackups/RMAN/ODA_PROD/GTIKODXP/rman/CURRENT
+			[oracle@prodoraoda02 CURRENT]$
+
+============================================================================================================================================================
+
+15.DATABASE MAINTENANCE:
+-check first node
+-crontab -l|grep -i stats
+-cd /u01/app/oracle/admin/BHAXODMP_PR/stats/
+-cd log/
+-ls -ltr 
+
+
+
+
+Server		Database	Result	Output
+col-afcccms-01	AFCCCMSP	Pass	Starting Collection of Dictionary Stats at  25-SEP-2021 09:30:01
+			Dictionary Stats Collection Ended at  25-SEP-2021 09:30:24
+			
+			Starting Collection of Fixed Objects Stats at  25-SEP-2021 09:30:24
+			Fixed Objects Stats Collection Ended at  25-SEP-2021 09:32:29
+			
+			Dictionary Statistics Collection for AFCCCMSP Database completed successfully.
+			
+			Sep 25 09:32:29 col-afcccms-01 sendEmail[6113]: Email was sent successfully!
+			/u01/app/Cintra/STATS/AFCCCMSP/CDBA_STATS_AFCCCMSP_DICT.sh SUCCEDED on 09/25/2021 09:32:29
+			
+prodoraoda01	BHAXODMP	Pass	Statistics Collection for MRA_ADMIN schema completed successfully.
+			Email sent successfully
+			Statistics Collection for OJVMSYS schema completed successfully.
+			Email sent successfully
+			Statistics Collection for OWBSYS schema completed successfully.
+			Email sent successfully
+			Statistics Collection for PARTCD_UTILITY schema completed successfully.
+			Email sent successfully
+			Statistics Collection for PD_ADMIN schema completed successfully.
+			Email sent successfully
+			Statistics Collection for RTHAKKAR schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SCH_ADMIN schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SCOTT schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SPATEL01 schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SQLTXPLAIN schema completed successfully.
+			Email sent successfully
+			Statistics Collection for VVALA schema completed successfully.
+			Email sent successfully
+			Statistics Collection for YGE schema completed successfully.
+			Email sent successfully
+			
+prodoraoda01	GTIKODMP	Pass	Statistics Collection for SDAGUE schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SGRAY schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SPATEL01 schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SQLTXPLAIN schema completed successfully.
+			Email sent successfully
+			Statistics Collection for STAGING schema completed successfully.
+			Email sent successfully
+			Statistics Collection for VVALA schema completed successfully.
+			Email sent successfully
+			Statistics Collection for VWU schema completed successfully.
+			Email sent successfully
+			
+prodoraoda01	BHIKODMP	Pass	
+			Statistics Collection for OTB_ADMIN schema completed successfully.
+			Email sent successfully
+			Statistics Collection for PD_ADMIN schema completed successfully.
+			Email sent successfully
+			Statistics Collection for PR_UTILITY schema completed successfully.
+			Email sent successfully
+			Statistics Collection for RNUTAKKI schema completed successfully.
+			Email sent successfully
+			Statistics Collection for RWALDROP schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SDAGUE schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SGRAY schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SPATEL01 schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SQLTXPLAIN schema completed successfully.
+			Email sent successfully
+			Statistics Collection for STAGING schema completed successfully.
+			Email sent successfully
+			Statistics Collection for VVALA schema completed successfully.
+			Email sent successfully
+			Statistics Collection for VWU schema completed successfully.
+			Email sent successfully
+			Statistics Collection for YGE schema completed successfully.
+			Email sent successfully			
+			
+prodoraoda01	GTIKODXP	Pass	Statistics Collection for NHPATEL schema completed successfully.
+			Email sent successfully
+			Statistics Collection for OJVMSYS schema completed successfully.
+			Email sent successfully
+			Statistics Collection for PPOTUKUCHHI schema completed successfully.
+			Email sent successfully
+			Statistics Collection for PSHAH schema completed successfully.
+			Email sent successfully
+			Statistics Collection for RDISOTUAR schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SPATEL01 schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SQLTXPLAIN schema completed successfully.
+			Email sent successfully
+			Statistics Collection for STAGING schema completed successfully.
+			Email sent successfully
+			Statistics Collection for SYSMAN schema completed successfully.
+			Email sent successfully
+			Statistics Collection for TEMP_PIPE_D schema completed successfully.
+			Email sent successfully
+			Statistics Collection for TOADATOMATN_APP_SRVC schema completed successfully.
+			Email sent successfully
+			Statistics Collection for VIPRJFH_APP_SRVC schema completed successfully.
+			Email sent successfully
+			Statistics Collection for VVALA schema completed successfully.
+			Email sent successfully
+			Statistics Collection for YGE schema completed successfully.
+			Email sent successfully
+
+============================================================================================================================================================
+
+17.DATABASE EXPORT:
+-crontab -l| grep -i data
+- cd /u01/app/oracle/admin/BHIKODMP_PR/PDD_export/datapump
+-cd log file and cat fo the date concerned and copy and paste in report
+-node 1, check the log
+
+
+-crontab -l
+-Look for datapump file
+-cd to directory of job
+-cat the log file and copy out put of success
+
+
+
+Server		Database	Result	Output
+col-afcccms-01	AFCCCMSP	Pass	success /u01/app/Cintra/DPUMP/AFCCCMSP/CDBA_BAK_AFCCCMSP_DPUMPFULL.sh
+			Sep 28 17:03:26 col-afcccms-01 sendEmail[12635]: Email was sent successfully!
+			/u01/app/Cintra/DPUMP/AFCCCMSP/CDBA_BAK_AFCCCMSP_DPUMPFULL.sh SUCCEDED on 09/28/2021 17:03:26
+			
+			Master table "SYS"."SYS_EXPORT_FULL_02" successfully loaded/unloaded
+			******************************************************************************
+			Dump file set for SYS.SYS_EXPORT_FULL_02 is:
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_01.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_02.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_03.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_04.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_05.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_06.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_07.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_08.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_09.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_10.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_11.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_12.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_13.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_14.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_15.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_16.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_17.dmp
+			  /u08/DataPump/AFCCCMSP/AFCCCMSP_FULL_EXPDP_09_28_2021_14_30_01_18.dmp
+			Job "SYS"."SYS_EXPORT_FULL_02" successfully completed at Tue Sep 28 15:14:12 2021 elapsed 0 00:44:11
+			
+prodoraoda01	BHAXODMP	Pass	Master table "CDBA"."SYS_EXPORT_FULL_02" successfully loaded/unloaded
+			******************************************************************************
+			Dump file set for CDBA.SYS_EXPORT_FULL_02 is:
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_01.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_02.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_03.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_04.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_05.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_06.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_07.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_08.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_09.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_10.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_11.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_51.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_52.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_53.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_54.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_55.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_56.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_57.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_58.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_59.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_60.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_61.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_62.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_63.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHAXODMP/export/BHAXODMP_FULL_EXPDP_09_28_2021_18_45_01_64.dmp
+			Job "CDBA"."SYS_EXPORT_FULL_02" completed with 1 error(s) at Wed Sep 29 05:35:32 2021 elapsed 0 10:50:29
+			
+			
+			
+			
+			
+			
+prodoraoda01	GTIKODMP	Pass	Master table "CDBA"."SYS_EXPORT_FULL_02" successfully loaded/unloaded
+			******************************************************************************
+			Dump file set for CDBA.SYS_EXPORT_FULL_02 is:
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_01.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_02.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_03.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_04.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_05.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_06.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_07.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_08.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_09.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_10.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_11.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_12.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_13.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_14.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_15.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_16.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_17.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_18.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_77.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_78.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_79.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_80.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_81.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODMP/export/GTIKODMP_FULL_EXPDP_09_28_2021_17_30_01_82.dmp
+			Job "CDBA"."SYS_EXPORT_FULL_02" successfully completed at Wed Sep 29 05:11:33 2021 elapsed 0 11:41:31
+			
+			
+			
+			
+			
+			
+			
+prodoraoda01	BHIKODMP	Pass	
+			Master table "CDBA"."SYS_EXPORT_FULL_01" successfully loaded/unloaded
+			******************************************************************************
+			Dump file set for CDBA.SYS_EXPORT_FULL_01 is:
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHIKODMP/export/BHIKODMP_FULL_EXPDP_09_29_2021_03_35_01_01.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHIKODMP/export/BHIKODMP_FULL_EXPDP_09_29_2021_03_35_01_02.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHIKODMP/export/BHIKODMP_FULL_EXPDP_09_29_2021_03_35_01_03.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/BHIKODMP/export/BHIKODMP_FULL_EXPDP_09_29_2021_03_35_01_04.dmp
+			Job "CDBA"."SYS_EXPORT_FULL_01" successfully completed at Wed Sep 29 04:12:18 2021 elapsed 0 00:37:16
+			
+			
+			
+			
+			
+			
+prodoraoda01	GTIKODXP	Pass	Master table "CDBA"."SYS_EXPORT_FULL_02" successfully loaded/unloaded
+			******************************************************************************
+			Dump file set for CDBA.SYS_EXPORT_FULL_02 is:
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_01.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_02.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_03.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_04.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_05.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_06.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_07.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_08.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_09.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_10.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_11.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_12.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_13.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_14.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_15.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_16.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_17.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_76.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_77.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_78.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_79.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_80.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_81.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_82.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_83.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_84.dmp
+			  /Oraclebackups/EXPORTS/ODA_PROD/GTIKODXP/export/GTIKODXP_FULL_EXPDP_09_28_2021_20_05_01_85.dmp
+			Job "CDBA"."SYS_EXPORT_FULL_02" completed with 3 error(s) at Wed Sep 29 06:54:31 2021 elapsed 0 10:49:29
+
+============================================================================================================================================================
+
+18.DR_STATUS:
+
+-crontab -l
+-cd /standby monitor script directory (cd /u02/app/Cintra/Standby/AFCCCMSP_DR)
+-Look for mailme.text file, cat it and collect info
+-for new DR, check script in node 2
+
+
+DR Sync Status has been varified			
+			
+Server		Database	Result	Output
+			
+droraoda02	GTIKODMP H ------ FRDM-ODA-DR DG STANDBY DATABASE REPORT  ------
+			
+			------ Wednesday 09/29/2021 08:35   ------
+			
+			------ GTIKODMP HA-Standby indicator for host droraoda02  ------
+			
+			Status         : IN-SYNCH (Within 30 Minutes)
+			
+			Primary Host Name  : prodoraoda01
+			Logs Applied Today : 195
+			Approx MB Applied  : 33191
+			Primary time is 2021/09/29 08:34:59
+			Standby time is 2021/09/29 08:34:56
+			Intentional Log Apply Delay is : 0 Minutes.
+			DR database GTIKODMP on server droraoda02 lags behind primary by
+			0 Days, 00 Hours, 00 Minutes and 03 Seconds
+			The DR is well within defined tolerable lag.
+			
+			
+			
+droraoda02	BHIKODMP_HA		------ FRDM-ODA-DR DG STANDBY DATABASE REPORT  ------
+			
+			------ Wednesday 09/29/2021 08:30   ------
+			
+			------ BHIKODMP HA-Standby indicator for host droraoda02  ------
+			
+			Status         : IN-SYNCH (Within 30 Minutes)
+			
+			Primary Host Name  : prodoraoda02
+			Logs Applied Today : 94
+			Approx MB Applied  : 4096
+			Primary time is 2021/09/29 08:30:00
+			Standby time is 2021/09/29 08:29:45
+			Intentional Log Apply Delay is : 0 Minutes.
+			DR database BHIKODMP on server droraoda02 lags behind primary by
+			0 Days, 00 Hours, 00 Minutes and 15 Seconds
+			The DR is well within defined tolerable lag.
+			
+			
+			
+droraoda02	BHAXODMP_HA		------ FRDM-ODA-DR DG STANDBY DATABASE REPORT  ------
+			
+			------ Wednesday 09/29/2021 08:45   ------
+			
+			------ BHAXODMP HA-Standby indicator for host droraoda02  ------
+			
+			Status         : IN-SYNCH (Within 30 Minutes)
+			
+			Primary Host Name  : prodoraoda02
+			Logs Applied Today : 167
+			Approx MB Applied  : 522899
+			Primary time is 2021/09/29 08:45:00
+			Standby time is 2021/09/29 08:42:09
+			Intentional Log Apply Delay is : 0 Minutes.
+			DR database BHAXODMP on server droraoda02 lags behind primary by
+			0 Days, 00 Hours, 02 Minutes and 51 Seconds
+			The DR is well within defined tolerable lag.
+			
+			
+alt-oradbmir-02	AFCCCMSP_DR		------ FREEDOM HA STANDBY DATABASE REPORT  ------
+			
+			------ Wednesday 09/29/2021 08:35   ------
+			
+			------ AFCCCMSP_DR DR-Standby indicator for host alt-oradbmir-02  ------
+			
+			Status         : IN-SYNCH (Within 15 Minutes)
+			
+			Primary Host Name  : col-afcccms-01
+			Logs Applied Today : 95
+			Approx MB Applied  : 6569
+			Primary time is 2021/09/29 08:23:07
+			Standby time is 2021/09/29 08:23:07
+			Intentional Log Apply Delay is : 0 Minutes.
+			DR database AFCCCMSP on server alt-oradbmir-02 lags behind primary by
+			0 Days, 00 Hours, 26 Minutes and 57 Seconds
+			The DR is well within defined tolerable lag.
+			
+			
+			
+droraoda02	GTIKODXP_DR		------ FRDM-ODA-DR DG STANDBY DATABASE REPORT  ------
+			
+			------ Wednesday 09/29/2021 08:45   ------
+			
+			------ GTIKODXP HA-Standby indicator for host droraoda02  ------
+			
+			Status         : IN-SYNCH (Within 30 Minutes)
+			
+			Primary Host Name  : prodoraoda02
+			Logs Applied Today : 8
+			Approx MB Applied  : 23897
+			Primary time is 2021/09/29 08:45:01
+			Standby time is 2021/09/29 08:43:25
+			Intentional Log Apply Delay is : 0 Minutes.
+			DR database GTIKODXP on server droraoda02 lags behind primary by
+			0 Days, 00 Hours, 01 Minutes and 36 Seconds
+			The DR is well within defined tolerable lag.
+
+============================================================================================================================================================
+
+19. DATABASE STATUS:
+
+Server		Database	Result	Output
+col-afcccms-01	AFCCCMSP	Pass	
+			AFCCCMSP         OPEN
+			
+prodoraoda01	BHAXODMP	Pass	
+			BHAXODMP         OPEN
+			
+prodoraoda01	GTIKODMP	Pass	
+			GTIKODMP         OPEN
+			
+prodoraoda01	BHIKODMP	Pass	
+			BHIKODMP         OPEN
+prodoraoda01	GTIKODXP	Pass	
+			GTIKODXP         OPEN
+
+============================================================================================================================================================
+
+20.PLUGGABLE DATABASE:
+
+List of All Pluggable Datbases		
+		
+		
+Server		Database	Result
+col-afcccms-01	AFCCCMSP	Pass
+
+
+
+
+
+NOTE:
+
+-User  accounts expiry
+-schema objects
+-server performance data(OEM)
+-O.S logs
+
+
+
+			
+
+
+
+
+
+
+			
+
+
+			
+
+
+
+
+
+			
+			
+			
+			
+
+
+
+
+
+
+
+

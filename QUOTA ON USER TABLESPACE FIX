@@ -1,0 +1,45 @@
+
+QUOTA ON USER
+==============
+>select TABLESPACE_NAME,USERNAME, BYTES/1024/1024 "MB" , MAX_BYTES/1024/1024 "MB" from DBA_TS_QUOTAS where TABLESPACE_NAME='MOO_SAS_DATA'
+AND USERNAME IN ('MOO_KSWARTZ');
+
+>SELECT TABLESPACE_NAME,
+BYTES / 1024 / 1024 "UTILIZIED_SPACE",
+MAX_BYTES / 1024 / 1024 "QUOTA_ALLOCATED"
+FROM dba_ts_quotas
+WHERE username = 'MOO_KSWARTZ';
+
+>Also check size of USERS tablespace if there is enough space, then proceed as below:
+
+> ALTER USER MOO_KSWARTZ  QUOTA 100M ON MOO_SAS_DATA;  (BETWEEN 300 AND 500M)
+
+-Based on environment policy, you can also grant unlimited quota to a user as follows:
+
+>ALTER USER username QUOTA UNLIMITED ON USERS;
+
+ALTER USER username QUOTA 20G ON USERS
+
+OUTPUT:
+
+SQL> select TABLESPACE_NAME,USERNAME, BYTES/1024/1024 "MB" , MAX_BYTES/1024/1024 "MB" from DBA_TS_QUOTAS where TABLESPACE_NAME='USERS'
+AND USERNAME IN ('PYNERM');  2
+
+TABLESPACE_NAME               |USERNA|        MB|        MB
+------------------------------|------|----------|----------
+USERS                         |PYNERM|   199.375|       200
+
+SQL> ALTER USER PYNERM QUOTA 400M ON USERS;
+
+User altered.
+
+SQL> select TABLESPACE_NAME,USERNAME, BYTES/1024/1024 "MB" , MAX_BYTES/1024/1024 "MB" from DBA_TS_QUOTAS where TABLESPACE_NAME='USERS'
+AND USERNAME IN ('PYNERM');  2
+
+TABLESPACE_NAME               |USERNA|        MB|        MB
+------------------------------|------|----------|----------
+USERS                         |PYNERM|   199.375|       400
+
+
+select TABLESPACE_NAME,USERNAME, BYTES/1024/1024 "MB" , MAX_BYTES/1024/1024 "MB" from DBA_TS_QUOTAS where TABLESPACE_NAME'='MOO_SAS_DATA'
+AND USERNAME IN ('MOO_KSWARTZ')

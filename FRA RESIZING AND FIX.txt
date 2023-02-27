@@ -1,0 +1,99 @@
+FRA FIX:
+
+FRA
+===
+
+
+1.set line 200
+select * from v$flash_recovery_area_usage;
+
+2. 
+col name  format a45
+col size_mb  format 999,999,999
+col used_mb  format 999,999,999
+col pct_used format 999
+
+select name,
+   ceil( space_limit / 1024 / 1024 /1024) size_gb,
+   ceil( space_used / 1024 / 1024/1024) used_gb,
+   decode( nvl( space_used, 0),0, 0,
+   ceil ( ( space_used / space_limit) * 100) ) pct_used
+from v$recovery_file_dest order by name desc;
+
+
+3. alter system set db_recovery_file_dest_size=20G scope=both; (if FRA is exhausted)
+
+
+OR
+
+
+
+
+FRA fix in JB:
+
+Hi Chaitanya\Vish,
+
+Can you please confirm if we are good to remove the below restore point.
+
+-SQL> select name, open_mode, database_role, instance_name, startup_time from v$database, v$instance;
+
+NAME      OPEN_MODE            DATABASE_ROLE    INSTANCE_NAME    STARTUP_T
+--------- -------------------- ---------------- ---------------- ---------
+DOPRD     READ WRITE           PRIMARY          DOPRD1           22-MAR-22
+
+
+-SQL> set line 999 pagesize 9999
+SQL> select SCN, GUARANTEE_FLASHBACK_DATABASE,STORAGE_SIZE, TIME, NAME  from v$restore_point;
+
+       SCN GUA STORAGE_SIZE TIME                                                                        NAME
+---------- --- ------------ --------------------------------------------------------------------------- -----------------------------------------------------
+3.4448E+11 YES   2.3923E+12 22-MAR-22 01.28.27.000000000 PM                                             R16_1_4
+
+
+
+
+-Check percentage of FRA used and reclaimable
+
+set pages 100
+set linesize 200
+select FILE_TYPE, PERCENT_SPACE_USED, PERCENT_SPACE_RECLAIMABLE, NUMBER_OF_FILES
+from v$flash_recovery_area_usage;
+
+FILE_TYPE               PERCENT_SPACE_USED PERCENT_SPACE_RECLAIMABLE NUMBER_OF_FILES
+----------------------- ------------------ ------------------------- ---------------
+CONTROL FILE                             0                         0               0
+REDO LOG                                 0                         0               0
+ARCHIVED LOG                             4                      3.19              82
+BACKUP PIECE                             0                         0               1
+IMAGE COPY                               0                         0               0
+FLASHBACK LOG                        86.02                         0             559
+FOREIGN ARCHIVED LOG                     0                         0               0
+AUXILIARY DATAFILE COPY                  0                         0               0
+
+8 rows selected.
+
+- Check space reclaimable on RECODG destination( if there is, hen we have to see what to delete from FRA)
+set lin 1000
+col name form a60
+col space_limit_gb form 9999.99
+col space_used_GB form 9999.99
+col space_reclaimable_GB form 9999.99
+SELECT NAME,
+round(SPACE_USED*100/SPACE_LIMIT,2) PCT_USED,
+((SPACE_LIMIT/1024)/1024)/1024 SPACE_LIMIT_GB,
+round(((SPACE_USED/1024)/1024)/1024,2) SPACE_USED_GB,
+round(((SPACE_RECLAIMABLE/1024)/1024)/1024,2) SPACE_RECLAIMABLE_GB,NUMBER_OF_FILES
+FROM v$recovery_file_dest;
+
+NAME                                                           PCT_USED SPACE_LIMIT_GB SPACE_USED_GB SPACE_RECLAIMABLE_GB NUMBER_OF_FILES
+------------------------------------------------------------ ---------- -------------- ------------- -------------------- ---------------
++RECODG                                                           90.03        2600.00       2340.65                83.03             642
+
+
+
+-Once FRA size is exhausted, first fix is to increase FRA size, and then check what files to delete.
+You can also:
+
+If The last archive backup got failed due to an unknown error.
+Increased the FRA , re-initiated the backup now FRA is under the threshold limit.
+I’ve also reduced the threshold limit to 90% before it was 98%.

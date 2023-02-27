@@ -1,0 +1,62 @@
+CONNETIVITY DOC ON KEEPERS:
+
+
+FREEDOM HEALTH ENVIRONMENT VARIABLES:
+
+login as: cintraops
+cintraops@172.20.12.133's password:PrpP@h-ReTV@Z923
+Last failed login: Mon Dec  6 13:42:38 EST 2021 from col-rdssh-01.freedomh.com o                                                                             n ssh:notty
+There was 1 failed login attempt since the last successful login.
+Last login: Wed Dec  1 15:21:53 2021 from col-rdssh-01.freedomh.com
+[cintraops@prodoraoda02 ~]$ ps -ef|grep pmon
+cintrao+  3692  3413  0 13:43 pts/1    00:00:00 grep --color=auto pmon
+oracle    8465     1  0 Sep24 ?        00:04:35 ora_pmon_GORARP012
+grid     10115     1  0 Aug21 ?        00:05:57 asm_pmon_+ASM2
+grid     13077     1  0 Aug21 ?        00:06:10 apx_pmon_+APX2
+oracle   21832     1  0 Sep24 ?        00:05:28 ora_pmon_GTIKODXP2
+oracle   28658     1  0 Sep24 ?        00:05:14 ora_pmon_GTIKODMP2
+oracle   51168     1  0 Sep24 ?        00:05:38 ora_pmon_BHAXODMP2
+oracle   90992     1  0 Dec01 ?        00:00:21 ora_pmon_BHIKODMP2
+[cintraops@prodoraoda02 ~]$ sudo su - oracle
+Last login: Mon Dec  6 13:30:07 EST 2021
+[oracle@prodoraoda02 ~]$ id
+uid=1001(oracle) gid=1001(oinstall) groups=1001(oinstall),1002(dbaoper),1003(dba                                                                             ),1006(asmdba)
+[oracle@prodoraoda02 ~]$ ls -al
+
+[oracle@prodoraoda02 ~]$ . .profile_BHAXODMP
+[oracle@prodoraoda02 ~]$ echo $ORACLE_SID
+BHAXODMP2
+[oracle@prodoraoda02 ~]$ sqlplus / as sysdba
+
+
+13:45:48 SQL> show parameter name
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+cdb_cluster_name                     string
+cell_offloadgroup_name               string
+db_file_name_convert                 string
+db_name                              string      BHAXODMP
+db_unique_name                       string      BHAXODMP_PR
+global_names                         boolean     FALSE
+instance_name                        string      BHAXODMP2
+lock_name_space                      string
+log_file_name_convert                string
+pdb_file_name_convert                string
+processor_group_name                 string
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+service_names                        string      BHAXODMP_PR.freedomh.com
+13:45:58 SQL>
+13:46:04 SQL>
+13:46:04 SQL>
+13:46:05 SQL>
+13:46:05 SQL>
+
+
+13:46:05 SQL> desc dba_data_files
+
+
+13:46:18 SQL> select FILE_NAME,TABLESPACE_NAME,BYTES/1024/1024 from dba_data_files where TABLESPACE_NAME='SYSAUX';
+

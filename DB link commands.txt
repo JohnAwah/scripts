@@ -1,0 +1,3 @@
+desc dba_db_links;
+
+SQL> select OWNER,DB_LINK,USERNAME from dba_db_links where owner='DLEX_B6REPORT';

@@ -1,0 +1,971 @@
+-TO SEE LOCATION OF DATAFILES AND TABLESPACES:
+
+
+-FIRST THING:
+ALWAYS CHECK ASM DISK GROUP USAGE:
+
+>[oracle@odm4db01-adm ~]$ . oraenv
+ORACLE_SID = [oracle] ? +ASM3
+
+[oracle@odm4db01-adm ~]$ asmcmd
+ASMCMD> lsdg
+State    Type    Rebal  Sector  Logical_Sector  Block       AU   Total_MB   Free_MB  Req_mir_free_MB  Usable_file_MB  Offline_disks  Voting_files  Name
+MOUNTED  HIGH    N         512             512   4096  4194304  274599936  21475728          5085184         5463514              0             N  DATADG/
+MOUNTED  NORMAL  N         512             512   4096  4194304    3253152   3248528            34608         1606960              0             Y  DBFS_DG/
+MOUNTED  HIGH    N         512             512   4096  4194304   30646080  20307084           567520         6579854              0             N  RECODG/
+
+
+.desc dba_data_files;
+.select username, tablespace_name from dba_data_files;
+
+
+TABLESPACE SIZE RESOLUTION( RESIZING DATAFILES)
+
+SQL> desc dba_data_files (Check database data files)
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ FILE_NAME                                          VARCHAR2(513)
+ FILE_ID                                            NUMBER
+ TABLESPACE_NAME                                    VARCHAR2(30)
+ BYTES                                              NUMBER
+ BLOCKS                                             NUMBER
+ STATUS                                             VARCHAR2(9)
+ RELATIVE_FNO                                       NUMBER
+ AUTOEXTENSIBLE                                     VARCHAR2(3)
+ MAXBYTES                                           NUMBER
+ MAXBLOCKS                                          NUMBER
+ INCREMENT_BY                                       NUMBER
+ USER_BYTES                                         NUMBER
+ USER_BLOCKS                                        NUMBER
+ ONLINE_STATUS                                      VARCHAR2(7)
+ LOST_WRITE_PROTECT                                 VARCHAR2(7)
+
+SQL> select FILE_NAME,TABLESPACE_NAME,BYTES/1024/1024 from dba_data_files where TABLESPACE_NAME='HUI_MART_D128K_T01'; ( Query to obtain sizes of datafiles in the tablespace concerned)
+
+FILE_NAME
+--------------------------------------------------------------------------------
+TABLESPACE_NAME                BYTES/1024/1024
+------------------------------ ---------------
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.845.1081278475
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL             21504
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.876.1081278781
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL              7168
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.781.1081278035
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               397
+
+
+FILE_NAME
+--------------------------------------------------------------------------------
+TABLESPACE_NAME                BYTES/1024/1024
+------------------------------ ---------------
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.817.1081278305
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               405
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.832.1081278359
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               405
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.831.1081278359
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               469
+
+
+FILE_NAME
+--------------------------------------------------------------------------------
+TABLESPACE_NAME                BYTES/1024/1024
+------------------------------ ---------------
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.780.1081278033
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               467
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.875.1081278781
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               467
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.857.1081278687
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               466
+
+
+FILE_NAME
+--------------------------------------------------------------------------------
+TABLESPACE_NAME                BYTES/1024/1024
+------------------------------ ---------------
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.752.1081277701
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               453
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.799.1081278117
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               459
+
+
+11 rows selected.
+
+SQL> ; ( Command to resize the datafiles in the tablespace to add space in the tablespace)
+alter database datafile '+PRDDATADG/blkprod/datafile/blk_aud_smt_t01.903.1093795579' resize 60G;
++DEVDATADG
+
+OR
+
+SQL> alter tablespace BOAUDSBX_SMT_T01 add datafile '+DATADG' size 1024m AUTOEXTEND ON next 50M maxsize 17048m;
+
+alter tablespace HUI_MART_D128K_T01 add datafile '+PRDDATADG' size 60g;
+HUI_MART_D128K_T01                   3407865        134525 4%
+
++PRDDATADG/uhg2prd/datafile/ovt_mart_model_t01.3725.994959491      OVT_MART_MODEL_T01
+
+OVT_MART_MODEL_T01
+
+Tablespace altered.
+ 
+
+URX_MART_STAGING_T01                  523944          7624 1%
+
+SQL> select FILE_NAME,TABLESPACE_NAME,BYTES/1024/1024 from dba_data_files where TABLESPACE_NAME='USERS '; (double check to see that the datafile size has increased)
+
+MOO_NEOOP_SMT_T01                   15580885        433924 3%
+
+
+TS_ABBOTT_RPT_EXTERN                  102400          7918 8%
+
+FILE_NAME
+--------------------------------------------------------------------------------
+TABLESPACE_NAME                BYTES/1024/1024
+------------------------------ ---------------
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.845.1081278475
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL             21504
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.876.1081278781
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL              7168
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.781.1081278035
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL              7168
+
+
+FILE_NAME
+--------------------------------------------------------------------------------
+TABLESPACE_NAME                BYTES/1024/1024
+------------------------------ ---------------
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.817.1081278305
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               405
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.832.1081278359
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               405
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.831.1081278359
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               469
+
+
+FILE_NAME
+--------------------------------------------------------------------------------
+TABLESPACE_NAME                BYTES/1024/1024
+------------------------------ ---------------
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.780.1081278033
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               467
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.875.1081278781
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               467
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.857.1081278687
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               466
+
+
+FILE_NAME
+--------------------------------------------------------------------------------
+TABLESPACE_NAME                BYTES/1024/1024
+------------------------------ ---------------
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.752.1081277701
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               453
+
++DATADG/DOPRD_NVA/DATAFILE/dlex_b6aq_admin_resvaq_small.799.1081278117
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL               459
+
+
+11 rows selected.
+
+-Check percentage usage of tablespaces:
+
+"
+set pages 50000 lines 32767
+col tablespace_name format a30
+col TABLESPACE_NAME heading ""Tablespace|Name""
+col Allocated_size heading ""Allocated|Size(GB)"" form 99999999.99
+col Current_size heading ""Current|Size(GB)"" form 99999999.99
+col Used_size heading ""Used|Size(GB)"" form 99999999.99
+col Available_size heading ""Available|Size(GB)"" form 99999999.99
+col Pct_used heading ""%Used (vs)|(Allocated)"" form 99999999.99
+select a.tablespace_name
+        ,a.alloc_size/1024/1024/1024 Allocated_size
+        ,a.cur_size/1024/1024/1024 Current_Size
+        ,(u.used+a.file_count*65536)/1024/1024/1024 Used_size
+        ,(a.alloc_size-(u.used+a.file_count*65536))/1024/1024/1024 Available_size
+        ,((u.used+a.file_count*65536)*100)/a.alloc_size Pct_used
+from dba_tablespaces t
+        ,(select t1.tablespace_name
+        ,nvl(sum(s.bytes),0) used
+        from dba_segments s
+        ,dba_tablespaces t1
+         where t1.tablespace_name=s.tablespace_name(+)
+         group by t1.tablespace_name) u
+        ,(select d.tablespace_name
+        ,sum(greatest(d.bytes,nvl(d.maxbytes,0))) alloc_size
+        ,sum(d.bytes) cur_size
+        ,count(*) file_count
+        from dba_data_files d
+        group by d.tablespace_name) a
+where t.tablespace_name=u.tablespace_name
+and t.tablespace_name=a.tablespace_name
+order by Pct_used desc
+/
+"
+
+
+Tablespace                        Allocated      Current         Used    Available   %Used (vs)
+Name                               Size(GB)     Size(GB)     Size(GB)     Size(GB)  (Allocated)
+------------------------------ ------------ ------------ ------------ ------------ ------------
+DLEX_B6RESV_RESV_INDEX              2625.95      2625.95      2407.21       218.74        91.67
+DLEX_B6RESV_RESV_SMALL              4249.20      4247.20      3839.48       409.73        90.36
+DLEX_B6RESV_RESV_LOB                 267.99       255.99       234.83        33.17        87.62
+TOKENEX_DATA                          96.00        84.00        71.74        24.26        74.73
+DLEX_B6AQ_ADMIN_RESVAQ_SMALL          49.51        38.51        29.35        20.16        59.28
+DLEX_B6TRANSACC_DATA                  87.19        65.19        47.75        39.44        54.76
+DLEX_B6TRANSACC_IDX                   51.13        29.13        22.44        28.69        43.89
+UNDOTBS1                              98.19        70.21        31.03        67.17        31.60
+GGS_DATA                              32.00        12.00         9.24        22.76        28.88
+TOKENEX_INDEX                         32.00        30.00         8.67        23.33        27.10
+UNDOTBS2                             151.74       150.81        40.24       111.50        26.52
+DLEX_B6AQ_ADMIN_RESVAQ_INDEX          33.32        11.32         8.52        24.81        25.56
+SYSAUX                                94.00        56.00        16.34        77.66        17.38
+DLEX_B6BUSINESS_RULES_INDEX           35.00         5.00         3.31        31.69         9.45
+DLEX_B6BUSINESS_RULES_DATA            32.97         2.97         2.36        30.61         7.17
+DLEX_B6BIZ_DATA_PRODUCT_INDEX         33.40         3.40         1.74        31.66         5.20
+DLEX_B6BIZ_DATA_PRODUCT_DATA          33.34         1.83         1.57        31.78         4.70
+DLEX_B6RESV_RESV_ANC_DATA             33.47         1.96         1.56        31.91         4.67
+SYSTEM                                33.00         2.00         1.41        31.59         4.26
+DLEX_B6BUSINESS_RULES_LOB             32.74         1.72         1.16        31.58         3.55
+DLEX_B6RESV_RESV_ANC_INDEX            32.97         1.46         1.06        31.90         3.22
+DLEX_B6STATICCONTENTS_LOB             32.38          .68          .48        31.91         1.47
+DLEX_B6BIZ_DATA_PRODUCT_LOB           32.10          .30          .25        31.85          .78
+DLEX_B6STATICCONTENTS_DATA            32.08          .42          .16        31.92          .51
+USERS                                 32.10          .25          .15        31.95          .46
+DLEX_B6TAXCACHE_LOB                   32.02          .16          .14        31.88          .43
+DLEX_B6CREDITBANK_DATA                32.04          .14          .08        31.96          .26
+DLEX_B6CREDITBANK_INDEX               32.02          .12          .04        31.98          .13
+DLEX_B6TAXCACHE_INDEX                 32.00          .11          .03        31.97          .10
+DLEX_B6INVENTORY_DATA                 32.01          .06          .02        31.99          .06
+DLEX_B6STATICCONTENTS_INDEX           32.01          .06          .02        31.99          .06
+DLEX_B6DATA_PURGE_DATA                32.01          .03          .01        31.99          .05
+DLEX_B6DATA_PURGE_INDEX               32.01          .03          .01        32.00          .04
+DLEX_B6TAXCACHE_DATA                  32.00          .01          .01        31.99          .03
+DLEX_B6INVENTORY_INDEX                32.01          .02          .01        32.00          .03
+DLEX_B6BIZ_DATA_PRODUCT_TEXT          32.00          .01          .00        32.00          .01
+DLEX_B6HERTZ_INDEX                    32.00          .01          .00        32.00          .01
+DLEX_B6PROFILE_INDEX                  32.00          .01          .00        32.00          .01
+DLEX_B6HERTZ_SMALL                    32.00          .01          .00        32.00          .01
+DLEX_B6TICKETING_SMALL                32.00          .01          .00        32.00          .01
+DLEX_B6SPRINGBATCH_INDEX              32.00          .00          .00        32.00          .00
+DLEX_B6SPRINGBATCH_DATA               32.00          .00          .00        32.00          .00
+DLEX_B6PROFILE_DATA                   32.00          .00          .00        32.00          .00
+DLEX_B6GTA_INDEX                      32.00          .00          .00        32.00          .00
+DLEX_B6STATS_A1_INDEX                 32.00          .00          .00        32.00          .00
+DLEX_B6STATS_A1_SMALL                 32.00          .00          .00        32.00          .00
+DLEX_B6GTA_DATA                       32.00          .00          .00        32.00          .00
+DLEX_B6SPRINGBATCH_LOB                32.00          .00          .00        32.00          .00
+DLEX_B6GTA_LOB                        32.00          .00          .00        32.00          .00
+DLEX_B6TICKETING_XMLTYPE              32.00          .00          .00        32.00          .00
+DLEX_B6PROFILE_LOB                    32.00          .00          .00        32.00          .00
+DLEX_B6INVENTORY_LOB                  32.00          .00          .00        32.00          .00
+DLEX_B6CREDITBANK_LOB                 32.00          .00          .00        32.00          .00
+DLEX_B6DATA_PURGE_LOB                 32.00          .01          .00        32.00          .00
+
+54 rows selected.
+
+SQL> SQL>
+
+2. 
+SELECT DFQ.TABLESPACE_NAME "Tablespace Name"
+      ,DFQ.TOTALSPACE "Total Size MB"
+      , (DFQ.TOTALSPACE - DSQ.TOTALUSEDSPACE) "Free Space MB"
+      ,ROUND (100 * ( (DFQ.TOTALSPACE - DSQ.TOTALUSEDSPACE) / DFQ.TOTALSPACE)) || '%' "Free Space %"
+FROM   (SELECT   TABLESPACE_NAME, ROUND (SUM (BYTES) / 1048576) TOTALSPACE
+        FROM     DBA_DATA_FILES
+        GROUP BY TABLESPACE_NAME) DFQ
+      ,(SELECT   TABLESPACE_NAME, ROUND (SUM (BYTES) / (1024 * 1024)) TOTALUSEDSPACE
+        FROM     DBA_SEGMENTS
+        GROUP BY TABLESPACE_NAME) DSQ
+WHERE  DFQ.TABLESPACE_NAME = DSQ.TABLESPACE_NAME(+);
+
+sudo
+;
+
+Tablespace Name                Total Size MB Free Space MB Free Space %
+------------------------------ ------------- ------------- -----------------------------------------
+AUDIT_DATA                             28672          2752 10%
+SYSAUX                                 15236          7457 49%
+UNDOTBS1                               49128         40507 82%
+TRAX_PART_DATA                       3131182        152830 5%
+USERS                                      5             2 40%
+SYSTEM                                  1544            62 4%
+GGS_DATA                                2348           473 20%
+UNDOTBS2                              135338        122851 91%
+TRAXDATA                             1008831        116421 12%
+TRAX_PART_IDX                         155314          9878 6%
+GCS_DATA                                1000               %
+ADMIN                                   1000               %
+
+12 rows selected.
+
+
+alter tablespace BLK_AUD_SMT_T01  add datafile '+PRDDATADG' size 1024M AUTOEXTEND ON next 50M maxsize 32767M;
+
+
+
+
+3.HOW TO CHECK/SET TABLESPACE THRESHOLD IN OEM 13C:
+-CLICK ON TARGETS (TOP RIGHT) > SELECT THE DATABASE > CLICK ON CLUSTER DATABASE ON THE LEFT FOR RAC DB > SELECT MONITORING > CLICK METRIC AND COLLECTION SETTINGS >
+SCROLL BELOW TO TABLESPACE SPACE THRESHOLD AND SET IT AS WELL AS TABLESPACE DICTIONARY MANAGED OPTION AND SET AS NEEDED AND THEN CLICK DONE BELOW RIGHT. 
+
+
+
+TEMPORARY TABLESPACE SPACE TROUBLESHOOTING & RESOLUTION:
+
+2. WRITE FAILED ON TEMPORARY FILE---OUT OF DISK SPACE (UNABLE TO RUN QUERIES ON TRAX)
+
+>Run the below scripts to get the temp tablespace usage:
+
+select a.tablespace_name tablespace,
+         d.TEMP_TOTAL_MB,
+         sum (a.used_blocks * d.block_size) / 1024 / 1024 TEMP_USED_MB,
+         d.TEMP_TOTAL_MB - sum (a.used_blocks * d.block_size) / 1024 / 1024 TEMP_FREE_MB
+from v$sort_segment a,
+        (
+          select   b.name, c.block_size, sum (c.bytes) / 1024 / 1024 TEMP_TOTAL_MB
+          from     v$tablespace b, v$tempfile c
+          where    b.ts#= c.ts#
+          group by b.name, c.block_size
+        ) d
+where    a.tablespace_name = d.name
+group by a.tablespace_name, d.TEMP_TOTAL_MB;
+
+> If there is enough space in temporary tablespace, then check df -h and see if  mount point for tempfs has space.
+
+>If there is space, then check alert log files for any possible errors related to temp file space
+>If there is no space in temp tablespace as in check above, consider adding a temp file into the temp tablespace as follows 
+to add space into temp tablespace as follows:
+
+SQL> desc dba_temp_files;
+SQL> select file_name,TABLESPACE_NAME from dba_temp_files;
+add temp file into temp tablespace OR resize existing temp file to add space to temp tablespace.
+
+
+
+-HOW TO GET MAX DB FILE LIMIT:
+select
+   tablespace_name,
+   maxbytes/1024/1024 max_meg
+from
+   dba_data_files;
+
+select
+   tablespace_name,
+   count(*)       nbr_data_files,
+   sum(maxblocks) maxbytes
+from
+   dba_data_files
+group by
+   tablespace_name;
+   
+
+
+
+
+-TO GET TABLE SIZE:
+
+select owner,segment_name,segment_type,sum(bytes)/1024/1024/1024 "GB" from dba_segments where segment_name='ODS_MOO.ncoa_input_record;'
+group by owner,segment_name,segment_type;
+
+NCOA_INPUT_RECORD
+
+
+ASMCMD> lsdg
+State    Type    Rebal  Sector  Logical_Sector  Block       AU   Total_MB    Free_MB  Req_mir_free_MB  Usable_file_MB  Offline_disks  Voting_files  Name
+MOUNTED  HIGH    N         512             512   4096  4194304  644972544  209023900         13436928        65195657              0             N  PRDDATADG/
+MOUNTED  NORMAL  N         512             512   4096  4194304    2768640    2758840            34608         1362116              0             Y  PRDDBFSDG/
+MOUNTED  HIGH    N         512             512   4096  4194304   71669760   70359248          1493120        22955376              0             N  PRDRECODG/
+ASMCMD>
+
+
+-BIG TABLESPACE SCENARIOS WHEN ADDING DATAFILES:
+
+
+FILE_NAME
+--------------------------------------------------------------------------------
+TABLESPACE_NAME                BYTES/1024/1024
+------------------------------ ---------------
++DATAC1/ABBT2PRD/DATAFILE/ts_abbott_rpt_extern.938.1087558467
+TS_ABBOTT_RPT_EXTERN                    102400
+
+
+SQL> alter tablespace TS_ABBOTT_RPT_EXTERN add datafile '+DATAC1' size 50G;
+alter tablespace TS_ABBOTT_RPT_EXTERN add datafile '+DATAC1' size 50G
+*
+ERROR at line 1:
+ORA-32771: cannot add file to bigfile tablespace
+
+
+NOTE: Note: A Bigfile tablespace can contain only one datafile so you can only resize the existing datafile by mentioning tablespace name only ,not the datafile . Please find below the example.
+
+SQL> ALTER TABLESPACE TS_PGE2_CMPGN RESIZE 200g;
+
+Tablespace altered.
+
+
+-QUOTA ON USER
+==============
+>select TABLESPACE_NAME,USERNAME, BYTES/1024/1024 "MB" , MAX_BYTES/1024/1024 "MB" from DBA_TS_QUOTAS where TABLESPACE_NAME'='USERS'
+AND USERNAME IN ('PYNERM');
+
+>SELECT TABLESPACE_NAME,
+BYTES / 1024 / 1024 "UTILIZIED_SPACE",
+MAX_BYTES / 1024 / 1024 "QUOTA_ALLOCATED"
+FROM dba_ts_quotas
+WHERE username = 'PYNERM';
+
+>Also check size of USERS tablespace if there is enough space, then proceed as below:
+
+> ALTER USER <username> QUOTA 100M ON <tablespace name>;  (BETWEEN 300 AND 500M)
+
+-Based on environment policy, you can also grant unlimited quota to a user as follows:
+
+>ALTER USER username QUOTA UNLIMITED ON USERS;
+
+OUTPUT:
+
+SQL> select TABLESPACE_NAME,USERNAME, BYTES/1024/1024 "MB" , MAX_BYTES/1024/1024 "MB" from DBA_TS_QUOTAS where TABLESPACE_NAME='USERS'
+AND USERNAME IN ('PYNERM');  2
+
+TABLESPACE_NAME               |USERNA|        MB|        MB
+------------------------------|------|----------|----------
+USERS                         |PYNERM|   199.375|       200
+
+SQL> ALTER USER PYNERM QUOTA 400M ON USERS;
+
+User altered.
+
+SQL> select TABLESPACE_NAME,USERNAME, BYTES/1024/1024 "MB" , MAX_BYTES/1024/1024 "MB" from DBA_TS_QUOTAS where TABLESPACE_NAME='USERS'
+AND USERNAME IN ('PYNERM');  2
+
+TABLESPACE_NAME               |USERNA|        MB|        MB
+------------------------------|------|----------|----------
+USERS                         |PYNERM|   199.375|       400
+
+
+
+
+alter tablespace MEP_ADMIN_DATA01 add datafile '/u02/app/oracle/oradata/HXODAFCT_TST/HXODAFCT_TST/datafile/o1_mf_mep_admi_k7o7gg7k.dbf' size 20g
+
+/u02/app/oracle/oradata/HXODAFCT_TST/HXODAFCT_TST/datafile/o1_mf_mep_admi_k7o7gg75.dbf
+
+
+TABELESPACE RESIZING ISSUES: CREATING DATAFILE IN WRONG LOCATION(FIX FOR DATAFILE CREATED IN WRONG LOCATION (ORA-01157))
+
+
+FIX FOR CREATING DATAFILE IN WRONG LOCATION: 2022-07-20 22:41:18.0 java.sql.BatchUpdateException: ORA-01157: cannot identify/lock data file 130 - see DBWR trace file
+ORA-01110: data file 130: '/u01/app/oracle/product/19.0.0/dbhome_1/dbs/DATA'
+
+
+
+1. Move datafile to correct shared disk location:(NOTE IN 19C THERE IS NO NEED TO TAKE THE DATA FILE OFFLINE)
+
+SQL> alter database create datafile '/u01/app/oracle/product/19.0.0/dbhome_1/dbs/DATA' as '+DATADG' size 31G;
+
+2. CHECK DATAFILE STATUS:
+
+SQL> select to_char(CREATION_TIME,'DD-MM-RRRR HH24:MM:SS'),name from v$datafile;
+
+RECOVER        130
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.416.1110543713
+      33,285,996,544 19-JUL-22
+
+ONLINE         131
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.410.1110467313
+      32,212,254,720 19-JUL-22
+
+ONLINE         132
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.411.1110467425
+      32,212,254,720 19-JUL-22
+
+ONLINE         133
+
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.412.1110467733
+      32,212,254,720 19-JUL-22
+
+ONLINE         134
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.413.1110468011
+      32,212,254,720 19-JUL-22
+
+ONLINE         135
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.414.1110468167
+      32,212,254,720 19-JUL-22
+
+ONLINE         136
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.415.1110468229
+
+      32,212,254,720 19-JUL-22
+
+3. 
+
+SQL>alter database recover datafile '+DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.416.1110543713';
+*
+ERROR at line 1:
+ORA-00279: change 821225956878 generated at 07/19/2022 15:07:38 needed for thread 1
+ORA-00289: suggestion : +RECODG
+ORA-00280: change 821225956878 for thread 1 is in sequence #8776
+
+
+4. CONNECT TO RMAN AND CROSSCHECK ARCHIVELOGS:
+
+[oracle@vorarac4p01 dbs]$ rman target /
+
+Recovery Manager: Release 19.0.0.0.0 - Production on Wed Jul 20 13:09:02 2022
+Version 19.14.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: CEPPROD (DBID=1194872901)
+
+RMAN> crosscheck archivelog all;
+
+using target database control file instead of recovery catalog
+configuration for DISK channel 3 is ignored
+configuration for DISK channel 4 is ignored
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: SID=336 instance=cepprod1 device type=DISK
+validation succeeded for archived log
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8776.316.1110545727 RECID=18060 STAMP=1110545727
+validation succeeded for archived log
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8790.317.1110544219 RECID=18059 STAMP=1110544219
+Crosschecked 2 objects
+
+5.RMAN> restore archivelog sequence 8776;
+
+Starting restore at 20-JUL-22
+using target database control file instead of recovery catalog
+configuration for DISK channel 3 is ignored
+configuration for DISK channel 4 is ignored
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: SID=950 instance=cepprod1 device type=DISK
+
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8776
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_19-bset_a8130th3_22856_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_19-bset_a8130th3_22856_1_1 tag=TAG20220719T163027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+Finished restore at 20-JUL-22
+
+6. RECOVER DATAFILE:
+
+RMAN> recover datafile '+DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.416.1110543713';
+
+Starting recover at 20-JUL-22
+using channel ORA_DISK_1
+
+starting media recovery
+
+archived log for thread 1 with sequence 8776 is already on disk as file +RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8776.316.1110545727
+archived log for thread 1 with sequence 8790 is already on disk as file +RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8790.317.1110544219
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8776.316.1110545727 thread=1 sequence=8776
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9259
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9260
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_19-bset_a8130th3_22856_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_19-bset_a8130th3_22856_1_1 tag=TAG20220719T163027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:45
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9259.310.1110546711 thread=2 sequence=9259
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9259.310.1110546711 RECID=18062 STAMP=1110546751
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9260.312.1110546711 thread=2 sequence=9260
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8777
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_19-bset_a9130tih_22857_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_19-bset_a9130tih_22857_1_1 tag=TAG20220719T163027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8777.310.1110546759 thread=1 sequence=8777
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8777.310.1110546759 RECID=18063 STAMP=1110546759
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8778
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9261
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_19-bset_ab131bj1_22859_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_19-bset_ab131bj1_22859_1_1 tag=TAG20220719T203024
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8778.318.1110546761 thread=1 sequence=8778
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9260.312.1110546711 RECID=18061 STAMP=1110546710
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9261.310.1110546761 thread=2 sequence=9261
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9261.310.1110546761 RECID=18065 STAMP=1110546760
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9262
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8779
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_19-bset_ac131bj1_22860_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_19-bset_ac131bj1_22860_1_1 tag=TAG20220719T203024
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9262.312.1110546761 thread=2 sequence=9262
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8778.318.1110546761 RECID=18064 STAMP=1110546760
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8779.310.1110546763 thread=1 sequence=8779
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8779.310.1110546763 RECID=18066 STAMP=1110546761
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8780
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9263
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9264
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8781
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_20-bset_ah131pkq_22865_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_20-bset_ah131pkq_22865_1_1 tag=TAG20220720T003018
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8780.318.1110546763 thread=1 sequence=8780
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9262.312.1110546761 RECID=18067 STAMP=1110546761
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9263.304.1110546763 thread=2 sequence=9263
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9263.304.1110546763 RECID=18069 STAMP=1110546763
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9264.307.1110546763 thread=2 sequence=9264
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8780.318.1110546763 RECID=18070 STAMP=1110546763
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8781.310.1110546765 thread=1 sequence=8781
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9264.307.1110546763 RECID=18068 STAMP=1110546763
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9265
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8782
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_20-bset_ag131pkq_22864_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_20-bset_ag131pkq_22864_1_1 tag=TAG20220720T003018
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9265.318.1110546765 thread=2 sequence=9265
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8781.310.1110546765 RECID=18071 STAMP=1110546763
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8782.307.1110546765 thread=1 sequence=8782
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8782.307.1110546765 RECID=18073 STAMP=1110546764
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8783
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9266
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_20-bset_ai131pkr_22866_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_20-bset_ai131pkr_22866_1_1 tag=TAG20220720T003018
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8783.307.1110546767 thread=1 sequence=8783
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9265.318.1110546765 RECID=18072 STAMP=1110546764
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9266.310.1110546767 thread=2 sequence=9266
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9266.310.1110546767 RECID=18075 STAMP=1110546765
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9267
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_20-bset_ak1327n3_22868_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_20-bset_ak1327n3_22868_1_1 tag=TAG20220720T043027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:02
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9267.310.1110546769 thread=2 sequence=9267
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8783.307.1110546767 RECID=18074 STAMP=1110546765
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8784
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9268
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_20-bset_al1327n3_22869_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_20-bset_al1327n3_22869_1_1 tag=TAG20220720T043027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8784.307.1110546769 thread=1 sequence=8784
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8784.307.1110546769 RECID=18078 STAMP=1110546768
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9267.310.1110546769 RECID=18076 STAMP=1110546767
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8785
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_20-bset_am1327n4_22870_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_20-bset_am1327n4_22870_1_1 tag=TAG20220720T043027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8785.310.1110546771 thread=1 sequence=8785
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8785.310.1110546771 RECID=18079 STAMP=1110546769
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9268.318.1110546769 RECID=18077 STAMP=1110546768
+media recovery complete, elapsed time: 00:00:01
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8786
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9269
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_20-bset_ao132loq_22872_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_20-bset_ao132loq_22872_1_1 tag=TAG20220720T083017
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8786.310.1110546773 RECID=18080 STAMP=1110546771
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9269.318.1110546771 RECID=18081 STAMP=1110546771
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9270
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8787
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_20-bset_ap132loq_22873_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_20-bset_ap132loq_22873_1_1 tag=TAG20220720T083017
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8787.310.1110546775 RECID=18083 STAMP=1110546772
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9270.318.1110546773 RECID=18082 STAMP=1110546772
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8788
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9271
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_20-bset_ar1333qq_22875_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_20-bset_ar1333qq_22875_1_1 tag=TAG20220720T123017
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8788.310.1110546777 RECID=18084 STAMP=1110546773
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9271.318.1110546775 RECID=18085 STAMP=1110546773
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9272
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8789
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_20-bset_as1333qq_22876_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_20-bset_as1333qq_22876_1_1 tag=TAG20220720T123017
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8789.310.1110546779 RECID=18087 STAMP=1110546774
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9272.318.1110546777 RECID=18086 STAMP=1110546774
+Finished recover at 20-JUL-22
+
+7. CONFIRM STATUS OF DATAFILES AS ONLINE:
+
+SQL> select name,status,bytes,creation_time from v$datafile where creation_time>=trunc(sysdate-1);
+
+
+8. VALIDATE THAT THE WRONG FILE TIMESTAMP IS NOT BEING UPDATED A DAY OR TWO AFTER, AND YOU CAN DELETE THE FILE.
+
+
+
+-TEMP TABLESPACE ERROR:
+
+ORA-01652: unable to extend temp segment by 64 in tablespace TEMP_RPT
+
+ORA-06512: at "UNIMR_MART.SP_PSI_MART_FULL_LOAD", line 253
+
+ORA-06512: at line 2
+
+SOLUTION:
+
+
+SQL> set pages 999
+SQL> set lines 400
+SQL> col FILE_NAME format a75
+SQL> select d.TABLESPACE_NAME, d.FILE_NAME, d.BYTES/1024/1024 SIZE_MB, d.AUTOEXTENSIBLE, d.MAXBYTES/1024/1024 MAXSIZE_MB, d.INCREMENT_BY*(v.BLOCK_SIZE/1024)/1024 INCREMENT_BY_MB
+  2  from dba_temp_files d,
+  3   v$tempfile v
+  4  where d.FILE_ID = v.FILE#
+  5  order by d.TABLESPACE_NAME, d.FILE_NAME;
+  
+  
+SQL> select d.TABLESPACE_NAME, d.FILE_NAME, d.BYTES/1024/1024 SIZE_MB, d.AUTOEXTENSIBLE, d.MAXBYTES/1024/1024 MAXSIZE_MB, d.INCREMENT_BY*(v.BLOCK_SIZE/1024)/1024 INCREMENT_BY_MB
+from dba_temp_files d,
+  2    3   v$tempfile v
+  4  where d.FILE_ID = v.FILE# and d.TABLESPACE_NAME='TABLESPACE_NAME'
+  5  order by d.TABLESPACE_NAME, d.FILE_NAME;
+  
+TABLESPACE_NAME                FILE_NAME                                                                      SIZE_MB AUT MAXSIZE_MB INCREMENT_BY_MB
+------------------------------ --------------------------------------------------------------------------- ---------- --- ---------- ---------------
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.1068.1077215885                             65535 YES      65535            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.1092.1077215887                             65535 YES      65535            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.1659.1077215337                             65535 YES      65535            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.1690.1077215337                             65535 YES      65535            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.1700.1077215337                             65535 YES      65535            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.1764.1077215887                             65535 YES      65535            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2016.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2017.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2021.984354963                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2024.984354963                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2033.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2046.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2051.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2063.984354965                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2075.984354961                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2104.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2132.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2147.984354961                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2148.984354963                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2149.984354965                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2150.984354965                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2151.984354965                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2152.984354965                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2218.984354961                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2219.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2251.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2263.984354961                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2268.984354961                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2278.984354965                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2303.984354961                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2306.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2328.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2331.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2333.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2334.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2390.984354965                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2409.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2412.984354963                         65535.9688 YES 65535.9688            128
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2435.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2436.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2437.984354965                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2438.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2439.984354965                              65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2456.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2457.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2506.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.2556.984354959                         65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.3255.1111737133                             65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.3256.1111737081                             65535 YES 65535.9688        .015625
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.3311.1018201467                        65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.3312.1018201471                        65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.3313.1018201471                        65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.3314.1018201471                        65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.3315.1018201473                        65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.3316.1018201473                        65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.3317.1018201475                        65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.3318.1018212155                        65535.9688 YES 65535.9688            100
+TEMP_RPT                       +PRDDATADG/uhg2prd/tempfile/temp_rpt.3319.1018212169                        65535.9688 YES 65535.9688            100
+
+
+
+SQL> select name,free_mb,total_mb from v$asm_diskgroup;
+
+NAME                              FREE_MB   TOTAL_MB
+------------------------------ ---------- ----------
+PRDDATADG                       168106264  644972544
+PRDDBFSDG                         2758812    2768640
+PRDRECODG                        70173152   71669760
+
+
+SQL> alter TABLESPACE TEMP_RPT ADD TEMPFILE '+PRDDATADG' SIZE 1G AUTOEXTEND ON NEXT 1G MAXSIZE 32767M;
+
+CHECK TO SEE THE TEMP TABLESPACE GROWING:
+
+SQL> select * from dba_temp_free_space;
+
+TABLESPACE_NAME                TABLESPACE_SIZE ALLOCATED_SPACE FREE_SPACE
+------------------------------ --------------- --------------- ----------
+TEMP_RPT                            5.9957E+12      5.9950E+12  710934528
+TEMP                                3.5691E+12      3.5690E+12 3.5177E+12
+TEMP_SAS                            4.8791E+12      4.8790E+12 4.1929E+12
+TEMP_DBRX                           2168455168        35651584 2132803584
+
+SQL> /
+
+TABLESPACE_NAME                TABLESPACE_SIZE ALLOCATED_SPACE FREE_SPACE
+------------------------------ --------------- --------------- ----------
+TEMP_RPT                            6.0022E+12      6.0022E+12 6918504448
+TEMP                                3.5691E+12      3.5690E+12 3.5156E+12
+TEMP_SAS                            4.8791E+12      4.8790E+12 4.1923E+12
+TEMP_DBRX                           2168455168        35651584 2132803584
+
+SQL> /
+
+TABLESPACE_NAME                TABLESPACE_SIZE ALLOCATED_SPACE FREE_SPACE
+------------------------------ --------------- --------------- ----------
+TEMP_RPT                            6.0032E+12      6.0028E+12 7210008576
+TEMP                                3.5691E+12      3.5690E+12 3.5156E+12
+TEMP_SAS                            4.8791E+12      4.8790E+12 4.1923E+12
+TEMP_DBRX                           2168455168        35651584 2132803584
+
+
+-check alert log to see error and see error resumed:
+
+[oracle@odm6db06 ~]$ adrci
+
+ADRCI: Release 11.2.0.4.0 - Production on Tue Aug 16 04:02:25 2022
+
+Copyright (c) 1982, 2011, Oracle and/or its affiliates.  All rights reserved.
+
+ADR base = "/u01/app/oracle"
+adrci> show alert
+
+ADR Home = /u01/app/oracle/diag/rdbms/uhg2prd/uhg2prd2:
+*************************************************************************
+Output the results to file: /tmp/alert_164618_140_uhg2prd2_1.ado
+Thread 2 advanced to log sequence 100383 (LGWR switch)
+  Current log# 27 seq# 100383 mem# 0: +PRDDATADG/uhg2prd/onlinelog/group_27.3378.984850143
+  Current log# 27 seq# 100383 mem# 1: +PRDRECODG/uhg2prd/onlinelog/group_27.2379.984850155
+2021-07-02 05:55:11.184000 -05:00
+Archived Log entry 1125482 added for thread 2 sequence 100382 ID 0x47b2f156 dest 1:
+2021-07-02 06:06:13.213000 -05:00
+Thread 2 advanced to log sequence 100384 (LGWR switch)
+  Current log# 28 seq# 100384 mem# 0: +PRDDATADG/uhg2prd/onlinelog/group_28.3379.984850175
+  Current log# 28 seq# 100384 mem# 1: +PRDRECODG/uhg2prd/onlinelog/group_28.414.984850191
+2021-07-02 06:08:54.265000 -05:00
+Archived Log entry 1125485 added for thread 2 sequence 100383 ID 0x47b2f156 dest 1:
+2021-07-02 06:09:35.000000 -05:00
+Thread 2 advanced to log sequence 100385 (LGWR switch)
+  Current log# 8 seq# 100385 mem# 0: +PRDDATADG/uhg2prd/onlinelog/group_8.3371.984849813
+
+
+State    Type    Rebal  Sector  Logical_Sector  Block       AU   Total_MB   Free_MB  Req_mir_free_MB  Usable_file_MB  Offline_disks  Voting_files  Name
+MOUNTED  HIGH    N         512             512   4096  4194304  204103680   7700384          6803456          298976              0             N  PRDDATADG/
+MOUNTED  NORMAL  N         512             512   4096  4194304    1730400   1724316            34608          844854              0             Y  PRDDBFSDG/
+MOUNTED  HIGH    N         512             512   4096  4194304   22698240  21520008           756608         6921133              0             N  PRDRECODG/
+
+
+
+State    Type    Rebal  Sector  Logical_Sector  Block       AU   Total_MB    Fre                                                                       e_MB  Req_mir_free_MB  Usable_file_MB  Offline_disks  Voting_files  Name
+MOUNTED  HIGH    N         512             512   4096  4194304  644972544  13750                                                                       7320         13436928        41356797              0             N  PRDDATADG/
+MOUNTED  NORMAL  N         512             512   4096  4194304    2768640    275                                                                       8796            34608         1362094              0             Y  PRDDBFSDG/
+MOUNTED  HIGH    N         512             512   4096  4194304   71669760   7014                                                                       7616          1493120        22884832              0             N  PRDRECODG/
+
+
+-Query to add datafile in ODA's:
+
+- alter tablespace  users add datafile size 30g;
+
+
+
+
+
+
+
+
+
+
+

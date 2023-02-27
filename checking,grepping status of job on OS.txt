@@ -1,0 +1,37 @@
+HOW TO CHECK IF A SHELL JOB IS RUNNING IN THE BACKEND:
+
+1. ps -ef|grep sqlplus or
+   ps -ef|grep jobname
+   
+   oracle@zmooodsdbprd01> ps -ef|grep sqlplus
+oracle   26099 31022   0 12:38:48 pts/1       0:00 sqlplus / as sysdba
+oracle   19579 26481   0 22:13:08 pts/4       0:00 grep sqlplus
+oracle    2484  2482   0   Feb 22 ?           0:00 sqlplus -s / as sysdba
+oracle    8079  8077   0   Feb 22 ?           0:00 sqlplus -s / as sysdba
+oracle   27568 27566   0   Feb 22 ?           0:00 sqlplus -s / as sysdba
+oracle   10344 10338   0   Feb 22 ?           0:00 sqlplus -s / as sysdba
+oracle   22198 22196   0   Feb 22 ?           0:00 sqlplus -s / as sysdba
+oracle@zmooodsdbprd01> ps -ef|grep populate_records
+oracle   22196  1769   0   Feb 22 ?           0:00 sh ./populate_records6.sh
+oracle   20022 26481   0 22:13:25 pts/4       0:00 grep populate_records
+oracle   10338  1769   0   Feb 22 ?           0:00 sh ./populate_records8.sh
+oracle   27566  1769   0   Feb 22 ?           0:00 sh ./populate_records9.sh
+oracle    8077  1769   0   Feb 22 ?           0:00 sh ./populate_records5.sh
+oracle    2482  1769   0   Feb 22 ?           0:00 sh ./populate_records7.sh
+oracle@zmooodsdbprd01> ps -ef|grep populate_records
+oracle   22196  1769   0   Feb 22 ?           0:00 sh ./populate_records6.sh
+oracle    5882 26481   0 00:37:50 pts/4       0:00 grep populate_records
+You have new mail in /var/mail/oracle
+oracle@zmooodsdbprd01> ps -ef|grep sqlplus
+oracle   26099 31022   0 12:38:48 pts/1       0:00 sqlplus / as sysdba
+oracle    6262 26481   0 00:38:00 pts/4       0:00 grep sqlplus
+oracle   22198 22196   0   Feb 22 ?           0:00 sqlplus -s / as sysdba
+
+
+2. jobs -l
+
+If terminal from which job is was launched is still open
+
+
+
+

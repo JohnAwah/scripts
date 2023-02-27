@@ -1,0 +1,10 @@
+-Go to www.openAI.com
+-Click on TRY in the top middle pane ( it opens in new tab)
+-click on sign up
+-Click continue with google account
+-confirm your name and click continue
+-Enter phone number and click continue
+-Enter code and verify
+
+
+

@@ -1,0 +1,75 @@
+TABLE SIZE:
+
+select segment_name,segment_type, sum(bytes/1024/1024/1024) GB
+ from dba_segments
+ where segment_name='&Your_Table_Name' 
+group by segment_name,segment_type;
+
+-SQL> select segment_name,segment_type, sum(bytes/1024/1024/1024) GB
+ from dba_segments
+ where segment_name='&Your_Table_Name'
+group by segment_name,segment_type;  2    3    4
+Enter value for your_table_name: AC_ACTUAL_FLIGHTS
+old   3:  where segment_name='&Your_Table_Name'
+new   3:  where segment_name='AC_ACTUAL_FLIGHTS'
+
+SEGMENT_NAME
+--------------------------------------------------------------------------------
+SEGMENT_TYPE               GB
+------------------ ----------
+AC_ACTUAL_FLIGHTS
+TABLE              1.20898438
+
+
+-it will prompt you the table name, put it without the schema name, e.g AC_ACTUAL_FLIGHTS table.
+
+select segment_name,segment_type, sum(bytes/1024/1024/1024) GB
+from dba_segments
+where segment_name='&Your_Table_Name'
+group by segment_name,segment_type;
+
+
+ 
+ -TOP 10 OR MORE BIGGEST TABLES IN DATABASE AS THE CASE MAY BE :
+ 
+ SELECT * FROM
+(select
+SEGMENT_NAME,
+SEGMENT_TYPE,
+BYTES/1024/1024/1024 GB,
+TABLESPACE_NAME
+from
+dba_segments
+order by 3 desc ) WHERE
+ROWNUM <= 10
+
+-Query to get all tables belonging to a schema:
+   
+   
+   SELECT DISTINCT OWNER, OBJECT_NAME 
+  FROM DBA_OBJECTS
+ WHERE OBJECT_TYPE = 'TABLE'
+   AND OWNER = 'DLEX_B6RESV'
+   
+-TO GET LAST TIME TABLE DATA WAS CHANGED:
+
+
+SQL> SELECT SCN_TO_TIMESTAMP(MAX(ora_rowscn)) from DLEX_B6RESV.RESVCUSTOMEREMAIL;
+
+SCN_TO_TIMESTAMP(MAX(ORA_ROWSCN))
+---------------------------------------------------------------------------
+26-MAY-22 05.17.53.000000000 PM
+
+
+desc dba_tables;
+
+-SQL> select max(CREATED_DATE) from ODB.AC_ACTUAL_FLIGHTS;
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 

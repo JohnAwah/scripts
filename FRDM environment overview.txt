@@ -1,0 +1,63 @@
+col-afcccms-01----Old prod
+username---psharma
+password----FirstLogin12345p
+*************************************************
+SQL*Plus: Release 11.2.0.4.0 Production on Wed Dec 8 12:56:10 2021
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+Enter user-name: sys as sysdba
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning option
+
+SQL>
+SQL>
+SQL> select name,open_mode,database_role from gv$database;
+
+NAME      OPEN_MODE            DATABASE_ROLE
+--------- -------------------- ----------------
+AFCCCMSP  READ WRITE           PRIMARY
+
+OLD DR:-
+alt-oradbmir-02 
+username---psharma
+password----FirstLogin12345p
+
+SQL> select name,open_mode,database_role from gv$database;
+
+NAME      OPEN_MODE            DATABASE_ROLE
+--------- -------------------- ----------------
+AFCCCMSP  MOUNTED              PHYSICAL STANDBY
+
+/u02/app/Cintra/Standby/AFCCCMSP_DR/CDBA_DG_AFCCCMSP_MONITOR.sh
+/u02/app/Cintra/Standby/AFCCCMSP_DR
+***********************************************************
+
+New Prod:-- oracle/SunShine2200##
+****************************************
+[oracle@prodoraoda01 ~]$ ps -ef|grep -i pmon
+oracle    4888     1  0 Sep24 ?        00:05:41 ora_pmon_GTIKODXP1
+grid     10153     1  0 Aug21 ?        00:06:11 asm_pmon_+ASM1
+grid     13594     1  0 Aug21 ?        00:06:27 apx_pmon_+APX1
+oracle   13703     1  0 Sep24 ?        00:05:27 ora_pmon_GTIKODMP1
+oracle   33466 33368  0 13:01 pts/3    00:00:00 grep --color=auto -i pmon
+oracle   38811     1  0 Sep24 ?        00:05:47 ora_pmon_BHAXODMP1
+oracle   83807     1  0 Dec01 ?        00:00:28 ora_pmon_BHIKODMP1
+
+[oracle@prodoraoda01 ~]$ ssh prodoraoda02
+oracle@prodoraoda02's password:
+Last login: Wed Dec  8 13:00:07 2021
+[oracle@prodoraoda02 ~]$ ps -ef|grep -i pmon
+oracle    8465     1  0 Sep24 ?        00:04:42 ora_pmon_GORARP012
+grid     10115     1  0 Aug21 ?        00:06:03 asm_pmon_+ASM2
+oracle   10970 10700  0 13:05 pts/2    00:00:00 grep --color=auto -i pmon
+grid     13077     1  0 Aug21 ?        00:06:16 apx_pmon_+APX2
+oracle   21832     1  0 Sep24 ?        00:05:37 ora_pmon_GTIKODXP2
+oracle   28658     1  0 Sep24 ?        00:05:22 ora_pmon_GTIKODMP2
+oracle   51168     1  0 Sep24 ?        00:05:47 ora_pmon_BHAXODMP2
+oracle   90992     1  0 Dec01 ?        00:00:30 ora_pmon_BHIKODMP2
+
+SQL>

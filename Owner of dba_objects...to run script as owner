@@ -1,0 +1,12 @@
+
+
+SQL> select owner from dba_objects where object_name='SYSTEM_TRAN_CODE';
+
+OWNER
+--------------------------------------------------------------------------------
+ODB
+
+SQL> alter session set current_schema=ODB;
+
+
+Then execute this script once you alter the session, if the schema is not mentioned in the script.

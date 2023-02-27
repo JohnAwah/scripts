@@ -1,0 +1,48 @@
+DATABASE IS DOWNN DUE TO EXHAUSTION OF PROCESSES:
+
+1.TRY TO SIGN IN AS SYSDBA (connect / as sysdba)
+ if this fails
+ 
+2.sqlplus -prelim "/ as sysdba"
+
+
+-IF ANY OF THE TWO COMMANDS WORK and you are able to sign into the database:
+
+3. > show parameter processes;
+
+4 > show parameter session;
+
+5.set processes value to be thesame as sessions parameter value:
+
+alter system set processes=1200 scope=spfile;
+
+
+-BUT IN SCENARIO WHERE THE ERROR DOES NOT ALLOW YOU LOG INTO THE DATABASE WITH EITHER OF THE ABOVE MEANS:
+
+FOLLOW THESE STEPS:
+
+1 At O.S level do:
+
+ps -ef|grep pmon
+
+-If the database process is running, you will have to do stop the database if it is not production db:
+
+$srvctl status database -d db_name ( to see if database is running)
+$srvctl stop database -d db_name (as in grep output)(it will stop the db or say it was already stopped)...then restart
+$srvtctl start database -d db_name 
+
+If it starts, do:
+
+sqlplus / as sysdba
+
+and alter processes parameter value by increasing it to session parameter value as below:
+
+> show parameter processes;
+
+> show parameter session;
+
+>set processes value to be thesame as sessions parameter value:
+
+alter system set processes=1200 scope=spfile;
+
+ 

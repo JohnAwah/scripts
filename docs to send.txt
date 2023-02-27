@@ -1,0 +1,443 @@
+-To grep a job on crontab: crontab -l |grep jobname
+-To run a shell script: sh /u02/app/oracle/admin/TRAXSTG_NVA/misc_scripts/B045_HF_RESTRICTED_AC.sh
+
+- more/cat a file is thesame thing
+
+
+
+login as: oracle
+oracle@jbcualora1002c's password:
+Last login: Thu Oct  7 08:45:59 2021
+-bash-4.2$ ps -ef|grep pmon
+grid       7803      1  0 Aug26 ?        00:04:15 asm_pmon_+ASM1
+grid       8125      1  0 Aug26 ?        00:03:19 apx_pmon_+APX1
+oracle     8890      1  0 Aug26 ?        00:06:55 ora_pmon_CCPRD1
+oracle     9599      1  0 Aug26 ?        00:04:43 ora_pmon_DRPRD1
+oracle     9605      1  0 Aug26 ?        00:07:05 ora_pmon_DAPRD1
+oracle     9611      1  0 Aug26 ?        00:07:20 ora_pmon_DFPRD1
+oracle     9617      1  0 Aug26 ?        00:29:05 ora_pmon_DOPRD1
+oracle   135692 135629  0 09:02 pts/2    00:00:00 grep --color=auto pmon
+-bash-4.2$ . .profile_doprd
+-bash-4.2$ sqlplus / as sysdba
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Thu Oct 7 09:03:11 2021
+Version 19.9.0.0.0
+
+Copyright (c) 1982, 2020, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.9.0.0.0
+
+SQL> desc DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ RESVCOMPPROVIDERPAYMENTID                 NOT NULL NUMBER(38)
+ RESVCOMPDOCID                             NOT NULL NUMBER(38)
+ CONCURRENCYCOL                                     NUMBER(38)
+
+SQL> ^[SELECT cols.table_name, cols.column_name, cols.position, cons.status, cons.owner
+FROM all_constraints cons, all_cons_columns cols
+WHERE cols.table_name = 'RESVCOMPPROVIDERPAYMENTEXC'
+AND cons.constraint_type = 'P'
+AND cons.constraint_name = cols.constraint_name
+AND cons.owner = cols.owner
+ORDER BY cols.table_name, cols.position;SP2-0734: unknown command beginning "ELECT co..." - rest of line ignored.
+SQL> SP2-0734: unknown command beginning "FROM all_c..." - rest of line ignored.
+SQL> SP2-0734: unknown command beginning "WHERE cols..." - rest of line ignored.
+SQL> SP2-0734: unknown command beginning "AND cons.c..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> SP2-0734: unknown command beginning "AND cons.c..." - rest of line ignored.
+SQL> SP2-0734: unknown command beginning "AND cons.o..." - rest of line ignored.
+SQL> ^C
+
+SQL> SELECT cols.table_name, cols.column_name, cols.position, cons.status, cons.owner
+FROM all_constraints cons, all_cons_columns cols
+WHERE cols.table_name = 'RESVCOMPPROVIDERPAYMENTEXC'
+AND cons.constraint_type = 'P'
+AND cons.constraint_name = cols.constraint_name
+AND cons.owner = cols.owner
+ORDER BY cols.table_name, cols.position;  2    3    4    5    6    7
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+COLUMN_NAME
+--------------------------------------------------------------------------------
+  POSITION STATUS
+---------- --------
+OWNER
+--------------------------------------------------------------------------------
+RESVCOMPPROVIDERPAYMENTEXC
+ID
+         1 ENABLED
+DLEX_B6RESV
+
+
+SQL> create table CDBA.RESVCOMPPROVIDERPAYMENTEXC as select a.* from DLEX_B6RESV.RESVCUSTOMERPAYMENT a, DLEX_B6RESV.RESVEVENT b  where a.RESVEVENTID = b.id(+) and b.id is null;
+^Ccreate table CDBA.RESVCOMPPROVIDERPAYMENTEXC as select a.* from DLEX_B6RESV.RESVCUSTOMERPAYMENT a, DLEX_B6RESV.RESVEVENT b  where a.RESVEVENTID = b.id(+) and b.id is null
+                                                                            *
+ERROR at line 1:
+ORA-01013: user requested cancel of current operation
+
+
+
+SQL> create table CDBA.RESVCOMPPROVIDERPAYMENTEXC as select a.* from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC a, DLEX_B6RESV.RESVCOMPDOC b  where a.RESVCOMPDOCID = b.id(+) and b.id is null;
+
+Table created.
+
+SQL> desc CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ RESVCOMPPROVIDERPAYMENTID                 NOT NULL NUMBER(38)
+ RESVCOMPDOCID                             NOT NULL NUMBER(38)
+ CONCURRENCYCOL                                     NUMBER(38)
+
+SQL> select count(*) from  CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+      1129
+
+SQL> truncate table CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+Table truncated.
+
+SQL> select count(*) from  CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+         0
+
+SQL> DECLARE
+cursor cur is
+select a.ID from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC a, DLEX_B6RESV.RESVCOMPDOC b  where a.RESVCOMPDOCID = b.id(+) and b.id is null;
+TYPE CII_TYPE IS TABLE OF NUMBER;
+CII_TYPE_TBL CII_TYPE;
+BEGIN
+OPEN CUR;
+LOOP
+FETCH CUR BULK COLLECT INTO CII_TYPE_TBL LIMIT 20000;
+FORALL i IN 1..CII_TYPE_TBL.COUNT
+insert into CDBA.RESVCOMPPROVIDERPAYMENTEXC select * from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC where ID=CII_TYPE_TBL(i);
+COMMIT;
+EXIT WHEN CUR%NOTFOUND;
+END LOOP;
+CLOSE CUR;
+END;   2    3    4    5    6    7    8    9   10   11   12   13   14   15   16
+ 17  /
+
+PL/SQL procedure successfully completed.
+
+SQL>  select count(*) from  CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+      1129
+
+SQL> select coutn(*) from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC;
+select coutn(*) from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC
+             *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select count(*) from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+   4950969
+
+SQL> create table CDBA.RESVCOMPPROVIDERPAYMENTEXC_BKP as select * from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC;
+
+Table created.
+
+SQL> select count(*) from CDBA.RESVCOMPPROVIDERPAYMENTEXC_BKP;
+
+  COUNT(*)
+----------
+   4951008
+
+SQL>  select count(*) from  CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+      1129
+
+SQL>  select count(*) from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+   4951013
+
+SQL> DECLARE
+cursor cur is
+select a.ID from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC a, DLEX_B6RESV.RESVCOMPDOC b  where a.RESVCOMPDOCID = b.id(+) and b.id is null;
+TYPE CII_TYPE IS TABLE OF NUMBER;
+CII_TYPE_TBL CII_TYPE;
+BEGIN
+OPEN CUR;
+LOOP
+FETCH CUR BULK COLLECT INTO CII_TYPE_TBL LIMIT 20000;
+FORALL i IN 1..CII_TYPE_TBL.COUNT
+delete from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC where ID=CII_TYPE_TBL(i);
+COMMIT;
+EXIT WHEN CUR%NOTFOUND;
+END LOOP;
+CLOSE CUR;
+END;   2    3    4    5    6    7    8    9   10   11   12   13   14   15   16
+ 17  /
+
+PL/SQL procedure successfully completed.
+
+SQL> select count(*) from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+   4949893
+
+SQL> select a.ID from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC a, DLEX_B6RESV.RESVCOMPDOC b  where a.RESVCOMPDOCID = b.id(+) and b.id is null;
+
+no rows selected
+
+SQL> insert into DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC select * from CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+insert into DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC select * from CDBA.RESVCOMPPROVIDERPAYMENTEXC
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (DLEX_B6RESV.FK_RESV_COMP_PROV_PAYM_EXCH_RE)
+violated - parent key not found
+
+
+SQL> select count(*) from CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+      1129
+
+SQL> select * from CDBA.RESVCOMPPROVIDERPAYMENTEXC where rownum < 2;
+
+        ID RESVCOMPPROVIDERPAYMENTID RESVCOMPDOCID CONCURRENCYCOL
+---------- ------------------------- ------------- --------------
+  29509340                 214923752     229425487              0
+
+SQL> ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC DISABLE CONSTRAINT DLEX_B6RESV.FK_RESV_COMP_PROV_PAYM_EXCH_RE;
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC DISABLE CONSTRAINT DLEX_B6RESV.FK_RESV_COMP_PROV_PAYM_EXCH_RE
+                                                                                 *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC DISABLE CONSTRAINT DLEX_B6RESV.FK_RESV_COMP_PROV_PAYM_EXCH_RE;
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC DISABLE CONSTRAINT DLEX_B6RESV.FK_RESV_COMP_PROV_PAYM_EXCH_RE
+                                                                                 *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL>
+SQL> ASQL> ^C
+
+SQL> ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC DISABLE CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE;
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC DISABLE CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+*
+ERROR at line 1:
+ORA-04022: nowait requested, but had to wait to lock dictionary object
+
+
+SQL> ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC DISABLE CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE;
+
+Table altered.
+
+SQL>  insert into DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC select * from CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+1129 rows created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+  2  ;
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+*
+ERROR at line 1:
+ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
+
+
+SQL> /
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+                                                                      *
+ERROR at line 1:
+ORA-02298: cannot validate (DLEX_B6RESV.FK_RESV_COMP_PROV_PAYM_EXCH_RE) -
+parent keys not found
+
+
+SQL> ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE NOVALIDATE  CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE;
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE NOVALIDATE  CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+*
+ERROR at line 1:
+ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
+
+
+SQL> /
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE NOVALIDATE  CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+*
+ERROR at line 1:
+ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
+
+
+SQL> /
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE NOVALIDATE  CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+*
+ERROR at line 1:
+ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
+
+
+SQL> /
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE NOVALIDATE  CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+*
+ERROR at line 1:
+ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
+
+
+SQL> /
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE NOVALIDATE  CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+*
+ERROR at line 1:
+ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
+
+
+SQL> /
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE NOVALIDATE  CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+*
+ERROR at line 1:
+ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
+
+
+SQL> ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE NOVALIDATE  CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE;
+ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE NOVALIDATE  CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+*
+ERROR at line 1:
+ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
+
+
+SQL> select count(*)from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC a, DLEX_B6RESV.RESVCOMPDOC b  where a.RESVCOMPDOCID = b.id(+) and b.id is null;
+
+  COUNT(*)
+----------
+      1129
+
+SQL>  ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE NOVALIDATE  CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE;
+ ALTER TABLE DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC  ENABLE NOVALIDATE  CONSTRAINT FK_RESV_COMP_PROV_PAYM_EXCH_RE
+*
+ERROR at line 1:
+ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
+
+
+SQL> /
+
+Table altered.
+
+SQL>
+login as: oracle
+oracle@jbcualora1002c's password:
+Last login: Thu Oct  7 14:46:02 2021
+-bash-4.2$ ps -ef|grep pmon
+grid       7803      1  0 Aug26 ?        00:04:17 asm_pmon_+ASM1
+grid       8125      1  0 Aug26 ?        00:03:20 apx_pmon_+APX1
+oracle     8890      1  0 Aug26 ?        00:06:57 ora_pmon_CCPRD1
+oracle     9599      1  0 Aug26 ?        00:04:44 ora_pmon_DRPRD1
+oracle     9605      1  0 Aug26 ?        00:07:07 ora_pmon_DAPRD1
+oracle     9611      1  0 Aug26 ?        00:07:23 ora_pmon_DFPRD1
+oracle     9617      1  0 Aug26 ?        00:29:20 ora_pmon_DOPRD1
+oracle    42993  42760  0 14:49 pts/2    00:00:00 grep --color=auto pmon
+-bash-4.2$ . .profile_doprd
+-bash-4.2$ sqlplus / as sysdba
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Thu Oct 7 14:49:37 2021
+Version 19.9.0.0.0
+
+Copyright (c) 1982, 2020, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.9.0.0.0
+
+SQL> select count(*) from CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+      1129
+
+SQL> desc CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ RESVCOMPPROVIDERPAYMENTID                 NOT NULL NUMBER(38)
+ RESVCOMPDOCID                             NOT NULL NUMBER(38)
+ CONCURRENCYCOL                                     NUMBER(38)
+
+SQL> DECLARE
+cursor cur is
+select a.ID from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC a, DLEX_B6RESV.RESVCOMPDOC b  where a.RESVCOMPDOCID = b.id(+) and b.id is null;
+TYPE CII_TYPE IS TABLE OF NUMBER;
+CII_TYPE_TBL CII_TYPE;
+BEGIN
+OPEN CUR;
+LOOP
+FETCH CUR BULK COLLECT INTO CII_TYPE_TBL LIMIT 20000;
+FORALL i IN 1..CII_TYPE_TBL.COUNT
+delete from CDBA.RESVCOMPPROVIDERPAYMENTEXC where ID=CII_TYPE_TBL(i);
+EXIT WHEN CUR%NOTFOUND;
+END LOOP;
+CLOSE CUR;
+END;
+/
+
+  2    3    4    5    6    7    8    9   10   11   12   13   14   15   16
+
+PL/SQL procedure successfully completed.
+
+SQL> SQL> SQL>
+SQL> select count(*) from CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+         0
+
+SQL> commit;
+
+Commit complete.
+
+SQL> DECLARE
+cursor cur is
+select a.ID from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC a, DLEX_B6RESV.RESVCOMPDOC b  where a.RESVCOMPDOCID = b.id(+) and b.id is null;
+TYPE CII_TYPE IS TABLE OF NUMBER;
+CII_TYPE_TBL CII_TYPE;
+BEGIN
+OPEN CUR;
+LOOP
+  2    3    4    5    6    7    8    9  FETCH CUR BULK COLLECT INTO CII_TYPE_TBL LIMIT 20000;
+FORALL i IN 1..CII_TYPE_TBL.COUNT
+insert into CDBA.RESVCOMPPROVIDERPAYMENTEXC select * from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC where ID=CII_TYPE_TBL(i);
+COMMIT;
+EXIT WHEN CUR%NOTFOUND;
+E 10  ND LOOP;
+CLOSE CUR;
+END;
+/
+ 11   12   13   14   15   16   17
+
+PL/SQL procedure successfully completed.
+
+SQL> SQL> select count(*) from CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+      1129
+
+SQL>

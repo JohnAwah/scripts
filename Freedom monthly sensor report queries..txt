@@ -1,0 +1,70 @@
+1. How to get System and Database uptime
+
+At O.S level: uptime
+              or top
+
+2.size of RMAN database backup:
+
+select ctime "Date", decode(backup_type, 'L', 'Archive Log', 'D', 'Full', 'Incremental') backup_type,
+bsize "Size MB" from (select trunc(bp.completion_time) ctime , backup_type , round(sum(bp.bytes/1024/1024),2) bsize
+from v$backup_set bs, v$backup_piece bp where bs.set_stamp = bp.set_stamp and bs.set_count  = bp.set_count
+and bp.status = 'A' group by trunc(bp.completion_time), backup_type) order by 1, 2;
+
+
+3. RUNTIME OF TYPES OF RMAN BACKUPS:
+
+col STATUS format a9
+col hrs format 999.99
+select
+SESSION_KEY, INPUT_TYPE, STATUS,
+to_char(START_TIME,'mm/dd/yy hh24:mi') start_time,
+to_char(END_TIME,'mm/dd/yy hh24:mi')   end_time,
+elapsed_seconds/3600                   hrs
+from V$RMAN_BACKUP_JOB_DETAILS
+order by session_key;
+
+
+*Not sure about these stats:
+
+-Under operational summary:
+
+Stats	
+Dictionary Stats Schedule 	Every Sunday of week 04:30 AM
+Dictionary Stats Runtime	10 Minutes
+Schema Stats Schedule 	Every Sunday of week 03:30 AM
+Schema Stats Runtime	2hrs 30 minutes
+Maintenance	
+Housekeeping	Executed
+
+
+-Last backup location
+-Backup retention
+
+4. Location of last rman backup, show parameter recovery;
+
+ramn>list copy; or list backup;
+
+
+5. show backup retention policy:
+
+RMAN>show retention policy;
+
+6.Obtain information for CPU,memory and disk on OEM.
+
+-Log into OEM using URL in connectivity sheet
+ .Username:sysman
+  Password: Pr0d3mprd
+
+-click on target to see the different hosts(servers)
+-click on server name > click on monitoring> And you will see CPU,memory,and Disk tabs
+-first click on CPU details > click CPU utilization > click on view tab on the right and select 'last 31 days' > copy data and graph and put in report
+-Do same for memory details(memory utilization > due date last 31 days) and disk details (select max disk i/o> last 31 days). Do this for all servers.
+
+
+
+7. For Availability chart:
+
+-Go to OEM > select Target > Click hosts > Monitoring> Status History >Due date (last 31 days) > copy chart and info and fill in the report
+.Do same for all the hosts
+-Dont change anything under Availability Performance Indicators
+-Next part 'SERVICE SUMMARY CHARTS'...will be explained later.

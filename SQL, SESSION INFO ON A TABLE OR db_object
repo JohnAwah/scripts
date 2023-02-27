@@ -1,0 +1,182 @@
+TO OBTAIN SESSIONS RUNNING ON A TABLE OR DATABASE OBJECT:
+
+COLUMN object FORMAT A30
+COLUMN type FORMAT A15
+COLUMN sid FORMAT 9999
+COLUMN username FORMAT A20
+COLUMN osuser FORMAT A10
+COLUMN program FORMAT A40
+SELECT a.object,
+a.type,
+a.sid,
+b.username,
+b.osuser,
+b.program
+FROM v$access a,
+gv$session b
+WHERE a.sid = b.sid
+AND a.owner = UPPER('&ENTER_SCHEMA_NAME')
+AND a.object = upper('&OBJECT_NAME')
+ORDER BY a.object
+/
+
+Enter value for enter_schema_name: UNIURX_MART
+old  10: AND a.owner = UPPER('&ENTER_SCHEMA_NAME')
+new  10: AND a.owner = UPPER('UNIURX_MART')
+Enter value for object_name: PKG_UNI_MART_REFRESH
+old  11: AND a.object = upper('&OBJECT_NAME')
+new  11: AND a.object = upper('PKG_UNI_MART_REFRESH')
+
+OBJECT                         TYPE              SID USERNAME
+------------------------------ --------------- ----- --------------------
+OSUSER     PROGRAM
+---------- ----------------------------------------
+PKG_UNI_MART_REFRESH           PACKAGE           521 KBMP102
+wmclemore  plsqldev.exe
+
+
+
+
+-IT WILL PROMPT YOU SCHEMA NAME
+-IT WILL PROMPT YOU ONJECT NAME...AND THEN ENTER_SCHEMA_NAME
+
+
+-TIME TAKEN AND TAKING TO COMPLETE A QUERY:
+
+set lines 300
+
+col TARGET for a40
+
+col SQL_ID for a20
+
+select SID,TARGET||OPNAME TARGET,TIME_REMAINING/60 Mins_Remaining,SQL_ID from gv$session_longops where TIME_REMAINING>0 order by TIME_REMAINING
+
+
+  SID TARGET                                    TOTALWORK   SOFAR       MINS_REMAINING    ELAPSED_SECONDS SQL_ID
+----- ---------------------------------------- ---------- ---------- -------------- --------------- --------------------
+  
+ 3105 OVT_MART.HPRO_MBR_GAPTable Scan             9923513    6154700     65.0666667             6376      869vw83bk4cwt
+ 
+ 
+ select SID,TARGET||OPNAME TARGET, TOTALWORK, SOFAR,TIME_REMAINING/60 Mins_Remaining,ELAPSED_SECONDS,SQL_ID from gv$session_longops where TIME_REMAINING>0 order by TIME_REMAININGSQL> SQL> SQL> SQL> SQL> SQL> ;
+
+       SID TARGET                                    TOTALWORK      SOFAR MINS_REMAINING ELAPSED_SECONDS SQL_ID
+---------- ---------------------------------------- ---------- ---------- -------------- --------------- --------------------
+       606 BLK_AUD.BLK_ETPROMOHIST_ATable Scan       141915658  101793908     20.5333333            3126 fyb0vndj68t65
+	   
+	   
+	          SID TARGET                                    TOTALWORK      SOFAR MINS_REMAINING ELAPSED_SECONDS SQL_ID
+---------- ---------------------------------------- ---------- ---------- -------------- --------------- --------------------
+              606 BLK_AUD.BLK_ETPROMOHIST_ATable Scan       141915658  119370970          11.45            3635 fyb0vndj68t65
+       
+
+
+
+
+
+       SID TARGET                                    TOTALWORK      SOFAR MINS_REMAINING ELAPSED_SECONDS SQL_ID
+---------- ---------------------------------------- ---------- ---------- -------------- --------------- --------------------
+      1072 SYS.ORA_TEMP_1_DS_1334987Rowid Range Sca      47382      13412     1.51666667              36 5wptrxwm5wqra
+           n
+
+       946 SYS.ORA_TEMP_1_DS_1334987Rowid Range Sca      47254      14698     1.51666667              41 5wptrxwm5wqra
+           n
+
+       990 SYS.ORA_TEMP_1_DS_1334987Rowid Range Sca      49110      15142     1.53333333              41 5wptrxwm5wqra
+           n
+
+      1047 SYS.ORA_TEMP_1_DS_1334987Rowid Range Sca      46038      12919     1.53333333              36 5wptrxwm5wqra
+           n
+
+       SID TARGET                                    TOTALWORK      SOFAR MINS_REMAINING ELAPSED_SECONDS SQL_ID
+---------- ---------------------------------------- ---------- ---------- -------------- --------------- --------------------
+
+       972 SYS.ORA_TEMP_1_DS_1334987Rowid Range Sca      49175      15019           1.55              41 5wptrxwm5wqra
+           n
+
+      1018 SYS.ORA_TEMP_1_DS_1334987Rowid Range Sca      48662      13665     1.58333333              37 5wptrxwm5wqra
+           n
+
+       892 SYS.ORA_TEMP_1_DS_1334987Rowid Range Sca      49494      14564            1.6              40 5wptrxwm5wqra
+           n
+
+       914 SYS.ORA_TEMP_1_DS_1334987Rowid Range Sca      51030      12733            1.8              36 5wptrxwm5wqra
+
+       SID TARGET                                    TOTALWORK      SOFAR MINS_REMAINING ELAPSED_SECONDS SQL_ID
+---------- ---------------------------------------- ---------- ---------- -------------- --------------- --------------------
+           n
+
+         3 BLK_AUD.INTRCTN_ATable Scan                62148203   14968411     266.333333            5070 58xdt6my4zttu
+		 
+		 
+	
+
+9 rows selected.
+
+
+
+
+-HOW TO GET SQL TEXT FROM SID AND SERIAL NUMBER:
+
+
+select
+a.sid,
+a.serial#,
+b.sql_text
+from
+gv$session a,
+gv$sqlarea b
+where
+a.sql_address=b.address
+and
+sid=1209   
+
+
+SID  SERIAL#  SQL_TEXT
+
+1209  14707   MERGE INTO INDVDL_XREF_LEAD IXL USING ( SELECT IX.INDVDL_XREF_ID, :B1 AS LEAD_ID FROM INDVDL_XREF IX WHERE IX.FROM_INDVDL_ID = :B3 AND                       IX.TO_INDVDL_ID = :B2 ) SOURCE ON (IXL.INDVDL_XREF_ID = SOURCE.INDVDL_XREF_ID AND IXL.LEAD_ID = SOURCE.LEAD_ID) WHEN NOT MATCHED THEN INSERT                (INDVDL_XREF_LEAD_ID, INDVDL_XREF_ID, LEAD_ID) VALUES ( INDVDL_XREF_LEAD_SEQ.NEXTVAL, SOURCE.INDVDL_XREF_ID, SOURCE.LEAD_ID )
+
+
+select a.sid, a.serial#, b.sql_fulltext
+from v$session a, v$sql b
+where decode(a.sql_id,null,a.prev_sql_id, a.sql_id)=b.sql_id
+and decode(a.sql_id,null,a.prev_child_number, a.sql_child_number)=b.child_number
+and a.sid=&sid
+and a.serial#=&serial;
+
+-will prompt you SID:
+  and Serial Number:
+  
+  
+-select * from v$sqltext;
+
+-select username,inst_id, SID,serial# from gv$session where username='UHG_EWILLIAMS';INST_ID MACHINE
+---------- ----------------------------------------------------------------
+   SERIAL#
+----------
+         1 zrmxvaduat02
+     11719
+	 
+	 
+
+
+-QUERY TO GET SID, SQL STATEMENT RUN BY QUERY, USERNAME, OSUSER FOR A QUERY FOR TROUBLESHOOTING OR KILLING THE SESSION:(In the query below in the place of username put the username of the database user running the query)
+
+select a.sid,a.username, a.osuser, a.server, a.command, a.ownerid, a.lockwait, a.status, a.program, b.sql_text from gv$session a, gv$sqlarea b where a.status = 'ACTIVE' and a.username is not null and a.username='MOO_MART' and a.sql_hash_value = b.hash_value and a.sql_address = b.address;
+
+
+- Query to check if a sql_ID is running:
+
+SELECT USERNAME, SID, SQL_ID, SERIAL#, OPNAME, TARGET, SOFAR, TOTALWORK, START_TIME, LAST_UPDATE_TIME,
+TIME_REMAINING, SQL_PLAN_OPERATION, SQL_PLAN_OPTIONS, UNITS, ELAPSED_SECONDS, MESSAGE
+FROM GV$SESSION_LONGOPS
+WHERE SQL_ID IN ('7njhdamcuc1d8')
+ORDER BY USERNAME, START_TIME DESC, OPNAME, SID --IN SECONDS--
+
+OR
+
+select inst_id,round(time_remaining)/60||':'||mod(time_remaining,60) remaining_time,
+opname,message
+from gv$session_longops
+where sofar!=totalwork and sid=464
+order by inst_id, username,4 --–- in minutes--

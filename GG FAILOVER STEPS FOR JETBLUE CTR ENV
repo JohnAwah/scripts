@@ -1,0 +1,300 @@
+GOLDENGATE FAILOVER STEPS FOR JETBLUE CTR ENVIRONMENT :
+
+ GoldenGate replication setup is for following CTR Environments: 
+ 
+-	Databases: GoldenGate replication is setup for five CTR databases namely:
+    Online (DOPRD), Reservations (DRPRD), Fares (DFPRD), Availcache (DAPRD) and Checking (CCPRD). 
+
+
+-	GoldenGate Software: GoldenGate software is installed and configured for each database in a separate home for respective RDBMS versions. For CCPRD database GoldenGate software version 19.1 is installed for Oracle 12c and for rest of the databases GoldenGate software version 19.1 is installed for Oracle 19c.
+
+GG_HOME=/ggate/<DB_NAME>/product/19.1.0.0.0.4/gg_home
+ORACLE_HOME=/u02/app/oracle/product/19.0.0/dbhome_1
+
+Primary hostname: jbcualora1002c/d
+Secondary hostname: jbegwlora1002c/d
+
+ 
+GoldenGate replication setup is for following CTR Environments: 
+ 
+•	Databases: GoldenGate replication is setup for five CTR databases namely Online (DOPRD), Reservations (DRPRD), Fares (DFPRD), Availcache (DAPRD) and Checking (CCPRD).  
+•	GoldenGate Software: GoldenGate software is installed and configured for each database in a separate home for respective RDBMS versions. For CCPRD database GoldenGate software version 19.1 is installed for Oracle 12c and for rest of the databases, GoldenGate software version 19.1 is installed for Oracle 19c.
+
+GG_HOME=/ggate/<DB_NAME>/product/19.1.0.0.0.4/gg_home
+ORACLE_HOME==/u02/app/oracle/product/19.0.0/dbhome_1
+
+Primary hostname: jbcualora1002c/d
+Secondary hostname: jbegwlora1002c/d
+ 
+ 
+3.0 JetBlue Oracle GoldenGate Failover  
+ 
+Oracle GoldenGate replication is always running uni-directional from Active site to Passive site in CTR application. Currently GoldenGate replication is setup from Culpeper databases (Active Site) to Englewood databases (Passive Site)
+ 
+On active site GoldenGate Capture processes are configured to capture transactional data and sequences and send to passive site GoldenGate instances over TCP/IP using GoldenGate pump processes.
+
+On Passive site GoldenGate Apply processes are configured to apply transactions captured in active site. 
+
+For site failover, each GoldenGate processes needs to be shut down in a specific sequence to avoid any data loss in this case replication from CUA to EGW needs to be stopped. Similarly, each process needs to be restarted from EGW to CUA to activate reverse replication in a specific sequence before handing over for application transaction to avoid data loss.
+
+  
+4.0 Replication Failover Steps For CTR
+ 
+Cintra recommend following steps for CTR replication failover from active site to passive site.
+ 
+1. Stop GoldenGate Replication on Source (Active Site- CUA)
+2. Stop GoldenGate Replication on Target (Passive Site- EGW)
+3. Start GoldenGate Reverse Replication on Failover Source Site (New Active Site- EGW)
+4. Start GoldenGate Reverse Replication on Failover Target Site (New Passive Site- CUA) 
+ 
+ 
+ 
+ 
+4.1 Stop GoldenGate Replication on Source (Active Site- CUA)
+ 
+Application needs to be shutdown before stopping GoldenGate Processes in Active Site. Once application is shutdown stop all GoldenGate processes running on Active site (CUA) in all 5 databases.
+
+Following are the commands used in DAPRD to stop GoldenGate Processes in synchronous way without any data loss. Same commands with each processes name will be used in other GoldenGate instances
+
+1.	Set profile and login to DAPRD GoldenGate instance
+
+[ggsowner@JBCUALORA1002C ~]$ . .profile_daprd19c
+[ggsowner@JBCUALORA1002C ~]$ g
+
+Oracle GoldenGate Command Interpreter for Oracle
+Version 19.1.0.0.200714 OGGCORE_19.1.0.0.0OGGBP_PLATFORMS_200628.2141_FBO
+Linux, x64, 64bit (optimized), Oracle 19c on Jun 29 2020 13:17:40
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2019, Oracle and/or its affiliates. All rights reserved.
+
+
+
+GGSCI (JBCUALORA1002C) 1> info all
+
+Program     Status      Group       Lag at Chkpt  Time Since Chkpt
+
+MANAGER     RUNNING
+EXTRACT     RUNNING     E_DA_NVA    00:00:00      00:00:08
+EXTRACT     RUNNING     P_DA_NCO    00:00:00      00:00:06
+REPLICAT    STOPPED     R_DA_NVA    00:00:00      1140:54:58
+
+
+ 
+2.	Check if there are any pending transaction in GoldenGate Extract process
+GGSCI (JBCUALORA1002C) 2> send E_DA_NVA, getlag
+
+3.	Stop Extract Process if there are no pending transaction.
+
+GGSCI (JBCUALORA1002C) 3> stop E_DA_NVA
+
+
+GGSCI (JBCUALORA1002C) 4> info E_DA_NVA
+
+
+4.	Similarly check downstream PUMP process and stop it using above commands.
+ 
+4.2 Stop GoldenGate Replication on Target (Passive Site- EGW)
+ 
+Once GoldenGate processes are shutdown in Active Site, check replication downstream processes in EGW passive site for any lag or pending transactions, stop these processes when lag is zero and there are no pending transactions.
+
+Following are the commands used in DAPRD to stop GoldenGate Processes in passive site without any data loss. Same commands with each processes name will be used in other GoldenGate instances
+
+1.	Set profile and login to DAPRD GoldenGate instance
+
+[ggsowner@JBEGWLORA1002C ~]$ . .profile_daprd19c
+[ggsowner@JBEGWLORA1002C ~]$ g
+
+Oracle GoldenGate Command Interpreter for Oracle
+Version 19.1.0.0.200714 OGGCORE_19.1.0.0.0OGGBP_PLATFORMS_200628.2141_FBO
+Linux, x64, 64bit (optimized), Oracle 19c on Jun 29 2020 13:17:40
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2019, Oracle and/or its affiliates. All rights reserved.
+
+
+
+GGSCI (JBEGWLORA1002C) 1> info all
+
+Program     Status      Group       Lag at Chkpt  Time Since Chkpt
+
+MANAGER     RUNNING
+REPLICAT    RUNNING     R_DA_NCO    00:00:00      00:00:07
+REPLICAT    RUNNING     R_DA_VA1    00:00:00      00:00:01
+
+ 
+2.	Check if there are any pending transaction in GoldenGate Replicat  process
+
+GGSCI (JBEGWLORA1002C) 2> send R_DA_NCO, getlag
+
+3.	Stop Replicat Process if there are no pending transaction.
+
+GGSCI (JBEGWLORA1002C) 3> stop R_DA_NCO
+ 
+ 
+4.3 Start GoldenGate Reverse Replication on Failover Source Site (New Active Site- EGW)
+
+After the replication from Active Site to Passive Site is completely stopped, prepare EGW site as new Active Site. This is achieved by starting reverse replication processes and flushing replicated sequences in respective EGW CTR databases Following is an example on DAPRD Database and GoldenGate Instance, similar steps needs to be performed in each database.
+ 
+1.	On each respective CTR EGW database, check which application schema is being replicated and execute below command for it to flush it sequences, so that Extract process can pickup next sequence number when it is changed. 
+
+[ggsowner@JBEGWLORA1002C ~]$ . .profile_doprd19c
+[ggsowner@JBEGWLORA1002C ~]$ g
+
+Oracle GoldenGate Command Interpreter for Oracle
+Version 19.1.0.0.200714 OGGCORE_19.1.0.0.0OGGBP_PLATFORMS_200628.2141_FBO
+Linux, x64, 64bit (optimized), Oracle 19c on Jun 29 2020 13:17:40
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2019, Oracle and/or its affiliates. All rights reserved.
+
+
+GGSCI (JBEGWLORA1002C) 1>> DBLOGIN USERID ggsowner, PASSWORD BlueSkies2019
+
+GGSCI (JBEGWLORA1002C) 2> FLUSH SEQUENCE <SCHEMA_NAME>.*
+
+
+2.	Start Extract Process in GoldenGate instance for all 5 databases. Below is command used for DAPRD database. Identify process name in each GG instance and start Extract process using this command.
+
+
+GGSCI (JBEGWLORA1002C) 3> info all
+
+GGSCI (JBEGWLORA1002C) 4> start E*
+
+GGSCI (JBEGWLORA1002C) 5> info E*
+
+
+3.	Verify Extract process is started and start respective Pump process to send trail file data to new Passive CTR site.
+
+GGSCI (JBEGWLORA1002C) 6> start P*
+
+GGSCI (JBEGWLORA1002C) 7> info P*
+
+ 
+4.4 Start GoldenGate Reverse Replication on Failover Target Site (New Passive Site- CUA)
+
+
+1.	Compare source and target sequence values. Target sequences should be greater than source sequences. If there is a big difference better them and target sequences are behind source then better to refresh them on target and then execute FLUSH SEQUENCE command on target to get them ahead of source sequences.
+2.	Set profile and login to DAPRD GoldenGate instance
+
+[ggsowner@JBCUALORA1002C ~]$ . .profile_daprd19c
+[ggsowner@JBCUALORA1002C ~]$ g
+
+Oracle GoldenGate Command Interpreter for Oracle
+Version 19.1.0.0.200714 OGGCORE_19.1.0.0.0OGGBP_PLATFORMS_200628.2141_FBO
+Linux, x64, 64bit (optimized), Oracle 19c on Jun 29 2020 13:17:40
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2019, Oracle and/or its affiliates. All rights reserved.
+
+
+GGSCI (JBCUALORA1002C) 1> info all
+
+
+3.	Start Replicat process on new Passive CTR site and verify it is running fine
+
+GGSCI (JBCUALORA1002C) 2> start R_DA_NVA
+
+
+GGSCI (JBCUALORA1002C) 3> info R_DA_NVA
+
+
+
+
+TROUBLESHOOTING GOLDENGATE TABLE NOT REPLICATING:
+
+1.Do: info all; (to make sure all processes are running)
+     info Replicat (on two replicats to see if there are any lags)
+
+- If no lags 
+
+2. check gg logfiles as follows
+[ggsowner@JBEGWLORA1001a ~]$ GG
+[ggsowner@JBEGWLORA1001a gghome]$ ls -lrt
+[ggsowner@JBEGWLORA1001a gghome]$ tail -f ggserr.log (to see logfiles as they generate. Also use $tail -500 logfile_name (to see last 500 lines of logfile) (ctrl+C to stop viewing the logfile)
+
+-[ggsowner@JBEGWLORA1001a gghome]$ cd dirprm/
+[ggsowner@JBEGWLORA1001a dirprm]$ ls -lrt
+total 16
+-rw-r----- 1 ggsowner oinstall  230 Mar  3  2020 p_tx_nv1.prm
+-rw-r----- 1 ggsowner oinstall  342 Mar 24  2020 mgr.prm
+-rw-r----- 1 ggsowner oinstall  809 Oct 13  2020 r_tx_nc2.prm
+-rw-r----- 1 ggsowner oinstall 1271 Jan 14 01:01 r_tx_nco.prm
+
+3. Now, check replicat parameter file to see parameters set and possible tables excluded as follows:
+
+[ggsowner@JBEGWLORA1001a dirprm]$ cat r_tx_nco.prm      OR    GGSCI (JBEGWLORA1001a) 2> view param R_TX_NCO
+
+REPLICAT R_TX_NCO
+SETENV (ORACLE_HOME = "/u02/app/oracle/product/12.1.0/dbhome_20201013150712")
+SETENV (ORACLE_SID = "TRAXPRD1")
+USERID GGADMIN, PASSWORD ggadmin
+ASSUMETARGETDEFS
+--Defers cascading delete until transaction is complete
+--DBOPTIONS DEFERREFCONST, SUPPRESSTRIGGERS
+--DBOPTIONS _NO_DISABLE_ON_RETRY_ERROR
+DBOPTIONS SUPPRESSTRIGGERS
+DBOPTIONS DEFERREFCONST
+
+DBOPTIONS INTEGRATEDPARAMS ( COMMIT_SERIALIZATION DEPENDENT_TRANSACTIONS, _ARRAY_OPERATION N, PARALLELISM 16, MAX_PARALLELISM 16, EAGER_SIZE 650000, DISABLE_ON_ERROR N)
+
+--HANDLETPKUPDATE
+GETTRUNCATES
+
+
+HANDLECOLLISIONS
+--REPERROR (1, DISCARD)
+--REPERROR (1403, DISCARD)
+--REPERROR (-2091, DISCARD)
+
+--SHOWSYNTAX
+--Specifies name and location of a discard file.
+DISCARDFILE ./dirrpt/R_TX_NCO_co.dsc, purge, maxbytes 2400000000
+REPORTCOUNT EVERY 10000 RECORDS, RATE
+SQLEXEC "ALTER SESSION SET COMMIT_WRITE='NOWAIT'";
+--DDLERROR 955 IGNORE
+--DDLERROR 2298 DISCARD
+--DDLERROR 2149 DISCARD
+DDLERROR 1430 DISCARD
+DDLERROR 955 DISCARD
+DDLERROR 2275 DISCARD
+DDL INCLUDE MAPPED
+DDLOPTIONS UPDATEMETADATA
+MAPEXCLUDE ODB.AC_ACTUAL_FLIGHTS_VIEW;
+MAPEXCLUDE ODB.INVENTORY_COSTING;
+
+MAPEXCLUDE ODB.AC_ACTUAL_FLIGHTS;
+--MAPEXCLUDE ODB.IOS_PRINTING_JOBS_QT;
+
+MAP PGUPTA.*, TARGET PGUPTA.*;
+MAP ODB.*, TARGET ODB.*;
+
+
+
+- TROUBLESHOOTING ABENDED REPLICAT:
+
+-GGSCI (JBEGWLORA1001a) 1> info all
+
+Program     Status      Group       Lag at Chkpt  Time Since Chkpt
+
+MANAGER     RUNNING
+REPLICAT    RUNNING     R_TX_NC2    00:00:00      00:00:08
+REPLICAT    ABENDED     R_TX_NCO    00:00:00      00:20:13
+
+
+GGSCI (JBEGWLORA1001a) 2> view report R_TX_NCO ............(LOOK FOR ERRORS WHICH USUALLY ARE AT THE END OF THE FILE)
+
+e.g 2022-01-28 16:18:55  ERROR   OGG-00918  Key column TOTAL_AC_BRAKE_CYCLES is missing from map.
+
+Possible fix: Add this parameter to the replicat parameter file: MAP ODB.AC_ACTUAL_FLIGHTS, TARGET ODB.AC_ACTUAL_FLIGHTS, KEYCOLS(TOTAL_AC_BRAKE_CYCLES);
+
+
+-EXTRACT WILL NOT STOP, DO THE FOLLOWING:
+
+Send extract <ext name>, force stop
+Kill <extract name>
+
+ 
+ 
+ 
+ 

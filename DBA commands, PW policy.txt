@@ -1,0 +1,276 @@
+Password Policy
+===============================================================================================================
+Current password:Lvf#42sH5%da
+
+Password change policy 
+
+https://selfservice.cintra.com
+
+Password policy is as follows:
+
+- Cannot use last 5 old passwords
+- 12 character minimum
+- Password complexity as follows
+English uppercase characters (A through Z)
+English lowercase characters (a through z)
+Base 10 digits (0 through 9)
+Non-alphabetic characters (for example, !, $, #, %)
+
+===================================================================================================================
+
+Sharepoint link for docs:
+
+cintraoffice.sharepoint.com
+
+https://cintraoffice.sharepoint.com/IT%20Support/Forms/AllItems.aspx?viewpath=%2FIT%20Support%2FForms%2FAllItems%2Easpx
+
+=====================================================================================================================
+to find alert log file from group of alert logs: find *.log
+======================================================================================================================
+
+To find zombie process and kill them: ps aux | grep Z
+
+=======================================================================================================================
+describe users;
+
+select username, account_status from dba_users (to see status of users)
+
+-free -g (memory usage)
+-df -hT( mount space)
+
+generate AWR report: cd $ORACLE_HOME/rdbms/admin/awrrpt.sql
+-sign in as sys and then run:
+
+@awrrpt.sql /path of report and the file will be created in the Oracle home directory
+====================================================================================================================
+how to reorganize your sql statements output to more understandble format:
+
+col action_time for a28                     OR set pagesize 
+
+col action for a8                              set linesize or set lines 2000 and then / (to rerun the command)
+
+col version for a8
+
+col comments for a30
+
+col status for a10
+
+set line 999 pages 999
+
+select patch_id,  version, status, Action,Action_time from dba_registry_sqlpatch order by action_time;
+==================================================================================================================
+
+How to set environment when it fails:
+
+export ORACLE_BASE=/u01/app/oracle
+
+export ORACLE_HOME=/u01/app/oracle/product/12.2.0/dbhome_1EE
+
+export PATH=$PATH:$ORACLE_HOME/bin
+
+export ORACLE_SID=IRISTSTC
+
+==========================================================================================================================
+
+PATCH RELEVANT QUERIES:
+
+### Put the patch number specifically In 12c Env ####
+
+select * from v$version;
+
+select xmltransform(dbms_qopatch.is_patch_installed('32473172'),dbms_qopatch.get_opatch_xslt) "Patch installed?" from dual;
+
+select xmltransform(dbms_qopatch.is_patch_installed('32507738'),dbms_qopatch.get_opatch_xslt) "Patch installed?" from dual;
+
+ 
+
+select name, open_mode from v$pdbs;
+
+select INSTANCE_NAME, STATUS, DATABASE_STATUS from v$instance;
+
+select NAME, OPEN_MODE, RESTRICTED from v$pdbs;
+
+==============================================================================================================================
+
+TO QUERY DATABASE OBJECTS:
+
+-desc dba_objects;
+
+TO QUERY DB OJECT, OWNER WHEN CREATED,LAST DDL TIME, USE:
+
+-From the desc dba_objects statement, build the statement:
+-select owner, object_name, created, last_ddl_time from dba_objects where object_name = 'PKG_NO_TASK_CARD_FUNCTIONS' and owner = 'ODB'
+
+TO IDENTIFY THE PACKAGE OUTPUT FROM BODY:
+
+-Add object_type to the sql above.
+
+-To check for invalid objects:
+sql> select count(*) from dba_objects where status='INVALID';
+sql> select count(*) from dba_objects where owner='ODB' and status='INVALID';
+
+
+===============================================================================================================================
+
+TO CHECK ALERT LOG FILE OF DATABASE:
+
+-sign in as sysdba: show parameter dump;(collect path for core_dump_dest_string upto the trace file/)
+-cd to the trace file directory obtained above /
+-$ls -lthr alert_DBNAME.log (to see the latest alert log)
+-$cat alert_DBNAME.log | grep -i PACKAGE_NAME ( will fetch the alertlog file and grep to see if any info is related to the pacakge)
+
+* Note: In a RAC environment we must not check the alertlog of both nodes, but for double checking purpose you can.
+==========================================================================================================================
+
+TO MOVE FROM NODE1 TO NODE2 WHILE ON NODE O.S
+
+-$ssh node2 hosts
+
+=========================================================================================================================================
+
+TO SEE IF HOSTS IS A RAC ENVIRONMENT:
+
+-ps -ef|grep -i pmon
+
+=================================================================================================================================
+
+RAC DATABASE COMMANDS:
+
+-To see RAC database unique_name: $srvctl config database
+-To see configuration variables for RAC database: $srvctl config database -d UNIQUE_NAME
+ you will get variables like: DB unique_name, DB name, Oracle home, Oracle User, spfile, P.W file.
+
+===================================================================================================================================================
+
+TUNING FOR PERFORMANCE ON OEM:
+
+-TRAXPRD uses Oracle 12c and the Flash feature is no longer available, so graphs are no longer available. 
+So we will be upgrading to 13.4 or 13.5c
+
+-On OEM, go to the performance tab (top left of page)> select sql (to see any sql performance data)
+
+- Under Sql monitor, look at sql execution time…if all executions are in seconds, its fine. Executions in hours is problematic.
+. click cluster_database > select monitoring and check
+
+-Also, click on performance > select blocking sessions > select relevant nodes > select top consumers > select top sessions > select DB user and trickle down as possible
+
+-Check top servers, consumers . top module….
+
+==================================================================================================================================================
+
+cp -R is a recursive command which copies all files and directories in the source directory tree.
+du -sh* file name (to see size of file)
+du -h ( sizes of space in mount points)
+du -*sh (sizes of al files in 
+ls -ltra ( list all files in directory including hidden files)
+======================================================================================================================
+RAC Commands:
+
+- To start Oracle RAC database: srvctl start database -db dbname ( status, stop)
+-                                 
+
+===================================================================================================================================================
+Coomand to check disk I/O errors
+
+-Execute top command at O.S level 
+-Execute iotop as root at O.S level
+
+==========================================================================================================
+
+-TO IDENTIFY BLOCKING SESSIONS:
+
+SQL> select sid,serial#,status,sql_id,prev_sql_id,final_blocking_session from gv$session where final_blocking_session is not null ;
+
+no rows selected
+
+SQL> select * from dba_blockers;
+
+no rows selected
+
+-CHECK FOR BLOCKING SESSIONS IN RAC:
+
+-select count(*) from gv$session where blocking_session is null;
+
+===========================================================================================================================
+
+
+============================================================================================================================================================
+
+-TO CHECK DATE AND TIMEZONE OF DATABASE:
+
+-At O.S level : # date
+-At O.S level : uptime
+-sql> select currrent_timestamp from dual;
+-sql> select dbtimezone from dual;
+
+-command to copy file from one server to another :  scp B045* JBCUALORA2001b:/u02/app/oracle/admin/TRAXSTG_NVA/misc_scripts
+-To ping a server from O.S:$ ping server_name or service_name in RAC...e.g tnsping DOPRD_NVA
+
+============================================================================================================================================================
+
+RESOLVING TIMEZONE ISSUES IN RAC CLUSTER:
+
+-https://support.oracle.com/epmos/faces/DocumentDisplay?_afrLoop=221355272169461&id=1988586.1&_afrWindowMode=0&_adf.ctrl-state=sbslgstwh_315
+
+-after that as per metalink doc
+
+-C1.) When using Grid Infrastructure  (if Grid Infrastructure is NOT used go to step C.2) .
+
+When using Grid Infrastructure (start the database using crsctl ) then check first of all the TZ entry in $GRID_HOME/crs/install/s_crsconfig_<nodename>_env.txt 
+
+.
+$ cd $GRID_HOME/crs/install/
+
+$ hostname
+
+xxx
+$ cat s_crsconfig_xxx_env.txt
+-- do this for all nodes, note that the filename reflects the nodename
+Edit the s_crsconfig_<nodename>_env.txt file and set the OS TZ parameter in this file to the required OS time zone on ALL nodes.
+
+The s_crsconfig_<nodename>_env.txt is a simple txt file, edit it using for example the vi or nano editor.
+
+$ vi s_crsconfig_xxx_env.txt
+
+-- do this for all nodes, note that the filename reflects the nodename
+
+-Changed TZ In s_crsconfig_xxx_env.txt file on both nodes
+
+============================================================================================================================================================
+
+-TO SET PAGE SIZE & LINE SIZE IN ORACLE DATABASE:
+
+-PAGE SIZE MAXIMUM NUMBER IS 50,000
+-LINE SIZE MAXIMUM NUMBER IS 32,000
+
+
+=============================================================================================================================================================
+
+-Goldengate login procedure: log in as root
+                            sudo su - ggsowner
+                            ps -ef|grep mgr
+                            . .profile_trxprd
+                            g ( to sign in)
+        Useful GG commands : info all, info E*, info P*, info R*, start/stop E*, P*,R*
+
+
+=====================================================================================================================================================================
+
+-Query to identify last logon time for database users
+
+.select username, machine, terminal, logon_time from v$session; (And look at the last logon column)
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+

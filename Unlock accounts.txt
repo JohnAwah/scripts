@@ -1,0 +1,89 @@
+USERNAME
+--------------------------------------------------------------------------------
+ACCOUNT_STATUS
+--------------------------------
+DLEX_B6DATA_PURGE
+LOCKED
+
+DLEX_B6CREDITBANK
+LOCKED
+
+DLEX_B6STATS_A1
+LOCKED
+
+
+USERNAME
+--------------------------------------------------------------------------------
+ACCOUNT_STATUS
+--------------------------------
+DLEX_B6HERTZ
+LOCKED
+
+DLEX_B6STATICCONTENTS
+LOCKED
+
+DLEX_B6BUSINESS_RULES
+LOCKED
+
+
+USERNAME
+--------------------------------------------------------------------------------
+ACCOUNT_STATUS
+--------------------------------
+DLEX_B6AQ_ADMIN
+LOCKED
+
+DLEX_B6BIZ_DATA
+LOCKED
+
+DLEX_B6PROFILE
+LOCKED
+
+
+USERNAME
+--------------------------------------------------------------------------------
+ACCOUNT_STATUS
+--------------------------------
+DLEX_B6SPRINGBATCH
+LOCKED
+
+DLEX_B6INVENTORY
+LOCKED
+
+DLEX_B6TAXCACHE
+LOCKED
+
+
+USERNAME
+--------------------------------------------------------------------------------
+ACCOUNT_STATUS
+--------------------------------
+DLEX_B6TRANSACC
+LOCKED
+
+DLEX_B6GTA
+LOCKED
+
+DLEX_B6RESV
+LOCKED
+
+
+USERNAME
+--------------------------------------------------------------------------------
+ACCOUNT_STATUS
+--------------------------------
+DLEX_B6TICKETING
+LOCKED
+
+
+16 rows selected.
+
+alter user DLEX_B6DATA_PURGE account unlock;
+alter user DLEX_B6CREDITBANK account unlock;
+alter user DLEX_B6STATS_A1 account unlock;
+alter user DLEX_B6HERTZ account unlock;
+alter user DLEX_B6STATICCONTENTS account unlock;
+alter user DLEX_B6BUSINESS_RULES account unlock;
+alter user DLEX_B6AQ_ADMIN account unlock;
+alter user DLEX_B6BIZ_DATA account unlock;
+

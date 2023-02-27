@@ -1,0 +1,2 @@
+-To get cardinality of Indexed column on a table: select distinct col1 from table1;
+-To get record count on a table: select count(*) from user.tablename;

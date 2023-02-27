@@ -1,0 +1,32 @@
+CHG0055020 - Trax HF Radio MEL Stored Procedure Modification - STG
+
+Attached is the script we will be executing for this change
+
+Modify the stored procedure executed by the Cronjob 00 00 * * * /u02/app/oracle/admin/TRAXPRD_NVA/misc_scripts/B045_HF_RESTRICTED_AC.sh
+
+Update the stored procedure with the attached script.
+
+1. Create a backup of the stored procedure B045_HF_RESTRICTED_AC
+2. Update the stored procedure with the script provided in this change in TRAXSTG on JBCUALORA2001A/B
+3. Change the email address to ITOpsProductSupportTO@jetblue.com so the alerts are not generating emails to operations team for STG
+4. Create sample HF deferrals 
+5. Manually trigger the cron job 
+6. Observer the results
+
+
+
+
+
+1. Create a backup of the stored procedure B045_HF_RESTRICTED_AC – Completed – Backup placed in below location.
+
+[oracle@JBCUALORA2001a misc_scripts]$ pwd
+/u02/app/oracle/admin/TRAXSTG_NVA/misc_scripts
+
+[oracle@JBCUALORA2001a misc_scripts]$ ls -lthr *23SEP*
+-rwxr-xr-x. 1 oracle oinstall 5.1K Sep 23 19:47 B045_HF_RESTRICTED_AC.sh_23SEP21
+-rwxr-xr-x. 1 oracle oinstall 1.8K Sep 23 19:48 B045_HF_script_config.ini_23SEP21
+2. Update the stored procedure with the script provided in this change in TRAXSTG on JBCUALORA2001A/B – Completed 
+3. Change the email address to ITOpsProductSupportTO@jetblue.com so the alerts are not generating emails to operations team for STG – Completed 
+4. Create sample HF deferrals – Pending 
+5. Manually trigger the cron job – Executed once for testing
+6. Observer the results – Results file is empty 

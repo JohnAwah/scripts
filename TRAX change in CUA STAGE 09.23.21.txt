@@ -1,0 +1,43 @@
+STEPS IN IMPLEMENTING 
+CHG0054634 - Trax SP8 S1000D Patch - SQL - STG
+CHG0054637 - Trax SP8 S1000D Patch - PBD – STG
+
+
+CHG0054634 - Trax SP8 S1000D Patch - SQL - STG
+
+CHG0054637 - Trax SP8 S1000D Patch - PBD – STG
+
+Added one more Change to this session
+CHG0055027 - Trax PDSC Work Orders Functionality Fix for ETOPS Flights - STG
+
+-Transfer files to stage server using WinScp
+-Connect to server on putty:
+-[root@JBCUALORA2001a ~]# ps -ef|grep smon
+-[root@JBCUALORA2001a ~]# cd to directory where files are saved
+-chmod 777 "Traxchange 09.23.zip" (if files were transferred by root)
+-[root@JBCUALORA2001a tmp]# mv "Traxchange 09.23.zip" Traxchange_09.23.zip (change name of file)
+-[root@JBCUALORA2001a tmp]# su - oracle
+-[oracle@JBCUALORA2001a ~]$ . .profile_traxstg (set environment to traxstg)
+-[oracle@JBCUALORA2001a ~]$ cd /tmp ( cd to location of txt files)
+-ll
+-[oracle@JBCUALORA2001a tmp]$ unzip Traxchange_09.23.zip (unzip or gunzip the file if zipped)
+-[oracle@JBCUALORA2001a tmp]$ mkdir traxchange
+-[oracle@JBCUALORA2001a tmp]$ cp Traxchange_09.23.zip /tmp/traxchange 
+-[oracle@JBCUALORA2001a tmp]$ cd traxchange ( to see backed up files to this directory)
+
+-[oracle@JBCUALORA2001a traxchange]$ sqlplus / as sysdba
+-To spool into a file on sql > spool file_name;
+-SQL> alter session set current_schema=ODB;
+-SQL> select count(*) from dba_objects where status='INVALID'; (to check for invalid objects)
+-SQL> select count(*) from dba_objects where owner='ODB' and status='INVALID';
+-SQL> @$ORACLE_HOME/rdbms/admin/utlrp.sql (to fix invalid objects)
+-SQL> select count(*) from dba_objects where owner='ODB' and status='INVALID';
+-SQL> @"0.LOG 301959-new_columns.txt"
+-SQL> @"1.PKG_TRAX_APP_EXCEPTIONS_08192021.txt" (executing the scripts)
+-SQL> @"2.PKG_FIX_XML_TEXT_08192021.txt"
+-SQL> @"3.PKG_TASK_CARD_CREATE_XML_08192021.txt"
+-SQL> @"4.PKG_TASK_CARD_LINK_TRAXDOC_08192021.txt"
+-SQL> select count(*) from dba_objects where owner='ODB' and status='INVALID';
+
+-command to copy file from one server to another :  scp B045* JBCUALORA2001b:/u02/app/oracle/admin/TRAXSTG_NVA/misc_scripts
+-To ping a server from O.S:$ ping server_name

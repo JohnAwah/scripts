@@ -1,0 +1,13 @@
+SQL> select PARTITION_NAME,TABLE_OWNER from dba_tab_partitions where table_name='CTM';
+
+PARTITION_NAME                 TABLE_OWNER
+------------------------------ ------------------------------
+P_INS_TSTMP_0086               OVT_MART
+P_INS_TSTMP_0087               OVT_MART
+P_INS_TSTMP_0088               OVT_MART
+P_INS_TSTMP_0089               OVT_MART
+P_INS_TSTMP_0090               OVT_MART
+P_INS_TSTMP_0091               OVT_MART
+P_INS_TSTMP_0092               OVT_MART
+P_INS_TSTMP_0093               OVT_MART
+

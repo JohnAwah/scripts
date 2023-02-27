@@ -1,0 +1,1 @@
+find /u01/app/oracle/diag/rdbms/odm4tst/odm4tst1/trace/*.trc -mtime +20 -exec rm {} \;

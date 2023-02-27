@@ -1,0 +1,4 @@
+SCHEMA EXPORT IN CTI DELA RELEASE:
+
+
+nohup expdp \"/ as sysdba\" directory=export_20220307 dumpfile=INSIS_CUST_ADDON.dmp logfile=INSIS_CUST_ADDON.log schemas=INSIS_CUST_ADDON &

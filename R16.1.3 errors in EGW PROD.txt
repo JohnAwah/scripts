@@ -1,0 +1,97 @@
+Errors encountered in R16.1 database upgrade in EGW PROD:
+
+1.ORA-02275: such a referential constraint already exists in the table
+ORA-06512: at "DLEX_B6BIZ_DATA.DLEX_DDL", line 1959
+ORA-06512: at "DLEX_B6BIZ_DATA.DLEX_DDL", line 1920
+ORA-06512: at line 1
+
+
+so we suggested to delete it manually and it should fix the issue:
+conn DLEX_B6BIZ_DATA
+sql> alter session set current_schema=DLEX_B6BIZ_DATA;
+sql> alter table POSAIRFAREFAMILY drop constraint FK_POSAIRFAREFAMILY_DEL;
+
+
+2. ORA-01430: column being added already exists in table
+ORA-06512: at "DLEX_B6RESV.DLEX_DDL", line 326
+ORA-06512: at "DLEX_B6RESV.DLEX_DDL", line 297
+ORA-06512: at line 1
+
+It was fixed by doing the following:
+
+cd /cloudfs/CTR/Release/database/resv/upgrade/oracle/DBD-5391-01
+ls -ltr
+vi alter_table_SALESJOURNAL_add_column_AGENTTYPE.sql   (go to line 6 and remove the space after AGENTTYPE and the right single quote : 'AGENTTYPE ')
+
+PROMPT &&line1
+PROMPT Script: alter_table_SALESJOURNAL_add_column_AGENTTYPE.sql
+PROMPT &&line1
+
+prompt Modifying SALESJOURNAL table...
+
+PROMPT Add AGENTTYPE column
+EXECUTE DLEX_DDL.add_column('SALESJOURNAL', 'AGENTTYPE', 'VARCHAR2(20)', 'NULL');
+
+PROMPT Add AGENTTYPE column comment
+EXECUTE DLEX_DDL.add_column_comment('SALESJOURNAL', 'AGENTTYPE', 'Agent type, the value is DCP_AGENT_CODE if the Agent information is stored in DCP, EXTERNAL_AGENT_CODE otherwise');
+
+Esc and save the file.
+
+- Go back and run the upgrade command and it should be fixed
+
+
+
+
+3. PL/SQL: ORA-00942: table or view does not exist
+ORA-24344: success with compilation error
+ORA-06512: at line 83
+ORA-06512: at line 83
+ORA-06512: at line 71
+
+
+
+-This error was ignored as not a bottleneck to the deployment,  after attempting the below fixes:
+
+Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.11.0.0.0
+-bash-4.2$ . .profile_drprd
+-bash-4.2$ cd /cloudfs/CTR/Release/database/report/upgrade/oracle/plsql/procedures
+-bash-4.2$ ls -ltr
+total 44
+-rw-rw-r--. 1 oracle oinstall   875 Oct 18 12:46 proc_DLEX_SYNC_LOGOS.sql
+-rw-rw-r--. 1 oracle oinstall  1728 Oct 18 12:46 insert_rep_def_period.sql
+-rw-rw-r--. 1 oracle oinstall 24113 Oct 18 12:46 create_rresv_groundtransport_sale_table.sql
+-rw-rw-r--. 1 oracle oinstall  1587 Oct 18 12:46 create_insert_error_type_proc.sql
+-rw-rw-r--. 1 oracle oinstall   555 Oct 18 12:46 compile.sql
+-rw-r-----. 1 oracle oinstall  1020 Jan 18 19:14 sqlnet.log
+-bash-4.2$ sqlplus / as sysdba
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Tue Jan 18 19:15:59 2022
+Version 19.11.0.0.0
+
+Copyright (c) 1982, 2020, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.11.0.0.0
+
+SQL> alter session set current_schema=DLEX_B6REPORT;
+
+Session altered.
+
+SQL> @proc_DLEX_SYNC_LOGOS.sql DLEX_B6RESV
+old   1: select db_link from user_db_links where username=upper('&&user_name')
+new   1: select db_link from user_db_links where username=upper('DLEX_B6RESV')
+
+no rows selected
+
+old   9:  INSERT INTO REPORTING_AIRLINE (ID,AIRLINECODE,IMAGE,IATAAIRLINECODE,CURRENCYCODE,DISTANCEUOM,LANGUAGECODE,TIMEZONE) SELECT ID,AIRLINECODE,IMAGE,IATAAIRLINECODE,CURRENCYCODE,DISTANCEUOM,LANGUAGECODE,TIMEZONE  FROM R_AIRLINE@&&db_link_name;
+new   9:  INSERT INTO REPORTING_AIRLINE (ID,AIRLINECODE,IMAGE,IATAAIRLINECODE,CURRENCYCODE,DISTANCEUOM,LANGUAGECODE,TIMEZONE) SELECT ID,AIRLINECODE,IMAGE,IATAAIRLINECODE,CURRENCYCODE,DISTANCEUOM,LANGUAGECODE,TIMEZONE  FROM R_AIRLINE@;
+
+Warning: Procedure created with compilation errors.
+
+SQL> select * from user_db_links;
+
+no rows selected
+

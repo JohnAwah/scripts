@@ -1,0 +1,16 @@
+Unix team,
+
+We have started receiving below  sensor alert from Remix Prod server zremixdbprd01.
+
+Please review if its something related to space addition request which was raised yesterday and being worked upon ?
+
+**************************************************************
+
+FOLLOWING DISKS NEED REVIEW on zremixdbprd01
+******************************************************
+------------------------------ ------------
+PATH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       NAME                  HEADER_STATU MOUNT_S
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --------------- ------------ -------
+/dev/rdsk/c11t60000970000197700462533030323442d0s6                                                                                                                                                                                                                                                                                                                                                                                                                         CANDIDATE    CLOSED
+**************************************************************
+

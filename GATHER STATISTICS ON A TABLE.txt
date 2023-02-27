@@ -1,0 +1,3 @@
+SQL> exec dbms_stats.gather_table_stats(ownname => 'ODS_UCEE', tabname => 'INDVDL', degree => 24, estimate_percent => dbms_stats.auto_sample_size);
+
+PL/SQL procedure successfully completed.

@@ -1,0 +1,38 @@
+#!/bin/bash
+
+. /home/oracle/.profile_doprd
+
+sqlplus -s "/ as sysdba" << EOF
+set timing on;
+DECLARE
+delete_count number;
+cursor cur is
+select /*+ parallel 4 */ count(*) from DLEX_B6RESV.RESVITINSEGCARADDITIONALCHARGE a, DLEX_B6RESV.RESVITINSEGMENTCAR b  where a.RESVITINSEGMENTCARID is not null and a.RESVITINSEGMENTCARID = b.id(+) and b.id is null;
+deleted_so_far_local number;
+LOCAL_ID NUMBER;
+  BEGIN
+  delete_count := 0;
+  deleted_so_far_local := 0;
+  OPEN CUR;
+  LOOP
+  FETCH CUR INTO LOCAL_ID;
+  insert into CDBA.RESVITINSEGCARADDITIONALCHARGE select * from DLEX_B6RESV.RESVITINSEGCARADDITIONALCHARGE where ID=LOCAL_ID;
+  --delete from DLEX_B6RESV.RESVITINSEGCARADDITIONALCHARGE where ID=LOCAL_ID;
+  delete_count := delete_count + 1;
+  if delete_count =10000
+  then
+ deleted_so_far_local := deleted_so_far_local + 10000;
+ insert into cdba.orphan_deletes_tracking (table_deleting,deleted_so_Far,delete_time) values ('RESVITINSEGCARADDITIONALCHARGE',deleted_so_far_local,sysdate);
+ COMMiT;
+ delete_count := 0;
+ dbms_lock.sleep(1);
+ end if;
+ EXIT WHEN CUR%NOTFOUND;
+ END LOOP;
+ deleted_so_far_local:=deleted_so_far_local + delete_count;  insert into cdba.orphan_deletes_tracking (table_deleting,deleted_so_Far,delete_time) values ('RESVITINSEGCARADDITIONALCHARGE',deleted_so_far_local,sysdate);
+ COMMIT;
+ CLOSE CUR;
+ END;
+ /
+exit;
+EOF

@@ -1,0 +1,156 @@
+RELOCATING SERVICES FROM ONE RAC DATABASE INSTANCE TO ANOTHER: 2 WAYS:
+
+A. SINGLE COMMAND:
+
+B.
+
+1. Check if and what services are running and on which nodes they are running
+
+[oracle@vdaloraclep002 ~]$ srvctl status service database -d idcprod  (command to see RAC services & idcprod is db_unique_name)
+Service oc_wcc_antprd_idc is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_dmoprd_idc is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_huiprd_idc is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_ovt3cprd is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_ovtprd_idc is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_uhuprd_idc is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_wmd3cprd is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_wmdprd_idc is running on instance(s) idcprod1,idcprod2
+
+2. Shutdown the instance from which you are trying relocate services: Either by:
+
+
+a.Bring them down both manually by logging into the database( shutdown immediate)
+b.Or by srvctl stop service....(usually a problem).
+
+3.check cluster services is disabled on the relocating node in case multiple reboots is ready which
+ should not bring up the instance, do the following:
+
+-log in on the relocating node as grid user
+-. oraenv
+-+ASM
+-crsctl check crs (to check if its enable)
+-crsctl stop crs
+-crsctl diable crs      (some environments may require this to be done as root, so check if it fails with insufficient privilges)
+
+4. Reboot (now0
+
+5. After reboot is done of the instance is done and all is fine, bring back the cluster service on node 1 as follows:
+
+-crsctl start crs
+-crsctl enable crs
+-Check if instanse is also up on node 1, if not , start instance on node 1, possibly manually as it was shutdown manually
+
+6.Check services in the cluster again to make sure its running on all instances:
+
+[oracle@vdaloraclep001 ~]$ srvctl status service database -d idcprod
+Service oc_wcc_antprd_idc is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_dmoprd_idc is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_huiprd_idc is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_ovt3cprd is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_ovtprd_idc is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_uhuprd_idc is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_wmd3cprd is running on instance(s) idcprod1,idcprod2
+Service oc_wcc_wmdprd_idc is running on instance(s) idcprod1,idcprod2
+
+7.check if instances in the cluster are up and running:
+
+[oracle@vdaloraclep001 ~]$ srvctl status database -d idcprod
+Instance idcprod1 is running on node vdaloraclep001
+Instance idcprod2 is running on node vdaloraclep002
+
+-OTHER RAC COMMANDS:
+
+Processes of starting RAC database and commands:
+
+1. Cluster services:
+. oraenv 
+-crsctl check crs
+-crsctl start/stop crs
+-crsctl check crs
+
+* Also check if cluster services are running on all nodes:
+
+[grid@vdaloraclep001 bin]$ ./crsctl stat res -t
+--------------------------------------------------------------------------------
+Name           Target  State        Server                   State details                                                                              
+--------------------------------------------------------------------------------
+Local Resources
+--------------------------------------------------------------------------------
+ora.LISTENER.lsnr
+               ONLINE  UNKNOWN      vdaloraclep001           STABLE
+               ONLINE  ONLINE       vdaloraclep002           STABLE
+ora.SYSTEMDG.GHCHKPT.advm
+               OFFLINE OFFLINE      vdaloraclep001           STABLE
+               OFFLINE OFFLINE      vdaloraclep002           STABLE
+ora.chad
+               ONLINE  OFFLINE      vdaloraclep001           STABLE
+               ONLINE  ONLINE       vdaloraclep002           STABLE
+			  
+*  cd /u01/app/19.0.0/grid/bin (grid home)
+
+[grid@vdaloraclep001 bin]$ ./crsctl check crs
+CRS-4638: Oracle High Availability Services is online
+CRS-4537: Cluster Ready Services is online
+CRS-4529: Cluster Synchronization Services is online
+CRS-4533: Event Manager is online
+
+
+[grid@vdaloraclep001 bin]$ ./crsctl check cluster -all
+**************************************************************
+vdaloraclep001:
+CRS-4537: Cluster Ready Services is online
+CRS-4529: Cluster Synchronization Services is online
+CRS-4533: Event Manager is online
+**************************************************************
+vdaloraclep002:
+CRS-4537: Cluster Ready Services is online
+CRS-4529: Cluster Synchronization Services is online
+CRS-4533: Event Manager is online
+
+
+
+
+2.Manage ASM
+
+Check if ASM is up on a given instance:
+
+[oracle@vdaloraclep001 ~]$ . oraenv
+ORACLE_SID = [oracle] ? idcprod1
+
+
+-[oracle@vdaloraclep001 ~]$ srvctl status asm -n vdaloraclep001
+ASM is not running on vdaloraclep001
+-Start ASM
+[oracle@vdaloraclep001 ~]$ srvctl start asm -n vdaloraclep001
+[oracle@vdaloraclep001 ~]$ srvctl status asm -n vdaloraclep001
+ASM is running on vdaloraclep001
+
+3. Manage database instance:
+
+-[oracle@vdaloraclep001 ~]$ srvctl status database -d idcprod
+Instance idcprod1 is running on node vdaloraclep001
+Instance idcprod2 is running on node vdaloraclep002
+
+or start database instances if not started:
+
+-[oracle@vdaloraclep001 ~]$ srvctl start database -d idcprod (database unique_name)
+
+
+-CHECK ASM ALERT LOG FILE:/u01/app/grid/diag/asm/+asm/+ASM1/trace
+-CHECK DATABASE ALERT LOGFILE:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

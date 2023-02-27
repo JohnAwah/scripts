@@ -1,0 +1,41 @@
+SELECT cols.table_name, cols.column_name, cols.position, cons.status, cons.owner
+FROM all_constraints cons, all_cons_columns cols
+WHERE cols.table_name = 'TABLE_NAME'
+AND cons.constraint_type = 'P'
+AND cons.constraint_name = cols.constraint_name
+AND cons.owner = cols.owner
+ORDER BY cols.table_name, cols.position;
+
+
+-If you knew the table name that you were looking for, you could modify the SQL as follows:
+
+SELECT cols.table_name, cols.column_name, cols.position, cons.status, cons.owner
+FROM all_constraints cons, all_cons_columns cols
+WHERE cols.table_name = 'TABLE_NAME'
+AND cons.constraint_type = 'P'
+AND cons.constraint_name = cols.constraint_name
+AND cons.owner = cols.owner
+ORDER BY cols.table_name, cols.position;
+Make sure to type the table_name in uppercase, as Oracle stores all table names in uppercase.
+
+Let's quickly explain the output from this query.
+
+table_name
+The name of the table (stored in uppercase).
+column_name
+The name of the column that is a part of the primary key. (also stored in uppercase)
+position
+The position in the primary key. A primary key can contain more than one column, so understanding the order of the columns in the primary key is very important.
+status
+Indicates whether the primary key is currently enabled or disabled.
+owner
+Indicates the schema that owns the table.
+
+>SELECT cols.table_name, cols.column_name, cols.position, cons.status, cons.owner
+FROM all_constraints cons, all_cons_columns cols
+WHERE cons.constraint_type = 'P'
+AND cons.constraint_name = cols.constraint_name
+AND cons.owner = cols.owner
+ORDER BY cols.table_name, cols.position;
+
+

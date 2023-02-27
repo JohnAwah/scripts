@@ -1,0 +1,4 @@
+Tuning a query at a database:
+
+run script at database level: @?/rdbms/admin/sqltrpt.sql 
+and fill in sql details and search.

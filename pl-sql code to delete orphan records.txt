@@ -1,0 +1,95 @@
+1. CODE TESTED SUCCESSFULLY WITH THE INSERT OPTION
+
+DECLARE
+delete_count number;
+cursor cur is
+select a.ID from DLEX_B6RESV.RESVCUSTOMERPAYMENT a, DLEX_B6RESV.RESVEVENT b where a.RESVEVENTID = b.id(+) and b.id is null;
+deleted_so_far_local number;
+LOCAL_ID NUMBER;
+BEGIN
+delete_count := 0;
+deleted_so_far_local := 0;
+OPEN CUR;
+LOOP
+FETCH CUR INTO LOCAL_ID;
+insert into CDBA.RESVCUSTOMERPAYMENT select * from DLEX_B6RESV.RESVCUSTOMERPAYMENT where ID=LOCAL_ID;
+--delete from DLEX_B6RESV.RESVCUSTOMERPAYMENT where ID=LOCAL_ID;
+delete_count := delete_count + 1;
+if delete_count =10000
+then
+deleted_so_far_local := deleted_so_far_local + 10000;
+insert into cdba.orphan_deletes_tracking (table_deleting,deleted_so_Far,delete_time) values ('RESVCUSTOMERPAYMENT',deleted_so_far_local,sysdate);
+COMMiT;
+delete_count := 0;
+dbms_lock.sleep(1);
+end if;
+EXIT WHEN CUR%NOTFOUND;
+END LOOP;
+CLOSE CUR;
+END;
+/
+
+
+
+2. ADDITIONAL VARIABLE DECLARED IN CODE TO INSERT RECORDS NOT UPTO 10,000 IN NUMBER:
+
+SQL> DECLARE
+delete_count number;
+  2    3  cursor cur is
+  4  select a.ID from DLEX_B6RESV.RESVCUSTOMERPAYMENT a, DLEX_B6RESV.RESVEVENT b where a.RESVEVENTID = b.id(+) and b.id is null;
+  5  deleted_so_far_local number;
+  6  LOCAL_ID NUMBER;
+  7  BEGIN
+  8  delete_count := 0;
+  9  deleted_so_far_local := 0;
+ 10  OPEN CUR;
+ 11  LOOP
+ 12  FETCH CUR INTO LOCAL_ID;
+ 13  insert into CDBA.RESVCUSTOMERPAYMENT select * from DLEX_B6RESV.RESVCUSTOMERPAYMENT where ID=LOCAL_ID;
+ 14  --delete from DLEX_B6RESV.RESVCUSTOMERPAYMENT where ID=LOCAL_ID;
+ 15  delete_count := delete_count + 1;
+ 16  if delete_count =10000
+ 17  then
+deleted_so_far_local := deleted_so_far_local + 10000;
+ 18   19  insert into cdba.orphan_deletes_tracking (table_deleting,deleted_so_Far,delete_time) values ('RESVCUSTOMERPAYMENT',deleted_so_far_local,sysdate);
+ 20  COMMiT;
+ 21  delete_count := 0;
+ 22  dbms_lock.sleep(1);
+ 23  end if;
+ 24  EXIT WHEN CUR%NOTFOUND;
+ 25  END LOOP;
+ 26  deleted_so_far_local:=deleted_so_far_local + delete_count;
+ 27  insert into cdba.orphan_deletes_tracking (table_deleting,deleted_so_Far,delete_time) values ('RESVCUSTOMERPAYMENT',deleted_so_far_local,sysdate);
+ 28  COMMIT;
+ 29  CLOSE CUR;
+ 30  END;
+ 31  /
+
+PL/SQL procedure successfully completed.
+
+SQL> select count(*) from CDBA.RESVCUSTOMERPAYMENT;
+
+  COUNT(*)
+----------
+     52424
+
+SQL> select * from cdba.orphan_deletes_tracking;
+
+TABLE_DELETING      DELETED_SO_FAR DELETE_TI
+------------------- -------------- ---------
+RESVCUSTOMERPAYMENT          10000 26-OCT-21
+RESVCUSTOMERPAYMENT          20000 26-OCT-21
+RESVCUSTOMERPAYMENT          30000 26-OCT-21
+RESVCUSTOMERPAYMENT          40000 26-OCT-21
+RESVCUSTOMERPAYMENT          50000 26-OCT-21
+RESVCUSTOMERPAYMENT          52424 26-OCT-21
+
+6 rows selected.
+
+SQL>
+
+
+
+
+
+

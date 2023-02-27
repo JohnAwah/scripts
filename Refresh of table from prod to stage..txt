@@ -1,0 +1,1555 @@
+STAG IMPORT:
+
+login as: oracle
+oracle@JBCUALORA2001a's password:
+[oracle@JBCUALORA2001a ~]$ ps -ef|grep pmon
+grid       7182      1  0 05:13 ?        00:00:03 asm_pmon_+ASM1
+oracle     9130      1  0 05:14 ?        00:00:04 ora_pmon_TRAXTRN1
+oracle    10393  10305  0 17:19 pts/0    00:00:00 grep pmon
+oracle    10541      1  0 05:14 ?        00:00:09 ora_pmon_TRAXSTG1
+oracle   231130      1  0 11:01 ?        00:00:02 ora_pmon_TRAXCLN1
+[oracle@JBCUALORA2001a ~]$ ls -la
+total 2986328
+drwx------. 49 oracle users          4096 Feb  1 05:04 .
+drwxr-xr-x.  7 root   root           4096 May 25  2021 ..
+-rw-r--r--.  1 oracle oinstall      67549 Feb 18  2020 01_grnt_privtorole.sql
+-rw-r--r--.  1 oracle oinstall       2279 Aug 20  2020 01_traxstg_scheduler_job_                                                                             20AUG20.sql
+-rw-r--r--.  1 oracle oinstall       3844 Jun 18  2020 1
+drwxr-xr-x.  3 oracle oinstall       4096 May 24  2021 24MAY2021_scripts
+-rw-r--r--.  1 oracle oinstall     196304 Aug 17 17:26 6_log.sql
+-rw-r--r--.  1 root   root            595 Jan 28  2020 70-persistent-net.rules
+-rw-r--r--.  1 oracle oinstall     197666 Aug 17 17:26 7_log.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .abrt
+drwx------.  3 oracle oinstall       4096 Oct  8  2020 .ansible
+drwxr-xr-x.  2 oracle oinstall       4096 Oct  8  2020 .ansible_async
+-rw-r--r--.  1 oracle oinstall    1412556 Sep 22  2020 AWR_TRAXSTG_sep22_15-16.h                                                                             tml
+-rw-------.  1 oracle oinstall      20521 Feb  1 09:06 .bash_history
+-rw-r--r--.  1 oracle users            18 Mar 22  2017 .bash_logout
+-rw-r--r--.  1 oracle oinstall        860 Oct  8  2020 .bash_profile
+-rw-r--r--.  1 oracle users           124 Mar 22  2017 .bashrc
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .cache
+-rw-r--r--.  1 oracle oinstall       8077 Mar 10  2020 CHG0038604.log
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  5  2020 CHG0043254
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 25  2020 CHG0043827
+drwxr-xr-x.  2 oracle oinstall       4096 Sep  8  2020 CHG0044401
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 19  2020 CHG0044610
+drwxr-xr-x.  2 oracle oinstall       4096 Feb 26  2021 CHG0049142
+drwxr-xr-x.  2 oracle oinstall       4096 Mar 30  2021 CHG0049615
+drwxr-xr-x.  2 oracle oinstall       4096 Jun 29  2021 CHG0052880_29062021
+-rw-r--r--.  1 oracle oinstall        569 Jan 25 14:30 chg56626.txt
+drwxr-xr-x.  4 oracle oinstall       4096 Nov 30 09:59 cintra
+drwxrwxrwx. 12 oracle oinstall       4096 Feb  1 05:04 Cintra
+drwxr-xr-x.  5 oracle oinstall       4096 Nov 20  2019 .config
+-rw-r--r--.  1 oracle oinstall       4520 Oct 29  2020 cronjobs_20201028.txt
+-rw-r--r--.  1 oracle oinstall       3840 Jul 23  2020 cron.oracle.23july
+-rw-r--r--.  1 oracle oinstall       4531 Jan  9  2021 cron.oracle.9jan2021
+-rw-r--r--.  1 oracle oinstall       3840 Jun 30  2020 crontab-20203006.txt
+-rw-r--r--.  1 oracle asmadmin       1138 Jan  8  2020 ctrl_traxqa.sql
+drwxr-xr-x.  7 oracle oinstall       4096 Mar 30  2021 database
+drwx------.  3 oracle oinstall       4096 Nov 20  2019 .dbus
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Desktop
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Documents
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Downloads
+-rw-------.  1 oracle oinstall         16 Nov 20  2019 .esd_auth
+drwx------.  4 oracle oinstall       4096 Jan 28  2020 .gconf
+drwxr-xr-x.  5 oracle users          4096 Nov 20  2019 .gnome2
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .gnote
+drwx------.  2 oracle oinstall       4096 Jan 28  2020 .gnupg
+-rw-r--r--.  1 oracle oinstall     128525 Aug 15 23:24 grant_new.sql
+-rw-r--r--.  1 oracle oinstall     129042 Aug 15 23:21 grant.sql
+-rw-r--r--.  1 oracle oinstall        142 Jan 28  2020 .gtk-bookmarks
+drwx------.  2 oracle oinstall       4096 Nov 20  2019 .gvfs
+-rw-r--r--.  1 oracle oinstall      49600 Jul 15  2021 hot_fix_traxstg.txt
+-rw-------.  1 oracle oinstall       1876 Jan 28  2020 .ICEauthority
+-rw-r--r--.  1 oracle oinstall        639 Jan 28  2020 .imsettings.log
+-rw-r--r--.  1 oracle asmadmin       1731 Jan  6  2020 init01_traxdev.ora
+-rw-r--r--.  1 oracle asmadmin       1735 Jan  5  2020 init01_traxdev.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1663 Jan  3  2020 initbkpTRAXDEV.ora
+-rw-r--r--.  1 oracle asmadmin       1632 Jan  3  2020 init_traxdev031219.ora
+-rw-r--r--.  1 oracle asmadmin       2263 Jan  8  2020 inittraxdev_20200108.ora
+-rw-r--r--.  1 oracle asmadmin       2295 Jan  9  2020 inittraxdev20200109.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1688 Jan  5  2020 initTRAXDEV.ora
+-rw-r--r--.  1 oracle oinstall       1671 Jan  5  2020 initTRAXDEV.ora_org
+-rw-r--r--.  1 oracle asmadmin       2211 Jan  8  2020 inittraxqa_nva_20200108.o                                                                             ra
+-rw-r--r--.  1 oracle asmadmin       2209 Jan  8  2020 inittraxqa_nva_20200108.o                                                                             ra_bkp
+-rw-r--r--.  1 oracle oinstall       1672 Jan  8  2020 inittraxqa_nva_20200108.o                                                                             ra_original
+-rw-r--r--.  1 oracle oinstall       1687 Jan  8  2020 inittraxqa.ora
+-rw-r--r--.  1 oracle oinstall       1639 Jan  8  2020 inittraxqa.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       2296 Jan 14  2020 initTRAXSTG_DR.ora
+-rw-r--r--.  1 oracle oinstall       2235 Jan  8  2020 inittraxtrn_20200108.ora
+-rw-r--r--.  1 oracle oinstall      48948 Aug 17 17:24 jetblue_patch.txt
+-rw-r--r--.  1 oracle oinstall 1673544724 Nov 20  2019 linuxamd64_12102_database                                                                             _1of2.zip
+-rw-r--r--.  1 oracle oinstall 1014530602 Nov 20  2019 linuxamd64_12102_database                                                                             _2of2.zip
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .local
+-rw-r-----.  1 oracle oinstall        316 Jun  1  2021 log_file_client.log
+drwxr-xr-x.  4 oracle users          4096 Nov 20  2019 .mozilla
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Music
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .nautilus
+-rw-------.  1 oracle oinstall         13 Aug  8  2020 nohup.out
+-rw-r--r--.  1 oracle oinstall       2796 Mar  6  2020 null_value.sql
+-rw-r--r--.  1 oracle oinstall    2314468 Feb 12  2020 odb123.lst
+-rw-r--r--.  1 oracle oinstall    3141085 Feb 12  2020 odb_ro1.lst
+drwx------.  2 oracle asmadmin       4096 Aug  6  2020 .oit
+drwxr-xr-x.  2 oracle oinstall       4096 Oct  8  2020 .oracle_jre_usage
+drwxr-----.  3 oracle oinstall       4096 Jan  8  2020 oradiag_oracle
+-rw-r--r--.  1 oracle oinstall       3353 Mar  6  2020 other_value.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 22  2019 patch
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Pictures
+-rw-r--r--.  1 oracle oinstall        172 Sep  2  2020 .profile_trax2cln
+-rw-r--r--.  1 oracle oinstall        189 Oct 29  2020 .profile_traxcln
+-rw-r--r--.  1 oracle oinstall        186 Nov 19  2020 .profile_traxdev
+-rw-r--r--.  1 oracle oinstall        230 Aug  6  2020 .profile_traxprd
+-rw-r--r--.  1 oracle oinstall        188 Jan  6  2021 .profile_traxqa
+-rw-r--r--.  1 oracle oinstall        189 Oct 23  2020 .profile_traxstg
+-rw-r--r--.  1 oracle oinstall        186 Nov 23  2020 .profile_traxtrn
+-rw-r--r--.  1 oracle oinstall        189 Nov 26  2020 .profile_traxtst
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Public
+drwx------.  2 oracle oinstall       4096 Jan 28  2020 .pulse
+-rw-------.  1 oracle oinstall        256 Nov 20  2019 .pulse-cookie
+-rw-r--r--.  1 oracle oinstall      11197 Jun 18  2020 r.sql
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Rubrik-cua
+drwxr-xr-x.  3 oracle oinstall       4096 Sep  2  2020 rubrik_oracle_tools
+drwxr-xr-x.  4 oracle oinstall       4096 Jul 17  2020 Rubrik_Tools
+drwxr-xr-x.  2 oracle oinstall       4096 Dec  9 14:22 SCTASK0163967_traxtrn
+-rw-r-----.  1 oracle oinstall  353372540 Feb  1 17:06 sqlnet.log
+drwx------.  2 oracle oinstall       4096 May  4  2020 .ssh
+-rw-r--r--.  1 oracle oinstall      19436 Sep 16  2020 sshpass-1.05-1.el6.rf.x86                                                                             _64.rpm
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Templates
+-rw-r--r--.  1 oracle oinstall       5142 Mar  5  2020 test01.sql
+drwxr-xr-x.  7 oracle oinstall      20480 Nov 11 04:57 TRAX
+-rw-r--r--.  1 oracle oinstall     173071 Jan  9  2020 traxdev_clone_20200108.lo                                                                             g
+-rw-r--r--.  1 oracle oinstall      28156 Jan  8  2020 traxdev_clone_20200108.lo                                                                             g_01
+-rwxr-xr-x.  1 oracle oinstall       1245 Jan  8  2020 traxdev_clone.sh
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  1  2021 TRAXQA_REFRESH
+-rw-r--r--.  1 oracle oinstall       4963 Oct 23  2020 TRAXSTG_index.log
+-rw-r--r--.  1 oracle oinstall    7886172 Mar 10  2020 TRAX.tar.gz
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Videos
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 15 10:09 .vim
+-rw-------.  1 oracle oinstall       9929 Feb  1 05:04 .viminfo
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .vnc
+-rw-------.  1 oracle oinstall        173 Jul 24  2020 .Xauthority
+-rw-------.  1 oracle oinstall       4816 Feb 16  2020 .xsession-errors
+-rw-------.  1 oracle oinstall      11494 Jan  8  2020 .xsession-errors.old
+[oracle@JBCUALORA2001a ~]$ cat /etc/oratab
+#Backup file is  /u02/app/oracle/product/12.1.0/dbhome_20201008061648/srvm/admin/oratab.bak.jbcualora2001a line added by Agent
+#
+
+
+
+# This file is used by ORACLE utilities.  It is created by root.sh
+# and updated by either Database Configuration Assistant while creating
+# a database or ASM Configuration Assistant while creating ASM instance.
+
+# A colon, ':', is used as the field terminator.  A new line terminates
+# the entry.  Lines beginning with a pound sign, '#', are comments.
+#
+# Entries are of the form:
+#   $ORACLE_SID:$ORACLE_HOME:<N|Y>:
+#
+# The first and second fields are the system identifier and home
+# directory of the database respectively.  The third field indicates
+# to the dbstart utility that the database should , "Y", or should not,
+# "N", be brought up at system boot time.
+#
+# Multiple entries with the same $ORACLE_SID are not allowed.
+#
+#
+TSTDB_NVA:/u02/app/oracle/product/12.1.0/dbhome_1:N             # line added by Agent
+TRAXPRD:/u02/app/oracle/product/12.1.0/dbhome_1:N               # line added by Agent
+TRAXDEV_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N              # line added by Agent
+TRAXQA_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N               # line added by Agent
++ASM1:/u01/app/12.1.0/grid_20201008061639:N             # line added by Agent
+TRAXTRN_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N              # line added by Agent
+TRAXSTG_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N              # line added by Agent
+TRAXCLN:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N          # line added by Agent
+[oracle@JBCUALORA2001a ~]$ clear
+[oracle@JBCUALORA2001a ~]$ ps -ef|grep pmon
+grid       7182      1  0 05:13 ?        00:00:03 asm_pmon_+ASM1
+oracle     9130      1  0 05:14 ?        00:00:04 ora_pmon_TRAXTRN1
+oracle    10541      1  0 05:14 ?        00:00:09 ora_pmon_TRAXSTG1
+oracle    11067  10305  0 17:20 pts/0    00:00:00 grep pmon
+oracle   231130      1  0 11:01 ?        00:00:02 ora_pmon_TRAXCLN1
+[oracle@JBCUALORA2001a ~]$ la -la
+-bash: la: command not found
+[oracle@JBCUALORA2001a ~]$ ls -la
+total 2986328
+drwx------. 49 oracle users          4096 Feb  1 05:04 .
+drwxr-xr-x.  7 root   root           4096 May 25  2021 ..
+-rw-r--r--.  1 oracle oinstall      67549 Feb 18  2020 01_grnt_privtorole.sql
+-rw-r--r--.  1 oracle oinstall       2279 Aug 20  2020 01_traxstg_scheduler_job_20AUG20.sql
+-rw-r--r--.  1 oracle oinstall       3844 Jun 18  2020 1
+drwxr-xr-x.  3 oracle oinstall       4096 May 24  2021 24MAY2021_scripts
+-rw-r--r--.  1 oracle oinstall     196304 Aug 17 17:26 6_log.sql
+-rw-r--r--.  1 root   root            595 Jan 28  2020 70-persistent-net.rules
+-rw-r--r--.  1 oracle oinstall     197666 Aug 17 17:26 7_log.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .abrt
+drwx------.  3 oracle oinstall       4096 Oct  8  2020 .ansible
+drwxr-xr-x.  2 oracle oinstall       4096 Oct  8  2020 .ansible_async
+-rw-r--r--.  1 oracle oinstall    1412556 Sep 22  2020 AWR_TRAXSTG_sep22_15-16.html
+-rw-------.  1 oracle oinstall      20521 Feb  1 09:06 .bash_history
+-rw-r--r--.  1 oracle users            18 Mar 22  2017 .bash_logout
+-rw-r--r--.  1 oracle oinstall        860 Oct  8  2020 .bash_profile
+-rw-r--r--.  1 oracle users           124 Mar 22  2017 .bashrc
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .cache
+-rw-r--r--.  1 oracle oinstall       8077 Mar 10  2020 CHG0038604.log
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  5  2020 CHG0043254
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 25  2020 CHG0043827
+drwxr-xr-x.  2 oracle oinstall       4096 Sep  8  2020 CHG0044401
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 19  2020 CHG0044610
+drwxr-xr-x.  2 oracle oinstall       4096 Feb 26  2021 CHG0049142
+drwxr-xr-x.  2 oracle oinstall       4096 Mar 30  2021 CHG0049615
+drwxr-xr-x.  2 oracle oinstall       4096 Jun 29  2021 CHG0052880_29062021
+-rw-r--r--.  1 oracle oinstall        569 Jan 25 14:30 chg56626.txt
+drwxr-xr-x.  4 oracle oinstall       4096 Nov 30 09:59 cintra
+drwxrwxrwx. 12 oracle oinstall       4096 Feb  1 05:04 Cintra
+drwxr-xr-x.  5 oracle oinstall       4096 Nov 20  2019 .config
+-rw-r--r--.  1 oracle oinstall       4520 Oct 29  2020 cronjobs_20201028.txt
+-rw-r--r--.  1 oracle oinstall       3840 Jul 23  2020 cron.oracle.23july
+-rw-r--r--.  1 oracle oinstall       4531 Jan  9  2021 cron.oracle.9jan2021
+-rw-r--r--.  1 oracle oinstall       3840 Jun 30  2020 crontab-20203006.txt
+-rw-r--r--.  1 oracle asmadmin       1138 Jan  8  2020 ctrl_traxqa.sql
+drwxr-xr-x.  7 oracle oinstall       4096 Mar 30  2021 database
+drwx------.  3 oracle oinstall       4096 Nov 20  2019 .dbus
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Desktop
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Documents
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Downloads
+-rw-------.  1 oracle oinstall         16 Nov 20  2019 .esd_auth
+drwx------.  4 oracle oinstall       4096 Jan 28  2020 .gconf
+drwxr-xr-x.  5 oracle users          4096 Nov 20  2019 .gnome2
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .gnote
+drwx------.  2 oracle oinstall       4096 Jan 28  2020 .gnupg
+-rw-r--r--.  1 oracle oinstall     128525 Aug 15 23:24 grant_new.sql
+-rw-r--r--.  1 oracle oinstall     129042 Aug 15 23:21 grant.sql
+-rw-r--r--.  1 oracle oinstall        142 Jan 28  2020 .gtk-bookmarks
+drwx------.  2 oracle oinstall       4096 Nov 20  2019 .gvfs
+-rw-r--r--.  1 oracle oinstall      49600 Jul 15  2021 hot_fix_traxstg.txt
+-rw-------.  1 oracle oinstall       1876 Jan 28  2020 .ICEauthority
+-rw-r--r--.  1 oracle oinstall        639 Jan 28  2020 .imsettings.log
+-rw-r--r--.  1 oracle asmadmin       1731 Jan  6  2020 init01_traxdev.ora
+-rw-r--r--.  1 oracle asmadmin       1735 Jan  5  2020 init01_traxdev.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1663 Jan  3  2020 initbkpTRAXDEV.ora
+-rw-r--r--.  1 oracle asmadmin       1632 Jan  3  2020 init_traxdev031219.ora
+-rw-r--r--.  1 oracle asmadmin       2263 Jan  8  2020 inittraxdev_20200108.ora
+-rw-r--r--.  1 oracle asmadmin       2295 Jan  9  2020 inittraxdev20200109.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1688 Jan  5  2020 initTRAXDEV.ora
+-rw-r--r--.  1 oracle oinstall       1671 Jan  5  2020 initTRAXDEV.ora_org
+-rw-r--r--.  1 oracle asmadmin       2211 Jan  8  2020 inittraxqa_nva_20200108.ora
+-rw-r--r--.  1 oracle asmadmin       2209 Jan  8  2020 inittraxqa_nva_20200108.ora_bkp
+-rw-r--r--.  1 oracle oinstall       1672 Jan  8  2020 inittraxqa_nva_20200108.ora_original
+-rw-r--r--.  1 oracle oinstall       1687 Jan  8  2020 inittraxqa.ora
+-rw-r--r--.  1 oracle oinstall       1639 Jan  8  2020 inittraxqa.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       2296 Jan 14  2020 initTRAXSTG_DR.ora
+-rw-r--r--.  1 oracle oinstall       2235 Jan  8  2020 inittraxtrn_20200108.ora
+-rw-r--r--.  1 oracle oinstall      48948 Aug 17 17:24 jetblue_patch.txt
+-rw-r--r--.  1 oracle oinstall 1673544724 Nov 20  2019 linuxamd64_12102_database_1of2.zip
+-rw-r--r--.  1 oracle oinstall 1014530602 Nov 20  2019 linuxamd64_12102_database_2of2.zip
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .local
+-rw-r-----.  1 oracle oinstall        316 Jun  1  2021 log_file_client.log
+drwxr-xr-x.  4 oracle users          4096 Nov 20  2019 .mozilla
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Music
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .nautilus
+-rw-------.  1 oracle oinstall         13 Aug  8  2020 nohup.out
+-rw-r--r--.  1 oracle oinstall       2796 Mar  6  2020 null_value.sql
+-rw-r--r--.  1 oracle oinstall    2314468 Feb 12  2020 odb123.lst
+-rw-r--r--.  1 oracle oinstall    3141085 Feb 12  2020 odb_ro1.lst
+drwx------.  2 oracle asmadmin       4096 Aug  6  2020 .oit
+drwxr-xr-x.  2 oracle oinstall       4096 Oct  8  2020 .oracle_jre_usage
+drwxr-----.  3 oracle oinstall       4096 Jan  8  2020 oradiag_oracle
+-rw-r--r--.  1 oracle oinstall       3353 Mar  6  2020 other_value.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 22  2019 patch
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Pictures
+-rw-r--r--.  1 oracle oinstall        172 Sep  2  2020 .profile_trax2cln
+-rw-r--r--.  1 oracle oinstall        189 Oct 29  2020 .profile_traxcln
+-rw-r--r--.  1 oracle oinstall        186 Nov 19  2020 .profile_traxdev
+-rw-r--r--.  1 oracle oinstall        230 Aug  6  2020 .profile_traxprd
+-rw-r--r--.  1 oracle oinstall        188 Jan  6  2021 .profile_traxqa
+-rw-r--r--.  1 oracle oinstall        189 Oct 23  2020 .profile_traxstg
+-rw-r--r--.  1 oracle oinstall        186 Nov 23  2020 .profile_traxtrn
+-rw-r--r--.  1 oracle oinstall        189 Nov 26  2020 .profile_traxtst
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Public
+drwx------.  2 oracle oinstall       4096 Jan 28  2020 .pulse
+-rw-------.  1 oracle oinstall        256 Nov 20  2019 .pulse-cookie
+-rw-r--r--.  1 oracle oinstall      11197 Jun 18  2020 r.sql
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Rubrik-cua
+drwxr-xr-x.  3 oracle oinstall       4096 Sep  2  2020 rubrik_oracle_tools
+drwxr-xr-x.  4 oracle oinstall       4096 Jul 17  2020 Rubrik_Tools
+drwxr-xr-x.  2 oracle oinstall       4096 Dec  9 14:22 SCTASK0163967_traxtrn
+-rw-r-----.  1 oracle oinstall  353372540 Feb  1 17:06 sqlnet.log
+drwx------.  2 oracle oinstall       4096 May  4  2020 .ssh
+-rw-r--r--.  1 oracle oinstall      19436 Sep 16  2020 sshpass-1.05-1.el6.rf.x86_64.rpm
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Templates
+-rw-r--r--.  1 oracle oinstall       5142 Mar  5  2020 test01.sql
+drwxr-xr-x.  7 oracle oinstall      20480 Nov 11 04:57 TRAX
+-rw-r--r--.  1 oracle oinstall     173071 Jan  9  2020 traxdev_clone_20200108.log
+-rw-r--r--.  1 oracle oinstall      28156 Jan  8  2020 traxdev_clone_20200108.log_01
+-rwxr-xr-x.  1 oracle oinstall       1245 Jan  8  2020 traxdev_clone.sh
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  1  2021 TRAXQA_REFRESH
+-rw-r--r--.  1 oracle oinstall       4963 Oct 23  2020 TRAXSTG_index.log
+-rw-r--r--.  1 oracle oinstall    7886172 Mar 10  2020 TRAX.tar.gz
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Videos
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 15 10:09 .vim
+-rw-------.  1 oracle oinstall       9929 Feb  1 05:04 .viminfo
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .vnc
+-rw-------.  1 oracle oinstall        173 Jul 24  2020 .Xauthority
+-rw-------.  1 oracle oinstall       4816 Feb 16  2020 .xsession-errors
+-rw-------.  1 oracle oinstall      11494 Jan  8  2020 .xsession-errors.old
+[oracle@JBCUALORA2001a ~]$ . .profile_traxstg
+[oracle@JBCUALORA2001a ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Feb 1 17:21:01 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL> select name, open_mode from v$database;
+
+NAME      OPEN_MODE
+--------- --------------------
+TRAXSTG   READ WRITE
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+[oracle@JBCUALORA2001a ~]$ ls -la
+total 2986332
+drwx------. 49 oracle users          4096 Feb  1 17:25 .
+drwxr-xr-x.  7 root   root           4096 May 25  2021 ..
+-rw-r--r--.  1 oracle oinstall      67549 Feb 18  2020 01_grnt_privtorole.sql
+-rw-r--r--.  1 oracle oinstall       2279 Aug 20  2020 01_traxstg_scheduler_job_20AUG20.sql
+-rw-r--r--.  1 oracle oinstall       3844 Jun 18  2020 1
+drwxr-xr-x.  3 oracle oinstall       4096 May 24  2021 24MAY2021_scripts
+-rw-r--r--.  1 oracle oinstall     196304 Aug 17 17:26 6_log.sql
+-rw-r--r--.  1 root   root            595 Jan 28  2020 70-persistent-net.rules
+-rw-r--r--.  1 oracle oinstall     197666 Aug 17 17:26 7_log.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .abrt
+drwx------.  3 oracle oinstall       4096 Oct  8  2020 .ansible
+drwxr-xr-x.  2 oracle oinstall       4096 Oct  8  2020 .ansible_async
+-rw-r--r--.  1 oracle oinstall    1412556 Sep 22  2020 AWR_TRAXSTG_sep22_15-16.html
+-rw-------.  1 oracle oinstall      20521 Feb  1 09:06 .bash_history
+-rw-r--r--.  1 oracle users            18 Mar 22  2017 .bash_logout
+-rw-r--r--.  1 oracle oinstall        860 Oct  8  2020 .bash_profile
+-rw-r--r--.  1 oracle users           124 Mar 22  2017 .bashrc
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .cache
+-rw-r--r--.  1 oracle oinstall       8077 Mar 10  2020 CHG0038604.log
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  5  2020 CHG0043254
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 25  2020 CHG0043827
+drwxr-xr-x.  2 oracle oinstall       4096 Sep  8  2020 CHG0044401
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 19  2020 CHG0044610
+drwxr-xr-x.  2 oracle oinstall       4096 Feb 26  2021 CHG0049142
+drwxr-xr-x.  2 oracle oinstall       4096 Mar 30  2021 CHG0049615
+drwxr-xr-x.  2 oracle oinstall       4096 Jun 29  2021 CHG0052880_29062021
+-rw-r--r--.  1 oracle oinstall        569 Jan 25 14:30 chg56626.txt
+drwxr-xr-x.  4 oracle oinstall       4096 Nov 30 09:59 cintra
+drwxrwxrwx. 12 oracle oinstall       4096 Feb  1 05:04 Cintra
+drwxr-xr-x.  5 oracle oinstall       4096 Nov 20  2019 .config
+-rw-r--r--.  1 oracle oinstall       4520 Oct 29  2020 cronjobs_20201028.txt
+-rw-r--r--.  1 oracle oinstall       3840 Jul 23  2020 cron.oracle.23july
+-rw-r--r--.  1 oracle oinstall       4531 Jan  9  2021 cron.oracle.9jan2021
+-rw-r--r--.  1 oracle oinstall       3840 Jun 30  2020 crontab-20203006.txt
+-rw-r--r--.  1 oracle asmadmin       1138 Jan  8  2020 ctrl_traxqa.sql
+drwxr-xr-x.  7 oracle oinstall       4096 Mar 30  2021 database
+drwx------.  3 oracle oinstall       4096 Nov 20  2019 .dbus
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Desktop
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Documents
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Downloads
+-rw-------.  1 oracle oinstall         16 Nov 20  2019 .esd_auth
+drwx------.  4 oracle oinstall       4096 Jan 28  2020 .gconf
+drwxr-xr-x.  5 oracle users          4096 Nov 20  2019 .gnome2
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .gnote
+drwx------.  2 oracle oinstall       4096 Jan 28  2020 .gnupg
+-rw-r--r--.  1 oracle oinstall     128525 Aug 15 23:24 grant_new.sql
+-rw-r--r--.  1 oracle oinstall     129042 Aug 15 23:21 grant.sql
+-rw-r--r--.  1 oracle oinstall        142 Jan 28  2020 .gtk-bookmarks
+drwx------.  2 oracle oinstall       4096 Nov 20  2019 .gvfs
+-rw-r--r--.  1 oracle oinstall      49600 Jul 15  2021 hot_fix_traxstg.txt
+-rw-------.  1 oracle oinstall       1876 Jan 28  2020 .ICEauthority
+-rw-r--r--.  1 oracle oinstall        639 Jan 28  2020 .imsettings.log
+-rw-r--r--.  1 oracle asmadmin       1731 Jan  6  2020 init01_traxdev.ora
+-rw-r--r--.  1 oracle asmadmin       1735 Jan  5  2020 init01_traxdev.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1663 Jan  3  2020 initbkpTRAXDEV.ora
+-rw-r--r--.  1 oracle asmadmin       1632 Jan  3  2020 init_traxdev031219.ora
+-rw-r--r--.  1 oracle asmadmin       2263 Jan  8  2020 inittraxdev_20200108.ora
+-rw-r--r--.  1 oracle asmadmin       2295 Jan  9  2020 inittraxdev20200109.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1688 Jan  5  2020 initTRAXDEV.ora
+-rw-r--r--.  1 oracle oinstall       1671 Jan  5  2020 initTRAXDEV.ora_org
+-rw-r--r--.  1 oracle asmadmin       2211 Jan  8  2020 inittraxqa_nva_20200108.ora
+-rw-r--r--.  1 oracle asmadmin       2209 Jan  8  2020 inittraxqa_nva_20200108.ora_bkp
+-rw-r--r--.  1 oracle oinstall       1672 Jan  8  2020 inittraxqa_nva_20200108.ora_original
+-rw-r--r--.  1 oracle oinstall       1687 Jan  8  2020 inittraxqa.ora
+-rw-r--r--.  1 oracle oinstall       1639 Jan  8  2020 inittraxqa.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       2296 Jan 14  2020 initTRAXSTG_DR.ora
+-rw-r--r--.  1 oracle oinstall       2235 Jan  8  2020 inittraxtrn_20200108.ora
+-rw-r--r--.  1 oracle oinstall      48948 Aug 17 17:24 jetblue_patch.txt
+-rw-r--r--.  1 oracle oinstall 1673544724 Nov 20  2019 linuxamd64_12102_database_1of2.zip
+-rw-r--r--.  1 oracle oinstall 1014530602 Nov 20  2019 linuxamd64_12102_database_2of2.zip
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .local
+-rw-r-----.  1 oracle oinstall        316 Jun  1  2021 log_file_client.log
+-rw-r--r--.  1 oracle oinstall       1407 Feb  1 17:15 MEL_MASTER_UPDATES.txt
+drwxr-xr-x.  4 oracle users          4096 Nov 20  2019 .mozilla
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Music
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .nautilus
+-rw-------.  1 oracle oinstall         13 Aug  8  2020 nohup.out
+-rw-r--r--.  1 oracle oinstall       2796 Mar  6  2020 null_value.sql
+-rw-r--r--.  1 oracle oinstall    2314468 Feb 12  2020 odb123.lst
+-rw-r--r--.  1 oracle oinstall    3141085 Feb 12  2020 odb_ro1.lst
+drwx------.  2 oracle asmadmin       4096 Aug  6  2020 .oit
+drwxr-xr-x.  2 oracle oinstall       4096 Oct  8  2020 .oracle_jre_usage
+drwxr-----.  3 oracle oinstall       4096 Jan  8  2020 oradiag_oracle
+-rw-r--r--.  1 oracle oinstall       3353 Mar  6  2020 other_value.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 22  2019 patch
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Pictures
+-rw-r--r--.  1 oracle oinstall        172 Sep  2  2020 .profile_trax2cln
+-rw-r--r--.  1 oracle oinstall        189 Oct 29  2020 .profile_traxcln
+-rw-r--r--.  1 oracle oinstall        186 Nov 19  2020 .profile_traxdev
+-rw-r--r--.  1 oracle oinstall        230 Aug  6  2020 .profile_traxprd
+-rw-r--r--.  1 oracle oinstall        188 Jan  6  2021 .profile_traxqa
+-rw-r--r--.  1 oracle oinstall        189 Oct 23  2020 .profile_traxstg
+-rw-r--r--.  1 oracle oinstall        186 Nov 23  2020 .profile_traxtrn
+-rw-r--r--.  1 oracle oinstall        189 Nov 26  2020 .profile_traxtst
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Public
+drwx------.  2 oracle oinstall       4096 Jan 28  2020 .pulse
+-rw-------.  1 oracle oinstall        256 Nov 20  2019 .pulse-cookie
+-rw-r--r--.  1 oracle oinstall      11197 Jun 18  2020 r.sql
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Rubrik-cua
+drwxr-xr-x.  3 oracle oinstall       4096 Sep  2  2020 rubrik_oracle_tools
+drwxr-xr-x.  4 oracle oinstall       4096 Jul 17  2020 Rubrik_Tools
+drwxr-xr-x.  2 oracle oinstall       4096 Dec  9 14:22 SCTASK0163967_traxtrn
+-rw-r-----.  1 oracle oinstall  353372880 Feb  1 17:21 sqlnet.log
+drwx------.  2 oracle oinstall       4096 May  4  2020 .ssh
+-rw-r--r--.  1 oracle oinstall      19436 Sep 16  2020 sshpass-1.05-1.el6.rf.x86_64.rpm
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Templates
+-rw-r--r--.  1 oracle oinstall       5142 Mar  5  2020 test01.sql
+drwxr-xr-x.  7 oracle oinstall      20480 Nov 11 04:57 TRAX
+-rw-r--r--.  1 oracle oinstall     173071 Jan  9  2020 traxdev_clone_20200108.log
+-rw-r--r--.  1 oracle oinstall      28156 Jan  8  2020 traxdev_clone_20200108.log_01
+-rwxr-xr-x.  1 oracle oinstall       1245 Jan  8  2020 traxdev_clone.sh
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  1  2021 TRAXQA_REFRESH
+-rw-r--r--.  1 oracle oinstall       4963 Oct 23  2020 TRAXSTG_index.log
+-rw-r--r--.  1 oracle oinstall    7886172 Mar 10  2020 TRAX.tar.gz
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Videos
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 15 10:09 .vim
+-rw-------.  1 oracle oinstall       9929 Feb  1 05:04 .viminfo
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .vnc
+-rw-------.  1 oracle oinstall        173 Jul 24  2020 .Xauthority
+-rw-------.  1 oracle oinstall       4816 Feb 16  2020 .xsession-errors
+-rw-------.  1 oracle oinstall      11494 Jan  8  2020 .xsession-errors.old
+[oracle@JBCUALORA2001a ~]$ ls -ltr
+total 2986120
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Videos
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Templates
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Public
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Pictures
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Music
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Downloads
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Desktop
+-rw-r--r--.  1 oracle oinstall 1673544724 Nov 20  2019 linuxamd64_12102_database_1of2.zip
+-rw-r--r--.  1 oracle oinstall 1014530602 Nov 20  2019 linuxamd64_12102_database_2of2.zip
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 22  2019 patch
+-rw-r--r--.  1 oracle asmadmin       1632 Jan  3  2020 init_traxdev031219.ora
+-rw-r--r--.  1 oracle asmadmin       1663 Jan  3  2020 initbkpTRAXDEV.ora
+-rw-r--r--.  1 oracle oinstall       1671 Jan  5  2020 initTRAXDEV.ora_org
+-rw-r--r--.  1 oracle asmadmin       1688 Jan  5  2020 initTRAXDEV.ora
+-rw-r--r--.  1 oracle asmadmin       1735 Jan  5  2020 init01_traxdev.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1731 Jan  6  2020 init01_traxdev.ora
+-rw-r--r--.  1 oracle asmadmin       1138 Jan  8  2020 ctrl_traxqa.sql
+-rw-r--r--.  1 oracle asmadmin       2263 Jan  8  2020 inittraxdev_20200108.ora
+-rw-r--r--.  1 oracle oinstall       1639 Jan  8  2020 inittraxqa.ora_bkp
+-rw-r--r--.  1 oracle oinstall       1687 Jan  8  2020 inittraxqa.ora
+-rw-r--r--.  1 oracle oinstall       1672 Jan  8  2020 inittraxqa_nva_20200108.ora_original
+-rw-r--r--.  1 oracle asmadmin       2209 Jan  8  2020 inittraxqa_nva_20200108.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       2211 Jan  8  2020 inittraxqa_nva_20200108.ora
+-rw-r--r--.  1 oracle oinstall       2235 Jan  8  2020 inittraxtrn_20200108.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora_bkp
+-rwxr-xr-x.  1 oracle oinstall       1245 Jan  8  2020 traxdev_clone.sh
+-rw-r--r--.  1 oracle oinstall      28156 Jan  8  2020 traxdev_clone_20200108.log_01
+drwxr-----.  3 oracle oinstall       4096 Jan  8  2020 oradiag_oracle
+-rw-r--r--.  1 oracle oinstall     173071 Jan  9  2020 traxdev_clone_20200108.log
+-rw-r--r--.  1 oracle asmadmin       2295 Jan  9  2020 inittraxdev20200109.ora
+-rw-r--r--.  1 oracle asmadmin       2296 Jan 14  2020 initTRAXSTG_DR.ora
+-rw-r--r--.  1 root   root            595 Jan 28  2020 70-persistent-net.rules
+-rw-r--r--.  1 oracle oinstall    3141085 Feb 12  2020 odb_ro1.lst
+-rw-r--r--.  1 oracle oinstall    2314468 Feb 12  2020 odb123.lst
+-rw-r--r--.  1 oracle oinstall      67549 Feb 18  2020 01_grnt_privtorole.sql
+-rw-r--r--.  1 oracle oinstall       5142 Mar  5  2020 test01.sql
+-rw-r--r--.  1 oracle oinstall       2796 Mar  6  2020 null_value.sql
+-rw-r--r--.  1 oracle oinstall       3353 Mar  6  2020 other_value.sql
+-rw-r--r--.  1 oracle oinstall    7886172 Mar 10  2020 TRAX.tar.gz
+-rw-r--r--.  1 oracle oinstall       8077 Mar 10  2020 CHG0038604.log
+-rw-r--r--.  1 oracle oinstall      11197 Jun 18  2020 r.sql
+-rw-r--r--.  1 oracle oinstall       3844 Jun 18  2020 1
+-rw-r--r--.  1 oracle oinstall       3840 Jun 30  2020 crontab-20203006.txt
+drwxr-xr-x.  4 oracle oinstall       4096 Jul 17  2020 Rubrik_Tools
+-rw-r--r--.  1 oracle oinstall       3840 Jul 23  2020 cron.oracle.23july
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  5  2020 CHG0043254
+-rw-------.  1 oracle oinstall         13 Aug  8  2020 nohup.out
+-rw-r--r--.  1 oracle oinstall       2279 Aug 20  2020 01_traxstg_scheduler_job_20AUG20.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 25  2020 CHG0043827
+drwxr-xr-x.  3 oracle oinstall       4096 Sep  2  2020 rubrik_oracle_tools
+drwxr-xr-x.  2 oracle oinstall       4096 Sep  8  2020 CHG0044401
+-rw-r--r--.  1 oracle oinstall      19436 Sep 16  2020 sshpass-1.05-1.el6.rf.x86_64.rpm
+-rw-r--r--.  1 oracle oinstall    1412556 Sep 22  2020 AWR_TRAXSTG_sep22_15-16.html
+-rw-r--r--.  1 oracle oinstall       4963 Oct 23  2020 TRAXSTG_index.log
+-rw-r--r--.  1 oracle oinstall       4520 Oct 29  2020 cronjobs_20201028.txt
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 19  2020 CHG0044610
+-rw-r--r--.  1 oracle oinstall       4531 Jan  9  2021 cron.oracle.9jan2021
+drwxr-xr-x.  2 oracle oinstall       4096 Feb 26  2021 CHG0049142
+drwxr-xr-x.  7 oracle oinstall       4096 Mar 30  2021 database
+drwxr-xr-x.  2 oracle oinstall       4096 Mar 30  2021 CHG0049615
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Documents
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Rubrik-cua
+drwxr-xr-x.  3 oracle oinstall       4096 May 24  2021 24MAY2021_scripts
+-rw-r-----.  1 oracle oinstall        316 Jun  1  2021 log_file_client.log
+drwxr-xr-x.  2 oracle oinstall       4096 Jun 29  2021 CHG0052880_29062021
+-rw-r--r--.  1 oracle oinstall      49600 Jul 15  2021 hot_fix_traxstg.txt
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  1  2021 TRAXQA_REFRESH
+-rw-r--r--.  1 oracle oinstall     129042 Aug 15 23:21 grant.sql
+-rw-r--r--.  1 oracle oinstall     128525 Aug 15 23:24 grant_new.sql
+-rw-r--r--.  1 oracle oinstall      48948 Aug 17 17:24 jetblue_patch.txt
+-rw-r--r--.  1 oracle oinstall     196304 Aug 17 17:26 6_log.sql
+-rw-r--r--.  1 oracle oinstall     197666 Aug 17 17:26 7_log.sql
+drwxr-xr-x.  7 oracle oinstall      20480 Nov 11 04:57 TRAX
+drwxr-xr-x.  4 oracle oinstall       4096 Nov 30 09:59 cintra
+drwxr-xr-x.  2 oracle oinstall       4096 Dec  9 14:22 SCTASK0163967_traxtrn
+-rw-r--r--.  1 oracle oinstall        569 Jan 25 14:30 chg56626.txt
+drwxrwxrwx. 12 oracle oinstall       4096 Feb  1 05:04 Cintra
+-rw-r--r--.  1 oracle oinstall       1407 Feb  1 17:15 MEL_MASTER_UPDATES.txt
+-rw-r-----.  1 oracle oinstall  353372880 Feb  1 17:21 sqlnet.log
+[oracle@JBCUALORA2001a ~]$ . oraenv
+ORACLE_SID = [TRAXSTG1] ?
+ORACLE_HOME = [/home/oracle] ?
+ORACLE_BASE environment variable is not being set since this
+information is not available for the current user ID oracle.
+You can set ORACLE_BASE manually if it is required.
+Resetting ORACLE_BASE to its previous value or ORACLE_HOME
+The Oracle base remains unchanged with value /u02/app/oracle
+[oracle@JBCUALORA2001a ~]$ sqlplus / as sysdba
+-bash: sqlplus: command not found
+[oracle@JBCUALORA2001a ~]$ ls -la
+total 2986332
+drwx------. 49 oracle users          4096 Feb  1 17:25 .
+drwxr-xr-x.  7 root   root           4096 May 25  2021 ..
+-rw-r--r--.  1 oracle oinstall      67549 Feb 18  2020 01_grnt_privtorole.sql
+-rw-r--r--.  1 oracle oinstall       2279 Aug 20  2020 01_traxstg_scheduler_job_20AUG20.sql
+-rw-r--r--.  1 oracle oinstall       3844 Jun 18  2020 1
+drwxr-xr-x.  3 oracle oinstall       4096 May 24  2021 24MAY2021_scripts
+-rw-r--r--.  1 oracle oinstall     196304 Aug 17 17:26 6_log.sql
+-rw-r--r--.  1 root   root            595 Jan 28  2020 70-persistent-net.rules
+-rw-r--r--.  1 oracle oinstall     197666 Aug 17 17:26 7_log.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .abrt
+drwx------.  3 oracle oinstall       4096 Oct  8  2020 .ansible
+drwxr-xr-x.  2 oracle oinstall       4096 Oct  8  2020 .ansible_async
+-rw-r--r--.  1 oracle oinstall    1412556 Sep 22  2020 AWR_TRAXSTG_sep22_15-16.html
+-rw-------.  1 oracle oinstall      20521 Feb  1 09:06 .bash_history
+-rw-r--r--.  1 oracle users            18 Mar 22  2017 .bash_logout
+-rw-r--r--.  1 oracle oinstall        860 Oct  8  2020 .bash_profile
+-rw-r--r--.  1 oracle users           124 Mar 22  2017 .bashrc
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .cache
+-rw-r--r--.  1 oracle oinstall       8077 Mar 10  2020 CHG0038604.log
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  5  2020 CHG0043254
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 25  2020 CHG0043827
+drwxr-xr-x.  2 oracle oinstall       4096 Sep  8  2020 CHG0044401
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 19  2020 CHG0044610
+drwxr-xr-x.  2 oracle oinstall       4096 Feb 26  2021 CHG0049142
+drwxr-xr-x.  2 oracle oinstall       4096 Mar 30  2021 CHG0049615
+drwxr-xr-x.  2 oracle oinstall       4096 Jun 29  2021 CHG0052880_29062021
+-rw-r--r--.  1 oracle oinstall        569 Jan 25 14:30 chg56626.txt
+drwxr-xr-x.  4 oracle oinstall       4096 Nov 30 09:59 cintra
+drwxrwxrwx. 12 oracle oinstall       4096 Feb  1 05:04 Cintra
+drwxr-xr-x.  5 oracle oinstall       4096 Nov 20  2019 .config
+-rw-r--r--.  1 oracle oinstall       4520 Oct 29  2020 cronjobs_20201028.txt
+-rw-r--r--.  1 oracle oinstall       3840 Jul 23  2020 cron.oracle.23july
+-rw-r--r--.  1 oracle oinstall       4531 Jan  9  2021 cron.oracle.9jan2021
+-rw-r--r--.  1 oracle oinstall       3840 Jun 30  2020 crontab-20203006.txt
+-rw-r--r--.  1 oracle asmadmin       1138 Jan  8  2020 ctrl_traxqa.sql
+drwxr-xr-x.  7 oracle oinstall       4096 Mar 30  2021 database
+drwx------.  3 oracle oinstall       4096 Nov 20  2019 .dbus
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Desktop
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Documents
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Downloads
+-rw-------.  1 oracle oinstall         16 Nov 20  2019 .esd_auth
+drwx------.  4 oracle oinstall       4096 Jan 28  2020 .gconf
+drwxr-xr-x.  5 oracle users          4096 Nov 20  2019 .gnome2
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .gnote
+drwx------.  2 oracle oinstall       4096 Jan 28  2020 .gnupg
+-rw-r--r--.  1 oracle oinstall     128525 Aug 15 23:24 grant_new.sql
+-rw-r--r--.  1 oracle oinstall     129042 Aug 15 23:21 grant.sql
+-rw-r--r--.  1 oracle oinstall        142 Jan 28  2020 .gtk-bookmarks
+drwx------.  2 oracle oinstall       4096 Nov 20  2019 .gvfs
+-rw-r--r--.  1 oracle oinstall      49600 Jul 15  2021 hot_fix_traxstg.txt
+-rw-------.  1 oracle oinstall       1876 Jan 28  2020 .ICEauthority
+-rw-r--r--.  1 oracle oinstall        639 Jan 28  2020 .imsettings.log
+-rw-r--r--.  1 oracle asmadmin       1731 Jan  6  2020 init01_traxdev.ora
+-rw-r--r--.  1 oracle asmadmin       1735 Jan  5  2020 init01_traxdev.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1663 Jan  3  2020 initbkpTRAXDEV.ora
+-rw-r--r--.  1 oracle asmadmin       1632 Jan  3  2020 init_traxdev031219.ora
+-rw-r--r--.  1 oracle asmadmin       2263 Jan  8  2020 inittraxdev_20200108.ora
+-rw-r--r--.  1 oracle asmadmin       2295 Jan  9  2020 inittraxdev20200109.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1688 Jan  5  2020 initTRAXDEV.ora
+-rw-r--r--.  1 oracle oinstall       1671 Jan  5  2020 initTRAXDEV.ora_org
+-rw-r--r--.  1 oracle asmadmin       2211 Jan  8  2020 inittraxqa_nva_20200108.ora
+-rw-r--r--.  1 oracle asmadmin       2209 Jan  8  2020 inittraxqa_nva_20200108.ora_bkp
+-rw-r--r--.  1 oracle oinstall       1672 Jan  8  2020 inittraxqa_nva_20200108.ora_original
+-rw-r--r--.  1 oracle oinstall       1687 Jan  8  2020 inittraxqa.ora
+-rw-r--r--.  1 oracle oinstall       1639 Jan  8  2020 inittraxqa.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       2296 Jan 14  2020 initTRAXSTG_DR.ora
+-rw-r--r--.  1 oracle oinstall       2235 Jan  8  2020 inittraxtrn_20200108.ora
+-rw-r--r--.  1 oracle oinstall      48948 Aug 17 17:24 jetblue_patch.txt
+-rw-r--r--.  1 oracle oinstall 1673544724 Nov 20  2019 linuxamd64_12102_database_1of2.zip
+-rw-r--r--.  1 oracle oinstall 1014530602 Nov 20  2019 linuxamd64_12102_database_2of2.zip
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 20  2019 .local
+-rw-r-----.  1 oracle oinstall        316 Jun  1  2021 log_file_client.log
+-rw-r--r--.  1 oracle oinstall       1407 Feb  1 17:15 MEL_MASTER_UPDATES.txt
+drwxr-xr-x.  4 oracle users          4096 Nov 20  2019 .mozilla
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Music
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .nautilus
+-rw-------.  1 oracle oinstall         13 Aug  8  2020 nohup.out
+-rw-r--r--.  1 oracle oinstall       2796 Mar  6  2020 null_value.sql
+-rw-r--r--.  1 oracle oinstall    2314468 Feb 12  2020 odb123.lst
+-rw-r--r--.  1 oracle oinstall    3141085 Feb 12  2020 odb_ro1.lst
+drwx------.  2 oracle asmadmin       4096 Aug  6  2020 .oit
+drwxr-xr-x.  2 oracle oinstall       4096 Oct  8  2020 .oracle_jre_usage
+drwxr-----.  3 oracle oinstall       4096 Jan  8  2020 oradiag_oracle
+-rw-r--r--.  1 oracle oinstall       3353 Mar  6  2020 other_value.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 22  2019 patch
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Pictures
+-rw-r--r--.  1 oracle oinstall        172 Sep  2  2020 .profile_trax2cln
+-rw-r--r--.  1 oracle oinstall        189 Oct 29  2020 .profile_traxcln
+-rw-r--r--.  1 oracle oinstall        186 Nov 19  2020 .profile_traxdev
+-rw-r--r--.  1 oracle oinstall        230 Aug  6  2020 .profile_traxprd
+-rw-r--r--.  1 oracle oinstall        188 Jan  6  2021 .profile_traxqa
+-rw-r--r--.  1 oracle oinstall        189 Oct 23  2020 .profile_traxstg
+-rw-r--r--.  1 oracle oinstall        186 Nov 23  2020 .profile_traxtrn
+-rw-r--r--.  1 oracle oinstall        189 Nov 26  2020 .profile_traxtst
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Public
+drwx------.  2 oracle oinstall       4096 Jan 28  2020 .pulse
+-rw-------.  1 oracle oinstall        256 Nov 20  2019 .pulse-cookie
+-rw-r--r--.  1 oracle oinstall      11197 Jun 18  2020 r.sql
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Rubrik-cua
+drwxr-xr-x.  3 oracle oinstall       4096 Sep  2  2020 rubrik_oracle_tools
+drwxr-xr-x.  4 oracle oinstall       4096 Jul 17  2020 Rubrik_Tools
+drwxr-xr-x.  2 oracle oinstall       4096 Dec  9 14:22 SCTASK0163967_traxtrn
+-rw-r-----.  1 oracle oinstall  353372880 Feb  1 17:21 sqlnet.log
+drwx------.  2 oracle oinstall       4096 May  4  2020 .ssh
+-rw-r--r--.  1 oracle oinstall      19436 Sep 16  2020 sshpass-1.05-1.el6.rf.x86_64.rpm
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Templates
+-rw-r--r--.  1 oracle oinstall       5142 Mar  5  2020 test01.sql
+drwxr-xr-x.  7 oracle oinstall      20480 Nov 11 04:57 TRAX
+-rw-r--r--.  1 oracle oinstall     173071 Jan  9  2020 traxdev_clone_20200108.log
+-rw-r--r--.  1 oracle oinstall      28156 Jan  8  2020 traxdev_clone_20200108.log_01
+-rwxr-xr-x.  1 oracle oinstall       1245 Jan  8  2020 traxdev_clone.sh
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  1  2021 TRAXQA_REFRESH
+-rw-r--r--.  1 oracle oinstall       4963 Oct 23  2020 TRAXSTG_index.log
+-rw-r--r--.  1 oracle oinstall    7886172 Mar 10  2020 TRAX.tar.gz
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Videos
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 15 10:09 .vim
+-rw-------.  1 oracle oinstall       9929 Feb  1 05:04 .viminfo
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 .vnc
+-rw-------.  1 oracle oinstall        173 Jul 24  2020 .Xauthority
+-rw-------.  1 oracle oinstall       4816 Feb 16  2020 .xsession-errors
+-rw-------.  1 oracle oinstall      11494 Jan  8  2020 .xsession-errors.old
+[oracle@JBCUALORA2001a ~]$ cat /etc/oratab
+#Backup file is  /u02/app/oracle/product/12.1.0/dbhome_20201008061648/srvm/admin/oratab.bak.jbcualora2001a line added by Agent
+#
+
+
+
+# This file is used by ORACLE utilities.  It is created by root.sh
+# and updated by either Database Configuration Assistant while creating
+# a database or ASM Configuration Assistant while creating ASM instance.
+
+# A colon, ':', is used as the field terminator.  A new line terminates
+# the entry.  Lines beginning with a pound sign, '#', are comments.
+#
+# Entries are of the form:
+#   $ORACLE_SID:$ORACLE_HOME:<N|Y>:
+#
+# The first and second fields are the system identifier and home
+# directory of the database respectively.  The third field indicates
+# to the dbstart utility that the database should , "Y", or should not,
+# "N", be brought up at system boot time.
+#
+# Multiple entries with the same $ORACLE_SID are not allowed.
+#
+#
+TSTDB_NVA:/u02/app/oracle/product/12.1.0/dbhome_1:N             # line added by Agent
+TRAXPRD:/u02/app/oracle/product/12.1.0/dbhome_1:N               # line added by Agent
+TRAXDEV_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N              # line added by Agent
+TRAXQA_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N               # line added by Agent
++ASM1:/u01/app/12.1.0/grid_20201008061639:N             # line added by Agent
+TRAXTRN_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N              # line added by Agent
+TRAXSTG_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N              # line added by Agent
+TRAXCLN:/u02/app/oracle/product/12.1.0/dbhome_20201008061648:N          # line added by Agent
+[oracle@JBCUALORA2001a ~]$ ls -ltr
+total 2986120
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Videos
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Templates
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Public
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Pictures
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Music
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Downloads
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 20  2019 Desktop
+-rw-r--r--.  1 oracle oinstall 1673544724 Nov 20  2019 linuxamd64_12102_database_1of2.zip
+-rw-r--r--.  1 oracle oinstall 1014530602 Nov 20  2019 linuxamd64_12102_database_2of2.zip
+drwxr-xr-x.  2 oracle oinstall       4096 Nov 22  2019 patch
+-rw-r--r--.  1 oracle asmadmin       1632 Jan  3  2020 init_traxdev031219.ora
+-rw-r--r--.  1 oracle asmadmin       1663 Jan  3  2020 initbkpTRAXDEV.ora
+-rw-r--r--.  1 oracle oinstall       1671 Jan  5  2020 initTRAXDEV.ora_org
+-rw-r--r--.  1 oracle asmadmin       1688 Jan  5  2020 initTRAXDEV.ora
+-rw-r--r--.  1 oracle asmadmin       1735 Jan  5  2020 init01_traxdev.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       1731 Jan  6  2020 init01_traxdev.ora
+-rw-r--r--.  1 oracle asmadmin       1138 Jan  8  2020 ctrl_traxqa.sql
+-rw-r--r--.  1 oracle asmadmin       2263 Jan  8  2020 inittraxdev_20200108.ora
+-rw-r--r--.  1 oracle oinstall       1639 Jan  8  2020 inittraxqa.ora_bkp
+-rw-r--r--.  1 oracle oinstall       1687 Jan  8  2020 inittraxqa.ora
+-rw-r--r--.  1 oracle oinstall       1672 Jan  8  2020 inittraxqa_nva_20200108.ora_original
+-rw-r--r--.  1 oracle asmadmin       2209 Jan  8  2020 inittraxqa_nva_20200108.ora_bkp
+-rw-r--r--.  1 oracle asmadmin       2211 Jan  8  2020 inittraxqa_nva_20200108.ora
+-rw-r--r--.  1 oracle oinstall       2235 Jan  8  2020 inittraxtrn_20200108.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora
+-rw-r--r--.  1 oracle asmadmin       2264 Jan  8  2020 init_TRAXDEV_NVA.ora_bkp
+-rwxr-xr-x.  1 oracle oinstall       1245 Jan  8  2020 traxdev_clone.sh
+-rw-r--r--.  1 oracle oinstall      28156 Jan  8  2020 traxdev_clone_20200108.log_01
+drwxr-----.  3 oracle oinstall       4096 Jan  8  2020 oradiag_oracle
+-rw-r--r--.  1 oracle oinstall     173071 Jan  9  2020 traxdev_clone_20200108.log
+-rw-r--r--.  1 oracle asmadmin       2295 Jan  9  2020 inittraxdev20200109.ora
+-rw-r--r--.  1 oracle asmadmin       2296 Jan 14  2020 initTRAXSTG_DR.ora
+-rw-r--r--.  1 root   root            595 Jan 28  2020 70-persistent-net.rules
+-rw-r--r--.  1 oracle oinstall    3141085 Feb 12  2020 odb_ro1.lst
+-rw-r--r--.  1 oracle oinstall    2314468 Feb 12  2020 odb123.lst
+-rw-r--r--.  1 oracle oinstall      67549 Feb 18  2020 01_grnt_privtorole.sql
+-rw-r--r--.  1 oracle oinstall       5142 Mar  5  2020 test01.sql
+-rw-r--r--.  1 oracle oinstall       2796 Mar  6  2020 null_value.sql
+-rw-r--r--.  1 oracle oinstall       3353 Mar  6  2020 other_value.sql
+-rw-r--r--.  1 oracle oinstall    7886172 Mar 10  2020 TRAX.tar.gz
+-rw-r--r--.  1 oracle oinstall       8077 Mar 10  2020 CHG0038604.log
+-rw-r--r--.  1 oracle oinstall      11197 Jun 18  2020 r.sql
+-rw-r--r--.  1 oracle oinstall       3844 Jun 18  2020 1
+-rw-r--r--.  1 oracle oinstall       3840 Jun 30  2020 crontab-20203006.txt
+drwxr-xr-x.  4 oracle oinstall       4096 Jul 17  2020 Rubrik_Tools
+-rw-r--r--.  1 oracle oinstall       3840 Jul 23  2020 cron.oracle.23july
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  5  2020 CHG0043254
+-rw-------.  1 oracle oinstall         13 Aug  8  2020 nohup.out
+-rw-r--r--.  1 oracle oinstall       2279 Aug 20  2020 01_traxstg_scheduler_job_20AUG20.sql
+drwxr-xr-x.  2 oracle oinstall       4096 Aug 25  2020 CHG0043827
+drwxr-xr-x.  3 oracle oinstall       4096 Sep  2  2020 rubrik_oracle_tools
+drwxr-xr-x.  2 oracle oinstall       4096 Sep  8  2020 CHG0044401
+-rw-r--r--.  1 oracle oinstall      19436 Sep 16  2020 sshpass-1.05-1.el6.rf.x86_64.rpm
+-rw-r--r--.  1 oracle oinstall    1412556 Sep 22  2020 AWR_TRAXSTG_sep22_15-16.html
+-rw-r--r--.  1 oracle oinstall       4963 Oct 23  2020 TRAXSTG_index.log
+-rw-r--r--.  1 oracle oinstall       4520 Oct 29  2020 cronjobs_20201028.txt
+drwxr-xr-x.  3 oracle oinstall       4096 Nov 19  2020 CHG0044610
+-rw-r--r--.  1 oracle oinstall       4531 Jan  9  2021 cron.oracle.9jan2021
+drwxr-xr-x.  2 oracle oinstall       4096 Feb 26  2021 CHG0049142
+drwxr-xr-x.  7 oracle oinstall       4096 Mar 30  2021 database
+drwxr-xr-x.  2 oracle oinstall       4096 Mar 30  2021 CHG0049615
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Documents
+drwxr-xr-x.  2 oracle oinstall       4096 May 17  2021 Rubrik-cua
+drwxr-xr-x.  3 oracle oinstall       4096 May 24  2021 24MAY2021_scripts
+-rw-r-----.  1 oracle oinstall        316 Jun  1  2021 log_file_client.log
+drwxr-xr-x.  2 oracle oinstall       4096 Jun 29  2021 CHG0052880_29062021
+-rw-r--r--.  1 oracle oinstall      49600 Jul 15  2021 hot_fix_traxstg.txt
+drwxr-xr-x.  2 oracle oinstall       4096 Aug  1  2021 TRAXQA_REFRESH
+-rw-r--r--.  1 oracle oinstall     129042 Aug 15 23:21 grant.sql
+-rw-r--r--.  1 oracle oinstall     128525 Aug 15 23:24 grant_new.sql
+-rw-r--r--.  1 oracle oinstall      48948 Aug 17 17:24 jetblue_patch.txt
+-rw-r--r--.  1 oracle oinstall     196304 Aug 17 17:26 6_log.sql
+-rw-r--r--.  1 oracle oinstall     197666 Aug 17 17:26 7_log.sql
+drwxr-xr-x.  7 oracle oinstall      20480 Nov 11 04:57 TRAX
+drwxr-xr-x.  4 oracle oinstall       4096 Nov 30 09:59 cintra
+drwxr-xr-x.  2 oracle oinstall       4096 Dec  9 14:22 SCTASK0163967_traxtrn
+-rw-r--r--.  1 oracle oinstall        569 Jan 25 14:30 chg56626.txt
+drwxrwxrwx. 12 oracle oinstall       4096 Feb  1 05:04 Cintra
+-rw-r--r--.  1 oracle oinstall       1407 Feb  1 17:15 MEL_MASTER_UPDATES.txt
+-rw-r-----.  1 oracle oinstall  353372880 Feb  1 17:21 sqlnet.log
+[oracle@JBCUALORA2001a ~]$ . .profile_traxstg
+[oracle@JBCUALORA2001a ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Feb 1 17:28:20 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL> select name,open_mode from v$database;
+
+NAME      OPEN_MODE
+--------- --------------------
+TRAXSTG   READ WRITE
+
+SQL> select owner from dba_objects where object_name='DEFECT_MEL_MASTER';
+
+OWNER
+--------------------------------------------------------------------------------
+ODB
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+[oracle@JBCUALORA2001a ~]$ ps -ef|grep pmon
+grid       7182      1  0 05:13 ?        00:00:03 asm_pmon_+ASM1
+oracle     9130      1  0 05:14 ?        00:00:04 ora_pmon_TRAXTRN1
+oracle    10541      1  0 05:14 ?        00:00:09 ora_pmon_TRAXSTG1
+oracle    44533  10305  0 17:52 pts/0    00:00:00 grep pmon
+oracle   231130      1  0 11:01 ?        00:00:02 ora_pmon_TRAXCLN1
+[oracle@JBCUALORA2001a ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Feb 1 19:08:21 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL> alter session set current_schema=ODB;
+
+Session altered.
+
+SQL> @MEL_MASTER_UPDATES.txt
+
+539 rows updated.
+
+
+4 rows updated.
+
+
+3019 rows updated.
+
+
+686 rows updated.
+
+
+684 rows updated.
+
+
+686 rows updated.
+
+
+498 rows updated.
+
+
+498 rows updated.
+
+
+3 rows updated.
+
+
+6130 rows updated.
+
+
+4890 rows updated.
+
+
+438 rows updated.
+
+
+5622 rows updated.
+
+
+568 rows updated.
+
+
+673 rows updated.
+
+SQL>
+SQL> commit;
+
+Commit complete.
+
+SQL> select * froM dba_directories;
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+ORACLE_OCM_CONFIG_DIR
+/u01/app/oracle/product/11.2.0.3/dbhome_2/ccr/state
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+DATA_PUMP_DIR
+/u01/app/oracle/product/12.1.0.2/dbhome_2/rdbms/log/
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+TRAX_EXP
+/orabak/export/TRAXPRD1/TRAXPRD_EXPORT
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+DATA_PUMP
+/orabak/TRAXPRD/export/
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+DATAPUMP_ODB
+/orabak/TRAXPRD/export/FULL_SCHEMA
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+TRAX_ODB_EXP
+/orabak/export/TRAXPRD1/TRAXPRD_BLOB_EXPORT
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+GGS_DDL_TRACE
+/u01/app/oracle/diag/rdbms/traxprd_va/TRAXPRD1/trace
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+EXP_DUMP
+/orabak/TRAXPRD_NVA/export/
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+PREUPGRADE_DIR
+/u01/app/oracle/cfgtoollogs/TRAXPRD_VA/preupgrade/
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+PREUPG_OUTPUT_DIR
+/u01/app/oracle/cfgtoollogs/dbua/TRAXPRD_VA/upgrade1
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+ORACLE_HOME
+/
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+ORACLE_BASE
+/
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+OPATCH_LOG_DIR
+/u02/app/oracle/product/12.1.0/dbhome_20201008061648/QOpatch
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+OPATCH_SCRIPT_DIR
+/u02/app/oracle/product/12.1.0/dbhome_20201008061648/QOpatch
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+OPATCH_INST_DIR
+/u02/app/oracle/product/12.1.0/dbhome_20201008061648/OPatch
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+TEST_DIR
+/cloudfs/TRAXPRD/expdp/
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+DBMS_OPTIM_ADMINDIR
+/u02/app/oracle/product/12.1.0/dbhome_20201014040700/rdbms/admin
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+EXPDP_DIR
+/cloudfs/TRAXPRD/expdp/
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+CAW_EXTR
+/u02/app/oracle/product/agent12c/agent_inst
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+TRAPRD_20210722
+/cloudfs/TRAXPRD/traxprd_20210722
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+DBMS_OPTIM_LOGDIR
+/u02/app/oracle/product/12.1.0/dbhome_20201014040700/cfgtoollogs
+            0
+
+
+OWNER
+--------------------------------------------------------------------------------
+DIRECTORY_NAME
+--------------------------------------------------------------------------------
+DIRECTORY_PATH
+--------------------------------------------------------------------------------
+ORIGIN_CON_ID
+-------------
+SYS
+OPATCH_TEMP_DIR
+/u02/app/oracle/product/12.1.0/dbhome_20201008061648/QOpatch
+            0
+
+
+22 rows selected.
+
+SQL> select owner from dba_tables where table_name=upper('relation_master');
+
+OWNER
+--------------------------------------------------------------------------------
+ODB
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+[oracle@JBCUALORA2001a ~]$ expdp \"/ as sysdba \" directory=DATA_PUMP dumpfile=relation_master_bkp01022022.dmp logfile=relation_master.log parallel=8 cluster=n
+
+Export: Release 12.1.0.2.0 - Production on Tue Feb 1 19:29:41 2022
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+ORA-39002: invalid operation
+ORA-39070: Unable to open the log file.
+ORA-29283: invalid file operation
+ORA-06512: at "SYS.UTL_FILE", line 536
+ORA-29283: invalid file operation
+
+
+[oracle@JBCUALORA2001a ~]$ expdp \"/ as sysdba \" directory=EXPDP_DIR dumpfile=pat_relation_master_bkp_01022022_%U.dmp logfile=pat_relation_master_bkp_01022022.log tables=odb.relation_master parallel=8 cluster=n reuse_dumpfiles=y filesize=1G
+
+Export: Release 12.1.0.2.0 - Production on Tue Feb 1 19:41:51 2022
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+ORA-39002: invalid operation
+ORA-39070: Unable to open the log file.
+ORA-29283: invalid file operation
+ORA-06512: at "SYS.UTL_FILE", line 536
+ORA-29283: invalid file operation
+
+
+[oracle@JBCUALORA2001a ~]$ cd /cloudfs/TRAXPRD/expdp
+-bash: cd: /cloudfs/TRAXPRD/expdp: No such file or directory
+[oracle@JBCUALORA2001a ~]$ cd /cloudfs
+[oracle@JBCUALORA2001a cloudfs]$ ls-ltr
+-bash: ls-ltr: command not found
+[oracle@JBCUALORA2001a cloudfs]$ ls -ltr
+total 20
+drwxrwxrwx. 2 root root 4096 Jun  9  2021 TRAXTRN
+drwxrwxrwx. 3 root root 4096 Jun 22  2021 TRAXQA
+drwxrwxrwx. 2 root root 4096 Aug 15 06:37 trxprd
+drwxrwxrwx. 2 root root 4096 Aug 15 06:37 TRAXTRN_refresh
+drwxrwxrwx. 3 root root 4096 Nov 11 19:52 TRAXSTG
+[oracle@JBCUALORA2001a cloudfs]$ cd /orabak/TRAXPRD/export/
+-bash: cd: /orabak/TRAXPRD/export/: No such file or directory
+[oracle@JBCUALORA2001a cloudfs]$
+[oracle@JBCUALORA2001a cloudfs]$
+[oracle@JBCUALORA2001a cloudfs]$
+[oracle@JBCUALORA2001a cloudfs]$
+[oracle@JBCUALORA2001a cloudfs]$ df -kh
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/mapper/vg_oel-root
+                      197G   11G  177G   6% /
+tmpfs                  64G  631M   64G   1% /dev/shm
+/dev/mapper/vg_oel-home
+                       99G   12G   83G  13% /home
+/dev/mapper/vg_oel-opt
+                       50G  4.3G   43G  10% /opt
+/dev/mapper/vg_oel-var
+                       50G  695M   46G   2% /var
+/dev/sda1             976M  289M  620M  32% /boot
+/dev/sde              296G  110G  173G  39% /u02
+/dev/sdf              296G   79G  205G  28% /u01
+/dev/mapper/ntnx_era_agent_vg_789cbc77e15245bc86dc819eb3f8af9e-ntnx_era_agent_lv_era_software_789cbc77e15245bc86dc819eb3f8af9e
+                      3.0G  728M  2.1G  26% /opt/era_base/era_engine
+/dev/mapper/ntnx_era_agent_vg_789cbc77e15245bc86dc819eb3f8af9e-ntnx_era_agent_lv_era_logs_789cbc77e15245bc86dc819eb3f8af9e
+                      7.8G   75M  7.4G   1% /opt/era_base/logs
+/dev/mapper/ntnx_era_agent_vg_789cbc77e15245bc86dc819eb3f8af9e-ntnx_era_agent_lv_era_config_789cbc77e15245bc86dc819eb3f8af9e
+                       93M  1.3M   86M   2% /opt/era_base/cfg
+/dev/mapper/ntnx_era_agent_vg_6b2886bd02454cdebe927c5b1563b442-ntnx_era_agent_lv_db_stagging_logs_6b2886bd02454cdebe927c5b1563b442
+                      148G   60M  140G   1% /opt/era_base/db_logs/TRAXCLN1
+/dev/mapper/ntnx_era_agent_vg_03eda6c81a4342c089a4ce8af9af93a8-ntnx_era_agent_lv_db_stagging_logs_03eda6c81a4342c089a4ce8af9af93a8
+                      148G   60M  140G   1% /opt/era_base/db_logs/TRAXDEV1
+/dev/mapper/ntnx_era_agent_vg_15a84581404d446f8a4047669a0cdc72-ntnx_era_agent_lv_db_stagging_logs_15a84581404d446f8a4047669a0cdc72
+                      148G   60M  140G   1% /opt/era_base/db_logs/TRAXQA1
+/dev/mapper/ntnx_era_agent_vg_118c8fdb9892417bbf586b364f3328e5-ntnx_era_agent_lv_db_stagging_logs_118c8fdb9892417bbf586b364f3328e5
+                      148G   60M  140G   1% /opt/era_base/db_logs/TRAXTRN1
+/dev/mapper/ntnx_era_agent_vg_90ee39df6f8d4afcbb992b900fb59c3f-ntnx_era_agent_lv_db_stagging_logs_90ee39df6f8d4afcbb992b900fb59c3f
+                      148G   60M  140G   1% /opt/era_base/db_logs/TRAXSTG1
+10.34.4.17:/data/col1/CUATRXPRD_TRAXPRD_NVA
+                      124T   98T   27T  79% /orabak/TRAXPRD_NVA
+[oracle@JBCUALORA2001a cloudfs]$ cd /orabak/TRAXPRD_NVA/export/
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$ ls -ltr
+total 15765833
+-rw-r-----. 1 oracle oinstall 16141467648 Nov 11 20:15 detail_TRAXDOC_NO_37263.DMP
+-rw-r--r--. 1 oracle asmadmin        2465 Nov 11 20:30 detail_TRAXDOC_NO_37263_IMP.LOG
+-rw-r-----. 1 oracle oinstall     2711552 Nov 11 20:57 TRAXDOC_NO_37263.DMP
+-rw-r--r--. 1 oracle oinstall         175 Nov 11 21:04 exp.par
+-rw-r-----. 1 oracle asmadmin        4096 Nov 11 21:05 01_TRAXDOC_NO_37263_prod.DMP
+-rw-r--r--. 1 oracle asmadmin         667 Nov 11 21:05 01_TRAXDOC_NO_37263_prod.LOG
+-rw-r-----. 1 oracle oinstall        2720 Nov 11 21:10 sqlnet.log
+-rw-r--r--. 1 oracle asmadmin        1523 Nov 11 21:14 TRAXDOC_NO_37263_IMP.LOG
+-rw-r--r--. 1 oracle oinstall         203 Jan 28 12:57 expdp_AC_ACTUAL_FLIGHTS_tables.par
+-rw-r-----. 1 oracle asmadmin        4096 Jan 28 13:06 export_AC_ACTUAL_FLIGHTS.dmp
+-rw-r--r--. 1 oracle asmadmin         667 Jan 28 13:06 export_AC_ACTUAL_FLIGHTS.log
+-rw-r-----. 1 oracle asmadmin        4096 Feb  1 19:25 relation_master.dmp
+-rw-r-----. 1 oracle asmadmin        4096 Feb  1 19:27 relation_master_01022022.dmp
+-rw-r--r--. 1 oracle asmadmin         666 Feb  1 19:27 relation_master.log
+-rw-r--r--. 1 oracle asmadmin         589 Feb  1 19:31 relation_master_01022022.log
+-rw-r-----. 1 oracle asmadmin        4096 Feb  1 19:34 pat_relation_master_01022022_01.dmp
+-rw-r--r--. 1 oracle asmadmin         788 Feb  1 19:35 pat_relation_master_01022022.log
+[oracle@JBCUALORA2001a export]$ expdp \"/ as sysdba \" directory=EXP_DUMP dumpfile=pat_relation_master_bkp_01022022_%U.dmp logfile=pat_relation_master_bkp_01022022.log tables=odb.relation_master parallel=8 cluster=n reuse_dumpfiles=y filesize=1G
+
+Export: Release 12.1.0.2.0 - Production on Tue Feb 1 19:46:12 2022
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+ORA-39001: invalid argument value
+ORA-39000: bad dump file specification
+ORA-31641: unable to create dump file "/orabak/TRAXPRD_NVA/export/pat_relation_master_bkp_01022022_01.dmp"
+ORA-27086: unable to lock file - already in use
+Linux-x86_64 Error: 5: Input/output error
+Additional information: 9
+Additional information: 5
+ORA-27037: unable to obtain file status
+Linux-x86_64 Error: 2: No such file or directory
+Additional information: 3
+
+
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$ scp JBCUALORA1001a:/cloudfs/TRAXPRD/expdp/pat_relation_master_01022022_0* .
+pat_relation_master_01022022_01.dmp                                                                                        100% 1036KB   1.0MB/s   00:00
+pat_relation_master_01022022_02.dmp                                                                                        100% 9548KB   9.3MB/s   00:00
+[oracle@JBCUALORA2001a export]$ ls -ltr
+total 15776418
+-rw-r-----. 1 oracle oinstall 16141467648 Nov 11 20:15 detail_TRAXDOC_NO_37263.DMP
+-rw-r--r--. 1 oracle asmadmin        2465 Nov 11 20:30 detail_TRAXDOC_NO_37263_IMP.LOG
+-rw-r-----. 1 oracle oinstall     2711552 Nov 11 20:57 TRAXDOC_NO_37263.DMP
+-rw-r--r--. 1 oracle oinstall         175 Nov 11 21:04 exp.par
+-rw-r-----. 1 oracle asmadmin        4096 Nov 11 21:05 01_TRAXDOC_NO_37263_prod.DMP
+-rw-r--r--. 1 oracle asmadmin         667 Nov 11 21:05 01_TRAXDOC_NO_37263_prod.LOG
+-rw-r-----. 1 oracle oinstall        2720 Nov 11 21:10 sqlnet.log
+-rw-r--r--. 1 oracle asmadmin        1523 Nov 11 21:14 TRAXDOC_NO_37263_IMP.LOG
+-rw-r--r--. 1 oracle oinstall         203 Jan 28 12:57 expdp_AC_ACTUAL_FLIGHTS_tables.par
+-rw-r-----. 1 oracle asmadmin        4096 Jan 28 13:06 export_AC_ACTUAL_FLIGHTS.dmp
+-rw-r--r--. 1 oracle asmadmin         667 Jan 28 13:06 export_AC_ACTUAL_FLIGHTS.log
+-rw-r-----. 1 oracle asmadmin        4096 Feb  1 19:25 relation_master.dmp
+-rw-r-----. 1 oracle asmadmin        4096 Feb  1 19:27 relation_master_01022022.dmp
+-rw-r--r--. 1 oracle asmadmin         666 Feb  1 19:27 relation_master.log
+-rw-r--r--. 1 oracle asmadmin         589 Feb  1 19:31 relation_master_01022022.log
+-rw-r--r--. 1 oracle asmadmin         788 Feb  1 19:35 pat_relation_master_01022022.log
+-rw-r-----. 1 oracle asmadmin        4096 Feb  1 19:46 pat_relation_master_bkp_01022022_01.dmp
+-rw-r--r--. 1 oracle asmadmin         792 Feb  1 19:46 pat_relation_master_bkp_01022022.log
+-rw-r-----. 1 oracle asmadmin     1060864 Feb  1 19:47 pat_relation_master_01022022_01.dmp
+-rw-r-----. 1 oracle oinstall     9777152 Feb  1 19:47 pat_relation_master_01022022_02.dmp
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$ chmod 777 .
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$ expdp \"/ as sysdba \" directory=EXP_DUMP dumpfile=pat_relation_master_bkp_01022022_%U.dmp logfile=pat_relation_master_bkp_01022022.log tables=odb.relation_master parallel=8 cluster=n reuse_dumpfiles=y filesize=1G
+
+Export: Release 12.1.0.2.0 - Production on Tue Feb 1 19:48:26 2022
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+ORA-39001: invalid argument value
+ORA-39000: bad dump file specification
+ORA-31641: unable to create dump file "/orabak/TRAXPRD_NVA/export/pat_relation_master_bkp_01022022_01.dmp"
+ORA-27086: unable to lock file - already in use
+Linux-x86_64 Error: 5: Input/output error
+Additional information: 9
+Additional information: 5
+
+
+[oracle@JBCUALORA2001a export]$ sqlplus / as sysdba
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Feb 1 19:48:54 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL> select count(*) from odb.relation_master;
+
+  COUNT(*)
+----------
+     21549
+
+SQL> create table odb.relation_master_bkp as select * from odb.relation_master;
+
+Table created.
+
+SQL> select count(*) from odb.relation_master_bkp;
+
+  COUNT(*)
+----------
+     21549
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$
+[oracle@JBCUALORA2001a export]$ impdp \"/ as sysdba \" directory=EXP_DUMP dumpfile=pat_relation_master_01022022_%U.dmp logfile=imppat_relation_master_bkp_01022022.log tables=odb.relation_master parallel=8 cluster=n table_exits_action=replace
+LRM-00101: unknown parameter name 'table_exits_action'
+
+[oracle@JBCUALORA2001a export]$ impdp \"/ as sysdba \" directory=EXP_DUMP dumpfile=pat_relation_master_01022022_%U.dmp logfile=imppat_relation_master_bkp_01022022.log tables=odb.relation_master parallel=8 cluster=n table_exists_action=replace
+
+Import: Release 12.1.0.2.0 - Production on Tue Feb 1 19:52:32 2022
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+Master table "SYS"."SYS_IMPORT_TABLE_01" successfully loaded/unloaded
+Starting "SYS"."SYS_IMPORT_TABLE_01":  "/******** AS SYSDBA" directory=EXP_DUMP dumpfile=pat_relation_master_01022022_%U.dmp logfile=imppat_relation_master_bkp_01022022.log tables=odb.relation_master parallel=8 cluster=n table_exists_action=replace
+Processing object type TABLE_EXPORT/TABLE/PROCACT_INSTANCE
+Processing object type TABLE_EXPORT/TABLE/TABLE
+Processing object type TABLE_EXPORT/TABLE/TABLE_DATA
+ORA-39365: supplemental log data could not be generated for "ODB"."RELATION_MASTER"
+. . imported "ODB"."RELATION_MASTER"                     9.319 MB   21590 rows
+Processing object type TABLE_EXPORT/TABLE/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type TABLE_EXPORT/TABLE/INDEX/INDEX
+Processing object type TABLE_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+Processing object type TABLE_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
+Processing object type TABLE_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
+Processing object type TABLE_EXPORT/TABLE/STATISTICS/MARKER
+Job "SYS"."SYS_IMPORT_TABLE_01" completed with 1 error(s) at Tue Feb 1 19:53:33 2022 elapsed 0 00:01:00
+
+
+
+
+PROD:
+
+login as: oracle
+oracle@jbcualora1001a's password:
+Last login: Tue Feb  1 19:14:47 2022 from cua44495oem001.jetblue.com
+[oracle@JBCUALORA1001a ~]$ ps -ef|grep pmon
+oracle    64776  64742  0 19:38 pts/0    00:00:00 grep pmon
+oracle   132517      1  0 Jan12 ?        00:09:35 ora_pmon_TRAXPRD1
+grid     145212      1  0  2020 ?        01:27:02 asm_pmon_+ASM1
+[oracle@JBCUALORA1001a ~]$ cat /etc/oratab
+#Backup file is  /u02/app/oracle/product/12.1.0/dbhome_20201014040700/srvm/admin                                                                             /oratab.bak.jbcualora1001a line added by Agent
+#
+
+
+
+# This file is used by ORACLE utilities.  It is created by root.sh
+# and updated by either Database Configuration Assistant while creating
+# a database or ASM Configuration Assistant while creating ASM instance.
+
+# A colon, ':', is used as the field terminator.  A new line terminates
+# the entry.  Lines beginning with a pound sign, '#', are comments.
+#
+# Entries are of the form:
+#   $ORACLE_SID:$ORACLE_HOME:<N|Y>:
+#
+# The first and second fields are the system identifier and home
+# directory of the database respectively.  The third field indicates
+# to the dbstart utility that the database should , "Y", or should not,
+# "N", be brought up at system boot time.
+#
+# Multiple entries with the same $ORACLE_SID are not allowed.
+#
+#
+TSTDB_NVA:/u02/app/oracle/product/12.1.0/dbhome_1:N             # line added by                                                                              Agent
++ASM1:/u01/app/12.1.0/grid_20201014040651:N
+TRAXPRD_NVA:/u02/app/oracle/product/12.1.0/dbhome_20201014040700:N             #                                                                              line added by Agent
+[oracle@JBCUALORA1001a ~]$ clear
+[oracle@JBCUALORA1001a ~]$ . .profile_traxprd
+[oracle@JBCUALORA1001a ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Feb 1 19:39:30 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management,                                                                              OLAP,
+Advanced Analytics and Real Application Testing options
+
+SQL> select count(*) from odb.relation_master;
+
+  COUNT(*)
+----------
+     21590
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64                                                                             bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management,                                                                              OLAP,
+Advanced Analytics and Real Application Testing options
+[oracle@JBCUALORA1001a ~]$
+[oracle@JBCUALORA1001a ~]$
+[oracle@JBCUALORA1001a ~]$
+[oracle@JBCUALORA1001a ~]$
+[oracle@JBCUALORA1001a ~]$
+[oracle@JBCUALORA1001a ~]$ expdp \"/ as sysdba \" directory=EXPDP_DIR dumpfile=pat_relation_master_01022022_%U.dmp l                                         ogfile=pat_relation_master_01022022.log tables=odb.relation_master parallel=8 cluster=n reuse_dumpfiles=y filesize=1                                         G
+
+Export: Release 12.1.0.2.0 - Production on Tue Feb 1 19:40:54 2022
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, Real Application Clusters, Automatic Storage Management, OLAP,
+Advanced Analytics and Real Application Testing options
+FLASHBACK automatically enabled to preserve database integrity.
+Starting "SYS"."SYS_EXPORT_TABLE_01":  "/******** AS SYSDBA" directory=EXPDP_DIR dumpfile=pat_relation_master_010220                                         22_%U.dmp logfile=pat_relation_master_01022022.log tables=odb.relation_master parallel=8 cluster=n reuse_dumpfiles=y                                          filesize=1G
+Estimate in progress using BLOCKS method...
+Processing object type TABLE_EXPORT/TABLE/TABLE_DATA
+Total estimation using BLOCKS method: 12.18 MB
+Processing object type TABLE_EXPORT/TABLE/PROCACT_INSTANCE
+Processing object type TABLE_EXPORT/TABLE/TABLE
+Processing object type TABLE_EXPORT/TABLE/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type TABLE_EXPORT/TABLE/INDEX/INDEX
+Processing object type TABLE_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+Processing object type TABLE_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
+Processing object type TABLE_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
+Processing object type TABLE_EXPORT/TABLE/STATISTICS/MARKER
+. . exported "ODB"."RELATION_MASTER"                     9.319 MB   21590 rows
+Master table "SYS"."SYS_EXPORT_TABLE_01" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SYS.SYS_EXPORT_TABLE_01 is:
+  /cloudfs/TRAXPRD/expdp/pat_relation_master_01022022_01.dmp
+  /cloudfs/TRAXPRD/expdp/pat_relation_master_01022022_02.dmp
+Job "SYS"."SYS_EXPORT_TABLE_01" successfully completed at Tue Feb 1 19:41:29 2022 elapsed 0 00:00:34
+
+[oracle@JBCUALORA1001a ~]$ hostname
+JBCUALORA1001a
+[oracle@JBCUALORA1001a ~]$ pwd
+/home/oracle
+[oracle@JBCUALORA1001a ~]$
+

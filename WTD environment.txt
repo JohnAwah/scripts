@@ -1,0 +1,242 @@
+oracle:	Wa1k-up-the-r0ad
+grid:	Fly-t0-the-m00n
+sys:	Spr1ng21_{lowercase dbname}	
+system: W1nter21_{lowercase dbname}	-> E.g : DB Name hui3prd then password will W1nter21_hui3prd
+WALLET: Kbm9_dbs
+orcladmin: Kbm9_dbs
+DBA_ADMIN: DBA_ADMIN
+ASM SYS: Go2gether$
+ASMSNMP: TwoBefore101
+DBSNMP: 8DaysaWeek_{lowercase dbname}
+
+
+
+oracle:
+Sw1m-up-the-wat5r
+grid:
+Wa1k-t0-the-z00m
+
+Passwords for the below servers:
+
+zmooodsdbprd01
+oracle    PS    02/09/21    14   365    30
+
+zmooodsdbprd02
+oracle    PS    02/09/21    14   365    30
+
+zuhgodsdbprd01
+oracle    PS    02/21/21    14   365    30
+
+zuhgodsdbprd02
+oracle    PS    02/11/21    14   365    30
+
+zurxodsdbprd01
+oracle    PS    02/11/21    14   365    30
+
+zurxodsdbprd02
+oracle    PS    02/11/21    14   365    30
+
+
+
+WUNDERMAN THOMPSON DATA:
+
+1. PORTAL VM ACCESS
+---------------------------------
+https://portal.wundermandata.com/
+
+Username: pchoh 
+New Password: Angelinamama!86
+-Search SOFTWARE CENTER in search bar below in VM to see apps downloaded and checks on top right to see apps that can be downloaded
+
+2.WORKFRONT: REQUESTS/TIMESHEET
+----------------------------------------       
+https://wunderman.my.workfront.com/login
+
+Username: pchoh@cintra.com
+Password:Angelinemama@86
+
+WORKFRONT: REQUESTS/TIMESHEET
+-----------------------------
+https://wunderman.my.workfront.com/login
+mrafiq@cintra.com
+Cloud@Dec_2021
+
+
+
+PORTAL VM ACCESS
+---------------------------------
+https://portal.wundermandata.com/
+pchoh
+Angelinemama!86
+
+
+3.OEM:
+https://vdaloraoemprd01:7803/em/faces/logon/core-uifwk-console-login
+
+OEM server:vdaloraoemprd01 (All OEM CONFIGURATIONS ARE HERE)
+
+OEM LOGINS: Username:SYSMAN
+            Password:HXdf3_99oem
+
+
+*SOFTWARE REQUIRED: MOBAXTERM, PUTTY, PLSQL DEVELOPER
+
+
+4.https://opsview.kbmg.com (open within the VM box)
+
+Username:pchoh
+PW: Angelinemama#86 
+
+
+
+5.Maestro ticket site: https://issues.kbm1.com/TrakHome.asp
+Username:cin_PCHOH
+PW: Angelinamama!86
+ 
+
+
+5. Sharepoint access link:
+ https://wppcloudnam.sharepoint.com
+
+No access yet.
+
+
+6.Secret server access link:
+
+https://wundermandata.secretservercloud.com/login.aspx?ReturnUrl=%7e%2fapp%2f%23%2f  (stores passwords for databases, users and all applications)
+
+Username: pchoh
+Password: Angelinemama#86
+
+
+
+7. Users and passwords:
+
+oracle:		Wa1k-up-the-r0ad
+grid:		Fly-t0-the-m00n
+sys:		Spr1ng21_humprod
+system:		W1nter21_inctprd
+WALLET:		Kbm9_dbs
+orcladmin:	Kbm9_dbs
+DBA_ADMIN:	DBA_ADMIN
+ASM SYS:	Go2gether$
+ASMSNMP:	TwoBefore101
+DBSNMP:		8DaysaWeek_{lowercase dbname}
+sysman:		HXdf3_99oem
+
+
+
+
+-STEPS IN RESOLVING WTD TICKETS:
+
+-Acknowledge the ticket on Workfront app, so that client knows one is working on it.
+-If its a script, remember we only execute ddl scripts unless otherwise.
+-You can also ping on teams the sender of ticket about any input needed or whether the ticket needs any info(for example sequence of executing the script/ticket)
+-Always state the ticket number while pinging the sender. You can find ticket number on the Task details tab in WF platform.
+-Proceed to download the script from Work front app, by clicking on the script and click download arrow
+-Always review the scripts contents, try to understand it before executing( beware of drop, and truncate statements)
+-Open the connectivity sheet and look for the the service name, DB name, server name and if the server name comes with ODM you know it is EXADATA server.
+-Once the server name has been identified, log into the database using putty
+-Login using the Oracle user as above.
+-Most of databases are 2 node RAC
+.Once you log into the Exadata server, from there you can then ssh into any of the nodes
+.You cannot find all of the databases in all the nodes. They will be in one or two nodes
+.ps -ef|grep pmon to get correct database
+. set environment(. oraenv)
+
+sqlplus
+
+/ as sysdba
+
+.select name from v$database;
+.select name from v$active_services; (to confirm the service we are accessing)
+-create a .sql file at O.S level and give it the name of the script to be executed(vi ...) 
+-within the .sql file( insert 'set echo on' statement at the begining so as to see output of the script)
+.copy the script inside the file,save it and exit. 
+.Use this query below to confirm database name, service, name etc before running the scriptcol db_name for a15
+
+col db_name for a15
+col service for a25
+col HOST_NAME for a28
+col username for a25
+col account_status for a20
+select c.name "DB_NAME",a.name "SERVICE",b.HOST_NAME from  v$active_services a , v$instance b, v$database c where UPPER(a.name)='UHGPRD';
+
+- Now run the script, and copy output from database name verified above to end of output of script, create a notepad and give it name of the scipt (_log) and save on desktop to send to client.
+-create another .sql file and copy content into it and file starting with 'set echo on' in file.
+.You can also create a spool file for the logs to be created into it if procedure is very long.
+ e.g sql> spool /tmp/sql_blocker_info.html
+          script content
+          spool off
+-copy content of output , create its own logfile name and save on desktop.
+-Go now to Workfront ticket and reply to sender of ticket:( Request has been completed, and we have also uploaded the logfile) and click reply.
+-Go now and upload the logfiles. On same Workfront app, click "Add New">Document>select the logfiles and upload.
+-You can note it down in your daily tasks summary and the time it took to execute and the details.
+
+============================================================================================================================================================
+
+RESLOVING WTD TICKETS:
+
+-Log into workfront ticket portal
+.read the mail
+.click on UPDATE, read the ticket
+.download and open the script. Read the script and make sure what is mentioned in the ticket is also in the script and try to understand it.
+.Reply the ticket by clicking reply> 'Acknowledged, we will update once completed'. Click reply.
+-Open connectivity sheet, copy the service name and search for it in the sheet (Control + F and select Workbook, uncheck all matching boxes and click Find next)
+-log into the portal and open a session on mobaxterm
+.click ssh> put server name, oracle and sign in
+.ps -ef|grep pmon to confirm database name as in connectivity sheet
+.create the file to be excuted in the server (vi file_name.sql)
+.copy content of script and paste into vi file( first type at the top of the file:set echo on, set verify on, set timing on)
+.read through the file again to double check
+.
+.esc, :wq to save
+.log into the database.
+.set environment by using definition in oratab file ( . oraen, derpd1)
+.log into the database(sqlplus)
+.sql> show parameter service; (to verify service name)
+SQL> alter session set current_schema=ODB; (if schema is not mentioned in the script)
+.If its a CDB
+do this to see pdbs:
+
+set line 200 pages 200
+col CON_NAME for a30
+select CON_ID,CON_NAME ,NAME from V$ACTIVE_SERVICES order by 1;
+
+.sql>connect to the pdb : alter session set container=pdb;
+.sql> select name from V$ACTIVE_SERVICES where upper(name)='OC_WCC_WMD3CPRD'; (make sure service name is correct)
+.!ls -ltr (confirm name of script)
+.l (enter)
+./ (enter) to confirm service name in the output
+.@script_name.sql (run the script)
+
+-scroll for any errors
+-copy output from sql, and paste in a notepad. (remove the command)
+-save the notepad with the name of script as (script_name_log)
+-Go to WF ticket, refresh for any updates.
+-reply to the ticket: Request has been completed. (Please kindly validate using log file attached.Thanks)
+-cick Reply
+-select docuent tab on right hand > click add new on top left > document > upload doc from desktop.
+
+Finito. 
+
+
+-WTD-P | ITS | Support Request Queue ▸ Oracle Database Support ▸ Setup Oracle System Account: WTD does not setup Oracle User accounts. 
+-First check if user exist in the database, then for user creation access refer to CS configure test
+-PL_SQL profile contact TSS desktop team
+-
+
+ORA 600, ORA -07445 are generic errors.
+
+blkprod1
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+REGISTERING AN IP ADDRESS IN THE SERVER:
+
+
+-COMMAND PROMPT: ping jetblue.sentinelone.net
+Pinging jetblue.sentinelone.net [54.84.153.204] with 32 bytes of data
+
+-Obtain the IP: 54.84.153.204 & jetblue.sentinelone.net and enter into the /etc/host file in server
+ cd /etc/hosts
+ add 54.84.153.204 jetblue.sentinelone.net and save the file
+
+-Go back to command prompt and : curl https://jetblue.sentinelone.net
+
+It should resolve connection.

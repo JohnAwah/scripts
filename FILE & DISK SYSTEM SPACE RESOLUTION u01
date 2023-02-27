@@ -1,0 +1,154 @@
+RESOLVING FILESYSTEM SPACE ISSUES:
+
+-df -h (To see mount point of diffeent filesystems)
+
+-df -hT /mount point (to check size and percentage usage of mount point)
+
+log into the directory e.g 
+-cd /u01 (mount point dierectory)
+-du -Sh | sort -rh | head -5 (to get the top 5 files consuming space in the directory in Linux)
+-du -sh * | grep T or G (to get top G and T files in directory)
+
+- [oracle@odm6db01 zba01]$ df -h | grep zba
+-[oracle@vorarac1d01 ~]$ df -h | grep /dbackup0
+
+-Proceed to check whats inside the file consuming the most space and seek permission to delete to obtain space
+-Take screenshot and share solution
+
+-cd to directory consuming high space
+.to delete bulk files older than 7 days: $ find . -name "*.aud" -mtime +7 -exec rm {} \;
+.rm -rf file name (to delete files on Linux) e.g:
+
+[oracle@vdaloraclep001 trace]$ rm -rf *.trc
+[oracle@vdaloraclep001 trace]$ rm -rf *.trm
+
+-Also check if log rotation scripts are enabled:
+-check on crontab for purge_crs_trace files
+-check for crontab for purge_asm_trace files
+
+
+
+-FILESYSTEM THRESHOLD:90% 
+                                         
+Use%  Mounted
+0%  /dev
+4%  /dev/shm
+3%  /run
+0%  /sys/fs/cgroup
+10%  /
+34%  /u02
+20%  /boot
+1%  /home
+6%  /opt
+2%  /opt/era_base/cfg
+1%  /opt/era_base/logs
+26%  /opt/era_base/era_engine
+4%  /var
+49%  /u01
+21%  /orabak
+0%  /run/user/1002
+0%  /run/user/1001
+0%  /run/user/0
+50%  /ggate
+90%  /cloudfs
+21%  /orabak/CCPRD
+21%  /orabak/DFPRD
+21%  /orabak/DOPRD
+21%  /orabak/DRPRD
+21%  /orabak/DAPRD
+
+
+-Possibble errors:
+
+1. DISK WARNING - free space: /u01 39251 MB (20% inode=97%);
+.follow steps above to resolve space in mount point
+
+2. WRITE FAILED ON TEMPORARY FILE---OUT OF DISK SPACE (UNABLE TO RUN QUERIES ON TRAX)
+
+>Run the below scripts to get the temp tablespace usage:
+
+select a.tablespace_name tablespace,
+         d.TEMP_TOTAL_MB,
+         sum (a.used_blocks * d.block_size) / 1024 / 1024 TEMP_USED_MB,
+         d.TEMP_TOTAL_MB - sum (a.used_blocks * d.block_size) / 1024 / 1024 TEMP_FREE_MB
+from v$sort_segment a,
+        (
+          select   b.name, c.block_size, sum (c.bytes) / 1024 / 1024 TEMP_TOTAL_MB
+          from     v$tablespace b, v$tempfile c
+          where    b.ts#= c.ts#
+          group by b.name, c.block_size
+        ) d
+where    a.tablespace_name = d.name
+group by a.tablespace_name, d.TEMP_TOTAL_MB;
+
+> If there is enough space in temporary tablespace, then check df -h and see if  mount point for tempfs has space.
+
+>If there is space, then check alert log files for any possible errors related to temp file space
+>If there is no space in temp tablespace as in check above, consider adding a temp file into the temp tablespace as follows 
+to add space into temp tablespace as follows:
+
+SQL> desc dba_temp_files;
+SQL> select file_name,TABLESPACE_NAME from dba_temp_files;
+add temp file into temp tablespace OR resize existing temp file to add space to temp tablespace.
+
+
+-ALSO:
+
+Hi Mallika / Amy
+
+During weekend on call support,  we have come across scenarios where Unix admin support would be required as DBA team doesn’t hold the root access.
+
+1.	/  (root) file system alert last night with 20% threshold breached on odm4db02-adm.kbm1.loc 
+
+2.	/var file system alert with 10% threshold breached on vdaloraclet001.
+Logs are owned by root.
+ 
+3.	 Also,  to deploy OEM agents,  we’d need Unix team help for root access.  (can touch-base on  Monday for this )
+
+Pl let us know guidelines to reach to Unix admin team:
+i.	Through Workfront ticket and If any specific queue ?
+ii.	Through maestro ticket for P1 issues and if any specific queue ? 
+iii.	Through Contacting Operation support team to escalate issue where Unix admin team support required and if very critical  and specific queue  or directly by calling?
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+FOR GOLDENGATE FILE SYSTEM RUNNING OUT OF SPACE:
+
+FILESYSTEM THRESHOLD:90% 
+                                         
+Use%  Mounted
+0%  /dev
+12%  /dev/shm
+1%  /run
+0%  /sys/fs/cgroup
+10%  /
+52%  /u02
+4%  /var
+20%  /boot
+6%  /opt
+1%  /home
+2%  /opt/era_base/cfg
+2%  /opt/era_base/logs
+26%  /opt/era_base/era_engine
+52%  /u01
+1%  /opt/era_base/db_logs/DRPRD2
+1%  /opt/era_base/db_logs/DFPRD2
+1%  /opt/era_base/db_logs/DAPRD2
+1%  /opt/era_base/db_logs/DOPRD2
+79%  /orabak
+79%  /orabak/CCPRD
+79%  /orabak/DOPRD
+79%  /orabak/DRPRD
+79%  /orabak/DFPRD
+79%  /orabak/DAPRD
+0%  /run/user/1002
+0%  /run/user/1001
+54%  /cloudfs
+90%  /ggate
+0%  /run/user/1003
+
+Cleared GG trail files older than 5 days.
+
+[ggsowner@JBCUALORA1002C ~]$ df -h /ggate
+Filesystem          Size  Used Avail Use% Mounted on
+/dev/asm/ggate-450  800G  524G  277G  66% /ggate
+

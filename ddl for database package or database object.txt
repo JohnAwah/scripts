@@ -1,0 +1,6 @@
+Query to get DDL of a package or database object:
+
+set long 1000000
+select dbms_metadata.get_ddl('PACKAGE_BODY','YOUR_PACKAGE_NAME') from dual;
+
+select dbms_metadata.get_ddl('FUNCTION', 'ORA_UTILS.CHANGE_PASSWORD') from dual;

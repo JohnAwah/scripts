@@ -1,0 +1,101 @@
+STEPS to Deploy CTR R16.0.5 to EGW PROD (09/27/2021)
+
+1. STOP DOPRD GG Pump process in CUA CTR PROD
+
+-Log into JBCUALORA1002C server on putty as the root user(PW:BlueSkies2019)
+- su - ggsowner 
+- . .profile_doprd19c
+-$ g (hit enter and it signs you into the ggsci) (confirm it is GG for 19c database)
+
+exit back as ggsowner and
+- ps -ef | grep mgr ( To see the Manager process parameter files)
+- . .profile_drprd19c
+-$ g (hit enter to log into the ggsci)
+-ggsci> info mgr (check if Manager is running)
+-ggsci> info all (To see if all processes...Mgr, Extract (prefix E_O_NVA), Pump ( Prefix P_DO_) are running)
+
+-exit
+-$ . .profile_doprd19c
+-$ g
+-$ ggsci> info all (to see that all processes are running)
+-$ ggsci> stop P_DO_NCO
+-$ ggsci> info all to see that pump has stopped	
+	
+2. Check replication is in SYNC in EGW CTR all 5 databases
+
+-log into JBEGWLORA1002C server on putty as the root user (PW:BlueSkies2019)
+-ps -ef |grep mgr (to see the different databases)
+-su - ggssowner
+-ggsowner $ . .profile_doprd19c
+-ggsowner $ g 
+-ggsci > info all (since it is the target server...See Mgr, Replicat1 and Replicat2 running)
+-ggsci > info R* ( To see status of the Replicats)
+	
+		
+3. Stop replication in all 5 databases in EGW:
+
+-ggsci JBEGWLORA1002C> info R*
+-ggsci JBEGWLORA1002C> stop R*
+	
+		
+4. Create Restore point in all 5 databases in EGW
+
+-connect  to another JBEGWLORA1002C terminal on putty as root
+-su - oracle
+- . .profile_doprd
+- sqlplus / as sysdba
+> show parameter name ( to see if parameters of the database)
+> select name from v$restore_point;
+> create restore point EGW_R1605_before_deploy guarantee flashback database;
+> select name from v$restore_point:
+
+-Go into drprd19c on terminal 2 in step 2, and...
+-log into JBEGWLORA1002C server
+-ggsowner JBEGWLORA1002C $ . .profile_drprd19c (disaster recovery server)
+-ggsowner JBEGWLORA1002C $ g
+-ggsowner JBEGWLORA1002C $ info R* (Replicat running)
+-ggsowner JBEGWLORA1002C $ stop R*
+
+- Go back now to create restore point terminal
+-set . .profile_drprd
+-sqlplus / as sysdba
+-select name from v$restore_restore point;( to see restore points that exist in the DB)
+-create restore point EGW_R1605_before_deploy guarantee flashback database; (Confirm that replicat stopped on drprd19c first)
+-select name from v$restore_point: (to see restore points in the database)
+-drop restore_point; (dropping irrelevant restore_points leaving only the one required to flashback the database after the deployment)
+
+
+	
+		
+5. Unlock DLX accounts in all 5 databases in EGW:
+
+-Unlock DLX accounts in all 5 databases.
+	
+	
+	
+6. handover for test
+
+
+
+1.stop GG
+2.take restore points
+3.unlock DLEX* schemas
+-SQL> select username from dba_users;
+-SQL> desc dba_users;
+-SQL> select username, ACCOUNT_STATUS from dba_users where username=upper('DLEX_B6RESV');
+-SQL> alter user msaimadanmohan account unlock;
+
+4.validate
+5.upgrade
+6.take another restore points
+
+
+Once deployment is completed, we usually flashback all databases to 1st restore points taken.
+
+This is for EGW.
+
+After flashback is completed, only then we restart stopped GG processes.
+
+
+
+

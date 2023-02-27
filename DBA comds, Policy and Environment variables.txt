@@ -1,0 +1,510 @@
+Password Policy
+===============================================================================================================
+new password:Angelinamama#86
+
+Password change policy 
+
+https://selfservice.cintra.com
+
+Password policy is as follows:
+
+- Cannot use last 5 old passwords
+- 12 character minimum
+- Password complexity as follows
+English uppercase characters (A through Z)
+English lowercase characters (a through z)
+Base 10 digits (0 through 9)
+Non-alphabetic characters (for example, !, $, #, %)
+
+new password:Angelinamama@89
+
+-PURELY HR:
+
+https://cintra.purelyhr.com/?returnUrl=https%3a%2f%2fcintra.purelyhr.com%2fcpanel%2fcalendar.aspx
+
+sign in with SSO: with cintra email
+
+Company ID	CINTRA
+Username	pchoh
+Login URL	cintra.purelyhr.com 
+
+
+
+
+-
+
+CLIENT AUTHENTICATIONS:
+
+OEM Related issues: Bashir Ahamad
+JB>> LOGINS: USERNAME: pchoh@jetblue.com
+        PASSWORD:      CintraP@$$w0rd!@#$
+
+1. FREEDOM HEALTH LOGINS:
+RDP station:https://rds.freedomhealth.com/RDWeb
+Username: freedomh\pchoh
+Password:Player#14
+To upload FRDM sensor reports: Active Projects>Search for letter F>Freedom Health aka Global TPA> sensor
+-To connect via Oracle VM: clickon it VM >click on input> click keyboard>click ctrl-Alt-Del>click Administrator> put password (cintra) on administrator>
+
+-Unable to connect due to RDP issues:
+contact System's team Jamal Mohammad and run as Administrator the following:
+
+Open registry editor
+Go to - HKEYLOCALMACHINE\System\CurrentControlSet\Control\Lsa\LmCompatibilityLevel=4
+
+
+
+
+2.WUNDERMAN THOMPSON DATA:
+
+Network access:https://portal.wundermandata.com 
+Username: pchoh 
+New Password: Angelinemama!86
+-Search SOFTWARE CENTER in search bar below in VM to see apps downloaded and checks on top right to see apps that can be downloaded
+
+3. JIRA logins
+Service Desk: https://nucleus.cintra.com/jira
+Username:pchoh@cintra.com
+Email:	pchoh@cintra.com
+password:6XhK2SxdQRU683ta!
+
+
+
+
+3.1 NUCLEUS:
+
+Nucleus: 
+Service Desk: https://nucleus.cintra.com/jira
+Username: pchoh@cintra.com
+Password: 6XhK2SxdQRU683ta!
+
+
+Full Name:	Patrick Choh
+Get started by setting your own password and logging in. 
+
+
+4. Confluence Logging:
+
+Username:pchoh
+Password:Chang3M3Plz123!
+
+Link:https://confluence.cintra.com/
+Go to SPACES >> Global Delivery >> Index >> Jetblue.
+
+5.JETBLUE CREDENTIALS:
+
+Account Name	Account Type	E-Mail
+PChoh	User	Patrick.Choh@jetblue.com
+
+JB OEM url:https://cuaoem01.jetblue.com:7799/em
+username:sysman
+PW:Pr0d3mprd
+
+
+PW: Safety!56781
+
+Looks like the ADM account isn’t ready. I’m following up on this again.
+
+
+
+5.ROVA:
+db username: chohpa
+db PW      : ANgelinemama#%86
+
+
+-First you will set your own password, following the conditions below: 
+Wunderman Thompson Data password policy requires: 
+•	All passwords must be changed every 90 days 
+•	Passwords must be at least 10 characters long, and contain three of these four elements: 
+o	UPPERCASE letters 
+o	Lowercase letters 
+o	Numbers  
+o	Special characters 
+•	Cannot be changed within 15 days of last password change 
+Confirm your password on the next screen: 
+
+
+
+6.TARGETBASE ENVIRONMENT:
+
+A)TBASE ExaCS compute nodes:
+
+Hostname	          IP Address
+tboctbaexapl-f7fss1	100.78.140.35  (node1)
+tboctbaexapl-f7fss2	100.78.140.36  (node2)
+
+-To connect on node 1: putty > put in IP address of node > sign in as 'opc' user > sudo su - > su - oracle > ps -ef|grep pmon > databases
+-To connect to node 2 putty > ssh node2 from node1
+-set environment: . oraenv
+e.g
+[oracle@tboctbaexapl-f7fss1 ~]$ . oraenv
+ORACLE_SID = [pgetst1] ?
+ORACLE_HOME = [/home/oracle] ? /u02/app/oracle/product/19.0.0.0/dbhome_1
+The Oracle base remains unchanged with value /u02/app/oracle
+[oracle@tboctbaexapl-f7fss1 ~]$ sqlplus / as sysdba
+
+
+7. VIXXIO ACCOUNT DETAILS
+
+Logon Name	:	pchoh
+
+Password	:	#VX@2022#
+	
+Email Address	:	Patrick.Choh@vixxo.com
+
+Connection steps:
+
+Connect to cisco Anyconnect in Oracle VM Box
+-log into vpn.vixxo.com :
+pchoh
+password:#VX@2022#
+-Look out for Phone Microsoft authentication code or DUO code from phone.
+-Once cisco connects, establish session on putty and log in with Primary X6-2 server Public IP's
+
+
+8. CTI DELA:
+
+COONECTIVITY STEPS:
+
+-To connect to cloud server you need the ppk file(sent in this folfer)
+-Go to open VPN
+-Go to the bastion-dela server under GENERAL tab in connectivity sheet 
+-go to putty and attach the key via>Auth>browse the key>open it>sign in using opc> and you in the JUMP SERVER
+-The main Production server here is under DELA_PROD in the connectivity sheet. 
+.Depending on the server to access , you can ssh from this Bastion or jump server.
+. And then sudo su - oracle and .... ps -ef|grep pmon for databases.
+
+
+OCI ACCOUNT CREDENTIALS:
+
+-OCI account console password: Angelinamama!86
+.Username:pchoh@cintra.com
+
+
+
+\
+9.VERIZON LAPTOP LOGiN:
+
+USERNAME: ADEBP\chohpa
+Password: Angelinemama#86
+
+10.Paycor link: https://www.paycor.com
+Username:pchoh
+password:Angelinemama#86
+
+
+
+
+=====================================================================================================================
+
+ACUMATICA:
+
+https://cintra.acumatica.com/
+
+Username: pchoh
+Password:Angelinamama@83
+
+
+
+
+
+===================================================================================================================
+
+Sharepoint link for docs:
+
+cintraoffice.sharepoint.com
+
+https://cintraoffice.sharepoint.com/IT%20Support/Forms/AllItems.aspx?viewpath=%2FIT%20Support%2FForms%2FAllItems%2Easpx
+
+Keepers Link: A
+Keepers password: Angelinemama#86
+
+=====================================================================================================================
+to find alert log file from group of alert logs: find *.log
+======================================================================================================================
+
+To find zombie process and kill them: ps aux | grep Z
+
+=======================================================================================================================
+describe users;
+
+select username, account_status from dba_users (to see status of users)
+
+-free -g (memory usage)
+-df -hT( mount space)
+
+generate AWR report: cd $ORACLE_HOME/rdbms/admin/awrrpt.sql
+-sign in as sys and then run:
+
+@awrrpt.sql /path of report and the file will be created in the Oracle home directory
+====================================================================================================================
+how to reorganize your sql statements output to more understandble format:
+
+col action_time for a28                     
+col action for a8                              
+col version for a8
+col comments for a30
+col status for a10
+set line 999 pages 999
+
+
+OR
+-set pagesize 200
+- set linesize 2000 and then / (to rerun the command)
+
+select patch_id,  version, status, Action,Action_time from dba_registry_sqlpatch order by action_time;
+==================================================================================================================
+
+How to set environment when it fails:
+
+export ORACLE_BASE=/u02/app/oracle
+
+export ORACLE_HOME=/u02/app/oracle/product/19.0.0/dbhome_1:N
+
+export PATH=$PATH:$ORACLE_HOME/bin
+
+export ORACLE_SID=toqa
+
+==========================================================================================================================
+
+PATCH RELEVANT QUERIES:
+
+### Put the patch number specifically In 12c Env ####
+
+select * from v$version;
+
+select xmltransform(dbms_qopatch.is_patch_installed('32473172'),dbms_qopatch.get_opatch_xslt) "Patch installed?" from dual;
+
+select xmltransform(dbms_qopatch.is_patch_installed('32507738'),dbms_qopatch.get_opatch_xslt) "Patch installed?" from dual;
+
+ 
+
+select name, open_mode from v$pdbs;
+
+select INSTANCE_NAME, STATUS, DATABASE_STATUS from v$instance;
+
+select NAME, OPEN_MODE, RESTRICTED from v$pdbs;
+
+==============================================================================================================================
+
+TO QUERY DATABASE OBJECTS:
+
+-desc dba_objects;
+
+TO QUERY DB OJECT, OWNER WHEN CREATED,LAST DDL TIME, USE:
+
+-From the desc dba_objects statement, build the statement:
+-select owner, object_name, created, last_ddl_time from dba_objects where object_name = 'PKG_NO_TASK_CARD_FUNCTIONS' and owner = 'ODB'
+
+TO IDENTIFY THE PACKAGE OUTPUT FROM BODY:
+
+-Add object_type to the sql above.
+
+-To check for invalid objects:
+sql> select count(*) from dba_objects where status='INVALID';
+sql> select count(*) from dba_objects where owner='ODB' and status='INVALID';
+
+
+===============================================================================================================================
+
+TO CHECK ALERT LOG FILE OF DATABASE:
+
+-sign in as sysdba: show parameter dump;(collect path for core_dump_dest_string upto the trace file/)
+-cd to the trace file directory obtained above /
+-$ls -lthr alert_DBNAME.log (to see the latest alert log)
+-$cat alert_DBNAME.log | grep -i PACKAGE_NAME ( will fetch the alertlog file and grep to see if any info is related to the pacakge)
+
+* Note: In a RAC environment we must not check the alertlog of both nodes, but for double checking purpose you can.
+==========================================================================================================================
+
+TO MOVE FROM NODE1 TO NODE2 WHILE ON NODE O.S
+
+-$ssh node2 hosts
+
+=========================================================================================================================================
+
+TO SEE IF HOSTS IS A RAC ENVIRONMENT:
+
+-ps -ef|grep -i pmon
+
+=================================================================================================================================
+
+RAC DATABASE COMMANDS:
+
+-To see RAC database unique_name: $srvctl config database
+-To see configuration variables for RAC database: $srvctl config database -d UNIQUE_NAME
+ you will get variables like: DB unique_name, DB name, Oracle home, Oracle User, spfile, P.W file.
+
+===================================================================================================================================================
+
+TUNING FOR PERFORMANCE ON OEM:
+
+-TRAXPRD uses Oracle 12c and the Flash feature is no longer available, so graphs are no longer available. 
+So we will be upgrading to 13.4 or 13.5c
+
+-On OEM, go to the performance tab (top left of page)> select sql (to see any sql performance data)
+
+- Under Sql monitor, look at sql execution time…if all executions are in seconds, its fine. Executions in hours is problematic.
+. click cluster_database > select monitoring and check
+
+-Also, click on performance > select blocking sessions > select relevant nodes > select top consumers > select top sessions > select DB user and trickle down as possible
+
+-Check top servers, consumers . top module….
+
+==================================================================================================================================================
+
+cp -R is a recursive command which copies all files and directories in the source directory tree.
+du -sh* file name (to see size of file)
+du -h ( sizes of space in mount points)
+ls -ltra ( list all files in directory including hidden files)
+======================================================================================================================
+RAC Commands:
+
+- To start Oracle RAC database: srvctl start database -db dbname ( status, stop)
+-                                 
+
+===================================================================================================================================================
+Coomand to check disk I/O errors
+
+-Execute top command at O.S level 
+-Execute iotop as root at O.S level
+
+==========================================================================================================
+
+-TO IDENTIFY BLOCKING SESSIONS:
+
+SQL> select sid,serial#,status,sql_id,prev_sql_id,final_blocking_session from v$session where final_blocking_session is not null ;
+
+no rows selected
+
+SQL> select * from dba_blockers;
+
+no rows selected
+
+-CHECK FOR BLOCKING SESSIONS IN RAC:
+
+-select count(*) from gv$session where blocking_session is null;
+
+===========================================================================================================================
+
+
+============================================================================================================================================================
+
+-TO CHECK DATE AND TIMEZONE OF DATABASE:
+
+-At O.S level : # date
+-At O.S level : uptime
+-sql> select currrent_timestamp from dual;
+-sql> select dbtimezone from dual;
+
+-command to copy file from one server to another :  scp B045* JBCUALORA2001b:/u02/app/oracle/admin/TRAXSTG_NVA/misc_scripts
+-Command to copy file from remote server to home server : scp jbcualora2002c:/cloudfs/CTR/Release/database/R16.1.CUAQA2.log /tmp
+
+
+-To ping a server from O.S:$ ping server_name or service_name in RAC...e.g tnsping DOPRD_NVA
+
+============================================================================================================================================================
+
+RESOLVING TIMEZONE ISSUES IN RAC CLUSTER:
+
+-https://support.oracle.com/epmos/faces/DocumentDisplay?_afrLoop=221355272169461&id=1988586.1&_afrWindowMode=0&_adf.ctrl-state=sbslgstwh_315
+
+-after that as per metalink doc
+
+-C1.) When using Grid Infrastructure  (if Grid Infrastructure is NOT used go to step C.2) .
+
+When using Grid Infrastructure (start the database using crsctl ) then check first of all the TZ entry in $GRID_HOME/crs/install/s_crsconfig_<nodename>_env.txt 
+
+.
+$ cd $GRID_HOME/crs/install/
+
+$ hostname
+
+xxx
+$ cat s_crsconfig_xxx_env.txt
+-- do this for all nodes, note that the filename reflects the nodename
+Edit the s_crsconfig_<nodename>_env.txt file and set the OS TZ parameter in this file to the required OS time zone on ALL nodes.
+
+The s_crsconfig_<nodename>_env.txt is a simple txt file, edit it using for example the vi or nano editor.
+
+$ vi s_crsconfig_xxx_env.txt
+
+-- do this for all nodes, note that the filename reflects the nodename
+
+-Changed TZ In s_crsconfig_xxx_env.txt file on both nodes
+
+============================================================================================================================================================
+
+-TO SET PAGE SIZE & LINE SIZE IN ORACLE DATABASE:
+
+-PAGE SIZE MAXIMUM NUMBER IS 50,000
+-LINE SIZE MAXIMUM NUMBER IS 32,000
+
+
+=============================================================================================================================================================
+
+-Goldengate login procedure: log in as root
+                            sudo su - ggsowner
+                            ps -ef|grep mgr
+                            . .profile_trxprd
+                            g ( to sign in)
+        Useful GG commands : info all, info E*, info P*, info R*, start/stop E*, P*,R*
+
+
+=====================================================================================================================================================================
+
+-Query to identify last logon time for database users
+
+.select username, machine, terminal, logon_time from v$session; (And look at the last logon column)
+
+================================================================================================================================================================
+-To grep a job on crontab: crontab -l |grep jobname
+-To run a shell script: sh /u02/app/oracle/admin/TRAXSTG_NVA/misc_scripts/B045_HF_RESTRICTED_AC.sh
+
+- more/cat a file is thesame thing
+
+============================================================================================================================================================Generate AWR report:
+
+-login into the database
+[oracle@JBCUALORA1001b ~]$ . .profile_traxprd
+[oracle@JBCUALORA1001b ~]$ sqlplus / as sysdba
+
+-SQL> @?/rdbms/admin/awrrpt.sql
+-Enter value for report_type: html
+-Enter value for num_days(specify number of days ago): 2
+-Enter value for begin_snap (according to the time of incident): 13923
+-Enter value for end_snap(according to time of incident): 13924
+-Enter value for report_name: hit enter to take default name
+-exit
+-$ find cp awrrpt_2_13923_13924.html /tmp
+-ls -ltr
+-cp awrrpt_2_13923_13924.html /tmp
+-cd /tmp or (any directory of choice with space)
+-ls -ltr
+-Use Winscp to remove report from server to local machine.
+
+=======================================================================================================================================================
+CHECKING RAC DATABASE/ SEVICE STATUS:
+-checking status of database:  srvctl status database -d service_name (sometimes database name should work also)
+-checking status of service:   srvctl status service -d service_name (sometimes database name should work also)
+========================================================================================================================================================
+
+cronjob schedule:
+
+00 04 03 12 6 /u02/app/oracle/admin/DOPRD_NVA/purge/install/records_abandoned.sh
+
+===========================================================================================================================================================
+
+- cd trace
+-egrep -lr -i ORA-08103 * (searches into that file for the given error number) 
+
+===========================================================================================================================================================
+To ask for go ahead to resolve blocking sessions:
+For DB blocking blocking session resolution
+email to with blocking session info:
+
+IT Operations Product Support TechOps <ITOpsProductSupportTO@jetblue.com>; de la Rocha, David <David.delaRocha@jetblue.com>; Tong, William <William.Tong@jetblue.com>; Chohan, Hamid <Hamid.Chohan@jetblue.com>; Geles, Michael <Michael.Geles@jetblue.com>; Brown, Marcellus <Marcellus.Brown@jetblue.com>
+
+JB_Support Cintra <JB_Support@cintra.com>
+
+

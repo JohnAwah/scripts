@@ -1,0 +1,10 @@
+ORACLE VIEWS:
+
+Common views to check are the following.
+•	DBA_TABLESPACES
+•	DBA_DATA_FILES
+•	V$DATAFILE - desc dba_data_files
+•	V$TEMPFILE - desc dba_temp_files
+•	V$TABLESPACE- desc dba_tablespaces
+.   v$objects-
+.

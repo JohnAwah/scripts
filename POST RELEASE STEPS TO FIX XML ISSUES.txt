@@ -1,0 +1,20 @@
+CUA PRD
+. profile_doprd
+cd /cloudfs/DOPRD/DLX/install/dlx
+sqlplus system/welcome1
+@@compile "DLEX_B6AQ_ADMIN" "DELX_B6AQ_ADMIN_RQ_DIR" "/cloudfs/DOPRD/DLX/dlx_xml/xml" "POS" "ReservationRetrievalSvRQ_"
+
+conn DLEX_B6AQ_ADMIN/DLEX_AQ_ADMIN;
+
+Run following pl/sql block
+
+               begin
+               DLEX_RQ_CONFIG.turn_on_rq_messages;
+               --DLEX_RQ_CONFIG.turn_off_rq_messages;
+               end;
+               /
+
+exec dlex_rq_print.write_rq('A0000001');
+
+conn DLEX_B6RESV/DLEXRESV
+@@enable_AQ_triggers.sql

@@ -1,0 +1,45 @@
+BASIC VI COMMANDS:
+
+-TO DELETE A WHOLE LINE: enter ESCAPE mode and : dd at the begining of the line
+
+-To DELETE A WORD: enter ESCAPE mode: dw infront of the word, 2dw to delete 2 words etc
+
+-TO SEARCH AN ENTIRE FILE: after Esc : type % to search entire file, s to subsitute characters in a file...:%s/character to substitute/character to substitute with/g (for all occurences with the character to be changed) and hit enter
+
+-TO UNDO A CHANGE BEFORE IT WAS SAVE: press u and it will indicate on the line the undone number of changes
+
+-To allocate numbers to lines in a vi text: type Esc, :, type set number and hit enter as follows.... type Esc, then :set number (hit enter). This will give numbers to lines in a vi text but not physically in the docuement itself.
+
+
+V$ DICTTIONARY VIEWS AND CREATING DATABASE VIEWS FROM DATABASE DICTIONARY VIEWS:
+
+-select * from v$tablespace; (To know what all the tablespaces are)
+-select * from v$datafile;   (To get all the information about datafiles in the DB)
+
+.DATA DICTIONARY VIEWS:
+
+1.describe dba_roles;
+-select * from dba_roles (will give all roles)
+
+2.describe dba_users; 
+-build your view from the view displayed above. e.g: select username, account_status from dba_users;
+-select * from dba_users.
+
+3. describe dba_profiles;
+-build your view from output;
+
+
+4.describe dba_data_files;
+-e.g: select file_name, status from dba_dba_data_files;
+
+
+5. describe dba_tables; (structure of tables)
+-select owner, table_name, status from dba_tables where owner = 'HR';
+
+6.describe dba_tablespaces; (to give yu structure of all tablespaces)
+
+-select tablespace_name, status from dba_tablespaces;
+
+
+ 
+ 

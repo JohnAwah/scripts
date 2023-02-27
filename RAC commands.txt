@@ -1,0 +1,42 @@
+RAC COMMANDS:
+
+-To see RAC database unique_name: $srvctl config database
+-To see configuration variables for RAC database: $srvctl config database -d UNIQUE_NAME
+-You will get variables like: DB unique_name, DB name, Oracle home, Oracle User, spfile, P.W file.
+-To check the service name in RAC database: srvctl status service -d DOPRD_NCO
+-To check the status of database in RAC:    srvctl status database -d DOPRD_NCO
+-To identify processes in database: show parameter processes;
+-identify database objects in order to query them : desc dba_objects;
+
+-When databases in RAC hang and all services are not running from (ps -ef|grep pmon) and we are unable to check df -h, we will need to check the top command, free -m command, all OS processes
+Then:
+1. secondly, log in as grid user and check status of cluster
+$ su - grid
+Password:
+[grid@vdalphonedev01 ~]$ . oraenv
+ORACLE_SID = [grid] ? +ASM
+The Oracle base has been set to /u01/app/grid
+[grid@vdalphonedev01 ~]$ crsctl stat res -t
+
+.If resources are up and running but not indicating or not up and running, start or stop cluster resources as the case may be;
+
+
+2.Commands to start/stop standalone cluster:
+crsctl status has
+crsctl check has
+crsctl stop has
+crsctl start has 
+
+.we use 'has' for RAC standalone
+.Also note that for standalone RAC we will see ASM as +ASM
+
+crsctl stat res -t
+
+3. for cluster RAC with morethan one node we will use below commands to troubleshoot RAC services:
+crsctl status crs
+crsctl start crs
+crsctal stop crs
+.for multiple node RAC we will see ASM as +ASM1 or 2 etc
+
+-To check last reboot: $last roboot
+-To reboot in WTD: Sysadmin will do that.

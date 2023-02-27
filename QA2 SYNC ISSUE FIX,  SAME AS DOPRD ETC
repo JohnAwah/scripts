@@ -1,0 +1,181 @@
+QA2 SYNC ISSUE-STEPS, SAME AS FOR DOPRD etc... but make sure directory install exists.
+
+1.cd to the below directory
+(create directory 'install' if it does not exist with the contents as below.You can copy content from DOPRD database
+as follows:
+-bash-4.2$ scp -r install oracle@10.204.208.172:/cloudfs/TOQA/DLX
+.)
+
+-bash-4.2$ pwd
+cd /cloudfs/TOQA/DLX/install/dlx
+-bash-4.2$ sqlplus system/welcome1
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Wed Apr 13 17:18:12 2022
+Version 19.11.0.0.0
+
+Copyright (c) 1982, 2020, Oracle.  All rights reserved.
+
+Last Successful login time: Wed Apr 13 2022 15:25:35 +00:00
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.11.0.0.0
+
+SQL> @@compile "DLEX_B6AQ_ADMIN" "DELX_B6AQ_ADMIN_RQ_DIR" "/cloudfs/TOQA/DLX/dlx_xml/xml" "POS" "ReservationRetrievalSvRQ_"
+SP2-0553: Illegal variable name "-".
+
+LOG_FILE
+-------------------------------
+compile_2022-04-13_17-19-04.log
+
+Input parameters
+DLEX_AQ_ONL_USER=DLEX_B6AQ_ADMIN
+DIRECTORY_NAME=DELX_B6AQ_ADMIN_RQ_DIR
+DIRECTORY_PATH=/cloudfs/TOQA/DLX/dlx_xml/xml
+CONFIGURED_POS=POS
+RQ_FILE_PREFIX=ReservationRetrievalSvRQ_
+
+Creating the DELX_B6AQ_ADMIN_RQ_DIR directory ...
+old   1: CREATE OR REPLACE DIRECTORY &&DLEX_C_LOG_NAME as '&&DLEX_C_LOG_DIR'
+new   1: CREATE OR REPLACE DIRECTORY DELX_B6AQ_ADMIN_RQ_DIR as '/cloudfs/TOQA/DLX/dlx_xml/xml'
+
+Directory created.
+
+Granting directory access to  DLEX_B6AQ_ADMIN ...
+old   1: GRANT READ ON  DIRECTORY &&DLEX_C_LOG_NAME TO &&DLEX_C_SCHEMA_NAME
+new   1: GRANT READ ON  DIRECTORY DELX_B6AQ_ADMIN_RQ_DIR TO DLEX_B6AQ_ADMIN
+
+Grant succeeded.
+
+old   1: GRANT WRITE ON DIRECTORY &&DLEX_C_LOG_NAME TO &&DLEX_C_SCHEMA_NAME
+new   1: GRANT WRITE ON DIRECTORY DELX_B6AQ_ADMIN_RQ_DIR TO DLEX_B6AQ_ADMIN
+
+Grant succeeded.
+
+Testing an access to the directory '/cloudfs/TOQA/DLX/dlx_xml/xml'
+old   4: l_log_file_dir         CONSTANT ALL_DIRECTORIES.DIRECTORY_NAME%TYPE :='&&DLEX_C_LOG_NAME';
+new   4: l_log_file_dir         CONSTANT ALL_DIRECTORIES.DIRECTORY_NAME%TYPE :='DELX_B6AQ_ADMIN_RQ_DIR';
+old   6:        dbms_output.put_line('Trying to create file in the folder &&DLEX_C_LOG_DIR ');
+new   6:        dbms_output.put_line('Trying to create file in the folder /cloudfs/TOQA/DLX/dlx_xml/xml ');
+old   8:        dbms_output.put_line('Trying to remove file in the folder &&DLEX_C_LOG_DIR ');
+new   8:        dbms_output.put_line('Trying to remove file in the folder /cloudfs/TOQA/DLX/dlx_xml/xml ');
+Trying to create file in the folder /cloudfs/TOQA/DLX/dlx_xml/xml
+Trying to remove file in the folder /cloudfs/TOQA/DLX/dlx_xml/xml
+Test completed successfully
+
+PL/SQL procedure successfully completed.
+
+Switching to the DLEX_B6AQ_ADMIN user
+old   1: alter session set current_schema=&&DLEX_C_SCHEMA_NAME
+new   1: alter session set current_schema=DLEX_B6AQ_ADMIN
+
+Session altered.
+
+
+
+----------------------------------------------
+Script: compile.sql
+----------------------------------------------
+
+Introduced dlex_rq_config PL_SQL instrumentation package
+Compiling dlex_rq_config spec...
+old   5: DLEX_DIR_NAME CONSTANT ALL_DIRECTORIES.DIRECTORY_NAME%TYPE:='&&DLEX_AQ_ADMIN_LOG_DIR';
+new   5: DLEX_DIR_NAME CONSTANT ALL_DIRECTORIES.DIRECTORY_NAME%TYPE:='DELX_B6AQ_ADMIN_RQ_DIR';
+old   7: DLEX_SOURCE CONSTANT VARCHAR2(100):='&&DLEX_SOURCE';
+new   7: DLEX_SOURCE CONSTANT VARCHAR2(100):='POS';
+old   9: DLEX_FILENAME_PREFIX CONSTANT VARCHAR2(100):='&&DLEX_FILENAME_PREFIX';
+new   9: DLEX_FILENAME_PREFIX CONSTANT VARCHAR2(100):='ReservationRetrievalSvRQ_';
+
+Package created.
+
+
+No errors.
+
+Compiling dlex_rq_config body...
+
+Package body created.
+
+
+No errors.
+Compiling dlex_rq_print spec...
+
+Package created.
+
+
+No errors.
+
+Compiling dlex_rq_print body...
+
+Package body created.
+
+
+No errors.
+Compiling DLEX_RESVEVENT_AQ spec ...
+
+Package created.
+
+
+No errors.
+Compiling DLEX_RESVEVENT_AQ body ...
+
+Package body created.
+
+
+No errors.
+Adding parameter into the schema_config table
+
+0 rows created.
+
+
+Commit complete.
+
+
+
+Completed compilation of the PL-SQL subprograms
+
+
+
+
+2.
+
+SQL>  conn DLEX_B6AQ_ADMIN/DLEX_AQ_ADMIN
+Connected.
+SQL>
+SQL>
+SQL> show user
+USER is "DLEX_B6AQ_ADMIN"
+SQL>                begin
+               DLEX_RQ_CONFIG.turn_on_rq_messages;
+               --DLEX_RQ_CONFIG.turn_off_rq_messages;
+               end;
+               /
+  2    3    4    5
+PL/SQL procedure successfully completed.
+
+SQL> exec dlex_rq_print.write_rq('A0000001');
+
+PL/SQL procedure successfully completed.
+
+SQL> conn DLEX_B6RESV/DLEXRESV
+Connected.
+SQL> @@enable_AQ_triggers.sql
+
+Trigger altered.
+
+
+Trigger altered.
+
+
+Trigger altered.
+
+
+Trigger altered.
+
+
+Trigger altered.
+
+
+
+
+
+

@@ -1,0 +1,146 @@
+PL-SQL CODE:
+
+DECLARE 
+cursor cur is 
+select /*+ parallel 4 */ a.RESVCOMPDOCID  from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC a, DLEX_B6RESV.RESVCOMPDOC. b  where a.RESVCOMPDOCID = b.id(+) and b.id is null;
+TYPE CII_TYPE IS TABLE OF NUMBER; 
+CII_TYPE_TBL CII_TYPE; 
+BEGIN 
+OPEN CUR; 
+LOOP 
+FETCH CUR BULK COLLECT INTO CII_TYPE_TBL LIMIT 20000; 
+FORALL i IN 1..CII_TYPE_TBL.COUNT 
+DELETE FROM DLEX_B6RESV.RESVCUSTOMERPAYMENT WHERE RESVEVENTID=CII_TYPE_TBL(i); 
+COMMIT; 
+EXIT WHEN CUR%NOTFOUND; 
+END LOOP; 
+CLOSE CUR; 
+END; 
+/
+
+
+CHANGES AND TESTING:
+
+1. GOT PRIMARY KEY OF CHILD TABLE ( RESVCOMPPROVIDERPAYMENTEXC) = ID as below:
+
+SQL> SELECT cols.table_name, cols.column_name, cols.position, cons.status, cons.owner
+FROM all_constraints cons, all_cons_columns cols
+WHERE cols.table_name = 'RESVCOMPPROVIDERPAYMENTEXC'  
+AND cons.constraint_type = 'P'
+AND cons.constraint_name = cols.constraint_name
+AND cons.owner = cols.owner
+ORDER BY cols.table_name, cols.position;  2    3    4    5    6    7
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+COLUMN_NAME
+--------------------------------------------------------------------------------
+  POSITION STATUS
+---------- --------
+OWNER
+--------------------------------------------------------------------------------
+RESVCOMPPROVIDERPAYMENTEXC
+ID
+         1 ENABLED
+DLEX_B6RESV
+
+
+2. CREATED A TEMPORARY TABLE IN cdba schema for testing.
+
+SQL> create table CDBA.RESVCOMPPROVIDERPAYMENTEXC as select a.* from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC a, DLEX_B6RESV.RESVCOMPDOC b  where a.RESVCOMPDOCID = b.id(+) and b.id is null;
+
+Table created.
+
+SQL> desc CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ RESVCOMPPROVIDERPAYMENTID                 NOT NULL NUMBER(38)
+ RESVCOMPDOCID                             NOT NULL NUMBER(38)
+ CONCURRENCYCOL                                     NUMBER(38)
+
+SQL> select count(*) from  CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+      1129
+
+
+3. Truncate the temporary table for subsequent insert purpose:
+
+SQL> truncate table CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+Table truncated.
+
+SQL> select count(*) from  CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+         0
+
+
+4. USE THE CODE TO INSERT INTO THE TEMPORARY TABLE AS BELOW:
+
+
+SQL> DECLARE
+cursor cur is
+select a.ID from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC a, DLEX_B6RESV.RESVCOMPDOC b  where a.RESVCOMPDOCID = b.id(+) and b.id is null;
+TYPE CII_TYPE IS TABLE OF NUMBER;
+CII_TYPE_TBL CII_TYPE;
+BEGIN
+OPEN CUR;
+LOOP
+FETCH CUR BULK COLLECT INTO CII_TYPE_TBL LIMIT 20000;
+FORALL i IN 1..CII_TYPE_TBL.COUNT
+insert into CDBA.RESVCOMPPROVIDERPAYMENTEXC select * from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC where ID=CII_TYPE_TBL(i);
+COMMIT;
+EXIT WHEN CUR%NOTFOUND;
+END LOOP;
+CLOSE CUR;
+END;   2    3    4    5    6    7    8    9   10   11   12   13   14   15   16
+ 17  /
+
+PL/SQL procedure successfully completed.
+
+
+- Query the temporary table count to see the count increase by the orphan record:
+
+SQL>  select count(*) from  CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+      1129
+
+
+5.DELETE ORPHAN RECORD FROM THE TEMPORARY TABLE USING THE CODE:
+
+SQL> DECLARE
+cursor cur is
+select a.ID from DLEX_B6RESV.RESVCOMPPROVIDERPAYMENTEXC a, DLEX_B6RESV.RESVCOMPDOC b  where a.RESVCOMPDOCID = b.id(+) and b.id is null;
+TYPE CII_TYPE IS TABLE OF NUMBER;
+CII_TYPE_TBL CII_TYPE;
+BEGIN
+OPEN CUR;
+LOOP
+FETCH CUR BULK COLLECT INTO CII_TYPE_TBL LIMIT 20000;
+FORALL i IN 1..CII_TYPE_TBL.COUNT
+delete from CDBA.RESVCOMPPROVIDERPAYMENTEXC where ID=CII_TYPE_TBL(i);
+EXIT WHEN CUR%NOTFOUND;
+END LOOP;
+CLOSE CUR;
+END;
+/
+
+  2    3    4    5    6    7    8    9   10   11   12   13   14   15   16
+
+PL/SQL procedure successfully completed.
+
+-commit;
+
+SQL> SQL> SQL>
+SQL> select count(*) from CDBA.RESVCOMPPROVIDERPAYMENTEXC;
+
+  COUNT(*)
+----------
+         0
+

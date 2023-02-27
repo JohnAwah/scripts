@@ -1,0 +1,317 @@
+
+FIX FOR CREATING DATAFILE IN WRONG LOCATION: 2022-07-20 22:41:18.0 java.sql.BatchUpdateException: ORA-01157: cannot identify/lock data file 130 - see DBWR trace file
+ORA-01110: data file 130: '/u01/app/oracle/product/19.0.0/dbhome_1/dbs/DATA'
+
+
+
+1. Move datafile to correct shared disk location:(NOTE IN 19C THERE IS NO NEED TO TAKE THE DATA FILE OFFLINE)
+
+SQL> alter database create datafile '/u01/app/oracle/product/19.0.0/dbhome_1/dbs/DATA' as '+DATADG' size 31G;
+
+2. CHECK DATAFILE STATUS:
+
+SQL> select to_char(CREATION_TIME,'DD-MM-RRRR HH24:MM:SS'),name from v$datafile;
+
+RECOVER        130
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.416.1110543713
+      33,285,996,544 19-JUL-22
+
+ONLINE         131
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.410.1110467313
+      32,212,254,720 19-JUL-22
+
+ONLINE         132
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.411.1110467425
+      32,212,254,720 19-JUL-22
+
+ONLINE         133
+
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.412.1110467733
+      32,212,254,720 19-JUL-22
+
+ONLINE         134
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.413.1110468011
+      32,212,254,720 19-JUL-22
+
+ONLINE         135
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.414.1110468167
+      32,212,254,720 19-JUL-22
+
+ONLINE         136
++DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.415.1110468229
+
+      32,212,254,720 19-JUL-22
+
+3. 
+
+SQL>alter database recover datafile '+DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.416.1110543713';
+*
+ERROR at line 1:
+ORA-00279: change 821225956878 generated at 07/19/2022 15:07:38 needed for thread 1
+ORA-00289: suggestion : +RECODG
+ORA-00280: change 821225956878 for thread 1 is in sequence #8776
+
+
+4. CONNECT TO RMAN AND CROSSCHECK ARCHIVELOGS:
+
+[oracle@vorarac4p01 dbs]$ rman target /
+
+Recovery Manager: Release 19.0.0.0.0 - Production on Wed Jul 20 13:09:02 2022
+Version 19.14.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: CEPPROD (DBID=1194872901)
+
+RMAN> crosscheck archivelog all;
+
+using target database control file instead of recovery catalog
+configuration for DISK channel 3 is ignored
+configuration for DISK channel 4 is ignored
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: SID=336 instance=cepprod1 device type=DISK
+validation succeeded for archived log
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8776.316.1110545727 RECID=18060 STAMP=1110545727
+validation succeeded for archived log
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8790.317.1110544219 RECID=18059 STAMP=1110544219
+Crosschecked 2 objects
+
+5.RMAN> restore archivelog sequence 8776;
+
+Starting restore at 20-JUL-22
+using target database control file instead of recovery catalog
+configuration for DISK channel 3 is ignored
+configuration for DISK channel 4 is ignored
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: SID=950 instance=cepprod1 device type=DISK
+
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8776
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_19-bset_a8130th3_22856_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_19-bset_a8130th3_22856_1_1 tag=TAG20220719T163027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+Finished restore at 20-JUL-22
+
+6. RECOVER DATAFILE:
+
+RMAN> recover datafile '+DATADG/CEPPROD/DATAFILE/cep_data_smt_t01.416.1110543713';
+
+Starting recover at 20-JUL-22
+using channel ORA_DISK_1
+
+starting media recovery
+
+archived log for thread 1 with sequence 8776 is already on disk as file +RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8776.316.1110545727
+archived log for thread 1 with sequence 8790 is already on disk as file +RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8790.317.1110544219
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8776.316.1110545727 thread=1 sequence=8776
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9259
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9260
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_19-bset_a8130th3_22856_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_19-bset_a8130th3_22856_1_1 tag=TAG20220719T163027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:45
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9259.310.1110546711 thread=2 sequence=9259
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9259.310.1110546711 RECID=18062 STAMP=1110546751
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9260.312.1110546711 thread=2 sequence=9260
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8777
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_19-bset_a9130tih_22857_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_19-bset_a9130tih_22857_1_1 tag=TAG20220719T163027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8777.310.1110546759 thread=1 sequence=8777
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8777.310.1110546759 RECID=18063 STAMP=1110546759
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8778
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9261
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_19-bset_ab131bj1_22859_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_19-bset_ab131bj1_22859_1_1 tag=TAG20220719T203024
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8778.318.1110546761 thread=1 sequence=8778
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9260.312.1110546711 RECID=18061 STAMP=1110546710
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9261.310.1110546761 thread=2 sequence=9261
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9261.310.1110546761 RECID=18065 STAMP=1110546760
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9262
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8779
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_19-bset_ac131bj1_22860_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_19-bset_ac131bj1_22860_1_1 tag=TAG20220719T203024
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9262.312.1110546761 thread=2 sequence=9262
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8778.318.1110546761 RECID=18064 STAMP=1110546760
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8779.310.1110546763 thread=1 sequence=8779
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8779.310.1110546763 RECID=18066 STAMP=1110546761
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8780
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9263
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9264
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8781
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_20-bset_ah131pkq_22865_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_20-bset_ah131pkq_22865_1_1 tag=TAG20220720T003018
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8780.318.1110546763 thread=1 sequence=8780
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9262.312.1110546761 RECID=18067 STAMP=1110546761
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9263.304.1110546763 thread=2 sequence=9263
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9263.304.1110546763 RECID=18069 STAMP=1110546763
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9264.307.1110546763 thread=2 sequence=9264
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8780.318.1110546763 RECID=18070 STAMP=1110546763
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8781.310.1110546765 thread=1 sequence=8781
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9264.307.1110546763 RECID=18068 STAMP=1110546763
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9265
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8782
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_20-bset_ag131pkq_22864_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_20-bset_ag131pkq_22864_1_1 tag=TAG20220720T003018
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9265.318.1110546765 thread=2 sequence=9265
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8781.310.1110546765 RECID=18071 STAMP=1110546763
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8782.307.1110546765 thread=1 sequence=8782
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8782.307.1110546765 RECID=18073 STAMP=1110546764
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8783
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9266
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_20-bset_ai131pkr_22866_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_20-bset_ai131pkr_22866_1_1 tag=TAG20220720T003018
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8783.307.1110546767 thread=1 sequence=8783
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9265.318.1110546765 RECID=18072 STAMP=1110546764
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9266.310.1110546767 thread=2 sequence=9266
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9266.310.1110546767 RECID=18075 STAMP=1110546765
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9267
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_20-bset_ak1327n3_22868_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_20-bset_ak1327n3_22868_1_1 tag=TAG20220720T043027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:02
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9267.310.1110546769 thread=2 sequence=9267
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8783.307.1110546767 RECID=18074 STAMP=1110546765
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8784
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9268
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_20-bset_al1327n3_22869_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_20-bset_al1327n3_22869_1_1 tag=TAG20220720T043027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8784.307.1110546769 thread=1 sequence=8784
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8784.307.1110546769 RECID=18078 STAMP=1110546768
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9267.310.1110546769 RECID=18076 STAMP=1110546767
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8785
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_20-bset_am1327n4_22870_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_20-bset_am1327n4_22870_1_1 tag=TAG20220720T043027
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8785.310.1110546771 thread=1 sequence=8785
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8785.310.1110546771 RECID=18079 STAMP=1110546769
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9268.318.1110546769 RECID=18077 STAMP=1110546768
+media recovery complete, elapsed time: 00:00:01
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8786
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9269
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_20-bset_ao132loq_22872_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_20-bset_ao132loq_22872_1_1 tag=TAG20220720T083017
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8786.310.1110546773 RECID=18080 STAMP=1110546771
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9269.318.1110546771 RECID=18081 STAMP=1110546771
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9270
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8787
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_20-bset_ap132loq_22873_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_20-bset_ap132loq_22873_1_1 tag=TAG20220720T083017
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8787.310.1110546775 RECID=18083 STAMP=1110546772
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9270.318.1110546773 RECID=18082 STAMP=1110546772
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8788
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9271
+channel ORA_DISK_1: reading from backup piece /zba01/cepprod/archivelog/2022_07_20-bset_ar1333qq_22875_1_1
+channel ORA_DISK_1: piece handle=/zba01/cepprod/archivelog/2022_07_20-bset_ar1333qq_22875_1_1 tag=TAG20220720T123017
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8788.310.1110546777 RECID=18084 STAMP=1110546773
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9271.318.1110546775 RECID=18085 STAMP=1110546773
+channel ORA_DISK_1: starting archived log restore to default destination
+channel ORA_DISK_1: restoring archived log
+archived log thread=2 sequence=9272
+channel ORA_DISK_1: restoring archived log
+archived log thread=1 sequence=8789
+channel ORA_DISK_1: reading from backup piece /zba02/cepprod/archivelog/2022_07_20-bset_as1333qq_22876_1_1
+channel ORA_DISK_1: piece handle=/zba02/cepprod/archivelog/2022_07_20-bset_as1333qq_22876_1_1 tag=TAG20220720T123017
+channel ORA_DISK_1: restored backup piece 1
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:01
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_1_seq_8789.310.1110546779 RECID=18087 STAMP=1110546774
+channel default: deleting archived log(s)
+archived log file name=+RECODG/CEPPROD/ARCHIVELOG/2022_07_20/thread_2_seq_9272.318.1110546777 RECID=18086 STAMP=1110546774
+Finished recover at 20-JUL-22
+
+7. CONFIRM STATUS OF DATAFILES AS ONLINE:
+
+SQL> select name,status,bytes,creation_time from v$datafile where creation_time>=trunc(sysdate-1);
+
+
+8. VALIDATE THAT THE WRONG FILE TIMESTAMP IS NOT BEING UPDATED A DAY OR TWO AFTER, AND YOU CAN DELETE THE FILE.
+
+
+
+

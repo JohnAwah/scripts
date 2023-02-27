@@ -1,0 +1,5 @@
+set linesize 120
+set pagesize 500
+col Parameter  format a45
+col Value format a60
+select name Parameter,Value from v$parameter order by name,value;

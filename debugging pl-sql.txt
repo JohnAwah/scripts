@@ -1,0 +1,9 @@
+DEBUGGING A PL/SQL CODE:
+
+Place dbms_output.Put_line('I am in Condition1); in your pl/sql code and then run the below statements in SQL plus to debug ....
+This is one way of debugging.....
+
+
+SQL > SET SERVEROUTPUT ON
+
+SQL> EXEC proc_name(Parameters);
