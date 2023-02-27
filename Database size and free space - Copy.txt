@@ -1,0 +1,44 @@
+col "Database Size" format a20
+col "Free space" format a20
+col "Used space" format a20
+select round(sum(used.bytes) / 1024 / 1024 / 1024 ) || ' GB' "Database Size"
+ , round(sum(used.bytes) / 1024 / 1024 / 1024 ) -
+   round(free.p / 1024 / 1024 / 1024) || ' GB' "Used space"
+ , round(free.p / 1024 / 1024 / 1024) || ' GB' "Free space"
+   from (select bytes from v$datafile
+   union all
+select bytes
+from v$tempfile
+union all
+select bytes from v$log) used
+, (select sum(bytes) as p from dba_free_space) free
+group by free.p
+ /
+ 
+ Database Size        Used space           Free space
+-------------------- -------------------- --------------------
+87063 GB             68744 GB             18319 GB
+
+ 
+ 
+ 
+
+-check asm diskgroup space as well
+
+[grid@odm4db01-adm ~]$ ps -ef|grep pmon
+grid     151395 150934  0 09:40 pts/1    00:00:00 grep --color=auto pmon
+grid     322952      1  0  2021 ?        00:17:43 asm_pmon_+ASM3
+oracle   336252      1  0  2021 ?        01:32:05 ora_pmon_mooprd3
+[grid@odm4db01-adm ~]$ . oraenv
+ORACLE_SID = [grid] ? +ASM3
+The Oracle base remains unchanged with value /u01/app/grid
+[grid@odm4db01-adm ~]$ lsdg
+-bash: lsdg: command not found
+[grid@odm4db01-adm ~]$ asmcmd
+
+
+ASMCMD> lsdg
+State    Type    Rebal  Sector  Logical_Sector  Block       AU   Total_MB   Free_MB  Req_mir_free_MB  Usable_file_MB  Offline_disks  Voting_files  Name
+MOUNTED  HIGH    N         512             512   4096  4194304  274599936  17286000          5085184         4066938              0             N  DATADG/
+MOUNTED  NORMAL  N         512             512   4096  4194304    3253152   3248528            34608         1606960              0             Y  DBFS_DG/
+MOUNTED  HIGH    N         512             512   4096  4194304   30646080  19136076           567520         6189518              0             N  RECODG/

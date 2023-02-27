@@ -1,0 +1,35 @@
+CPU LOAD IS HIGHER THAN AVERAGE:
+
+-HOW TO CHECK:
+
+1. CHECK FOR TOP COMMAND AND check for LOAD AVERAGE on both nodes OR ($uptime load)
+
+2. CHECK FOR ACTIVE SESSIONS AND BLOCKERS
+
+3. KEEP AN EYE ON LOAD AVERAGE(MONITOR LOAD AVERAGE)
+
+
+
+TOTAL_SESSIONS_DLEX
+-------------------
+               6364
+
+ACTIVE_SESSIONS_DLEX
+--------------------
+                  21
+
+  BLOCKERS
+----------
+         0
+
+-------------------------------------------------------------------------
+JBCUALORA1002c CPU load
+20:48:11 up 137 days,  7:39,  1 user,  load average: 17.41, 18.05, 17.95
+08:48:11 PM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all     36.55      0.00     11.70      2.10      0.05     49.59
+
+JBCUALORA1002d CPU load
+20:48:12 up 137 days,  7:30,  0 users,  load average: 15.22, 15.71, 14.95
+08:48:12 PM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all     33.30      0.00     10.02      0.87      0.05     55.76
+--------------------------------------------------------------------

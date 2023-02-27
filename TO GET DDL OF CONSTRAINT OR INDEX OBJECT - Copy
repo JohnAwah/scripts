@@ -1,0 +1,23 @@
+COMMAND TO GET DDL OF A CONSTRAINT/INDEX, FOR EXAMPLE 'P_WO_TASKCARD_AUDIT'
+
+1. SQL> set long 20000 longchunksize 20000 pagesize 0 linesize 1000 feedback off verify off trimspool on
+begin
+   dbms_metadata.set_transform_param (dbms_metadata.session_transform, 'SQLTERMINATOR', true);
+   dbms_metadata.set_transform_param (dbms_metadata.session_transform, 'PRETTY', true);
+end;
+/
+
+2. SQL>  select object_type,owner,object_name from dba_objects where object_name='P_WO_TASKCARD_AUDIT';
+
+INDEX                   ODB                                                                                                                              P_WO_TASKCARD_AUDIT
+                                                                                                                        P_WO_TASKCARD_AUDIT
+
+
+3.SQL> select dbms_metadata.get_ddl('INDEX','P_WO_TASKCARD_AUDIT','ODB') from dual;
+
+  CREATE UNIQUE INDEX "ODB"."P_WO_TASKCARD_AUDIT" ON "ODB"."WO_TASK_CARD_ADUIT" ("WO", "TASK_CARD", "MODIFIED_DATE", "PN", "PN_SN", "AC", "TRANSACTION_TYPE")
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "TRAXDATA" ;

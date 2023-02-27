@@ -1,0 +1,8 @@
+DATABASE IS NOT RUNNING COMPLAIN:
+
+checks:
+
+1.check if database is up and running
+2.check if there are any locking or blocking sessions
+3.check alert log file for errors
+4.check what job is running from client side if it is scheduled on crontab and check to re-enable it if disabled.

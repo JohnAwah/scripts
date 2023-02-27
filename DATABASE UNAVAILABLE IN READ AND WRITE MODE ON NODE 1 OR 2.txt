@@ -1,0 +1,9 @@
+EGW Prod cluster crash incident(DATABASE ON NODE 1 ARE UNAVAILABLE):
+
+Send email to ITSE team:
+
+Hi ITSE Team,
+
+Could you please investigate EGW CTR & TRAX Prod Oracle database nodes got rebooted unexpectedly ?
+
+-Check and troubleshoot goldengate issues

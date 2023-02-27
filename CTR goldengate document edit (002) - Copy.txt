@@ -1,0 +1,124 @@
+[ggsowner@JBCUALORA1002C ~]$ . .profile_daprd19c
+[ggsowner@JBCUALORA1002C ~]$ g
+
+Oracle GoldenGate Command Interpreter for Oracle
+Version 19.1.0.0.200714 OGGCORE_19.1.0.0.0OGGBP_PLATFORMS_200628.2141_FBO
+Linux, x64, 64bit (optimized), Oracle 19c on Jun 29 2020 13:17:40
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2019, Oracle and/or its affiliates. All rights reserved.
+
+
+
+GGSCI (JBCUALORA1002C) 1> info all
+
+Program     Status      Group       Lag at Chkpt  Time Since Chkpt
+
+MANAGER     RUNNING
+EXTRACT     RUNNING     E_DA_NVA    00:00:00      00:00:08
+EXTRACT     RUNNING     P_DA_NCO    00:00:00      00:00:06
+REPLICAT    STOPPED     R_DA_NVA    00:00:00      1140:54:58
+
+
+GGSCI (JBCUALORA1002C) 2> send E_DA_NVA, getlag
+
+GGSCI (JBCUALORA1002C) 3> stop E_DA_NVA
+
+GGSCI (JBCUALORA1002C) 4> info E_DA_NVA
+
+
+[ggsowner@JBEGWLORA1002C ~]$ . .profile_daprd19c
+[ggsowner@JBEGWLORA1002C ~]$ g
+
+Oracle GoldenGate Command Interpreter for Oracle
+Version 19.1.0.0.200714 OGGCORE_19.1.0.0.0OGGBP_PLATFORMS_200628.2141_FBO
+Linux, x64, 64bit (optimized), Oracle 19c on Jun 29 2020 13:17:40
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2019, Oracle and/or its affiliates. All rights reserved.
+
+
+
+GGSCI (JBEGWLORA1002C) 1> info all
+
+Program     Status      Group       Lag at Chkpt  Time Since Chkpt
+
+MANAGER     RUNNING
+REPLICAT    RUNNING     R_DA_NCO    00:00:00      00:00:07
+
+
+
+GGSCI (JBEGWLORA1002C) 2> send R_DA_NCO, getlag
+
+GGSCI (JBEGWLORA1002C) 3> stop R_DA_NCO
+
+[ggsowner@JBEGWLORA1002C ~]$ . .profile_doprd19c
+[ggsowner@JBEGWLORA1002C ~]$ g
+
+Oracle GoldenGate Command Interpreter for Oracle
+Version 19.1.0.0.200714 OGGCORE_19.1.0.0.0OGGBP_PLATFORMS_200628.2141_FBO
+Linux, x64, 64bit (optimized), Oracle 19c on Jun 29 2020 13:17:40
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2019, Oracle and/or its affiliates. All rights reserved.
+
+GGSCI (JBEGWLORA1002C) 1>
+
+GGSCI (JBEGWLORA1002C) 2>
+
+GGSCI (JBEGWLORA1002C) 3> info all
+
+GGSCI (JBEGWLORA1002C) 4> start E*
+
+GGSCI (JBEGWLORA1002C) 5> info E*
+
+GGSCI (JBEGWLORA1002C) 6> start P*
+
+GGSCI (JBEGWLORA1002C) 7> info P*
+
+[ggsowner@JBCUALORA1002C ~]$ . .profile_daprd19c
+[ggsowner@JBCUALORA1002C ~]$ g
+
+Oracle GoldenGate Command Interpreter for Oracle
+Version 19.1.0.0.200714 OGGCORE_19.1.0.0.0OGGBP_PLATFORMS_200628.2141_FBO
+Linux, x64, 64bit (optimized), Oracle 19c on Jun 29 2020 13:17:40
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2019, Oracle and/or its affiliates. All rights reserved.
+
+GGSCI (JBCUALORA1002C) 1> info all
+
+GGSCI (JBCUALORA1002C) 2> start R_DA_NVA
+
+GGSCI (JBCUALORA1002C) 3> info R_DA_NVA
+
+
+
+
+
+
+
+
+
+
+-Question:
+-For failover purpose, i could see the replicat on the culpeper side, but could not see an extract or Pump on the EGW side in the event of a failover. Will this be configured upon failover?
+
+
+select count(*) from table-_name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

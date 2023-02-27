@@ -1,0 +1,3 @@
+select * from DSI_ORACLE_TABLESPACE_USAGE where db_name='MOOPRD' and to_char(track_date,'DD')='01' order by track_date desc;
+
+select * from DSI_SEGMENT_SPACE_USAGE where db_name='MOOPRD' and to_char(track_date,'DD')='01' order by track_date desc;

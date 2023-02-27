@@ -1,0 +1,223 @@
+-DATAGUARD/ BROKER STATUS CHECK & CHECK OF SYNC STATUS BETWEEN STANDBY AND PRIMARY
+
+1. Sign into the primary or standby
+. log into dataguard broker prompt:
+
+[oracle@prodoraoda01 ~]$ dgmgrl
+DGMGRL for Linux: Release 19.0.0.0.0 - Production on Fri Jan 7 09:38:26 2022
+Version 19.10.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+Welcome to DGMGRL, type "help" for information.
+DGMGRL> show configuration;
+not logged on
+DGMGRL> connect sys /
+Password:
+ORA-01005: null password given; logon denied
+
+DGMGRL>
+DGMGRL>
+DGMGRL>
+DGMGRL> connect /
+Connected to "BHAXODMP_PR"
+Connected as SYSDG.
+DGMGRL> show configuration;
+
+Configuration - BHAXODMP_DG
+
+  Protection Mode: MaxPerformance
+  Members:
+  BHAXODMP_PR - Primary database
+    BHAXODMP_DR - Physical standby database
+
+Fast-Start Failover:  Disabled
+
+Configuration Status:
+SUCCESS   (status updated 15 seconds ago)
+
+
+
+- LEVEL1-FRDM-OEM EM Event: Critical:BHIKODMP_PR - The Data Guard status of BHIKODMP_PR is Error ORA-16665: time out waiting for the result from a member.
+DGMGRL> show configuration;
+
+Configuration - BHIKODMP_DG
+
+  Protection Mode: MaxPerformance
+  Members:
+  BHIKODMP_PR - Primary database
+    BHIKODMP_DR - Physical standby database
+
+Fast-Start Failover:  Disabled
+
+Configuration Status:
+SUCCESS   (status updated 42 seconds ago)
+
+DGMGRL> show database 'BHIKODMP_DR'
+
+Database - BHIKODMP_DR
+
+  Role:               PHYSICAL STANDBY
+  Intended State:     APPLY-ON
+  Transport Lag:      0 seconds (computed 1 second ago)
+  Apply Lag:          0 seconds (computed 1 second ago)
+  Average Apply Rate: 48.00 KByte/s
+  Real Time Query:    OFF
+  Instance(s):
+    BHIKODMP1
+    BHIKODMP2 (apply instance)
+
+Database Status:
+SUCCESS
+
+
+
+
+2. IN THE ABSENCE OF THE DATAGUARD BROKER YOU CAN CHECK FOR SYNC STATUS AS FOLLOWS:
+
+-ON STANDBY:
+
+SQL> !hostname
+zremixdbstby01
+
+
+SQL> select name,database_role,open_mode from gv$database;
+
+NAME      DATABASE_ROLE    OPEN_MODE
+--------- ---------------- --------------------
+KBM2PRD1  PHYSICAL STANDBY MOUNTED
+
+
+
+SQL>  select * from gv$managed_standby where process like '%MRP%';
+
+   INST_ID PROCESS          PID STATUS       CLIENT_P CLIENT_PID                               CLIENT_DBID
+---------- --------- ---------- ------------ -------- ---------------------------------------- ----------------------------------------
+GROUP#                                   RESETLOG_ID    THREAD#  SEQUENCE#     BLOCK#     BLOCKS DELAY_MINS KNOWN_AGENTS ACTIVE_AGENTS
+---------------------------------------- ----------- ---------- ---------- ---------- ---------- ---------- ------------ -------------
+         1 MRP0           10649 WAIT_FOR_LOG N/A      N/A                                      N/A
+N/A                                        924492799          2     497137          0          0          0           33            33
+
+
+
+
+set lines 160
+col STBY_BEHIND_BY for a20
+select (select sysdate from dual)"TIMESTAMP",s.thread#,s.MAX_SEQ#, a.MAX_APP_SEQ#, ' '||(s.MAX_SEQ#-a.MAX_APP_SEQ#)||' sequences' "STBY_BEHIND_BY" from 
+( select thread#,max(sequence#) "MAX_SEQ#" from v$archived_log where activation#=(select activation# from v$database) group by thread# ) s,
+(select thread#,max(sequence#) "MAX_APP_SEQ#" from v$archived_log where activation#=(select activation# from v$database )and applied='YES' group by thread#) a where a.thread#=s.thread#;
+
+TIMESTAMP    THREAD#   MAX_SEQ# MAX_APP_SEQ# STBY_BEHIND_BY
+--------- ---------- ---------- ------------ --------------------
+01-FEB-22          1     500641       500640  1 sequences
+01-FEB-22          2     497136       497136  0 sequences
+
+
+
+FOR ADDITIONAL TROUBLESHOOTING:
+
+-Check when server was last available or rebooted:
+$uptime
+$last reboot
+
+
+
+
+3.. -To check DATAGUARD SYNC STATUS, YOU CAN ALSO
+on standby:
+
+-crontab -l
+-cd 
+[oracle@droraoda02 ~]$ cd /u01/app/oracle/admin/BHAXODMP_DR/standby
+[oracle@droraoda02 standby]$ ls -ltr
+total 192
+-rwxr-xr-x 1 oracle oinstall  11407 Jun 27  2021 CDBA_DG_BHAXODMP_MONITOR.sh
+-rw-r--r-- 1 oracle oinstall   3982 Jun 27  2021 DG_config.ini
+drwxr-xr-x 2 oracle oinstall 167936 Jan  7 10:45 log
+-rw-r--r-- 1 oracle oinstall   4469 Jan  7 10:45 mailme.txt
+[oracle@droraoda02 standby]$ cat mailme.txt
+ Script Version : 21.1.1
+------ FRDM-ODA-DR DG STANDBY DATABASE REPORT  ------
+
+------ Friday    01/07/2022 10:45   ------
+
+------ BHAXODMP HA-Standby indicator for host droraoda02  ------
+
+Status         : IN-SYNCH (Within 30 Minutes)
+
+Primary Host Name  : prodoraoda02
+Logs Applied Today : 176
+Approx MB Applied  : 525857
+Primary time is 2022/01/07 10:45:01
+Standby time is 2022/01/07 10:42:37
+Intentional Log Apply Delay is : 0 Minutes.
+DR database BHAXODMP on server droraoda02 lags behind primary by
+0 Days, 00 Hours, 02 Minutes and 24 Seconds
+The DR is well within defined tolerable lag.
+
+
+
+3. You can also cat the log file in FRDM environment.
+
+[oracle@droraoda02 ~]$ cd /u01/app/oracle/admin/BHAXODMP_DR/standby
+[oracle@droraoda02 standby]$ ls -ltr
+total 192
+-rwxr-xr-x 1 oracle oinstall  11407 Jun 27  2021 CDBA_DG_BHAXODMP_MONITOR.sh
+-rw-r--r-- 1 oracle oinstall   3982 Jun 27  2021 DG_config.ini
+drwxr-xr-x 2 oracle oinstall 167936 Jan  7 10:45 log
+-rw-r--r-- 1 oracle oinstall   4469 Jan  7 10:45 mailme.txt
+[oracle@droraoda02 standby]$ cd log
+[oracle@droraoda02 log]$ ls -ltr
+[oracle@droraoda02 log]$ cat CDBA_DG_BHAXODMP_MONITOR.sh_20220107_104501.log
+/u01/app/oracle/admin/BHAXODMP_DR/standby/CDBA_DG_BHAXODMP_MONITOR.sh taking off on 2022_01_07_at_10:45:01 AM....
+/u01/app/oracle/admin/BHAXODMP_DR/standby
+------ FRDM-ODA-DR DG STANDBY DATABASE REPORT  ------
+
+------ Friday    01/07/2022 10:45   ------
+
+------ BHAXODMP HA-Standby indicator for host droraoda02  ------
+
+Status         : IN-SYNCH (Within 30 Minutes)
+
+Primary Host Name  : prodoraoda02
+Logs Applied Today : 176
+Approx MB Applied  : 525857
+Primary time is 2022/01/07 10:45:01
+Standby time is 2022/01/07 10:42:37
+Intentional Log Apply Delay is : 0 Minutes.
+DR database BHAXODMP on server droraoda02 lags behind primary by
+0 Days, 00 Hours, 02 Minutes and 24 Seconds
+The DR is well within defined tolerable lag.
+
+0
+Archive logs applied to the DR database in past 24 hours.
+---------------------------------------------------------
+      Time              Logs  Size(mb)
+     ------             ----  ---------
+2022-01-06 11            2    7,326.49
+2022-01-06 12            1    2,849.50
+2022-01-06 13            1    3,698.29
+2022-01-06 14            4    9,240.17
+2022-01-06 15            1    3,807.58
+2022-01-06 16            5   15,393.70
+2022-01-06 17            1    1,190.60
+2022-01-06 18            9   25,723.82
+2022-01-06 19            3   10,832.95
+2022-01-06 20            3   10,553.73
+2022-01-06 21            1    3,734.83
+2022-01-06 23            4      139.41
+2022-01-07 00            4    1,386.29
+2022-01-07 03            2    7,426.03
+2022-01-07 04           46  146,431.77
+2022-01-07 05           49  141,605.72
+2022-01-07 06            2    7,479.00
+2022-01-07 07           26   89,941.72
+2022-01-07 08           10   29,762.71
+2022-01-07 09            1    3,672.30
+2022-01-07 10            1    3,660.56
+---------------------------------------------------------
+DR monitor executed successfully on 01_07_2022_at_10:45:03 AM. ....
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23
+MAILX
+
+

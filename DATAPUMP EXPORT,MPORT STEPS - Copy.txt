@@ -1,0 +1,21 @@
+EXPORT , IMPORT STEPS:
+
+1. FOR PDB:
+
+export ORACLE_PDB_SID=INSISDB
+nohup expdp \"/ as sysdba\" directory=export_20220307 dumpfile=INSIS_CUST_ADDON.dmp logfile=INSIS_CUST_ADDON.log schemas=INSIS_CUST_ADDON &
+
+2. a) FOR STANDALONE (SCHEMA):
+
+expdp system/*** dumpfile=EXPDP:EXP_DEVL2_EVENTS.dmp logfile=EXP_LOG:EXP_DEVL2_EVENTS.log schemas=EVENTS
+
+impdp system/**** dumpfile=EXPDP:EXP_DEVL2_EVENTS.dmp logfile=EXP_LOG:EXP_DEVL2_EVENTS.log schemas=EVENTS TABLE_EXISTS_ACTION=replace cluster=N
+
+
+b)FOR STANDALONE (TABLE):
+
+expdp system/HoBuJe65 tables=GENERAL.GURDMOD dumpfile=EXPDP:EXP_DEVL2_GENERAL.GURDMOD.dmp logfile=EXP_LOG:IMP_EXP_DEVL2_GENERAL.GURDMOD.dmp.log
+
+impdp system/HoBuJe65 tables=GENERAL.GUBMODU dumpfile=EXPDP:EXP_DEVL2_GENERAL.GUBMODU.dmp logfile=EXP_LOG:IMP_DEVL2_GENERAL.GUBMODU.dmp.log TABLE_EXISTS_ACTION=replace cluster=N
+
+

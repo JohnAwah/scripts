@@ -1,0 +1,16 @@
+col status format a20
+col hrs    format 999.99
+col start_time format a30
+col end_time format a30
+col Size format 999999
+
+select
+   input_type,
+   status,
+   to_char(START_TIME,'DAY mm/dd/yy hh24:mi') start_time,
+   to_char(END_TIME,'DAY mm/dd/yy hh24:mi') end_time,
+   round(elapsed_seconds/60) Min, round(input_bytes/1024/1024/1024) "Size"
+from
+   v$rman_backup_job_details
+order by
+   session_key;

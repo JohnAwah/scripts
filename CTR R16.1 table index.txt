@@ -1,0 +1,33 @@
+﻿-Update reservation database and add two new indexes within RRESV_AIR_LEG_SALE table. These are needed for performance improvements as well as future capabilities
+
+-Cintra to create both indexes in advance of the go-live with no ill effects. Then when running the DB upgrade with the usual option (./upgrade.ksh)  , when the time come to run upgrade for R16.1 it would be discovered that the indexes already exists and therefore no DDL will be required. 
+
+If possible we’d like to run this upgrade on a copy of production – to verify abd give some idea of the timings.
+
+
+-to check size of table: 
+
+SQL> select segment_name,sum(bytes)/(1024*1024)"TABLE_SIZE(MB)" from dba_extents where segment_type='TABLE' and owner=upper('DLEX_B6REPORT') and segment_name=upper('RRESV_AIR_LEG_SALE') group by segment_name;
+
+SEGMENT_NAME
+--------------------------------------------------------------------------------
+TABLE_SIZE(MB)
+--------------
+RRESV_AIR_LEG_SALE
+           296
+
+-To get name of table owner:
+
+select owner, object_type from dba_objects where object_name='RRESV_AIR_LEG_SALE' and object type='TABLE';
+
+ 
+
+
+
+JetBlue Oracle GoldenGate Failover Procedure for CTR Environments 
+ 
+ 
+ 
+ 
+ 
+CTR ENVIRONMENT RELEASE 
